@@ -48,14 +48,14 @@ Example: "How many subsets of $\{1, 2, 3\}$ have size $k$?". Define $S$ as the s
 
 Define the weight $w$ of an element $A$ to be $w(A) = |A|$. How many elements in $S$ have weight $k$?
 
-$\Phi_s(x) = 1 + 3x + 3x^2 + x^3$. The coeffient of $x^k$ in the generating series is the answer.
+$\Phi_S(x) = 1 + 3x + 3x^2 + x^3$. The coeffient of $x^k$ in the generating series is the answer.
 
-**Generating Series**: Given set $S$ where $\rho \in S$ is given a non-negative integer weight $w(\rho)$, the **generating series** of $S$ with respect to $w$ is $\Phi_s(x) = \sum_{\rho \in S} x^{w(\rho)}$. If $a_x$ is the number of elements in $S$ of weight $k$, then $\Phi_s(x) = \sum_{k \ge 0}a_k x^k$. The *coefficients* store the answers to our counting problems.
+**Generating Series**: Given set $S$ where $\rho \in S$ is given a non-negative integer weight $w(\rho)$, the **generating series** of $S$ with respect to $w$ is $\Phi_S(x) = \sum_{\rho \in S} x^{w(\rho)}$. If $a_x$ is the number of elements in $S$ of weight $k$, then $\Phi_S(x) = \sum_{k \ge 0}a_k x^k$. The *coefficients* store the answers to our counting problems.
 
-Notation: $[x^k]\Phi_s(x)$ denotes the coefficient of $x^k$ in $\Phi_s(x)$.
+Notation: $[x^k]\Phi_S(x)$ denotes the coefficient of $x^k$ in $\Phi_S(x)$.
 
 Example: How many ways can we throw 2 dice to get a sum of $k$?
-> Define $S = \{1, 2, 3, 4, 5, 6\} = \{(a, b) \mid a, b \in \{1, 2, 3, 4, 5, 6\}\}$. Define $w(a, b) = a + b$. So $\Phi_s(x) = (x + x^2 + x^3 + x^4 + x^5 + x^6)^2$.
+> Define $S = \{1, 2, 3, 4, 5, 6\} = \{(a, b) \mid a, b \in \{1, 2, 3, 4, 5, 6\}\}$. Define $w(a, b) = a + b$. So $\Phi_S(x) = (x + x^2 + x^3 + x^4 + x^5 + x^6)^2$.
 
 ## Format Power Series
 > A formal power series has the form $A(x) = \sum_{i \ge 0}a_i x_i$, where each $a_i$ is a well-defined, finite number. The coefficient of $x_i \in A(x) = a_i$, denoted by $[x_i]A(x)$.
@@ -99,3 +99,46 @@ Comparing coefficients, $a_0 = 1$, $a_i = a_{i + 1}$ for $i \ge 0$. So $\frac{1}
 Example: $\frac{1}{x}$. Suppose $\frac{1}{x} = \sum_{n \ge 0} a_n x_n$. Then $1 = \sum_{n \ge 0}a_n x^{n + 1}$. There is no constant on the right hand side so there is a contradiction. Therefore $\frac{1}{x}$ does not have an inverse.
 
 **Theorem**: $A(x)$ has an inverse if and only if $[x^0]A(x) \not= 0$.
+
+Example: Let $A(x) = \frac{1 - x}{1 - 2x - 3x^2}$. Suppose $A(x) = \sum_{n \ge 0}a_n x^n$.
+> $$\begin{aligned} A(x) &= \frac{1 - x}{1 - 2x - 3x^2} \\ 1 - x &= A(x)(1 - 2x - 3x^2) \\ &= a_0 + (a_1 - 2a_0)x + \sum_{n \ge 2}(a_n - 2a_{n - 1} - 3a_{n - 2})x^n \end{aligned}$$
+> **Comparing coefficients**.   
+> $1 = a_0$,    
+> $-1 = a_1 - 2a_0 \Rightarrow a_1 = 1$,    
+> $a_n = 2a_{n - 1} + 3a_{n - 2}$.  
+>
+> We can determine the coefficients of subsequent terms through the *recurrence*.
+
+### Common Series
+1. $\frac{1}{1 - x} = \sum_{n \ge 0} x^n$.
+2. $\frac{1 - x^{k + 1}}{1 - x} = 1 + x + x^2 + ... + x^k$.
+3. $(\frac{1}{1 - x})^k = \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n$ (*negative binomial theorem*).
+    - Proof: Induction on $k$.
+    > **Base Case**: $k = 1$, ${n - 1 \choose 0} = 1$, $\sum_{n \ge 0}x^n$ is the geometric series. 
+    > **Induction Step**: Consider $k$.;
+    > $$\begin{aligned} (\frac{1}{1 - x})^k &= (\frac{1}{1 - x})(\frac{1}{1 - x})^{k - 1} \\ &= (1 + x + x^2 + ...)(\sum_{n \ge 0}{n - k + 2 \choose k - 2}x^n) \\ &= \sum_{n \ge 0}({n + k - 2 \choose k - 2} + {n + k - 3 \choose k - 2} + ... + {k - 2 \choose k - 2})x^n \\ &= \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n \end{aligned}$$
+
+### Composition of Formal Power Series
+> Is $A(B(x))$ a formal power series?
+
+Example: $G(x) = \frac{1}{1 - x}$, $A(x) = \frac{x^2}{1 - x}$.
+> $$\begin{aligned} G(A(x)) &= 1 + (\frac{x^2}{1 - x}) + (\frac{x^2}{1 - x})^2 + ... \\ &= \frac{1}{1 - \frac{x^2}{1 - x}} \\ &= \frac{1 - x}{1 - x - x^2} \end{aligned}$$
+
+Example: $G(1 + x^2)$.
+> $G(1 + x^2) = 1 + (1 + x^2) + (1 + x^2)^2 + ...$.     
+> Looking at the constant term, there it is not a well-defined, finite number, so $G(1 + x^2)$ is **not** a formal power series.
+
+**Theorem**: If $A(x)$ and $B(x)$ are formal power series, where $[x^0]B(x) = 0$, then $A(B(x))$ is a formal power series.
+- Intuition is that we need a finite bound for the terms where $[x^n]A(B(x))$ can be found.
+
+## Sum and Product Lemmas
+
+### Sum Lemma
+
+Let $S = A \cup B$, $A \cap B = \emptyset$. Let $w$ be the weight function on $S$. Then $\Phi_S(x) = \Phi_A(x) + \Phi_B(x)$.
+> $\Phi_S(x) = \sum_{\rho \in S}x^{w(\rho)} = \sum_{\rho \in A} x^{w(\rho)} + \sum_{\rho \in B} x^{w(\rho)} = \Phi_A(x) + \Phi_B(x)$.
+
+### Product Lemma
+
+Let $A$, $B$ be sets with weight functions $\alpha, \beta$. Consider $A \times B$ with the weight function $w(a, b) = \alpha(a) + \beta(b)$, for all $(a, b) \in A \times B$. Then $\Phi_{A \times B}(x) = \Phi_A(x)\Phi_B(x)$.
+> $$\begin{aligned} \Phi_A(x)\Phi_B(x) &= (\sum_{a \in A}x^{\alpha(a)})(\sum_{b \in B}x^{\beta(b)}) \\ &= \sum_{a \in A}\sum_{b \in B}x^{w(a, b)} \\ &= \sum_{(a, b) \in A \times B}x^{w(a, b)} \\ &= \Phi_{A \times B}(x) \end{aligned}$$
