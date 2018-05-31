@@ -1,1 +1,12 @@
+gems:
+    - jekyll-pandoc
+
+markdown: Pandoc
+
 theme: jekyll-theme-minimal
+
+pandoc:
+  extensions:
+    - normalize
+    - smart
+    - mathjax
