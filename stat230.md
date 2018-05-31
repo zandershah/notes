@@ -92,3 +92,24 @@ Two events $A$ and $B$ are **mutually exclusive** if $A$ and $B$ are disjoint.
 **Definition**: Conditional probabilty of $A$ given $B$, so long as $P(B) > 0$, is denoted by $P(A \mid B) = \frac{P(A \cup B)}{P(B)}$.
 
 **Definition**: For events $A$ and $B$, $P(A \cap B) = P(A \mid B)P(B) = P(B \mid A)P(A)$.
+
+**Bayes Theorem**: $P(B_i | A) = \frac{P(A|B_i)P(B_i)}{\sum_{j = 1}^k P(A | B_j)P(B_j)}$
+
+Example: Pick Pharah, 20% chance of loss. Pick Winston, 10% chance of loss. Pick Winston 70% of the time, Pharah 30% of the time. Given that the game was lost, what is the probability that Pharah was picked?
+> $$\begin{aligned}P(Pharah | Loss) &= \frac{P(Loss | Pharah)P(Pharah)}{P(Loss)} \\ &= \frac{0.2 \cdot 0.3}{P(Loss | Pharah)P(Pharah) + P(Loss | Winston)P(Winston)} \\ &= \frac{0.2 \cdot 0.3}{0.2 \cdot 0.3 + 0.1 \cdot 0.7} \\ &= 0.461
+> 5\end{aligned}$$
+
+**Probablity Function**: $f_X(x) = P(X = x)$.
+1. $0 \le f_X(x) \le 1$.
+2. $\sum_{x \in X(S)}f_X(x) = 1$.
+
+**Cumulative Distribution Function (*CDF*)**: $F_X(x) = P(X \le x)$, $x \in \mathbb{R}$. We can use $P(X \le x) = P(\{\omega \in S: X(\omega) \le x\})$.
+1. $0 \le F_X(x) \le 1$.
+2. $F_X(x) \le F_X(y)$ for $x < y$.
+3. $\lim_{x \to -\infty}F_x(x) = 0$, and $\lim_{x \to \infty}F_X(x) = 1$.
+
+Example: $N$ balls labelled $1, 2, ..., N$ are placed in a box, and $n \le N$ are randomly selected without replacement. Find $P(X = x)$ where random variable $X$ is the largest number selected.
+> **pdf**: There is only 1 way to select $x \in \{1, ..., n\}$. There are ${x - 1 \choose n - 1}$ ways to pick the remaining $n - 1$ balls. $P(X = x) = \frac{x - 1 \choose n - 1}{N \choose n}$, $x \ge n$. $P(X \le x) = \frac{x \choose n}{N \choose n}$, $x \ge n$.
+>
+> Now we use the property of **pdf**.
+> $$\begin{aligned}P(X = x) &= F(x) - F(x - 1) \\ &= \frac{x \choose n}{N \choose n} - \frac{x - 1 \choose n}{N \choose n} \\ &= \frac{x - 1 \choose N - 1}{N \choose n}\end{aligned}$$
