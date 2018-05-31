@@ -81,11 +81,11 @@ Now everyone knows you can get rich from the music industry, most of them go to 
 - At it's peak in the 1920s, 1930s, 21000 publishers, 36000 composers.
 - Develops an efficient way of creating music, **divisions of labour** (composer, lyricist, publisher, publicity, performers). Allows for quality control and efficiency.
 - Lyric style is still the same as before, idealized romance. 
-- Music is made to be aasy to play / sing. AABA musical form (upper case for melody) - verse verse bridge verse.
+- Music is made to be easy to play / sing. AABA musical form (upper case for melody) - verse verse bridge verse.
     - Specifies the melody.
-    - easy to play, easy to sing with simple phrasing and range
+    - Easy to play, easy to sing with simple phrasing and range
 
-Example: "Somewhere Over the Rainbow" (Arden / Harburg 1939)
+Example: "Somewhere Over the Rainbow" (Arlen / Harburg 1939)
 
 There was no focus on singer at this time, more on songs. Popular songs were not linked to an artist. There is also no distinction based on age (e.g. people of all ages would like big bands).
 
@@ -168,7 +168,7 @@ Example: "Sweet Home Chicago" (Robert Johnson November 1936)
     - They only cared about what they thought they could sell.
     - Harder to sell to rural areas due to distance and populations.
 
-### Commercian Radio
+### Commercial Radio
 > 1920, recording industry almost dies.
 - Jan 1922, 28 sations. Dec 1922, 570 stations.
 - Controlled by only a few "Networks" (CBS, NBC, Mutual).
@@ -338,13 +338,18 @@ Recall that one of the main characteristics of parlour music is control.
 
 # Textbook Readings I
 
+## Chart Positions
 - Keep fan mentality at bay because we need to study history and development by looking at all influential / popular songs. Charts help to avoid fan mentality and keep us honest.
+- Charts are not the best because of faking but they are the best thing we have.
+- 500k, gold record. 1m platinum record.
 
 ## Rise of Radio Networks 1920s
 One could broadcast to larger ranges by using a high power transmitter or by linking regional stations.
 - NBC used AT&T telephone lines to link 69 stations for the first coast-coast in 1928.
 - It was unethical to use records on air. The musician unions tried to keep live performaces on radio through bylaws (1940s).
 - Offered soap operas, adventure shows, comedies. The Guiding Light (1937), Lone Ranger, Superman (1930s-1940s).
+- Clear-channeled stations can play on a specific frequency.
+    - X-Stations played on those frequencies below the border. Reach all the way to Chicago.
 
 ## Frank Sinatra
 - Bing Crosby was popular big band singer, but before 1945, it was rare for the singers to be stars.
@@ -354,9 +359,8 @@ One could broadcast to larger ranges by using a high power transmitter or by lin
 - Good looks and rebellious, became a teen idol.
 - One of the most successful post-WWII era singers, all the way to the 1980s.
 
-## Regional Syles: Country & Western
+## Regional Styles: Country & Western
 > Country and western music were regional unti lafter 1945.
-
 - Some of the first recordings by Ralph Peer.
 
 **Country Music**: Southeast and Appalacian. Folk traditions, ties to the British Isles. 
@@ -375,7 +379,7 @@ One could broadcast to larger ranges by using a high power transmitter or by lin
 - After WWII, Nashville became the center of professional western and country music.
 - Castle recording company.
 - Catalyst was a publishing firm in 1942 by Ray Acuff and Fred Rose, they did not use sheet music but instead targeted recording and performance.
-    - Patty Page "The Tenessee Waltz" became a hit in 1950, and gave them enough financial success to expand.
+    - Patty Paige "The Tenessee Waltz" became a hit in 1950, and gave them enough financial success to expand.
 
 ## Gospel, Chess, Chicago
 - Similar to western music, many youth singing R&B learned to sing in church.
