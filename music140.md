@@ -336,12 +336,76 @@ Recall that one of the main characteristics of parlour music is control.
 - 1970-77 Las Vegas.
 - Elivs dies August 16, 1977, age 42. 10 different types of perscription drugs in his bloodstream.
 
+# Chuck Berry
+> In many ways, he is the complete opposite of Elvis.
+- Born in St. Louis (midwest), middle class.
+- Father was a carpenter.
+    - Chuck look at records to see which African American artists were popular with middle class white (e.g. Nat King Cole). Notices that Nat King Cole has a very clear voice and tells stories.
+- Very deliberate in what he wanted to do.
+    - Decided that he wanted to be rich at a young age. Money guided many of his decisions.
+
+Talent competitions were very popular in African American culture. Chuck enters them and is looking for a way to stand out. He deliberately changes the tone of his guitar to be more similar to country / western and sings with more of a nasal sound.
+
+- 1955, ends up at Chess Records after visiting many other recording companies. Chuck plays around with Ida Red during spare time in the same way that Elvis played around with blues.
+- Chess Records tells him to rewrite it again so that they do not have to pay the songwriter. He writes a story about an unfaithful woman but recasts it as a car chase to be more family friendly.
+
+Example: "Maybellene" (July 1955)
+
+Chuck recognizes early on that he is targetting a brand new demographic of youth. He starts to write songs that he knows will appeal to teenagers (young white audience). Themes include cars (represents freedom and privacy), girls, no school, Rock 'n' Roll (celebrating the music itself).
+
+- Very few "cover versions" of Berry's songs because his songs aren't perceived as threatening. There is nothing that they can do to his songs.
+    - The centrality of the electric guitar made it hard to remove.
+
+Example: "Johnny B. Goode" (1958)
+- #2 R&B, #8 Pop.
+- 12-bar blues with a "text heavy" narrative.
+- White Elements.
+    - "Down Louisiana across to New Orleans"
+    - "Text heavy" narrative.
+    - Clear enunciation.
+    - Country guitar sound.
+- Black Elements.
+    - Blues chord structure.
+    - Added 6th (boogie woogie).
+        - Piano would play busy bass line with left and and solo with right hand.
+        - Guitar players would simplify the bass line.
+    - Call and response between voice and guitar.
+    - Guitar solo is structured on timbre, rhythm, articulation.
+        - You can play the same note on different strings to change timbre.
+        - You can change articulation by pressing the string differently or sliding to a note.
+
+> Elvis was a guitar *owner*, Chuck was a guitar *player*.
+
+A whole generation of bands will model themselves after Chuck Berry. He played the electric guitar and wrote his own songs.
+
+"If you wanted to give rock and roll a different name, you would call it Chuck Berry" - **John Lennon**.
+
+This period is referred to historically as the **Golden Age of Rock and Roll** (1954 - 1959).
+
+Elvis worked in the major recording companies because he did not write his own songs and therefore fit the division of labour.
+
+## Corruption - Payola
+- Major recording companies linked race with the "quality" of the music.
+- They spread rumors that the DJs were getting bribed in order to play them.
+- Rock 'n' Roll is attacked on the grounds that it is inferior music.
+- Payola Hearings (bribery). Turns out that everyone in the music industry was taking bribes.
+- Alan Freed (the man who coins the term *Rock 'n' Roll*).
+    - Fired from his job, gets hounded to death.
+- Bribery and corruption were nothing new.
+
+The major records had a good reason to be scared of Rock n Roll. In 1954, the music industry is estimated at **$200m**. By the end of 1959, it is estimated **$600m**.
+
+The Pop top 10 was 15% Rock n Roll in 1955, 42% in 1959. The independent record companies accounted for about 21%, 66% in 1959.
+
+**Racism**: Reaction against the perceived integration of youth. Birth of Rock and Roll coincides with emergence of Civil Rights Movement.
+- **Court Case**: May 1954. Brown vs. The Board of Education. The Supreme Court ordered the educational systems to end segregation.
+
 # Textbook Readings I
 
 ## Chart Positions
 - Keep fan mentality at bay because we need to study history and development by looking at all influential / popular songs. Charts help to avoid fan mentality and keep us honest.
 - Charts are not the best because of faking but they are the best thing we have.
-- 500k, gold record. 1m platinum record.
+- 500k, gold record. 1m, platinum record.
 
 ## Rise of Radio Networks 1920s
 One could broadcast to larger ranges by using a high power transmitter or by linking regional stations.
