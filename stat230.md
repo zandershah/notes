@@ -113,3 +113,34 @@ Example: $N$ balls labelled $1, 2, ..., N$ are placed in a box, and $n \le N$ ar
 >
 > Now we use the property of **pdf**.
 > $$\begin{aligned}P(X = x) &= F(x) - F(x - 1) \\ &= \frac{x \choose n}{N \choose n} - \frac{x - 1 \choose n}{N \choose n} \\ &= \frac{x - 1 \choose N - 1}{N \choose n}\end{aligned}$$
+
+Example: Suppose a tack when flipped has probability $0.6$ of landing point up. If the tack is flipped $10$ times, what is the probability it lands point up more than twice?
+> $X \in \{0, 1, 2, ..., 10\}$, $X \sim Bin(n = 10, p = 0.6)$   
+>
+>  We want $P(X \ge 3) = 1 - P(X < 2) = 1 - (0.6^{10} + {10 \choose 1}0.6^9 0.4 + {10 \choose 2}0.6^8 0.4^2)$.
+
+Example: Suppose a fair coin is flipped 17 times. Let $X$ denote the number of heads observed, and let $Y$ denote the number of tails observed. Which of the following is false?
+> - $X \sim Binomial(17, 0.5)$.
+> - $Y \sim Binomial(17, 0.5)$.
+> - $X \sim Y$ (*X follows the distribution of Y*).
+> - $X + Y = 17$.
+> - $X = Y$ (*False, because RV quantity is not fixed*).
+
+Example: Weekly lottery has a probability of 0.02 of winning a prize with a single ticket. If you buy one ticket per week for 52 weeks, what is the probability that you ...
+> $X \sim Bin(n=52, p=0.02)$
+1. Win no prizes?
+    > We want $P(X = 0) = 0.98^{52}$.
+2. Win 3 or more prizes?
+    > We want $P(X \ge 3) = 1 - (P(X = 0) + P(X = 1) + P(X = 2))$.
+
+Binomial and hypergeometric distributions are fundamentally different, as the former picks with replacement, whereas the latter picks without replacement.
+
+**Theorem**: If $r$ and $N$ relatively larger than $n$ and $\frac{r}{N} = p$ where $p \in [0, 1]$, then if $X \sim Hypergeometric(N, r, n)$ and $Y \sim Binomial(n, p)$ then $P(X \le k) \approx P(Y \le k)$.
+
+Example: In Overwatch there are 27 playable characters, of which 6 are considered "Tanks". Suppose that three characters are drawn at random.
+1. What is the probability that the selection contains exactly 2 tanks.
+    > We want $P(T = 2) = \frac{{6 \choose 2}{21 \choose 1}}{27 \choose 3} \approx 0.1077$.
+2. Approximate this probability using binomial distribution.
+    > $T_{Bin} \sim Bin(3, \frac{6}{27})$.  
+    >
+    > We want $P(T_{Bin} = 2) = {3 \choose 2}(\frac{6}{27})^2(\frac{21}{27}) \approx 0.1152$
