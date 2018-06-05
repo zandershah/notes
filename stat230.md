@@ -144,3 +144,15 @@ Example: In Overwatch there are 27 playable characters, of which 6 are considere
     > $T_{Bin} \sim Bin(3, \frac{6}{27})$.  
     >
     > We want $P(T_{Bin} = 2) = {3 \choose 2}(\frac{6}{27})^2(\frac{21}{27}) \approx 0.1152$
+
+## Negative Binomial
+Question: We want the number of tails until you get the first head.
+$$P(X = x) = (1-p)^xp,\ x = 0,1...$$
+
+Question: If I model the total number of coin flips until I get the first head, is this also a geometric distribution? **Yes** because it is essentially the same as the last question.
+
+We generalize to $k$ successes by noticing that the last trial must produce the $k$th success and the remaining $k-1$ successes may appear anywhere from the $1$st to $2$nd last trial.
+$${r + k - 1 \choose k - 1}p^k(1-p)^r$$
+
+Example: There is a 50.4% change of flipping a head. What is the probability that you need more than 5 flips to get a tail?
+> $$\begin{aligned}1 - P(X \le 4) &= 1 - \sum_{x = 0}^4 0.504^x (1 - 0.504)\end{aligned}$$
