@@ -115,7 +115,7 @@ Example: $N$ balls labelled $1, 2, ..., N$ are placed in a box, and $n \le N$ ar
 > $$\begin{aligned}P(X = x) &= F(x) - F(x - 1) \\ &= \frac{x \choose n}{N \choose n} - \frac{x - 1 \choose n}{N \choose n} \\ &= \frac{x - 1 \choose N - 1}{N \choose n}\end{aligned}$$
 
 Example: Suppose a tack when flipped has probability $0.6$ of landing point up. If the tack is flipped $10$ times, what is the probability it lands point up more than twice?
-> $X \in \{0, 1, 2, ..., 10\}$, $X \sim Bin(n = 10, p = 0.6)$   
+> $X \in \{0, 1, 2, ..., 10\}$, $X \sim Bin(n = 10, p = 0.6)$   .
 >
 >  We want $P(X \ge 3) = 1 - P(X < 2) = 1 - (0.6^{10} + {10 \choose 1}0.6^9 0.4 + {10 \choose 2}0.6^8 0.4^2)$.
 
@@ -127,7 +127,7 @@ Example: Suppose a fair coin is flipped 17 times. Let $X$ denote the number of h
 > - $X = Y$ (*False, because RV quantity is not fixed*).
 
 Example: Weekly lottery has a probability of 0.02 of winning a prize with a single ticket. If you buy one ticket per week for 52 weeks, what is the probability that you ...
-> $X \sim Bin(n=52, p=0.02)$
+> $X \sim Bin(n=52, p=0.02)$.
 1. Win no prizes?
     > We want $P(X = 0) = 0.98^{52}$.
 2. Win 3 or more prizes?
@@ -143,7 +143,7 @@ Example: In Overwatch there are 27 playable characters, of which 6 are considere
 2. Approximate this probability using binomial distribution.
     > $T_{Bin} \sim Bin(3, \frac{6}{27})$.  
     >
-    > We want $P(T_{Bin} = 2) = {3 \choose 2}(\frac{6}{27})^2(\frac{21}{27}) \approx 0.1152$
+    > We want $P(T_{Bin} = 2) = {3 \choose 2}(\frac{6}{27})^2(\frac{21}{27}) \approx 0.1152$.
 
 ## Negative Binomial
 Question: We want the number of tails until you get the first head.
@@ -155,4 +155,39 @@ We generalize to $k$ successes by noticing that the last trial must produce the 
 $${r + k - 1 \choose k - 1}p^k(1-p)^r$$
 
 Example: There is a 50.4% change of flipping a head. What is the probability that you need more than 5 flips to get a tail?
-> $$\begin{aligned}1 - P(X \le 4) &= 1 - \sum_{x = 0}^4 0.504^x (1 - 0.504)\end{aligned}$$
+> $1 - P(X \le 4) = 1 - \sum_{x = 0}^4 0.504^x (1 - 0.504)$.;
+
+Exampe: Hanzo is getting more popular. Every time I join a new game, I have a 15% change of picking Hanzo. What is the probability that ...
+> Let $W$ be the number of games played before I pick Hanzo. $W \sim Geo(0.15)$. We have $f_W(w) = (1-p)^wp$, $w \in \mathbb{N}_0$.
+1. I will need to play 4 games before I get to pick Hanzo?
+    > $P(W = 4) = f_w(4) = (0.85)^40.15 = 0.0783$.
+2. I will need to play at least 4 games before I get to pick Hanzo, given that I have to play at least 3 games before I pick him?
+    > $(P(W \ge 4 | W \ge 3) = \frac{P(W \ge 4 \cap W \ge 3)}{P(W \ge 3)} = \frac{P(W \ge 4)}{P(W \ge 3)} = 0.85$.
+    >
+    > $$\begin{aligned}P(W \ge w) &= \sum_{t=w}^\infty (1-p)^tp \\ &= p(1-p)^w\sum_{t=0}^\infty (1-p)^t \\ &= p(1-p)^w\frac{1}{1 - (1-p)} \\ &= (1-p)^w\end{aligned}$$
+3. I will need to play at least one game before I get to pick Hanzo?
+    > $P(W \ge 1) = 1 - P(W = 0) = 1 - p = 0.85$.
+
+## Memoryless Property of Geometric
+Let $X \sim Geo(p)$ and $s, t$ be non-negative integers.
+$$P(X \ge s + t | X \ge s) = P(X \ge t)$$
+
+Example: Mobile game "Show Me The Money". Game released super rate item which only appears from a loot box which costs $2 per box, with the change of 0.01%.
+> Let $X$ be the number of boxes without the rare item.
+1. What is the probability that he will need to buy 50 loot boxes to get 2 super rate items?
+    > Number of success is fixed but not the number of trials, so we use negative binomial. $X \sim NB(2, 0.0001)$.     
+    >
+    > We want $P(X = 48) = {48 + 2 - 1 \choose 2 - 1}(0.9999)^{48}(0.0001)^2 = 0.000000488$.
+
+# Poisson
+We say that a random variable $X \sim Poisson(\lambda)$ if we have $f_X(x)$ such that.
+$$f_X(x) = e^{-\lambda}\frac{\lambda^x}{x!}$$
+
+We verify that this is a valid probability distribution using the exponential series.
+$$\begin{aligned}
+\sum_{x=0}^\infty f_X(x) &= \sum_{x=0}^\infty e^{-\lambda}\frac{\lambda^x}{x!} \\
+&= e^{-\lambda}e^\lambda \\
+&= 1
+\end{aligned}$$
+
+One way to view poisson is to consider the limiting case of binomial, where you fix $\lambda = np$, and let $n \to \infty$ and $p \to 0$.
