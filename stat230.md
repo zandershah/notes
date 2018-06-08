@@ -191,3 +191,43 @@ $$\begin{aligned}
 \end{aligned}$$
 
 One way to view poisson is to consider the limiting case of binomial, where you fix $\lambda = np$, and let $n \to \infty$ and $p \to 0$.
+
+## Poisson Process
+1. **Independence**: the number of occurences in non-overlapping intervals are independent.
+2. **Individuality**: for sufficiently short periods of time, $\Delta t$, the probability of two or more events occuring in the interval approaches zero.
+$$\lim_{\Delta t \to 0} \frac{P(\text{2 of more events in } (t, t + \Delta t))}{\Delta t} = 0$$
+3. **Homogeneity or Uniformity**: events occur at a uniform or homogenous rate $\lamdba$ and proportional to time interval $\Delta t$.
+$$\lim_{\Delta t \to 0} \frac{P(\text{one event in } (t, t + \Delta t)) - \lambda \Delta t}{\Delta t} = 0$$
+
+A process that satisfies the prior conditions on the occurrence of events is often called a **Poisson Process**. More precisely, if $X_t$, for $t \ge 0$, denotes the number of events that have occurred up to time $t$, then $X_t$ is called a **Poisson Process**.
+
+Example: Website hits for a given website occur according to a Poisson process with a rate of 100 hits per minute. Find ...
+1. $P(\text{1 hit is observed in a second}) = \frac{e^{-\frac{5}{3}}\frac{5}{3}^1}{1!}$
+2. $P(\text{90 hits are observed in a minute}) = \frac{e^{-100}100^{90}}{90!}$
+
+## Relation to Binomial
+
+Consider one unit of time, so that the process follows $Poi(\lambda)$.
+
+We chop up the interval into $n$ equally-sized pieces. If we chop it up finely enough, then by individuallity, the probability of two or more events occuring goes to 0.
+
+This means that, over a small enough size, we approximately have either 0 or 1 event occuring with $P(event) = p$ for every piece.
+
+Moreover, the event probability $p$ is proportional to the length of the interval by homogeneity. This means that as $n \to \infty$, $p \to 0$.
+
+Finally, by independence, each $n$ pieces are independent, so we have $Bin(n, p)$, where $n$ is very large and $p$ is very small.
+
+We expect to see $np$ events, recall that rate $\lambda$ is the rate of occurance over 1 unit of time. So $\lambda = np$, and as $n \to \infty$, $p \to 0$, in $Bin(n, p)$, we approach $Poi(np)$.
+
+Example: A bit error occurs got a given data transmission method independently in out of of every 1000 bits transferred. Suppose a 64 bit message is sent using the transmission system.
+1. What is the probability that there are exactly 2 bit errors?
+    > $X \sim Bin(64, \frac{1}{1000})$, $P(X = 2) = {64 \choose 2}(\frac{999}{1000})^{62} (\frac{1}{1000})^2 \approx 0.019$.
+2. Approximate using Poisson.
+    > $X \sim Poi(\frac{64}{1000})$, $P(X = 2) = \frac{e^{-\frac{64}{1000}}(\frac{64}{1000})^2}{2!} \approx 0.019$.
+
+Example: Shiny versions of Pokemon are possible to encounter and catch starting in Generation 2 (Pokemon Gold / Silver).  Normal encounters with Pokemon while running in grass occur according to a Poisson process with rate 1 per minute on average. 1 in every 8192 encounters will be a Shiny Pokemon, on average.
+1. If you run around in the grass for 15 hours, what is the probability you will encounter at least one Shiny Pokemon?
+> $X \sim Poi(\frac{900}{8192})$. $P(X \ge 1) = 1 - P(X = 0) = 1 - e^{-\frac{900}{8192}}$. 
+
+2. How long would you have to run around in grass to have better than 50 percent chance of encountering at least one Shiny Pokemon?
+> Solve for $t$, where $0.5 = P(X_t \ge 1)$.
