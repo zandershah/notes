@@ -399,6 +399,101 @@ The Pop top 10 was 15% Rock n Roll in 1955, 42% in 1959. The independent record 
 
 **Racism**: Reaction against the perceived integration of youth. Birth of Rock and Roll coincides with emergence of Civil Rights Movement.
 - **Court Case**: May 1954. Brown vs. The Board of Education. The Supreme Court ordered the educational systems to end segregation.
+- Rosa Parks, Montgomery Alabama. Was illegal for African Americans to sit at the front of the bus. Montgomery Bus Boycott.
+    - Story attracted international attention. Town was so embarassed, by the end of 1956, they take down the signs that divide the bus.
+- Freedom Riders. Was illegal for people of opposite race to sit beside each other as they crossed the state lines.
+- Lunch Counter Sit-ins. Would go to lunch counters that do not serve African Americans and just sit there.
+- Leader was Rosa Park's church leader, Marin Luther King Jr.
+- Non-violent protest.
+
+### The Great Extinction
+> Many rock 'n' roll stars are taken out of the scene.
+- Elvis, March 1958, Army.
+- Chuck Berry, December 1959, Arrested under the "Mann Act".
+    - Serves over 2 years in jail.
+    - "My Dingaling" is written once he gets out of jail, makes him the most money.
+    - Is not a *revolutionary* figure afterward.
+- Jerry Lee Lewis, May 1958, Marriage to 13 year old cousin becomes public.
+- Little Richard, October 1957, announces retirement from music and becomes a church minister.
+- Buddy Holly, February 1959, Dies in plane crash along with Ritchie Valens and "The Big Bopper" (JP Richardson).
+    - Part of the second generation (listened to early Elvis).
+    - Symbolically seen as the end of the golden age of rock 'n' roll.
+
+# The "In-Between" Years (1959 - 1963)
+> The end of the "Golden Age" of Rock and Roll, to the arrival of the Beatles (February 1964).
+
+Major labels recognize that Rock and Roll is not a fad and begin to produce music similar to Rock and Roll, aimed at teenagers of the late 1950s / early 1960s. The only difference was that they were produced with the *divsion of labour* system.
+
+## Dance Craze
+> Starts by a song that came out of rythm and blues. "The Twist".
+
+The idea that a song that describes a dance becomes popular. Large music industries start to pump out songs about dances.
+
+Example: "The Locomotion" Little Eva (1962, Goffin, King)
+- Little Eva was the babysitter for Goffin's and King's children.
+
+- **Teel idols**. Clean-cut, idealized boyfriend. No "bad boy" image from the Golden Age.
+    - Singing was almost secondary to looks.
+
+Example: "Blue Velvet" Bobby Vinton (1963)
+- Composed in 1950, was a major hit for Tony Bennett in 1951.
+- Smoother sounding, but there are instruments you would have not heard 10 years older.
+    - Electric guitar.
+
+- Older TPA songs could be reworked in the new style.
+- Newer songs  are written specifically for the new teen demographic. Romantic (non-sexualized) love, and dancing.
+- Most of the newer singers did not write songs. These songs were coming from professional songwriters (not technically called TPA, but still in NYC).
+    - The Brill Building.
+    - Don Kirshaner / Alvin Nevins, Aldon Music. They employed some of the most successful songwriters of the time.
+    - Worked largely in pairs, lyricists and composers.
+    - Song could go from not written to a major hit in less than 3 weeks. Looking at the charts, you will see many different artists, but the same songwriters (most of them were the Brill Building songwriters).
+
+To summarize the "In-Between Years", division of labour figures out how to create songs that teenagers will buy and parent will not be scared of.
+
+## Rise of the Producer
+- The Magnetophon.
+    - Sgt. Jack Mullin.
+- The Nazis invented reel-to-reel tape.
+    - More reliable than records which could scratch or skip.
+- Bing Crosby becomes the first celebrity to pre-record a weekly broadcast.
+- 1948, Bing gives one of the first commercially produced reel-to-reel tape recorders to Les Paul.
+
+### Les Paul (1915 - 2009)
+- Popularizes the solid-body electric guitar.
+- Wishes to create recordings by layering performances.
+- Assists in the development of the "multitrack" tape recording.
+
+Example: "Sitting On Top Of The World" (Les Paul with Mary Ford, 1953)
+
+**Multitrack recording redefines the process of recording. Reproduction to Production.** Creating a moment that never actually happened. During the In-Between Years, the recording industry begins the transition from recording complete songs in a single "take" to the use of multitrack recording.
+
+### Phil Spector
+> Was not a performer, but became incredibly famous.
+- the "Wall of Sound".
+
+Example: "Be My Baby" The Ronettes, (1963, Barry, Greenwich, Spector)
+> Spector and the Brill Building.
+- Texture was so thick that it would be very hard to isolate specific instrument sounds.
+
+## Surf Music
+- Middle Class.
+- West Coast Prosperity.
+- Importance of Electric Guitar, Instrumental Tracks.
+
+"Surfin' USA" The Pendletones (*The Beach Boys*) (May 1963, Chuck Berry)
+- Amazing musicians, unrivaled background vocal complexity.
+- Brian Wilson was the creative force (*brains*).
+    - Songwriter, arrangement, recording engineer, producer. Was allowed to produce the Beach Boy's records himself.
+    - The one person in the world who scared the Beatles.
+    - Suspected to be schizophrenia, tried to combat with drugs and alcohol.
+
+Beach Boys decline in popularity through the late 1960s because of Brian Wilson's mental illness and changes in approaching popular music that they cannot keep up with.
+
+## Folk Revival
+- Many of the teen fans during the golden age of Rock 'n' Roll are now in their early 20s.
+- Now in University, many are looking for music that is more "serious".
+    - Folk music tells stories about issues.
+- Sounds similar to Folk music that we studied before, except that these are professional musicians.
 
 # Textbook Readings I
 
