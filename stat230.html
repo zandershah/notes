@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>stat230</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body);
+  });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="stat-230">STAT 230</h1>
+<p>Example: Suppose you have 20 distinct books, 7 of which are written by Mark Twain.</p>
+<ol type="1">
+<li><p>How many ways can you arrange 12 books on a shelf if exactly 3 of them must be Mark Twain books?</p>
+<blockquote>
+<p><span class="math inline">\({7 \choose 3}{13 \choose 9}\)</span> ways to choose subsets.<br />
+Books can be rearranged in <span class="math inline">\(12!\)</span> ways.<br />
+Therefore, the answer is <span class="math inline">\(12!{7 \choose 3}{13 \choose 9}\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>Example: Consider drawing 3 numbers at random <strong>with</strong> replacement from the digits 0 to 10. What is the probability that there is a repeated number among the 3.</p>
+<blockquote>
+<p>We can consider the complement, where there are no repeated numbers.<br />
+<span class="math inline">\(1 - \frac{10 \cdot 9 \cdot 8}{10^3}\)</span></p>
+</blockquote>
+<p>Example: Suppose there are 4 passengers on an elevator that services 5 floors. Each passenger is equally likely to get off at any floor.</p>
+<blockquote>
+<p><span class="math inline">\(|S| = 5^4\)</span></p>
+</blockquote>
+<ol type="1">
+<li><p>What is the probability that the passengers all get off on different floors?</p>
+<blockquote>
+<p><span class="math inline">\(|A| = 5^{(4)}\)</span>. Therefore <span class="math inline">\(P(A) = \frac{5^{(4)}}{5^4}\)</span>.</p>
+</blockquote></li>
+<li><p>2 passengers get off on floor 2, and 2 get off on floor 3.</p>
+<blockquote>
+<p><span class="math inline">\(|A| = {4 \choose 2}{2 \choose 2}\)</span>. Therefore <span class="math inline">\(P(A) = \frac{{4 \choose 2}{2 \choose 2}}{5^4}\)</span>.</p>
+</blockquote></li>
+<li><p>2 passengers get off on one floor, and 2 passengers get off on another floor.</p>
+<blockquote>
+<p><span class="math inline">\({5 \choose 2}{4 \choose 2}{2 \choose 2}\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>Example: Consider rearranging the letters at random in the name “ZENYATTA” to form a single ‘word’.</p>
+<ol type="1">
+<li><p>How many ways can this be done?</p>
+<blockquote>
+<p><span class="math inline">\(|S| = {8 \choose 2}{6 \choose 2}{4 \choose 1}{3 \choose 1}{2 \choose 1}{1 \choose 1} = \frac{8!}{2!2!}\)</span>.</p>
+</blockquote></li>
+<li><p>What is the probaility that all of the letters appear in alphabetical order?</p>
+<blockquote>
+<p>A = { “AAENTTYZ” }. Therefore <span class="math inline">\(P(A) = \frac{1}{|S|}\)</span>.</p>
+</blockquote></li>
+<li><p>What is the probability that the word begins and ends with “T”?.</p>
+<blockquote>
+<p><span class="math inline">\(|A| = {6 \choose 2}{4 \choose 1}{3 \choose 1}{2 \choose 1}{1 \choose 1}\)</span>.</p>
+</blockquote></li>
+</ol>
+<p><span class="math inline">\({n \choose n_1}{n - n_1 \choose n_2}...{n_k \choose n_k} = {n \choose n1,n2,...,n_k}\)</span>.</p>
+<p>Example: Harold’s daily morning ritual is to drink 5 cans of pop. He has 2 cans of pop C, 2 cans of pop F, and 1 can of pop P. How many ways can he complete the ritual?</p>
+<blockquote>
+<p><span class="math inline">\(|A| = \frac{5!}{2!2!} = 30\)</span>.</p>
+</blockquote>
+<p>Example: Find the probability that a bridge hand (13 cards picked at random from a standard deck without replacement) has …</p>
+<blockquote>
+<p><span class="math inline">\(|S| = {52 \choose 13}\)</span>.</p>
+</blockquote>
+<ol type="1">
+<li><p>3 aces.</p>
+<blockquote>
+<p><span class="math inline">\(|A| = {4 \choose 3}{48 \choose 10}\)</span>. Therefore <span class="math inline">\(P(A) = \frac{{4 \choose 3}{48 \choose 10}}{52 \choose 13}\)</span>.</p>
+</blockquote></li>
+<li><p>At least 1 ace.</p>
+<blockquote>
+<p>Consider the complement. <span class="math inline">\(|A^c| = {48 \choose 13}\)</span>. Therefore <span class="math inline">\(P(A) = 1 - \frac{48 \choose 13}{52 \choose 13}\)</span>.</p>
+</blockquote></li>
+<li><p>6 spaces, 4 hearts, 2 diamonds, 1 club.</p>
+<blockquote>
+<p><span class="math inline">\(|A| = {13 \choose 6}{13 \choose 4}{13 \choose 2}{13 \choose 1}\)</span>. Therefore <span class="math inline">\(P(A) = \frac{{13 \choose 6}{13 \choose 4}{13 \choose 2}{13 \choose 1}}{52 \choose 13}\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>For verifying your answer when counting across disjoint unions, adding up the top and bottom numbers for the <span class="math inline">\({n \choose k}\)</span> in <span class="math inline">\(|A|\)</span> should add up to <span class="math inline">\(|S|\)</span>.</p>
+<p>Example (<em>Team captain problem</em>): Show that <span class="math inline">\({n \choose k} \cdot k = {n -1 \choose k - 1} \cdot n\)</span>.</p>
+<blockquote>
+<p>We are either picking the team first and then choosing the captain, or the other way around.</p>
+</blockquote>
+<p>Example (<em>Vandermonde’s Identity</em>): Show that <span class="math inline">\({n + m \choose k} = \sum_{i = 0}^k {n \choose i}{m \choose k - i}\)</span> for non-negative integers <span class="math inline">\(n, m, k\)</span>.</p>
+<h2 id="inclusion-exclusion-principle">Inclusion Exclusion Principle</h2>
+<blockquote>
+<p><span class="math display">\[P(\cup_{i = 1}^n A_i) = \cup_{i} P(A_i) - \cup_{i &lt; j} P(A_iA_j) + \cup_{i &lt; j &lt; k}P(A_iA_jA_k) - ...\]</span></p>
+</blockquote>
+<p>Example: Suppose that 2 fair 6 sided dce are rolled. What is the probability that at least 1 of the dice shows a 6?</p>
+<blockquote>
+<p><span class="math inline">\(P(A) = 1 - P(A^c) = 1 - (\frac{5}{6})^2 = 1 - \frac{25}{36} = \frac{11}{36}\)</span>.</p>
+</blockquote>
+<p>Example: There are 6 stops on the subway and 4 passengers on the subway car. Assume the passengers are equally likely to get off at any stop. Find the probability that:</p>
+<blockquote>
+<p><span class="math inline">\(|S| = 6^4\)</span>.</p>
+</blockquote>
+<ol type="1">
+<li>The passengers all get off at different stops.</li>
+<li>2 passengers get off at stop 2 and 2 passengers get off at stop 5.</li>
+<li><p>2 passengers get off at 1 stop and the other 2 passengers get off at another 1 stop.</p>
+<blockquote>
+<p><span class="math inline">\(|A| = {6 \choose 2}{4 \choose 2}{2 \choose 2}\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>Example: 5 tourists plan to attent Octoberfest. There are 7 locations possible. Find the probability that:</p>
+<blockquote>
+<p><span class="math inline">\(|S| = 7^5\)</span></p>
+</blockquote>
+<ol type="1">
+<li>All tourist attend different locations.</li>
+<li>The tourists all attend the same location.</li>
+<li><p>2 tourists attend 1 location and 3 tourists attend another location.</p>
+<blockquote>
+<p><span class="math inline">\(|A| = {7 \choose 2} \cdot 2 \cdot {5 \choose 2}{3 \choose 3} = 7 \cdot 6 \cdot {5 \choose 2}{3 \choose 3}\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>Example: Consider rearranging the “NOOB” at random. Let <span class="math inline">\(A\)</span> represent the event that two “O”s appear together, and let <span class="math inline">\(B\)</span> denote the event that the word starts with the letter <span class="math inline">\(N\)</span>. Determine.</p>
+<ol type="1">
+<li><span class="math inline">\(P(A) = \frac{3!}{\frac{4!}{2!}} = \frac{1}{2}\)</span></li>
+<li><span class="math inline">\(P(B) = \frac{3!}{4!} = \frac{1}{4}\)</span></li>
+<li>The probability that the resulting word does not start with “N” and that the “O”s do not appear together. <span class="math inline">\(P(\overline{A} \cap \overline{B}) = P(\overline{A \cup B})\)</span>.</li>
+</ol>
+<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are said to be <strong>indepenedent</strong> if <span class="math inline">\(P(A \cap B) = P(A)P(B)\)</span>.</p>
+<p>Example: Consider rolling 2 fair 6 sided dice. <span class="math inline">\(A\)</span> is the event where the sum is 10. <span class="math inline">\(B\)</span> is the event that the first die rolls a 6. <span class="math inline">\(C\)</span> is the event that the sum is 7. Are <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent?</p>
+<blockquote>
+<p><span class="math inline">\(B = \{(6, i) \mid i \in \{1, ..., 6\}\}\)</span>. <span class="math inline">\(A = \{(5, 5), (6, 4), (4, 6)\}\)</span>. We can see that <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> are not independent.</p>
+</blockquote>
+<p>If <em>knowing</em> <span class="math inline">\(A\)</span> restricts our choices for <span class="math inline">\(B\)</span>, they are not independent.</p>
+<p>Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>mutually exclusive</strong> if <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint.</p>
+<p><strong>Proposition</strong>: Suppose that not both <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are trivial events. If <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> are indepenent <strong>and</strong> mutually exclusive, then either <span class="math inline">\(P(A) = 0\)</span> or <span class="math inline">\(P(B) = 0\)</span>.</p>
+<p><strong>Proposition</strong>: If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, then <span class="math inline">\(\overline{A}\)</span> and <span class="math inline">\(\overline{B}\)</span> are independent, <span class="math inline">\(A\)</span> and <span class="math inline">\(\overline{B}\)</span> are independent, and <span class="math inline">\(\overline{A}\)</span> and <span class="math inline">\(B\)</span> are independent.</p>
+<p><strong>Definition</strong>: Conditional probabilty of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span>, so long as <span class="math inline">\(P(B) &gt; 0\)</span>, is denoted by <span class="math inline">\(P(A \mid B) = \frac{P(A \cup B)}{P(B)}\)</span>.</p>
+<p><strong>Definition</strong>: For events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(P(A \cap B) = P(A \mid B)P(B) = P(B \mid A)P(A)\)</span>.</p>
+<p><strong>Bayes Theorem</strong>: <span class="math inline">\(P(B_i | A) = \frac{P(A|B_i)P(B_i)}{\sum_{j = 1}^k P(A | B_j)P(B_j)}\)</span></p>
+<p>Example: Pick Pharah, 20% chance of loss. Pick Winston, 10% chance of loss. Pick Winston 70% of the time, Pharah 30% of the time. Given that the game was lost, what is the probability that Pharah was picked?</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}P(Pharah | Loss) &amp;= \frac{P(Loss | Pharah)P(Pharah)}{P(Loss)} \\ &amp;= \frac{0.2 \cdot 0.3}{P(Loss | Pharah)P(Pharah) + P(Loss | Winston)P(Winston)} \\ &amp;= \frac{0.2 \cdot 0.3}{0.2 \cdot 0.3 + 0.1 \cdot 0.7} \\ &amp;= 0.461
+5\end{aligned}\]</span></p>
+</blockquote>
+<p><strong>Probablity Function</strong>: <span class="math inline">\(f_X(x) = P(X = x)\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(0 \le f_X(x) \le 1\)</span>.</li>
+<li><span class="math inline">\(\sum_{x \in X(S)}f_X(x) = 1\)</span>.</li>
+</ol>
+<p><strong>Cumulative Distribution Function (<em>CDF</em>)</strong>: <span class="math inline">\(F_X(x) = P(X \le x)\)</span>, <span class="math inline">\(x \in \mathbb{R}\)</span>. We can use <span class="math inline">\(P(X \le x) = P(\{\omega \in S: X(\omega) \le x\})\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(0 \le F_X(x) \le 1\)</span>.</li>
+<li><span class="math inline">\(F_X(x) \le F_X(y)\)</span> for <span class="math inline">\(x &lt; y\)</span>.</li>
+<li><span class="math inline">\(\lim_{x \to -\infty}F_x(x) = 0\)</span>, and <span class="math inline">\(\lim_{x \to \infty}F_X(x) = 1\)</span>.</li>
+</ol>
+<p>Example: <span class="math inline">\(N\)</span> balls labelled <span class="math inline">\(1, 2, ..., N\)</span> are placed in a box, and <span class="math inline">\(n \le N\)</span> are randomly selected without replacement. Find <span class="math inline">\(P(X = x)\)</span> where random variable <span class="math inline">\(X\)</span> is the largest number selected.</p>
+<blockquote>
+<p><strong>pdf</strong>: There is only 1 way to select <span class="math inline">\(x \in \{1, ..., n\}\)</span>. There are <span class="math inline">\({x - 1 \choose n - 1}\)</span> ways to pick the remaining <span class="math inline">\(n - 1\)</span> balls. <span class="math inline">\(P(X = x) = \frac{x - 1 \choose n - 1}{N \choose n}\)</span>, <span class="math inline">\(x \ge n\)</span>. <span class="math inline">\(P(X \le x) = \frac{x \choose n}{N \choose n}\)</span>, <span class="math inline">\(x \ge n\)</span>.</p>
+<p>Now we use the property of <strong>pdf</strong>. <span class="math display">\[\begin{aligned}P(X = x) &amp;= F(x) - F(x - 1) \\ &amp;= \frac{x \choose n}{N \choose n} - \frac{x - 1 \choose n}{N \choose n} \\ &amp;= \frac{x - 1 \choose N - 1}{N \choose n}\end{aligned}\]</span></p>
+</blockquote>
+<p>Example: Suppose a tack when flipped has probability <span class="math inline">\(0.6\)</span> of landing point up. If the tack is flipped <span class="math inline">\(10\)</span> times, what is the probability it lands point up more than twice?</p>
+<blockquote>
+<p><span class="math inline">\(X \in \{0, 1, 2, ..., 10\}\)</span>, <span class="math inline">\(X \sim Bin(n = 10, p = 0.6)\)</span> .</p>
+<p>We want <span class="math inline">\(P(X \ge 3) = 1 - P(X &lt; 2) = 1 - (0.6^{10} + {10 \choose 1}0.6^9 0.4 + {10 \choose 2}0.6^8 0.4^2)\)</span>.</p>
+</blockquote>
+<p>Example: Suppose a fair coin is flipped 17 times. Let <span class="math inline">\(X\)</span> denote the number of heads observed, and let <span class="math inline">\(Y\)</span> denote the number of tails observed. Which of the following is false?</p>
+<blockquote>
+<ul>
+<li><span class="math inline">\(X \sim Binomial(17, 0.5)\)</span>.</li>
+<li><span class="math inline">\(Y \sim Binomial(17, 0.5)\)</span>.</li>
+<li><span class="math inline">\(X \sim Y\)</span> (<em>X follows the distribution of Y</em>).</li>
+<li><span class="math inline">\(X + Y = 17\)</span>.</li>
+<li><span class="math inline">\(X = Y\)</span> (<em>False, because RV quantity is not fixed</em>).</li>
+</ul>
+</blockquote>
+<p>Example: Weekly lottery has a probability of 0.02 of winning a prize with a single ticket. If you buy one ticket per week for 52 weeks, what is the probability that you …</p>
+<blockquote>
+<p><span class="math inline">\(X \sim Bin(n=52, p=0.02)\)</span>.</p>
+</blockquote>
+<ol type="1">
+<li><p>Win no prizes?</p>
+<blockquote>
+<p>We want <span class="math inline">\(P(X = 0) = 0.98^{52}\)</span>.</p>
+</blockquote></li>
+<li><p>Win 3 or more prizes?</p>
+<blockquote>
+<p>We want <span class="math inline">\(P(X \ge 3) = 1 - (P(X = 0) + P(X = 1) + P(X = 2))\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>Binomial and hypergeometric distributions are fundamentally different, as the former picks with replacement, whereas the latter picks without replacement.</p>
+<p><strong>Theorem</strong>: If <span class="math inline">\(r\)</span> and <span class="math inline">\(N\)</span> relatively larger than <span class="math inline">\(n\)</span> and <span class="math inline">\(\frac{r}{N} = p\)</span> where <span class="math inline">\(p \in [0, 1]\)</span>, then if <span class="math inline">\(X \sim Hypergeometric(N, r, n)\)</span> and <span class="math inline">\(Y \sim Binomial(n, p)\)</span> then <span class="math inline">\(P(X \le k) \approx P(Y \le k)\)</span>.</p>
+<p>Example: In Overwatch there are 27 playable characters, of which 6 are considered “Tanks”. Suppose that three characters are drawn at random.</p>
+<ol type="1">
+<li><p>What is the probability that the selection contains exactly 2 tanks.</p>
+<blockquote>
+<p>We want <span class="math inline">\(P(T = 2) = \frac{{6 \choose 2}{21 \choose 1}}{27 \choose 3} \approx 0.1077\)</span>.</p>
+</blockquote></li>
+<li><p>Approximate this probability using binomial distribution.</p>
+<blockquote>
+<p><span class="math inline">\(T_{Bin} \sim Bin(3, \frac{6}{27})\)</span>.</p>
+<p>We want <span class="math inline">\(P(T_{Bin} = 2) = {3 \choose 2}(\frac{6}{27})^2(\frac{21}{27}) \approx 0.1152\)</span>.</p>
+</blockquote></li>
+</ol>
+<h2 id="negative-binomial">Negative Binomial</h2>
+<p>Question: We want the number of tails until you get the first head. <span class="math display">\[P(X = x) = (1-p)^xp,\ x = 0,1...\]</span></p>
+<p>Question: If I model the total number of coin flips until I get the first head, is this also a geometric distribution? <strong>Yes</strong> because it is essentially the same as the last question.</p>
+<p>We generalize to <span class="math inline">\(k\)</span> successes by noticing that the last trial must produce the <span class="math inline">\(k\)</span>th success and the remaining <span class="math inline">\(k-1\)</span> successes may appear anywhere from the <span class="math inline">\(1\)</span>st to <span class="math inline">\(2\)</span>nd last trial. <span class="math display">\[{r + k - 1 \choose k - 1}p^k(1-p)^r\]</span></p>
+<p>Example: There is a 50.4% change of flipping a head. What is the probability that you need more than 5 flips to get a tail?</p>
+<blockquote>
+<p><span class="math inline">\(1 - P(X \le 4) = 1 - \sum_{x = 0}^4 0.504^x (1 - 0.504)\)</span>.;</p>
+</blockquote>
+<p>Exampe: Hanzo is getting more popular. Every time I join a new game, I have a 15% change of picking Hanzo. What is the probability that …</p>
+<blockquote>
+<p>Let <span class="math inline">\(W\)</span> be the number of games played before I pick Hanzo. <span class="math inline">\(W \sim Geo(0.15)\)</span>. We have <span class="math inline">\(f_W(w) = (1-p)^wp\)</span>, <span class="math inline">\(w \in \mathbb{N}_0\)</span>.</p>
+</blockquote>
+<ol type="1">
+<li><p>I will need to play 4 games before I get to pick Hanzo?</p>
+<blockquote>
+<p><span class="math inline">\(P(W = 4) = f_w(4) = (0.85)^40.15 = 0.0783\)</span>.</p>
+</blockquote></li>
+<li><p>I will need to play at least 4 games before I get to pick Hanzo, given that I have to play at least 3 games before I pick him?</p>
+<blockquote>
+<p><span class="math inline">\((P(W \ge 4 | W \ge 3) = \frac{P(W \ge 4 \cap W \ge 3)}{P(W \ge 3)} = \frac{P(W \ge 4)}{P(W \ge 3)} = 0.85\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}P(W \ge w) &amp;= \sum_{t=w}^\infty (1-p)^tp \\ &amp;= p(1-p)^w\sum_{t=0}^\infty (1-p)^t \\ &amp;= p(1-p)^w\frac{1}{1 - (1-p)} \\ &amp;= (1-p)^w\end{aligned}\]</span></p>
+</blockquote></li>
+<li><p>I will need to play at least one game before I get to pick Hanzo?</p>
+<blockquote>
+<p><span class="math inline">\(P(W \ge 1) = 1 - P(W = 0) = 1 - p = 0.85\)</span>.</p>
+</blockquote></li>
+</ol>
+<h2 id="memoryless-property-of-geometric">Memoryless Property of Geometric</h2>
+<p>Let <span class="math inline">\(X \sim Geo(p)\)</span> and <span class="math inline">\(s, t\)</span> be non-negative integers. <span class="math display">\[P(X \ge s + t | X \ge s) = P(X \ge t)\]</span></p>
+<p>Example: Mobile game “Show Me The Money”. Game released super rate item which only appears from a loot box which costs $2 per box, with the change of 0.01%.</p>
+<blockquote>
+<p>Let <span class="math inline">\(X\)</span> be the number of boxes without the rare item.</p>
+</blockquote>
+<ol type="1">
+<li><p>What is the probability that he will need to buy 50 loot boxes to get 2 super rate items?</p>
+<blockquote>
+<p>Number of success is fixed but not the number of trials, so we use negative binomial. <span class="math inline">\(X \sim NB(2, 0.0001)\)</span>.</p>
+<p>We want <span class="math inline">\(P(X = 48) = {48 + 2 - 1 \choose 2 - 1}(0.9999)^{48}(0.0001)^2 = 0.000000488\)</span>.</p>
+</blockquote></li>
+</ol>
+<h1 id="poisson">Poisson</h1>
+<p>We say that a random variable <span class="math inline">\(X \sim Poisson(\lambda)\)</span> if we have <span class="math inline">\(f_X(x)\)</span> such that. <span class="math display">\[f_X(x) = e^{-\lambda}\frac{\lambda^x}{x!}\]</span></p>
+<p>We verify that this is a valid probability distribution using the exponential series. <span class="math display">\[\begin{aligned}
+\sum_{x=0}^\infty f_X(x) &amp;= \sum_{x=0}^\infty e^{-\lambda}\frac{\lambda^x}{x!} \\
+&amp;= e^{-\lambda}e^\lambda \\
+&amp;= 1
+\end{aligned}\]</span></p>
+<p>One way to view poisson is to consider the limiting case of binomial, where you fix <span class="math inline">\(\lambda = np\)</span>, and let <span class="math inline">\(n \to \infty\)</span> and <span class="math inline">\(p \to 0\)</span>.</p>
+<h2 id="poisson-process">Poisson Process</h2>
+<ol type="1">
+<li><p><strong>Independence</strong>: the number of occurences in non-overlapping intervals are independent.</p></li>
+<li><p><strong>Individuality</strong>: for sufficiently short periods of time, <span class="math inline">\(\Delta t\)</span>, the probability of two or more events occuring in the interval approaches zero.</p></li>
+</ol>
+<p><span class="math display">\[\lim_{\Delta t \to 0} \frac{P(\text{2 of more events in } (t, t + \Delta t))}{\Delta t} = 0\]</span></p>
+<ol start="3" type="1">
+<li><strong>Homogeneity or Uniformity</strong>: events occur at a uniform or homogenous rate <span class="math inline">\(\lambda\)</span> and proportional to time interval <span class="math inline">\(\Delta t\)</span>.</li>
+</ol>
+<p><span class="math display">\[\lim_{\Delta t \to 0} \frac{P(\text{one event in } (t, t + \Delta t)) - \lambda \Delta t}{\Delta t} = 0\]</span></p>
+<p>A process that satisfies the prior conditions on the occurrence of events is often called a <strong>Poisson Process</strong>. More precisely, if <span class="math inline">\(X_t\)</span>, for <span class="math inline">\(t \ge 0\)</span>, denotes the number of events that have occurred up to time <span class="math inline">\(t\)</span>, then <span class="math inline">\(X_t\)</span> is called a <strong>Poisson Process</strong>.</p>
+<p>Example: Website hits for a given website occur according to a Poisson process with a rate of 100 hits per minute. Find …</p>
+<ol type="1">
+<li><span class="math inline">\(P(\text{1 hit is observed in a second}) = \frac{e^{-\frac{5}{3}}\frac{5}{3}^1}{1!}\)</span></li>
+<li><span class="math inline">\(P(\text{90 hits are observed in a minute}) = \frac{e^{-100}100^{90}}{90!}\)</span></li>
+</ol>
+<h2 id="relation-to-binomial">Relation to Binomial</h2>
+<p>Consider one unit of time, so that the process follows <span class="math inline">\(Poi(\lambda)\)</span>.</p>
+<p>We chop up the interval into <span class="math inline">\(n\)</span> equally-sized pieces. If we chop it up finely enough, then by individuallity, the probability of two or more events occuring goes to 0.</p>
+<p>This means that, over a small enough size, we approximately have either 0 or 1 event occuring with <span class="math inline">\(P(event) = p\)</span> for every piece.</p>
+<p>Moreover, the event probability <span class="math inline">\(p\)</span> is proportional to the length of the interval by homogeneity. This means that as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(p \to 0\)</span>.</p>
+<p>Finally, by independence, each <span class="math inline">\(n\)</span> pieces are independent, so we have <span class="math inline">\(Bin(n, p)\)</span>, where <span class="math inline">\(n\)</span> is very large and <span class="math inline">\(p\)</span> is very small.</p>
+<p>We expect to see <span class="math inline">\(np\)</span> events, recall that rate <span class="math inline">\(\lambda\)</span> is the rate of occurance over 1 unit of time. So <span class="math inline">\(\lambda = np\)</span>, and as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(p \to 0\)</span>, in <span class="math inline">\(Bin(n, p)\)</span>, we approach <span class="math inline">\(Poi(np)\)</span>.</p>
+<p>Example: A bit error occurs got a given data transmission method independently in out of of every 1000 bits transferred. Suppose a 64 bit message is sent using the transmission system.</p>
+<ol type="1">
+<li><p>What is the probability that there are exactly 2 bit errors?</p>
+<blockquote>
+<p><span class="math inline">\(X \sim Bin(64, \frac{1}{1000})\)</span>, <span class="math inline">\(P(X = 2) = {64 \choose 2}(\frac{999}{1000})^{62} (\frac{1}{1000})^2 \approx 0.019\)</span>.</p>
+</blockquote></li>
+<li><p>Approximate using Poisson.</p>
+<blockquote>
+<p><span class="math inline">\(X \sim Poi(\frac{64}{1000})\)</span>, <span class="math inline">\(P(X = 2) = \frac{e^{-\frac{64}{1000}}(\frac{64}{1000})^2}{2!} \approx 0.019\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>Example: Shiny versions of Pokemon are possible to encounter and catch starting in Generation 2 (Pokemon Gold / Silver). Normal encounters with Pokemon while running in grass occur according to a Poisson process with rate 1 per minute on average. 1 in every 8192 encounters will be a Shiny Pokemon, on average.</p>
+<ol type="1">
+<li>If you run around in the grass for 15 hours, what is the probability you will encounter at least one Shiny Pokemon?</li>
+</ol>
+<blockquote>
+<p><span class="math inline">\(X \sim Poi(\frac{900}{8192})\)</span>. <span class="math inline">\(P(X \ge 1) = 1 - P(X = 0) = 1 - e^{-\frac{900}{8192}}\)</span>.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>How long would you have to run around in grass to have better than 50 percent chance of encountering at least one Shiny Pokemon?</li>
+</ol>
+<blockquote>
+<p>Solve for <span class="math inline">\(t\)</span>, where <span class="math inline">\(0.5 = P(X_t \ge 1)\)</span>.</p>
+</blockquote>
+</body>
+</html>

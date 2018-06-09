@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>cs240</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body);
+  });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="cs-240">CS 240</h1>
+<h1 id="algorithm-design">Algorithm Design</h1>
+<p><strong>Problem</strong>: Given a problem instance, carry out a particular computational task.</p>
+<p><strong>Problem Instance</strong>: Input.</p>
+<p><strong>Problem Solution</strong>: Output.</p>
+<p><strong>Size of a problem instance</strong>: Size(I) is a positive integer that measures the size of instance I.</p>
+<p><strong>Algorithm</strong>: Step-by-step process for carrying out a series of computations, given an abitrary problem instance I.</p>
+<p>For a problem <span class="math inline">\(\Pi\)</span>, we can have several algorithms. For an algorithm <span class="math inline">\(A\)</span> solving <span class="math inline">\(\Pi\)</span>, we can have several programs (implementations).</p>
+<ul>
+<li>Designing an algorithm <span class="math inline">\(A\)</span> that solves <span class="math inline">\(\Pi\)</span> -&gt; <strong>Algorithm Design</strong>.</li>
+<li>Assessing correctness and efficiency of <span class="math inline">\(A\)</span> -&gt; <strong>Algorithm Analysis</strong>.</li>
+</ul>
+<h1 id="analysis-of-algorithms-i">Analysis of Algorithms I</h1>
+<p>We may be interested in the amount of <strong>time</strong> or <strong>memory</strong>. Experimental shortcomings have shortcomings because of implementations, hardware, and testing against all inputs.</p>
+<p>Instead we write code for Random Access Machines (RAM)</p>
+<ul>
+<li>Set of memory cells, each of which stores one item of data.</li>
+<li>Access to memory in O(1).</li>
+<li>Primitive operations are O(1).</li>
+<li>Runtime of a program is the number of memory accesses + the number of primitive operations.</li>
+</ul>
+<p>The efficiency is measured in terms of it’s <strong>growth rate</strong> (this is called the <strong>complexity</strong> of the algorithm).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">        c[i][j] <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">            c[i][j] <span class="op">+=</span> a[i][k] <span class="op">*</span> b[k][j]</a></code></pre></div>
+<p><em>About</em> <span class="math inline">\(n^3\)</span> operations.</p>
+<h1 id="asymptotic-notation">Asymptotic Notation</h1>
+<p>O-Notation <span class="math inline">\(f(n) \in O(g(n))\)</span> if there exists constants <span class="math inline">\(c &gt; 0, n_0 &gt; 0\)</span> such that if <span class="math inline">\(|f(n)| \le c|g(n)|\)</span> <span class="math inline">\(\forall n \ge n_0\)</span>.</p>
+<p>Example: <span class="math inline">\(f(n) = 75n + 500\)</span> and <span class="math inline">\(g(n) = 5n^2\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(f(n), g(n) \ge 0\)</span> <span class="math inline">\(\forall n \ge 1\)</span><br />
+For <span class="math inline">\(n \ge 20\)</span><br />
+<span class="math inline">\(n^2 \ge 20n\)</span><br />
+<span class="math inline">\(5n^2 \ge 100n\)</span><br />
+<span class="math inline">\(25n \ge 25 * 20 = 500\)</span><br />
+<span class="math inline">\(5n^2 \ge 75n + 500\)</span><br />
+<span class="math inline">\(g(n) \ge f(n)\)</span><br />
+Taking <span class="math inline">\(n_0 = 20, c = 1\)</span>, this proves that <span class="math inline">\(f(n) \in O(g(n))\)</span>.</p>
+</blockquote>
+<p>We want a <strong>tight</strong> asymptotic bound.</p>
+<p><span class="math inline">\(\Omega\)</span>-notation: <span class="math inline">\(f(n) \in \omega(g(n))\)</span> if <span class="math inline">\(\exists c &gt; 0, n_0 &gt; 0\)</span> such that <span class="math inline">\(c|g(n)| \le |f(n)| \forall n \ge n_0\)</span>.</p>
+<p><span class="math inline">\(\Theta\)</span>-notation: <span class="math inline">\(\exists c1, c2 \ge 0, n_0 &gt; 0\)</span> such that <span class="math inline">\(c1|g(n)| \le |f(n)| \le c2|g(n)| \forall n \ge n_0\)</span>.</p>
+<p>How to express <span class="math inline">\(f(n)\)</span> is asymptotically strictly smaller than <span class="math inline">\(g(n)\)</span>?</p>
+<p>o-notation: <span class="math inline">\(\forall c &gt; 0, \exists n_0 &gt; 0\)</span> such that <span class="math inline">\(|f(n)| &lt; c|g(n)| \forall n \ge n_0\)</span>.</p>
+<p><span class="math inline">\(\omega\)</span>-notation: <span class="math inline">\(\forall c &gt; 0, \exists n_0 &gt; 0\)</span> such that <span class="math inline">\(0 \le c|g(n)| &lt; f(n) \forall n \ge n_0\)</span>.</p>
+<p>Example: <span class="math inline">\(f(n) = 2000n^2 + 5000n\)</span> and <span class="math inline">\(g(n) = n^3\)</span>. Prove <span class="math inline">\(f(n) \in o(g(n))\)</span>.</p>
+<blockquote>
+<p>Given <span class="math inline">\(c &gt; 0\)</span>, for <span class="math inline">\(n &gt; 0\)</span>, <span class="math inline">\(f(n) = 2000n^2 + 5000n \le 7000n^2\)</span>.<br />
+<span class="math inline">\(7000n^2 &lt; cn^3 \Leftrightarrow 7000 &lt; cn \Leftrightarrow n &gt; \frac{7000}{c}\)</span><br />
+So if we take <span class="math inline">\(n_0 = \frac{7000}{c} + 1\)</span>, we have <span class="math inline">\(f(n) &lt; g(n) \forall n \ge n_0\)</span>. This proves that <span class="math inline">\(f(n) \in o(g(n))\)</span>.</p>
+</blockquote>
+<h2 id="asymptotic-identities">Asymptotic Identities</h2>
+<blockquote>
+<p><span class="math inline">\(f(n) \in \Theta(g(n)) \Leftrightarrow g(n) \in \Theta(f(n))\)</span><br />
+<span class="math inline">\(f(n) \in O(g(n)) \Leftrightarrow g(n) \in \Omega(f(n))\)</span><br />
+<span class="math inline">\(f(n) \in o(g(n)) \Rightarrow f(n) \in O(g(n)), \nRightarrow f(n) \in \Omega(g(n))\)</span><br />
+<span class="math inline">\(f(n) \in \omega(g(n)) \Rightarrow f(n) \in \Omega(g(n)), \Rightarrow f(n) \notin O(g(n))\)</span><br />
+<em>Identitity</em>: <span class="math inline">\(f(n) \in \Theta(f(n))\)</span><br />
+<em>Maximum</em>: <span class="math inline">\(f(n) &gt; 0, g(n) &gt; 0 \forall n \ge n_0 \Rightarrow O(f(n) + g(n)) = O(\max\{f(n), g(n)\})\)</span>. Similar for <span class="math inline">\(\Omega\)</span>.<br />
+<em>Transitivity</em>: <span class="math inline">\(f(n) \in O(g(n)), g(n) \in O(h(n)) \Rightarrow f(n) \in O(h(n))\)</span>. Similar for <span class="math inline">\(\Omega\)</span>.</p>
+</blockquote>
+<h2 id="limit-test">Limit Test</h2>
+<p>Suppose <span class="math inline">\(L = \lim_{n \to \infty} \frac{f(n)}{g(n)}\)</span>.</p>
+<p><span class="math display">\[f(n) \in \begin{cases}
+o(g(n)), &amp;L = 0 \\
+\Theta(g(n)), &amp;0 &lt; L &lt; \infty \\
+\omega(g(n)), &amp;L = \infty
+\end{cases}\]</span></p>
+<p>Example: <span class="math inline">\(f(n) = \log(n) = \frac{\ln(n)}{\ln(2)}\)</span>, <span class="math inline">\(g(n) = n\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(\lim_{n \to \infty} \frac{1}{n\ln(2)} = 0\)</span> so <span class="math inline">\(f(n) \in o(g(n))\)</span> by the limit test.</p>
+</blockquote>
+<h1 id="analysis-of-algorithms-ii">Analysis of Algorithms II</h1>
+<p>Example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">def</span> Test1(n):</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">            <span class="bu">sum</span> <span class="op">+=</span> (i <span class="op">-</span> j) <span class="op">*</span> (i <span class="op">-</span> j)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    <span class="cf">return</span> <span class="bu">sum</span></a></code></pre></div>
+<blockquote>
+<p>Let <span class="math inline">\(T_1(n)\)</span> be the runtime of <span class="math inline">\(Test1(n)\)</span>.<br />
+<span class="math inline">\(T_1(n) \in \Theta(S_1(n))\)</span> where <span class="math inline">\(S_1(n)\)</span> is the number of times we enter the body of the inner loop on line 4.</p>
+<p><span class="math inline">\(S_1(n) = \sum_{i = 1}^n \sum_{j = i}^n i\)</span>.</p>
+</blockquote>
+<p><strong>1st solution</strong>: Brute Force.</p>
+<blockquote>
+<p><span class="math inline">\(S_1(n) = \sum_{i = 1}^n (n - i + 1) = \sum_{i = 1}^n n - \sum_{i = 1}^n + \sum_{i = 1}^n 1 = n^2 - \frac{n(n+1)}{2} + n = \frac{n^2}{2} + \frac{n}{2}\)</span>.<br />
+Therefore we have <span class="math inline">\(S_1(n) \in \Theta(n^2)\)</span>.</p>
+</blockquote>
+<p><strong>2nd solution</strong>: Separate <span class="math inline">\(O\)</span> and <span class="math inline">\(\Omega\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(S_1(n) \leq \sum_{i = 1}^n \sum_{j = 1}^n 1 = n^2\)</span> so <span class="math inline">\(S_1(n) \in O(n^2)\)</span>.<br />
+<span class="math inline">\(S_1(n) \geq \sum_{i = 1}^{n / 2} \sum_{j = 1}^n i \geq \sum_{i = 1}^{n / 2} \sum_{j = n / 2}^n 1 = \frac{n^2}{4}\)</span> so <span class="math inline">\(S_1(n) \in \Omega(n^2)\)</span>.<br />
+Therefore <span class="math inline">\(S_1(n) \in \Theta(n^2)\)</span>.</p>
+</blockquote>
+<p>Example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">def</span> Test2(A, n):</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="bu">max</span> <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">            <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(i, j <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">                <span class="bu">sum</span> <span class="op">+=</span> A[k]</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="cf">return</span> <span class="bu">max</span></a></code></pre></div>
+<blockquote>
+<p>Let <span class="math inline">\(T_2(n)\)</span> be the runtime of <span class="math inline">\(Test2(n)\)</span>.<br />
+Then <span class="math inline">\(T_2(n) \in \Theta(S_2(n))\)</span>, where <span class="math inline">\(S_2(n)\)</span> is the number of times we enter the body of the inner loop on line 6.</p>
+<p><span class="math inline">\(S_2(n) = \sum_{i = 1}^n \sum_{j = i}^n \sum_{k = i}^j 1\)</span>.</p>
+</blockquote>
+<p><strong>1st Solution</strong>: Brute Force.</p>
+<blockquote>
+<p>Input to Wolfram <span class="math inline">\(\alpha\)</span> and see that <span class="math inline">\(S_2(n) = \frac{n^3}{6} + ...n^2 + ...n + ...\)</span> so <span class="math inline">\(S_2(n) \in \Theta(n^3)\)</span>.</p>
+</blockquote>
+<p><strong>2nd Solution</strong>: Separate <span class="math inline">\(O\)</span> and <span class="math inline">\(\Omega\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(S_2(n) \leq \sum_{i = 1}^n \sum_{j = 1}^n \sum_{k = 1}^n 1 = n^3\)</span> so <span class="math inline">\(S_2(n) \in O(n^3)\)</span>.<br />
+<span class="math inline">\(S_2(n) \geq \sum_{i = 1}^{n / 3} \sum_{j = i}^n \sum_{k = i}^j 1 \geq \sum_{i = 1}^{n / 3} \sum_{j = 2n \ 3}^n \sum_{k = n / 3}^{2n / 3} 1 = (\frac{n}{3})^3 \in \Omega(n^3)\)</span><br />
+Therefore <span class="math inline">\(S_2(n) \in \Theta(n^3)\)</span>.</p>
+</blockquote>
+<p>Example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Insertion Sort</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">def</span> Test3(A, n):</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n):</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">        j <span class="op">=</span> i</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&gt;</span> A[j <span class="op">-</span> <span class="dv">1</span>]:</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">            A[j], A[j <span class="op">-</span> <span class="dv">1</span>] <span class="op">=</span> A[j <span class="op">-</span> <span class="dv">1</span>], A[j]</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">            j <span class="op">-=</span> <span class="dv">1</span></a></code></pre></div>
+<blockquote>
+<p>Let <span class="math inline">\(T_A(I)\)</span> denote the running time of an algorithm <span class="math inline">\(A\)</span> on instance <span class="math inline">\(I\)</span>.<br />
+<strong>Worse-case</strong>: <span class="math inline">\(T_A(n) = \max \{T_A(I): Size(I) = n\}\)</span>.<br />
+<strong>Average-case</strong>: <span class="math inline">\(T_A^{avg}(n) = \frac{1}{|\{I: Size(I) = n\}} \sum_{\{I: Size(I) = n\}} T_A(I)\)</span>.</p>
+</blockquote>
+<p>It is important to try and not make <strong>comparisons</strong> between algorithms using <span class="math inline">\(O\)</span>-notation.</p>
+<ul>
+<li>Worse-case run-time may happen rarely.</li>
+<li><span class="math inline">\(O\)</span>-notation is an upper bound, we should use <span class="math inline">\(\Theta\)</span>-notation.</li>
+</ul>
+<h1 id="mergesort-example"><em>MergeSort</em> Example</h1>
+<p><strong>Input</strong>: Array <span class="math inline">\(A\)</span> of <span class="math inline">\(n\)</span> integers.</p>
+<ol type="1">
+<li>We split <span class="math inline">\(A\)</span> into two subarrays. <span class="math inline">\(A_L\)</span> consists of the first <span class="math inline">\(\lceil\frac{n}{2}\rceil\)</span> elements and <span class="math inline">\(A_R\)</span> consists of the last <span class="math inline">\(\lfloor\frac{n}{2}\rfloor\)</span> elements.</li>
+<li>Recursively run <em>MergeSort</em> on <span class="math inline">\(A_L\)</span> and <span class="math inline">\(A_R\)</span>.</li>
+<li>After <span class="math inline">\(A_L\)</span> and <span class="math inline">\(A_R\)</span> are sorted, <em>merge</em> them together.</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">def</span> MergeSort(A, l <span class="op">=</span> <span class="dv">0</span>, r <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">    <span class="cf">if</span> r <span class="op">&lt;=</span> l:</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">        <span class="cf">return</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">        m <span class="op">=</span> (l <span class="op">+</span> r) <span class="op">/</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">        MergeSort(A, l, m)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">        MergeSort(A, m <span class="op">+</span> <span class="dv">1</span>, r)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">        Merge(A, l, m, r)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw">def</span> Merge(A, l, m, r):</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    <span class="co"># We should only copy over A[l, r] to S.</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">    S <span class="op">=</span> A</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">    i_L <span class="op">=</span> l, i_R <span class="op">=</span> m <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(l, r <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">        <span class="cf">if</span> i_L <span class="op">&gt;</span> m:</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">            A[k] <span class="op">=</span> S[i_R]</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">            i_R <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">        <span class="cf">elif</span> i_R <span class="op">&gt;</span> r:</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">            A[k] <span class="op">=</span> S[i_L]</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">            i_L <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">        <span class="cf">elif</span> S[i_L] <span class="op">&lt;=</span> S[i_R]:</a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">            A[k] <span class="op">=</span> S[i_L]</a>
+<a class="sourceLine" id="cb5-23" data-line-number="23">            i_L <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-24" data-line-number="24">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb5-25" data-line-number="25">            A[k] <span class="op">=</span> S[i_R]</a>
+<a class="sourceLine" id="cb5-26" data-line-number="26">            i_R <span class="op">+=</span> <span class="dv">1</span></a></code></pre></div>
+<p><em>Merge</em> takes time <span class="math inline">\(\Theta(r - l + 1) = \Theta(n)\)</span> time for merging <span class="math inline">\(n\)</span> elements.</p>
+<h2 id="analysis-of-mergesort">Analysis of <em>MergeSort</em></h2>
+<p>Let <span class="math inline">\(T(n)\)</span> denote the time to run <em>MergeSort</em> on an array of length <span class="math inline">\(n\)</span>.</p>
+<ol type="1">
+<li>Step 1 takes <span class="math inline">\(\Theta(n)\)</span>.</li>
+<li>Step 2 takes <span class="math inline">\(T(\lceil\frac{n}{2}\rceil)\)</span> + <span class="math inline">\(T(\lfloor\frac{n}{2}\rfloor)\)</span>.</li>
+<li>Step 3 takes <span class="math inline">\(\Theta(n)\)</span>.</li>
+</ol>
+<h3 id="sloppy-recurrence"><strong>Sloppy</strong> Recurrence</h3>
+<p><span class="math display">\[ T(n) = \begin{cases}
+  2T(\frac{n}{2}) + cn, &amp;\text{if } n &gt; 1 \\
+  c, &amp;\text{if } n = 1
+\end{cases}\]</span></p>
+<blockquote>
+<p>Exact and sloppy recurrences are <strong>identical</strong> when <span class="math inline">\(n\)</span> is a power of 2.<br />
+The recurrence can be easily solved by various methods when <span class="math inline">\(n = 2^k\)</span>.</p>
+</blockquote>
+<p><span class="math inline">\(T(n) = 2T(\frac{n}{2}) + cn\)</span>.<br />
+For <span class="math inline">\(n\)</span> a power of 2, <span class="math inline">\(n = 2^k\)</span>.<br />
+<span class="math display">\[\begin{aligned}
+T(2^k) &amp;= 2T(2^{k - 1}) + c2^k \\
+&amp;= 2(2T(2^{k - 2}) + c2^{k - 1}) + c2^k \\
+&amp;= 2^3 T(2^{k - 3}) + 3c2^k \\
+&amp;= 2^kT(2^{k - k}) + kc2^k \\
+&amp;= 2^k + c2^kk \\
+&amp;= n + cn\log(n)
+\end{aligned}\]</span><br />
+Therefore <span class="math inline">\(T(n) \in \Theta(n\log(n))\)</span>, for <span class="math inline">\(n = 2^k\)</span>.</p>
+<h1 id="priority-queue">Priority Queue</h1>
+<blockquote>
+<p>An ADT consisting of a collection of items (each having a <em>priority</em>)</p>
+</blockquote>
+<ul>
+<li><strong>Insert</strong>: Insert an item with a given <em>priority</em>.</li>
+<li><strong>DeleteMax</strong>: Remove the item with <em>highest priority</em></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">def</span> PQ_Sort(A):</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">    pq <span class="op">=</span> PriorityQueue()</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">        pq.insert(k)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">range</span>(n)):</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">        pq.deleteMax()</a></code></pre></div>
+<p>The runtime will be determined by how efficient our <strong>insert()</strong> and <strong>deleteMax()</strong> functions are.</p>
+<blockquote>
+<p><span class="math inline">\(O(n + n \cdot insert + n \cdot deleteMax)\)</span></p>
+</blockquote>
+<h2 id="inserting-into-dynamic-array">Inserting Into Dynamic Array</h2>
+<p>Let <span class="math inline">\(T(n)\)</span> be the total cost of insertion from length <span class="math inline">\(n\)</span> to <span class="math inline">\(2n - 1\)</span>, <span class="math inline">\(n = 2^k\)</span>. Then <span class="math inline">\(T(n)\)</span> is the cost of doubling from <span class="math inline">\(n\)</span> to <span class="math inline">\(2n\)</span> plus the cost of inserting <span class="math inline">\(n\)</span> items. <span class="math inline">\(T(n) \in O(n)\)</span>.</p>
+<h2 id="binary-heaps">Binary Heaps</h2>
+<blockquote>
+<p>A (binary) heap is a certain type of tree.</p>
+</blockquote>
+<p>Any binary tree with <span class="math inline">\(n\)</span> nodes has height at least <span class="math inline">\(\log(n + 1) - 1 \in \Omega(\log(n))\)</span>. 1. <strong>Structural Property</strong>: All levels of the heap are completely filled, except for the last level potentially. The entries in the last level are <em>left-justified</em>. 2. <strong>Heap-order Property</strong>: For any node <span class="math inline">\(i\)</span>, the <em>key</em> of <span class="math inline">\(i\)</span>’s parent is greater or equal to the <em>key</em> of <span class="math inline">\(i\)</span>.</p>
+<p>These are the properties for a <strong>max-heap</strong>. A <strong>min-heap</strong> is the same but with opposite order property.</p>
+<p><strong>Lemma</strong>: The height of a heap with <span class="math inline">\(n\)</span> nodes is <span class="math inline">\(\Theta(\log(n))\)</span>.</p>
+<blockquote>
+<p>Given the height of the tree <span class="math inline">\(h\)</span>.<br />
+<span class="math inline">\(2^n \le n \le 2^{h + 1}\)</span><br />
+<span class="math inline">\(h \le \log(n) \le h + 1\)</span><br />
+<span class="math inline">\(\log(n) - 1 \le h \le \log(n)\)</span></p>
+</blockquote>
+<h3 id="storing-heaps-in-arrays">Storing Heaps in Arrays</h3>
+<blockquote>
+<p>Heaps should <strong>not</strong> be stored as binary trees!</p>
+</blockquote>
+<p>Let <span class="math inline">\(H\)</span> be a heap of <span class="math inline">\(n\)</span> items and let <span class="math inline">\(A\)</span> be an array of size <span class="math inline">\(n\)</span>. We can store the root in <span class="math inline">\(A[0]\)</span> and continue with elements <em>level-by-level</em> from top to bottom. In each level <em>left-to-right</em>.</p>
+<ul>
+<li>The <strong>root</strong> node is at <span class="math inline">\(A[0]\)</span>.</li>
+<li>The <strong>left child</strong> of <span class="math inline">\(A[i]\)</span> is <span class="math inline">\(A[2i + 1]\)</span>.</li>
+<li>The <strong>right child</strong> of <span class="math inline">\(A[i]\)</span> is <span class="math inline">\(A[2i + 2]\)</span>.</li>
+<li>The <strong>right child</strong> of <span class="math inline">\(A[i]\)</span> is <span class="math inline">\(A[\frac{i - 1}{2}]\)</span>.</li>
+<li>The <strong>last</strong> node is <span class="math inline">\(A[n - 1]\)</span>.</li>
+</ul>
+<blockquote>
+<p>We should hide implementation using helper functions.</p>
+</blockquote>
+<h3 id="operations-in-binary-heaps">Operations in Binary Heaps</h3>
+<h4 id="insertion-in-heaps">Insertion in Heaps</h4>
+<ul>
+<li>Place the new key in the first free leaf.</li>
+<li>The heap-order property might be violated so we may need to perform a <em>bubble-up</em>.
+<ul>
+<li>Keep swapping with the parent node until the heap-order property is satisfied.</li>
+<li><span class="math inline">\(O(\text{height of heap}) = O(\log(n))\)</span>.</li>
+</ul></li>
+</ul>
+<h4 id="delete-in-heaps">Delete in Heaps</h4>
+<ul>
+<li>The maximum item of a heap is just the root node.</li>
+<li>We replace the root by the last leaf.</li>
+<li>Heap-order property might be violated so we may need to perform a <em>bubble-down</em>.
+<ul>
+<li>Keep swapping with the larger child until the heap-order property is satisfied.</li>
+<li><span class="math inline">\(O(\text{height of heap}) = O(\log(n))\)</span>.</li>
+</ul></li>
+</ul>
+<p><strong>HeapSort</strong> is not used as often as <strong>MergeSort</strong> or <strong>QuickSort</strong> because it has poor data locality.</p>
+<h3 id="building-heaps-by-bubble-up">Building Heaps by Bubble-Up</h3>
+<blockquote>
+<p>Given an array, build a heap out of them.</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">def</span> heapify(A):</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">    n <span class="op">=</span> <span class="bu">len</span>(A)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">range</span>(parent(last(n)) <span class="op">+</span> <span class="dv">1</span>)):</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">        fix_down(A, n, i)</a></code></pre></div>
+<blockquote>
+<p>Careful analysis yields a worst-case complexity of <span class="math inline">\(\Theta(n)\)</span>.</p>
+</blockquote>
+<p>Whenever you reach node <span class="math inline">\(i\)</span>, you know that the subtrees are both heaps because you have fixed them before.</p>
+<p>Let <span class="math inline">\(T(n)\)</span> be the worse case runtime of heapify for an array of size <span class="math inline">\(n\)</span>. It is related to the worse case number of swaps <span class="math inline">\(S(n)\)</span>, so <span class="math inline">\(T(n) \in \Theta(S(n))\)</span>.</p>
+<p><span class="math inline">\(S(1) = 0\)</span>.<br />
+<span class="math inline">\(S(2) = 1\)</span> because we <em>bubble-down</em> the root.<br />
+<span class="math inline">\(S(3) = 1\)</span> because we <em>bubble-down</em> the root.<br />
+<span class="math inline">\(S(4) = 1 + 2 = 3\)</span>.<br />
+<span class="math inline">\(S(5) = 3\)</span>.</p>
+<blockquote>
+<p>If we add <span class="math inline">\(n\)</span> nodes to a heap of size <span class="math inline">\(n\)</span>, (<span class="math inline">\(n \to 2n\)</span>). The new nodes form a <em>layer</em> of leaves. Every single original node now has to perform 1 more swap because the length of the path has been increased by 1. The new nodes do not have to perform any swaps because they are all leaves.</p>
+</blockquote>
+<p><span class="math inline">\(S(2n) = S(n) + n\)</span></p>
+<blockquote>
+<p>For <span class="math inline">\(n\)</span> a power of 2, <span class="math inline">\(n = 2^k\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[\begin{aligned}
+S(n) = S(2^k) &amp;= S(2^{k - 1}) + 2^{k - 1} \\
+&amp;= S(2^{k - 2}) + 2^{k - 2} + 2^{k - 1} \\
+&amp;= \sum_{i = 0}^{k - 1} 2^i \\
+&amp;= 2^k - 1 \\
+&amp;= n - 1
+\end{aligned}\]</span></p>
+<p>Therefore <span class="math inline">\(T(n) \in \Theta(n)\)</span> for <span class="math inline">\(n = 2^k\)</span>.</p>
+<h3 id="selection">Selection</h3>
+<blockquote>
+<p>The <span class="math inline">\(k\)</span>th-max problem asks to find the <strong><span class="math inline">\(k\)</span>th largest item</strong> in an array <span class="math inline">\(A\)</span> of <span class="math inline">\(n\)</span> numbers.</p>
+</blockquote>
+<ol type="1">
+<li>Scan the array and maintain the <span class="math inline">\(k\)</span> largest numbers seen so far in a <strong>min-heap</strong>. <span class="math inline">\(\Theta(n\log(k))\)</span>.</li>
+<li>Make a <strong>max-heap</strong> by calling <span class="math inline">\(heapify(A)\)</span>. Call <span class="math inline">\(deleteMax(A)\)</span> <span class="math inline">\(k\)</span> times. <span class="math inline">\(\Theta(n + k\log(n))\)</span>.</li>
+</ol>
+<h1 id="sorting-and-randomized-algorithms">Sorting and Randomized Algorithms</h1>
+<h2 id="quickselect">QuickSelect</h2>
+<blockquote>
+<p>Given an array of <span class="math inline">\(A\)</span> of <span class="math inline">\(n\)</span> numbers, <span class="math inline">\(0 \le k &lt; n\)</span>, find the element that be at position <span class="math inline">\(k\)</span> of the sorted array.</p>
+</blockquote>
+<p>The best heap-based algorithm had a running time of <span class="math inline">\(O(n + k\log n)\)</span>. For <em>median finding</em>, this is <span class="math inline">\(O(n\log n)\)</span> which is the same cost as our best sorting algorithms.</p>
+<p>The <strong>QuickSelect</strong> algorithm can do this in linear time.</p>
+<p><strong>QuickSelect</strong> and the related <strong>QuickSort</strong> rely on two subroutines.</p>
+<ol type="1">
+<li><strong>chose_pivot(A)</strong>: Choose an index <span class="math inline">\(p\)</span> in <span class="math inline">\(A\)</span>.</li>
+<li><strong>partition(A, p)</strong>: Rearrange <span class="math inline">\(A\)</span> and return <strong>pivot index</strong> <span class="math inline">\(i\)</span> such that <span class="math inline">\(A[i] = v\)</span>, <span class="math inline">\(A[0, ..., i - 1] \le v\)</span>, <span class="math inline">\(v \le A[i + 1, ..., n - 1]\)</span>.</li>
+</ol>
+<p>Partitioning in-place can be done by using two pointers <span class="math inline">\(i = 0\)</span>, <span class="math inline">\(j = n - 1\)</span>, and moving them to the middle, swapping while they are on the wrong side.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">def</span> partition(A, p):</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">    A[n <span class="op">-</span> <span class="dv">1</span>], A[p] <span class="op">=</span> A[p], A[n <span class="op">-</span> <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    i <span class="op">=</span> <span class="dv">0</span>, j <span class="op">=</span> n <span class="op">-</span> <span class="dv">2</span>, v <span class="op">=</span> A[n <span class="op">-</span> <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">    <span class="cf">while</span> <span class="va">True</span>:</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">        <span class="cf">while</span> i <span class="op">&lt;</span> n <span class="kw">and</span> A[i] <span class="op">&lt;</span> v:</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">            i <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">        <span class="cf">while</span> j <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&gt;</span> v:</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">            j <span class="op">-=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">        <span class="cf">if</span> j <span class="op">&gt;=</span> i:</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">            <span class="cf">break</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">        A[i], A[j] <span class="op">=</span> A[j], A[i]</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14">    A[i], A[n <span class="op">-</span> <span class="dv">1</span>] <span class="op">=</span> A[n <span class="op">-</span> <span class="dv">1</span>], A[i]</a></code></pre></div>
+<h3 id="quickselect-algorithm">QuickSelect Algorithm</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">def</span> quick_select_1(A, k):</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    p <span class="op">=</span> choose_pivot(A)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    i <span class="op">=</span> partition(A, p)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">    <span class="cf">if</span> i <span class="op">==</span> k:</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">        <span class="cf">return</span> A[i]</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    <span class="cf">elif</span> i <span class="op">&gt;</span> k:</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">        <span class="cf">return</span> quick_select_1(A[<span class="dv">0</span>, ..., i <span class="op">-</span> <span class="dv">1</span>], k)</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">    <span class="cf">elif</span> i <span class="op">&lt;</span> k:</a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">        <span class="cf">return</span> quick_select_1(A[i <span class="op">+</span> <span class="dv">1</span>, ..., n <span class="op">-</span> <span class="dv">1</span>], k <span class="op">-</span> i <span class="op">-</span> <span class="dv">1</span>)</a></code></pre></div>
+<h3 id="analysis-of-quick_select_1">Analysis of <em>quick_select_1</em></h3>
+<p><strong>Worse Case Analysis</strong>: Recursive calls could always have size of <span class="math inline">\(n - 1\)</span>. The recurrence is given by. <span class="math display">\[T(n) = \begin{cases}
+T(n - 1) + cn, &amp;n \ge 2 \\
+c, &amp;n = 1
+\end{cases}\]</span> For some constant <span class="math inline">\(c &gt; 0\)</span>. <strong>Solution</strong>: <span class="math inline">\(T(n) = cn + c(n - 1) + ... + c(2) + c \in \Theta(n^2)\)</span>.</p>
+<p><strong>Best Case Analysis</strong>: First chosen pivot could be the <span class="math inline">\(k\)</span>th element. We have no recurisve calls, so the total cost would be <span class="math inline">\(\Theta(n)\)</span>.</p>
+<h3 id="sorting-permutations">Sorting Permutations</h3>
+<blockquote>
+<p>We want to take the average runtime of <em>quick_select_1</em> over all inputs.</p>
+</blockquote>
+<p>How do we characterize all inputs of size <span class="math inline">\(n\)</span>? We can make a <strong>simplifying assumption</strong> that all input numbers are <strong>distinct</strong>. <em>quick_select_1</em> does not depend on the actual value, only their <em>relative order</em>. Therefore, we can characterize our input based on <strong>sorting permutation</strong>: the permutation that would put the input in order.</p>
+<p>If we assume that all <span class="math inline">\(n!\)</span> permutations are equally likely, the average cost is the sum of the total cost for all permutations, divided by <span class="math inline">\(n!\)</span>.</p>
+<p>Define <span class="math inline">\(T(n)\)</span> to be the average case for selecting from a size <span class="math inline">\(n\)</span> array. Fix one <span class="math inline">\(0 \le i \le n - 1\)</span>. There are <span class="math inline">\((n - 1)!\)</span> permutations for which the pivot value <span class="math inline">\(v\)</span> is the <span class="math inline">\(i\)</span>th smallest item.</p>
+<p><span class="math display">\[\begin{aligned}
+T(n, k) &amp;= \frac{1}{n!}\sum_{\text{permutations A of } \{1, ..., n\}} T(A, k) \\
+T(n) &amp;= \max_{k} T(n, k) \\
+&amp;\le c\cdot n + \frac{1}{n}\sum_{i = 0}^{n - 1}\max\{T(i), T(n - i + 1)\} \\
+\end{aligned}\]</span></p>
+<p><strong>Theorem</strong>: <span class="math inline">\(T(n) \in \Theta(n)\)</span>.</p>
+<p><strong>Sloppy Proof</strong>: We want <span class="math inline">\(T(n) \le \lambda n\)</span>. Suppose <span class="math inline">\(T(i) \le \lambda i\)</span>, <span class="math inline">\(i &lt; n\)</span>. <span class="math display">\[\begin{aligned}
+T(n) &amp;\le cn + \frac{1}{n}\sum_{i = 0}^{n - 1}\max \{\lambda i, \lambda(n - i - 1)\} \\
+&amp;\le cn + \frac{\lambda}{n}\sum_{i = 0}^{n - 1} \max \{i, n - i - 1\}
+\end{aligned}\]</span> We can see visually (taking max of <span class="math inline">\(i\)</span> and <span class="math inline">\(n - i - 1\)</span>) that <span class="math inline">\(\sum \approx \frac{3}{4}n^2\)</span>. Therefore we have <span class="math inline">\(T(n) \le cn + \frac{\lambda}{n}\frac{3}{4}n^2 = (c + \frac{3}{4}\lambda) n\)</span>. We want <span class="math inline">\(T(n) \le \lambda n\)</span>, let us take <span class="math inline">\(\lambda\)</span> such that <span class="math inline">\(c + \frac{3}{4}\lambda = \lambda \Leftrightarrow \lambda = 4c\)</span>.</p>
+<blockquote>
+<p><strong>Clean Proof</strong>: We can rewrite the proof that we had before using <span class="math inline">\(T(n) \le 4cn\)</span> by induction. We also have to prove that <span class="math inline">\(\sum_{i = 0}^{n - 1} \max\{1, n - i - 1\} \le \frac{3}{4}n^2\)</span> which can be done by a case discussion when <span class="math inline">\(n\)</span> is even or odd.</p>
+</blockquote>
+<h2 id="randomized-algorithms">Randomized Algorithms</h2>
+<blockquote>
+<p>No more bad instances, just unlucky numbers.</p>
+</blockquote>
+<h3 id="expected-running-time">Expected Running Time</h3>
+<blockquote>
+<p>Define <span class="math inline">\(T(I, R)\)</span> be the running time of the randomized algorithm for instance <span class="math inline">\(I\)</span> and sequence of random numbers <span class="math inline">\(R\)</span>.</p>
+</blockquote>
+<p><span class="math inline">\(T^{(exp)}(I) = E[T(I, R)] = \sum_{R}T(I, R)P(R)\)</span>.</p>
+<p><span class="math inline">\(T^{(exp)}_{worst}(n) = \max_{\{I: size(I) = n\}}T^{(exp)}(I)\)</span>.</p>
+<p><span class="math inline">\(T^{(exp)}_{avg}(n) = \frac{1}{|\{I: size(I) = n\}|}\sum_{\{I : size(I) = n\}}T^{(exp)}(I)\)</span>.</p>
+<h2 id="average-case-analysis-of-quicksort">Average-Case Analysis of QuickSort</h2>
+<p><span class="math display">\[\begin{cases}
+T(n) = cn + \frac{1}{n}\sum_{i = 0}^{n - 1}(T(i) + T(n - (i + 1))) \\
+T(0) = T(1) = 0
+\end{cases}\]</span></p>
+<p>We prove that <span class="math inline">\(T(n) \le 2cn\log(n)\)</span>, <span class="math inline">\(n \ge 1\)</span>.</p>
+<p>Define <span class="math inline">\(S(n) = \sum_{i = 1}^{n - 1}i\log(i)\)</span>. We claim that <span class="math inline">\(S(n) \le \frac{1}{2}n^2\log(n) - \frac{1}{4}n^2\)</span>. We skip the proof because it is too difficult.</p>
+<p>Assume that for <span class="math inline">\(i = 1, ..., n - 1\)</span>, <span class="math inline">\(T(i) \le 2ci\log(i)\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+T(n) &amp;= cn + \frac{1}{n}\sum_{i = 0}^{n - 1}T(i) + \frac{1}{n}\sum_{i = 0}^{n - 1}T(n - (i + 1)) \\
+&amp;= cn + \frac{2}{n}\sum_{i = 0}^{n - 1}T(i) \\
+&amp;= cn + \frac{2}{n} \sum_{i = 1}^{n - 1}T(i) \\
+&amp;\le cn + \frac{2}{n} \sum_{i = 1}^{n - 1}2ci\log(i) \\
+&amp;\le cn + \frac{4c}{n} \sum_{i = 1}^{n - 1}i\log(i) \\
+&amp;\le cn + \frac{4c}{n} S(n) \\
+&amp;\le cn + \frac{4c}{n} (\frac{1}{2}n^2\log(n) - \frac{1}{4}n^2) \\
+&amp;\le cn + (2cn\log(n) - cn) \\
+&amp;\le 2cn\log(n)
+\end{aligned}\]</span></p>
+<p>The auxiliary space is <span class="math inline">\(\Theta(n)\)</span> worst-case. We can reduce this to <span class="math inline">\(\Theta(\log(n))\)</span> by recursing in smaller sub-array first and replacing the other recursion by a while loop.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">def</span> quicksort_iterative(A, l, r):</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    <span class="cf">while</span> l <span class="op">&lt;</span> r:</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">        i <span class="op">=</span> partition(A, l, r)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">        <span class="cf">if</span> i <span class="op">-</span> l <span class="op">&lt;</span> r <span class="op">-</span> i:</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">            quicksort_iterative(A, l, i <span class="op">-</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">            l <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">            quicksort_iterative(A, i <span class="op">+</span> <span class="dv">1</span>, r)</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">            r <span class="op">=</span> i <span class="op">-</span> <span class="dv">1</span></a></code></pre></div>
+<p>One should stop recursing when <span class="math inline">\(n \le 10\)</span>. Then one run of InsertionSort at the end sorts everything in <span class="math inline">\(O(n)\)</span> because all items are within 10 units of their required position.</p>
+<p>Arrays with many duplicates can be dealt with more efficiently by creating a third partition for equals.</p>
+<h2 id="comparison-model">Comparison Model</h2>
+<p>In the <strong>comparison model</strong>, data can only be accessed in 2 ways.</p>
+<ol type="1">
+<li>Comparing two elements.</li>
+<li>Moving elements around (e.g. copying, swapping).</li>
+</ol>
+<p>We can represent comparison models as <strong>decision trees</strong>.</p>
+<p><strong>Theorem</strong>: Any correct <strong>comparison-based</strong> sorting algorithm requires at least <span class="math inline">\(\Omega(n\log n)\)</span> comparisons.</p>
+<p>In a decision tree that sorts n integers, there are at least n! leaves.</p>
+<p>We claim that in a binary tree of height <span class="math inline">\(h\)</span>, with <span class="math inline">\(L\)</span> leaves, <span class="math inline">\(L \le 2^{h + 1}\)</span>. We see that <span class="math inline">\(L \le \#\ nodes\)</span> and that is less than or equal to the number of nodes in a complete heap of height <span class="math inline">\(h\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+n! &amp;\le 2^{n + 1} \\
+\log(n!) &amp;\le n + 1 \\
+\end{aligned}\]</span> We know that <span class="math inline">\(\log(n!) \in \Theta(n\log n)\)</span> so <span class="math inline">\(h \in \Omega({n \log n})\)</span>.</p>
+<h2 id="non-comparison-based-sorting">Non-Comparison-Based Sorting</h2>
+<ul>
+<li>Assume all keys are numbers are in base (radix).</li>
+<li>Assume all keys have the same number <span class="math inline">\(m\)</span> of digits.
+<ul>
+<li>Can achieve by padding with leading 0s.</li>
+</ul></li>
+</ul>
+<h3 id="bucket-sort">Bucket Sort</h3>
+<ul>
+<li>Sort numbers by a single digit.</li>
+<li>Create a “bucket” for each possible digit.</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">def</span> bucket_sort(A, d):</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    Initialize an array B[<span class="dv">0</span> .. R <span class="op">-</span> <span class="dv">1</span>] of empty lists.</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)):</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">        B[dth digit of A[i]].append(A[i])</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">    i <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(R):</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">        <span class="cf">while</span> <span class="bu">len</span>(B[j]) <span class="op">&gt;</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">            A[i] <span class="op">=</span> B[j]</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">            i <span class="op">+=</span> <span class="dv">1</span></a></code></pre></div>
+<p>This is <strong>stable</strong>, equal items stay in order. The runtime is <span class="math inline">\(O(n + R)\)</span>, auxiliary space <span class="math inline">\(\Theta(n + R)\)</span>.</p>
+<h3 id="count-sort">Count Sort</h3>
+<ul>
+<li>We can save auxiliary memory by counting how many elements there are in each B.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">def</span> key_indexed_countsort(A, d):</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    count <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> R</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)):</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">        count[dth digit of A[i]] <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">    </a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">    idx <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> R</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, R):</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">        <span class="bu">id</span>[i] <span class="op">=</span> <span class="bu">id</span>[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> count[i <span class="op">-</span> <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">    aux <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="bu">len</span>(A)</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)):</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">        aux[<span class="bu">id</span>[dth digit of A[i]]] <span class="op">=</span> A[i]</a>
+<a class="sourceLine" id="cb12-13" data-line-number="13">        <span class="bu">id</span>[dth digit of A[i]] <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15">    A <span class="op">=</span> aux</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">def</span> MSD_radixsort(A, l, r, d):</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">    <span class="cf">if</span> l <span class="op">&lt;</span> r:</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">        key_index_countsort(A[l .. r], d)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">        <span class="cf">if</span> d <span class="op">&lt;</span> m:</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(R):</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">                l_i, r_i <span class="op">=</span> boundaries of ith <span class="bu">bin</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">                MSD_radixsort(A, l_i, r_i, d <span class="op">+</span> <span class="dv">1</span>)</a></code></pre></div>
+<p>Drawback is that we have many recursive calls.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">def</span> LSD_radixsort(A):</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">range</span>(<span class="dv">0</span>, m)):</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">        key_index_countsort(A, d)</a></code></pre></div>
+<p>Time complexity is <span class="math inline">\(\Theta(m(n + R))\)</span>. Auxiliary memory is <span class="math inline">\(O(n + R)\)</span>. This can be <span class="math inline">\(o(n\log(n))\)</span> for special cases.</p>
+<h1 id="dictionaries-and-balanced-search-trees">Dictionaries and Balanced Search Trees</h1>
+<h2 id="dictionary-adt">Dictionary ADT</h2>
+<ul>
+<li>A collection of items, each of which contains a <strong>key</strong>, and <strong>data</strong> (<em>key-value pair</em>). Keys can be compared and are typically unique.</li>
+</ul>
+<ol type="1">
+<li>search(k)</li>
+<li>insert(k, v)</li>
+<li>delete(k)</li>
+</ol>
+<p>Common assumptions are that the dictionary has <span class="math inline">\(n\)</span> KVPs, each of which uses constant space. We also assume that keys can be compare in constant time.</p>
+<h2 id="binary-search-trees">Binary Search Trees</h2>
+<p><strong><span class="math inline">\(search(k)\)</span></strong>: Start at the root, compare <span class="math inline">\(k\)</span> to the current node. Stop if found or node is external, else recurse at child.</p>
+<p><strong><span class="math inline">\(insert(k, v)\)</span></strong>: Search for <span class="math inline">\(k\)</span>, then insert <span class="math inline">\((k, v)\)</span> as new node.</p>
+<p><strong><span class="math inline">\(delete(k)\)</span></strong>: Search for node <span class="math inline">\(x\)</span> that contains the key <span class="math inline">\(k\)</span>.</p>
+<ol type="1">
+<li>If <span class="math inline">\(x\)</span> is a leaf, then delete it.</li>
+<li>If <span class="math inline">\(x\)</span> has one child, then move that child up.</li>
+<li>If <span class="math inline">\(x\)</span> has two children, swap at <span class="math inline">\(x\)</span> with the key at <strong>successor</strong> or <strong>predecessor</strong> node and then delete that node.</li>
+</ol>
+<blockquote>
+<p><strong>Remark</strong>: The successor of node <span class="math inline">\(x\)</span> does not have to be a leaf but it cannot have a left child.</p>
+</blockquote>
+<h3 id="height-of-a-bst">Height of a BST</h3>
+<p>All of the functions above have cost <span class="math inline">\(\Theta(h)\)</span>, where <span class="math inline">\(h\)</span> is the height of the tree.</p>
+<p>If <span class="math inline">\(n\)</span> items are inserted, the worst case if <span class="math inline">\(\Theta(n)\)</span>. The best case is <span class="math inline">\(\Theta(\log(n))\)</span> because any binary tree with <span class="math inline">\(n\)</span> nodes has height <span class="math inline">\(\ge \log(n + 1) - 1\)</span>. It can be shown that the average case is <span class="math inline">\(\Theta(\log(n))\)</span>.</p>
+<h2 id="avl-trees">AVL Trees</h2>
+<blockquote>
+<p>Introduced by Adel’son-Vel’ski˘ı and Landis in 1962.</p>
+</blockquote>
+<p>AVL Trees are BST with an additional <strong>height-balance</strong> property that the height of the left subtree L and right subtree R differ by at most 1. The height of an empty tree is defined to be -1.</p>
+<p>At each non-empty node, we require <span class="math inline">\(height(R) - height(L) \in \{-1, 0, 1\}\)</span>.</p>
+<blockquote>
+<ul>
+<li>-1, <strong>left-heavy</strong></li>
+<li>0, <strong>balanced</strong></li>
+<li>1, <strong>right-heavy</strong></li>
+</ul>
+</blockquote>
+<p>We need to store the height of the subtree rooted at each node. It can be shown that it is sufficient to store <span class="math inline">\(height(R) - height(L)\)</span> at each node which uses fewer bits but more complicated code (especially for deleting).</p>
+<h3 id="height-of-an-avl-tree">Height of an AVL Tree</h3>
+<p><strong>Theorem</strong>: an AVL Tree with <span class="math inline">\(n\)</span> nodes has <span class="math inline">\(\Theta(\log(n))\)</span> height.</p>
+<p><strong>Proof</strong>: We prove the upper and lower bounds separately.</p>
+<ol type="1">
+<li>The height <span class="math inline">\(h\)</span> of an AVL with <span class="math inline">\(n\)</span> keys is <span class="math inline">\(\Omega(\log(n))\)</span> because <span class="math inline">\(h \ge \log(n + 1) - 1\)</span>.</li>
+<li><p>The height <span class="math inline">\(h\)</span> of an AVL with <span class="math inline">\(n\)</span> keys is <span class="math inline">\(O(\log(n))\)</span>.</p>
+<blockquote>
+<p>Define <span class="math inline">\(N_h\)</span> as the minimum number of keys in an AVL of height <span class="math inline">\(h\)</span>. Our plan is to prove <span class="math inline">\(N_h \in \Omega(c^h)\)</span> for some constant <span class="math inline">\(c\)</span>. Then we would have <span class="math inline">\(\log(n) \in \Omega(h)\)</span>.</p>
+<p>We see that <span class="math inline">\(N_h\)</span> has a relation to Fibonacci numbers, <span class="math inline">\(N_h = F_{h + 3} - 1\)</span>. This is because to build <span class="math inline">\(N_h\)</span>, we can take the tree for <span class="math inline">\(N_{h - 1}\)</span> as a left child and the tree for <span class="math inline">\(N_{h - 2}\)</span> as a right child. We can prove <span class="math inline">\(N_{h} = N_{h - 1} + N_{h - 2} + 1\)</span> with generating series. We show the inductive proof that <span class="math inline">\(N_h = F_{h + 3} - 1\)</span>.</p>
+<p><span class="math display">\[\begin{aligned} N_{h + 2} &amp;= N_{h + 1} + N_{h} + 1 \\ &amp;= (F_{h + 4} - 1) + (F_{h + 3} - 1) + 1 \\ &amp;= F_{h + 4} + F_{h + 3} - 1 \\ &amp;= F_{h + 5} - 1\end{aligned}\]</span></p>
+<p>We claim <span class="math inline">\(F_h \in \Theta(\phi^h)\)</span>, <span class="math inline">\(\phi = \frac{1 + \sqrt 5}{2}\)</span> (<em>239</em>). Then <span class="math inline">\(N_h \in \Theta(\phi^h)\)</span> and <span class="math inline">\(\log(N_h) \in \Theta(h)\)</span> (<em>a1</em>). For any AVL with height <span class="math inline">\(h\)</span>, <span class="math inline">\(n\)</span> nodes, <span class="math inline">\(\log(n) \ge \log(N_h)\)</span> so <span class="math inline">\(\log(n) \in \Omega(h)\)</span>. Therefore <span class="math inline">\(h \in O(\log(n))\)</span>.</p>
+</blockquote></li>
+</ol>
+<h3 id="avl-insertion">AVL Insertion</h3>
+<ol type="1">
+<li>Insert <span class="math inline">\((k, v)\)</span> into <span class="math inline">\(T\)</span> with usual BST insertion.</li>
+<li>We assume that this returns the new leaf <span class="math inline">\(z\)</span> where the key was sorted.</li>
+<li>Move up the tree from <span class="math inline">\(z\)</span> and update heights.
+<ul>
+<li>We assume that we have parent links. This can be avoided if insert returns the full path to <span class="math inline">\(z\)</span>.</li>
+</ul></li>
+<li>If the height difference becomes <span class="math inline">\(\pm 2\)</span> at node <span class="math inline">\(z\)</span>, then <span class="math inline">\(z\)</span> is <strong>unbalanced</strong>. We must re-structure the tree to rebalance.</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">def</span> AVL_insert(r, k, v):</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">    z <span class="op">=</span> BST_insert(r, k, v)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">    z.height <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    <span class="cf">while</span> z <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">        set_height_from_children(z)</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">        <span class="cf">if</span> <span class="bu">abs</span>(z.left.height <span class="op">-</span> z.right.height) <span class="op">==</span> <span class="dv">2</span>:</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">            AVL_fix(z)</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">            <span class="cf">break</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">            z <span class="op">=</span> z.parent</a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="kw">def</span> set_height_from_children(u):</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13">    u.height <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="bu">max</span>(u.left.height <span class="op">+</span> u.right.height)</a></code></pre></div>
+<p><strong>Fixing a slightly unbalanced AVL tree</strong>. This is applied at a node <span class="math inline">\(z\)</span> that has balance <span class="math inline">\(\pm 2\)</span>, but the subtrees at <span class="math inline">\(z\)</span> are AVL.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">def</span> AVL_fix(z):</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">    <span class="co"># Find child and grand-child that go deepest.</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    <span class="cf">if</span> z.right.height <span class="op">&gt;</span> z.left.height:</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">        y <span class="op">=</span> z.right</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">        <span class="cf">if</span> y.left.height <span class="op">&gt;</span> y.right.height:</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">            x <span class="op">=</span> y.left</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">            x <span class="op">=</span> y.right</a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10">        y <span class="op">=</span> z.left</a>
+<a class="sourceLine" id="cb16-11" data-line-number="11">        <span class="cf">if</span> y.right.height <span class="op">&gt;</span> y.left.height:</a>
+<a class="sourceLine" id="cb16-12" data-line-number="12">            x <span class="op">=</span> y.right</a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">            x <span class="op">=</span> y.left</a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">    <span class="co"># Apply appropriate rotation to restructure at x, y, z</span></a>
+<a class="sourceLine" id="cb16-16" data-line-number="16">    ...</a></code></pre></div>
+<p>How do we “fix” an unbalanced AVL? Notice that there are many different BSTs with the same keys. Our <strong>goal</strong> is to change the <em>structure</em> among the three nodes without changing the <em>order</em> such that the subtree becomes balanced.</p>
+<p><img src="https://www.dropbox.com/s/tiq9xylng9hq53n/Screenshot%202018-06-05%2010.28.55.png?raw=1" /></p>
+<h4 id="right-rotation">Right Rotation</h4>
+<p><img src="https://www.dropbox.com/s/1uxwmuxn2aasmp0/Screenshot%202018-06-05%2010.30.23.png?raw=1" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">def</span> rotate_right(z):</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">    y <span class="op">=</span> z.left</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">    make y.right the new left child of z</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">    make y the new root of the subtree</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">    make z the new right child of yb</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">    set_height_from_children(z)</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">    set_height_from_children(y)</a></code></pre></div>
+<p>Recall that we need to update the parent links as well!</p>
+<ul>
+<li><strong>Left Rotation</strong> is symmetrical.</li>
+</ul>
+<h4 id="double-right-rotation">Double Right Rotation</h4>
+<ol type="1">
+<li>Left rotation at <span class="math inline">\(y\)</span>.</li>
+<li>Right rotation at <span class="math inline">\(z\)</span>.</li>
+</ol>
+<p><strong>Rule</strong>: The median of <span class="math inline">\(x, y, z\)</span> becomes the new root.</p>
+<p><img src="https://www.dropbox.com/s/czwsn0mtnmxc9l5/Screenshot%202018-06-05%2010.50.43.png?raw=1" /></p>
+<h3 id="avl-deletion">AVL Deletion</h3>
+<ul>
+<li>Remove the key <span class="math inline">\(k\)</span> with BST_delete</li>
+<li>We assume that BST_delete returns the place where the <em>structural</em> change happened (the parent <span class="math inline">\(z\)</span> of the node that got deleted).</li>
+<li>Go back up to the root, update heights, and rotate if needed.</li>
+</ul>
+<h1 id="other-dictionary-implementations">Other Dictionary Implementations</h1>
+<p>Arrays are a simple and popular implementation. Can we do something to make the search more effective in practice?</p>
+<p><strong>Yes</strong>, if the items are not equally likely to be accessed and we have a probability distribution of the items. - Intuition is that frequently accessed items should be in the front.</p>
+<h2 id="optimal-static-ordering">Optimal Static Ordering</h2>
+<ul>
+<li>Expected access cost in <span class="math inline">\(L\)</span> is <span class="math inline">\(E(L) = \sum_{i = 1}^n P(x_i)T(x_i) = \sum_{i=1}^n P(x_i)*i\)</span>
+<ul>
+<li><span class="math inline">\(P(x_i)\)</span> is the access probability for <span class="math inline">\(x_i\)</span>.</li>
+<li><span class="math inline">\(T(x_i)\)</span> is the position of <span class="math inline">\(x_i\)</span> in <span class="math inline">\(L\)</span>.</li>
+</ul></li>
+</ul>
+<p>Is this better than our linear time solution?</p>
+<p>Consider <span class="math inline">\(L=[x_1, ..., x_n]\)</span>, <span class="math inline">\(P(x_1) = \frac{1}{2}\)</span>, <span class="math inline">\(P(x_2) = \frac{1}{4}\)</span>, …, <span class="math inline">\(P(x_{n-1}) = P(x_n) = \frac{1}{2^{2n-1}}\)</span>. <span class="math inline">\(E(L) = 1\cdot\frac{1}{2} + 2\cdot\frac{1}{4} + ... + (n-1)\cdot \frac{1}{2^{n-1}} + n\cdot\frac{1}{2^{n-1}}\)</span>. <span class="math inline">\(\lim_{n \to \infty}E(L) = 2\)</span>.</p>
+<p><strong>Claim</strong>: Over all possible static orderings, the one that sorts items by non-increasing access-probability minimizes the expected cost. We can prove by contradiction.</p>
+<h2 id="dynamic-ordering">Dynamic Ordering</h2>
+<ul>
+<li>What if we do not know the access probabilities ahead of time?</li>
+<li><strong>Temporal locality</strong>: recently accessed items are likely to be used soon again.</li>
+<li><strong>Move-To-Front</strong> (<em>MTF</em>): Upon a successful search, move the accessed item to the front of the list.</li>
+<li><strong>Transpose</strong>: Upon a successful search, swap the accessed item with the item immediately preceding it.</li>
+</ul>
+<h3 id="performance-of-dynamic-ordering">Performance of Dynamic Ordering</h3>
+<ul>
+<li>MTF works well in practice.</li>
+<li>We can show that MTF is “2-competitive”. <span class="math inline">\(C_{OPT} \le C_{MTF} \le 2C_{OPT}\)</span>.</li>
+</ul>
+<h2 id="skip-lists">Skip Lists</h2>
+<blockquote>
+<p><strong>Randomized</strong> data structure for dictionary ADT.</p>
+</blockquote>
+<ul>
+<li>A heirarchy <span class="math inline">\(S\)</span> of ordered linked lists (<em>levels</em>) <span class="math inline">\(S_0, S_1, ..., S_h\)</span>.
+<ul>
+<li>Each list <span class="math inline">\(S_i\)</span> contains the special keys <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(+\infty\)</span>.</li>
+<li>List <span class="math inline">\(S_0\)</span> contains the KVPs of <span class="math inline">\(S\)</span> in non-decreasing order.</li>
+<li>Each list is a subsequence of the previous one, <span class="math inline">\(S_0 \supseteq S_1 \supseteq ... \supseteq S_h\)</span>.</li>
+<li>List <span class="math inline">\(S_h\)</span> only contains the two special keys.</li>
+</ul></li>
+<li>Each node <span class="math inline">\(p\)</span> has references <span class="math inline">\(below(p)\)</span> and <span class="math inline">\(after(p)\)</span>.</li>
+</ul>
+<h3 id="search-in-skip-lists">Search in Skip Lists</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">def</span> skip_search(l, k):</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">    P <span class="op">=</span> [p]</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">    <span class="cf">while</span> below(p) <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">        p <span class="op">=</span> below(p)</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">        <span class="cf">while</span> key(after(p)) <span class="op">&lt;</span> k:</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">            p <span class="op">=</span> after(p)</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">        P.append(p) </a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">    <span class="cf">return</span> P</a></code></pre></div>
+<h3 id="insert-in-skip-lists">Insert in Skip Lists</h3>
+<ul>
+<li><p>In an <strong>ideal</strong> skiplist, we have <span class="math inline">\(2n\)</span> keys and <span class="math inline">\(\log(n)\)</span> height. The search costs <span class="math inline">\(\Theta(\log(n))\)</span>.</p></li>
+<li>Randomly compute the height of a new item <span class="math inline">\(k\)</span>, flip a coin until you get tails.</li>
+<li>Let <span class="math inline">\(i\)</span> be the number of heads, this will be the height of <span class="math inline">\(k\)</span>.
+<ul>
+<li><span class="math inline">\(P(height \ge l) = (\frac{1}{2})^l\)</span>.</li>
+</ul></li>
+<li>Increase the height of the skip list if needed, to have <span class="math inline">\(h &gt; i\)</span> levels.</li>
+<li>Search for <span class="math inline">\(k\)</span> with skip_search to get stack <span class="math inline">\(P\)</span>.
+<ul>
+<li>The top <span class="math inline">\(i\)</span> items of <span class="math inline">\(p\)</span> are the predecessors <span class="math inline">\(p_0, p_1, ..., p_i\)</span> where <span class="math inline">\(k\)</span> should be in each list <span class="math inline">\(S_0, S_1, ... S_i\)</span>.</li>
+<li>Insert <span class="math inline">\((k, v)\)</span> after <span class="math inline">\(p_0\)</span> in <span class="math inline">\(S_0\)</span>, and <span class="math inline">\(k\)</span> after <span class="math inline">\(p_j\)</span> in <span class="math inline">\(S_j\)</span> for <span class="math inline">\(1 \le j \le i\)</span>.</li>
+</ul></li>
+</ul>
+<p><img src="https://www.dropbox.com/s/bsniny3fq8a39fk/Screenshot%202018-06-07%2010.52.03.png?raw=1" /></p>
+<h3 id="delete-in-skip-lists">Delete in Skip Lists</h3>
+<ul>
+<li>Search for <span class="math inline">\(k\)</span> with skip_search to get stack <span class="math inline">\(P\)</span>.</li>
+<li><span class="math inline">\(P\)</span> contains all predecessors <span class="math inline">\(p_0, p_1, ..., p_h\)</span> of <span class="math inline">\(k\)</span> in lists <span class="math inline">\(S_0, ..., S_h\)</span>.</li>
+<li>For each <span class="math inline">\(0 \le j \le h\)</span>, if <span class="math inline">\(key(after(p_j)) = k\)</span>, then remove <span class="math inline">\(after(p_j)\)</span> from list <span class="math inline">\(S_j\)</span>.</li>
+<li>Remove all but one of the lists <span class="math inline">\(S_i\)</span> that contain only the two special keys.</li>
+</ul>
+<p><img src="https://www.dropbox.com/s/rqrx1by20ge232p/Screenshot%202018-06-07%2010.56.23.png?raw=1" /></p>
+<h3 id="expected-performance">Expected Performance</h3>
+<ul>
+<li><span class="math inline">\(O(n)\)</span> space.</li>
+<li><span class="math inline">\(O(\log(n))\)</span> height. A skip list with <span class="math inline">\(n\)</span> items has height at most <span class="math inline">\(3\log(n)\)</span> with probability at least <span class="math inline">\(1 - \frac{1}{n^2}\)</span>.</li>
+<li><span class="math inline">\(O(\log(n))\)</span> search, insert, and delete.</li>
+</ul>
+</body>
+</html>

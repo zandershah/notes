@@ -2,16 +2,20 @@ MUSIC140
 =
 
 **Diane Warren** (1956-) *Songwriter*
+
 - Most successful in Western pop .
 
 # North American Pop
+
 > 1945 (End of WWII 1939-1945)
 
 End of the "Big Band" era which dominated since the mid 1930s (trumpets, saxophone, trombone)
+
 - Primarily intended for dancing.
 - Lack of focus on vocal
 
 Example of Big Band Music: 1944 "Sentimental Journey" (Brown / Homer / Green)
+
 - Performed by Les Brown and his Band of Renown, ft. Doris Day
     - Doris Day will become a film / music star in the 1950s.
 - Song title evokes sentiments from WWI
@@ -39,22 +43,27 @@ Example of Hillbilly Music: "Blue Moon of Kentucky" (Bill Monroe 1946, recorded/
 The **products** of the music insdustry at this time are sheet music and recordings. Sheet music dominates recordings until the late 1920s. By the end of WWII, recording industry has come to dominate.
 
 ## Why a Music Industry? Development of American Music Industry
+
 - 1600s, you could steal pamphlets and make copies yourself to sell because there was no intellectual property.
 - People complained to the Queen so you can now get sole rights to make copies and distribute to make money from an idea (copyright).
 - You would get payments from the stationers company (Queen) when people used your work (royalties).
 
 We need copyright law - intellectual property.
+
 - 1790s-1830s, Ammendments to the copyright laws to cover sheet music.
 - The Victorial Ballad: (Queen Victoria).
     - appearance and social mobility is everything
 
 Industrial Revolusion made it so that there was now a middle class. The new middle class wanted to show off their money. Ways to do this are to buy luxury items (piano) and have daughters pursue "leisure" activities and women in the family does not have to work.
+
 - The rise of middle class to have *Parlour Songs* written specifically for middle class
 
 **Parlour Songs**
 
 Example of Parlour Song: "Believe Me, If All Those Endearing Young Charms" (Thomas Moore, early 1800s)
+
 > Themes: Loyalty, honesty, control, restraint (idealized romance).
+
 - AABA
 - Piano accompaniment, showcase vocal control.
 - Target young women about idealized love
@@ -66,10 +75,12 @@ Demand for newly composed songs led to an increased organization of the music in
 ## Tin Pan Alley
 
 Parlour song: "After the Ball" (Charles K Harris 1892)
+
 - Typical song but became very popular, first sheet music sold over 5 mil copies (usually less than 100k).
 - Music industry's first "hit song".
 
 **Why 1892?**
+
 > Rural to urban shift.
 
 There cannot be a hit song if everyone lives in rural areas because it is too hard to spread the song. In the US, many people are migrating to the urban areas at this point in time (by the 1890s, over $\frac{1}{3}$ lives in cities).
@@ -90,10 +101,12 @@ Example: "Somewhere Over the Rainbow" (Arlen / Harburg 1939)
 There was no focus on singer at this time, more on songs. Popular songs were not linked to an artist. There is also no distinction based on age (e.g. people of all ages would like big bands).
 
 # North American Slave Trade
+
 > (1619 - (1863) 1865)
 > Music culture was brought over through slavery
 
 Example: "Work Song - Old Alabama" 1947
+
 - There were no recordings of slave work songs, this one is a prison work song.
 - For efficiency and entertainment
 - Used to pass time / set pace / coordinate work.
@@ -101,12 +114,14 @@ Example: "Work Song - Old Alabama" 1947
     - Two lines, guess which one it will be. More interactive than just repeating the same song.
 
 ## Folk Music
+
 - Performed by amateurs.
 - Self or community entertainment.
 - Passed by oral tradition.
 - More concern with tradition than innovation (lacking *self-consciousness*).
 
 ## African Retentions
+
 1. Interest in percussion and distorted timbres.
     - Shows emotion and dedication.
     - Uniqueness in sound
@@ -118,7 +133,9 @@ Example: "Work Song - Old Alabama" 1947
     - Energy flow.
 
 ## Post Slavery
+
 > (1865 -)
+
 - Institutionalized racism.
 - Acceleration of rural-to-urban shift.
 - New form of music appears during the late 1800s.
@@ -127,7 +144,9 @@ Example: "Work Song - Old Alabama" 1947
 - Centers close to the Mississippi river.
 
 ## Country (Rural) Blues
+
 > Blues is a broad term.
+
 - Wandering musicians.
 - Male vocalist, with acoustic guitar.
     - Too dangerous for women at the time.
@@ -135,17 +154,20 @@ Example: "Work Song - Old Alabama" 1947
 - Themes include: travel, economics, love.
 
 ### Musical Form
+
 - 12 measure phrases. No other styles specified length.
 - a-a-b lyric pattern.
 - Call and response between guitar and voice.
 - Early Blues performers made use of *floating pool of verse* (not formally writing out song).
 
 Example: "Travellin' Blues" (Blind Willie McTell 1929)
+
 - First blues recording in the 1920s.
 - Closer to folk music because lacks *self-awareness*.
     - Uneven bar counts.
 
 Example: "Sweet Home Chicago" (Robert Johnson November 1936)
+
 - Defined standards for blues guitar. 
 - Only made two sets of recordings (November 1936 / June 1937).
 - Standardized performance, very different from Blind Willie McTell.
@@ -155,6 +177,7 @@ Example: "Sweet Home Chicago" (Robert Johnson November 1936)
 ## Changes In Technology
 
 ### Mechanical Reproduction
+
 - 1877, Edison invents the phonograph (granophone).
     - Wax, not reusable, had business intentions / political but not music.
 - 1895-1912, transition from wax cylinder to disks.
@@ -163,13 +186,16 @@ Example: "Sweet Home Chicago" (Robert Johnson November 1936)
 - In 1925, recording industry starts to rise to prominence.
 
 ### What Was Recorded?
+
 - Sheet music (TPA), still controlled by the same people.
 - Black / Rural Southern White music was not recorded because TPA did not care.
     - They only cared about what they thought they could sell.
     - Harder to sell to rural areas due to distance and populations.
 
 ### Commercial Radio
+
 > 1920, recording industry almost dies.
+
 - Jan 1922, 28 sations. Dec 1922, 570 stations.
 - Controlled by only a few "Networks" (CBS, NBC, Mutual).
     - NBC was the first (1928).
@@ -180,26 +206,33 @@ Commercial radio changed how a song would become popular and how fast a song wou
 Black music was not played on the radio, so it maintained regional differences.
 
 ### Success of Radio
+
 - One time purchase, unlimited content.
 - Why buy records?
 - Non-musical entertainment.
 
 ## Rise of the Record Industry
+
 - **Ralph Peer**: worked for Okeh Records (Artists & Repetoire).
     - Finds good musicians and songs for them to record.
 
 Example: Mamie Smith "Crazy Blues" (1920)
+
 - Black vocalist.
 - Record sold relatively well, they did not expect African-Americans to own record players or for white middle class to be interested.
 
 Ralph has an idea, radio has the exact same TPA music, there was a market to record African-American and rural white southern.
 
 ## Introduction of "Hillbilly"
+
 Example: Uncle Dave Macon and the Fruit Jar Drinkers "Carve that Possum" (1927)
+
 - Banjo, acoustic guitar, mandelin, fiddle.
 
 ## Introduction to "Race"
+
 Example: Carr and Blackwell "How Long Blues" (1928)
+
 - Piano was added because it was performed in the city as opposed to rural area
 - Next step in the development of blues (city blues).
 - Increased complexity due to multiple musicians.
@@ -209,6 +242,7 @@ Example: Carr and Blackwell "How Long Blues" (1928)
 Sometime in the 1930s, the recording industry overtakes sheet music and mainly goes back to playing popular music (TPA).
 
 ## Television
+
 - First demonstrated in 1927.
 - Experimental and low resolution broadcasts in 1930s.
 - Network broadcasts begin in 1939.
@@ -221,19 +255,25 @@ WDIA Memphis was the first "Black Appeal" radio station in 1948. By 1954, there 
 In the 1950s, Tin Pan Alley is in its dying days. The songs were very "safe". Focus starts to fall of of the songs and towards the singers.
 
 Examples: Nat King Cole "Too Young" (1951, Lippman / Dee), Patti Page "How Much Is That Doggie In The Window" (1952, Merril)
+
 - World was emerging from WWII.
 
 ### Baby Boomers
+
 Baby boomers are experiencing extended adolescence. They invent the teenager. Teenagers get to stay in school, have part time jobs, and spend the money from their part time jobs. A generation gap appears between the culture of parents and their children.
+
 - Transitor radio: portable and small.
 
 ## Race Music
 
 ### Jump Blues
+
 We saw an example of Jump Blues before ("Good Rockin' Tonight" 1948). This genre develops from a fusion of Big Band music (TPA / Jazz) with more the prominent blues / race music influence.
 
 ### Gospel
+
 Example: Ray Charles (1930-2004) "I've Got A Woman" (1954)
+
 - Albany Georgia, blind at 7. Learns music at a school for the blind.
 - 1952, Atlantic Records.
 - Fusion of the energy of African American spiritual practice with secular lyrics.
@@ -243,7 +283,9 @@ Example: Ray Charles (1930-2004) "I've Got A Woman" (1954)
 - Based on a song called "It Must Be Jesus".
 
 ### Chicago Electric Blues
+
 Example: Muddy Waters (1913 - 1983) "Hoochie Coochie Man" (1954, Wille Dixon)
+
 - Born in Mississippi. Played guitar and harmonica. Emulated Robert Johnson.
 - Moves to chicago in the early 1940s, switches to electric guitar in 1945.
 - 1944, records for Aristocrat Records (Chess Records).
@@ -255,16 +297,20 @@ Example: Muddy Waters (1913 - 1983) "Hoochie Coochie Man" (1954, Wille Dixon)
 - Stop Time, sign of a practiced musician.
 
 Mid 1950s, WWII has changed everything. USA was able to build massive industry and experiences economic prosperity.
+
 - Extended adolescence (baby boomers).
 - Rhythm and Blues become crossover hits (black appeal chart to pop chart).
 
 ## Cover Verions: 1954 - 1956
+
 > "White" versions of "black" songs.
+
 - Combats the "moral panic" among white parents because white teenagers are listening to African American music and paying attention to their culture.
 - Several versions of the same song would end up on the charts at the same time.
 - The cover versions would have higher recording quality.
 
 Example: Little Richard (Richard Wayne Penniman)
+
 - Born in 1932, Macon Georgia.
 - First bit hit was "Tutti Frutti".
 - Released late 1955 on Specialty Records (lyrics revised by Dorothy LaBostrie).
@@ -275,6 +321,7 @@ Example: Little Richard (Richard Wayne Penniman)
     - Echo sound, no distortion, band plays more restrained.
 
 Example: "Sh-Boom" (The Chords / The Crew Cuts)
+
 - Do-wop (singers take the place of instruments). Nonsense syllables.
 - Originally released by The Cords in 1954 on an independent label Cat Records.
     - #3 R&B, #5 Pop.
@@ -292,18 +339,21 @@ Is this racist? Or a continuation of TPA traditions?
 By 1956, race covers lessen because a new type of pop emerges which does not fit into any old genre. A mixture of pop, C&W, R&B, target at teenagers: **Rock 'n' Roll**.
 
 Bill Haley and the Comets.
+
 - Born in 1925.
 - Originally "Bill Haley and the Saddlemen", (part of C&W: Western Swing).
 - Changes to "Bill Haley and the Comets" in 1952.
 - Early hits with "Crazy Man, Crazy", and "Shake, Rattle and Roll".
 
 Example: "Rock Around the Clock" (1954)
+
 - Popular in 1955 movie "Blackboard Jungle" about R&B causing juveniles delinquents.
 - 12-bar blues.
 
 Baby Boomers liked to listen to music performed by similar age group. Bill Haley was in his 30s.
 
 # Elvis Presley (1935-1977)
+
 - Tupelo, Mississippi.
 - Exposed to all different types of music.
 - 1953, 18 years old, Sam Phillips / Sun Records.
@@ -312,6 +362,7 @@ Baby Boomers liked to listen to music performed by similar age group. Bill Haley
 - The next day, Elvis goes down to the radio station to be interviewed. "Which highschool did you go to?", can tell everyone that he is white.
 
 July 1954 "That's Alright Mamma" / "Blue Moon of Kentucky"
+
 - "That's a pop song now, little guy", changes basic subdivision of "Blue Moon of Kentucky" from 3 to 4.
 - Percussive timbre.
 - 1954 - 1955: Elvis with Sun slowly becomes a regional star, with some national success on Country Charts.
@@ -323,12 +374,15 @@ Sam Phillips sells Elvis's record contract to RCA for $35,000 (high for the stan
 11 appearances on national television (there are 3 channels in 1956). Tens of millions people watching. Everyone knows who he is.
 
 Example: "Heartbreak Hotel" (Aril-May 1956)
+
 - #1 Pop, #1 Country, #5 R&B.
 
 August to December 1956, Elvis has #1 on pop charts. "Hound Dog", "Don't Be Cruel", "Love Me Tender". "Hound Dog" and "Don't be Cruel" chart on #1 on Pop, Country, and R&B.
+
 - "Leave the guitar off stage". Teenage girls going crazy.
 
 Recall that one of the main characteristics of parlour music is control.
+
 - Parker directs Elvis' career towards more "Pop-friendly" material.
 - Elvis not charting on R&B after 1957.
 - Elvis enters the army from March 1958 to March 1960. Develops an addition to perscription drugs. March 1961, last public performance for 7 years and just does movies.
@@ -337,7 +391,9 @@ Recall that one of the main characteristics of parlour music is control.
 - Elivs dies August 16, 1977, age 42. 10 different types of perscription drugs in his bloodstream.
 
 # Chuck Berry
+
 > In many ways, he is the complete opposite of Elvis.
+
 - Born in St. Louis (midwest), middle class.
 - Father was a carpenter.
     - Chuck look at records to see which African American artists were popular with middle class white (e.g. Nat King Cole). Notices that Nat King Cole has a very clear voice and tells stories.
@@ -357,6 +413,7 @@ Chuck recognizes early on that he is targetting a brand new demographic of youth
     - The centrality of the electric guitar made it hard to remove.
 
 Example: "Johnny B. Goode" (1958)
+
 - #2 R&B, #8 Pop.
 - 12-bar blues with a "text heavy" narrative.
 - White Elements.
@@ -385,6 +442,7 @@ This period is referred to historically as the **Golden Age of Rock and Roll** (
 Elvis worked in the major recording companies because he did not write his own songs and therefore fit the division of labour.
 
 ## Corruption - Payola
+
 - Major recording companies linked race with the "quality" of the music.
 - They spread rumors that the DJs were getting bribed in order to play them.
 - Rock 'n' Roll is attacked on the grounds that it is inferior music.
@@ -398,6 +456,7 @@ The major records had a good reason to be scared of Rock n Roll. In 1954, the mu
 The Pop top 10 was 15% Rock n Roll in 1955, 42% in 1959. The independent record companies accounted for about 21%, 66% in 1959.
 
 **Racism**: Reaction against the perceived integration of youth. Birth of Rock and Roll coincides with emergence of Civil Rights Movement.
+
 - **Court Case**: May 1954. Brown vs. The Board of Education. The Supreme Court ordered the educational systems to end segregation.
 - Rosa Parks, Montgomery Alabama. Was illegal for African Americans to sit at the front of the bus. Montgomery Bus Boycott.
     - Story attracted international attention. Town was so embarassed, by the end of 1956, they take down the signs that divide the bus.
@@ -407,7 +466,9 @@ The Pop top 10 was 15% Rock n Roll in 1955, 42% in 1959. The independent record 
 - Non-violent protest.
 
 ### The Great Extinction
+
 > Many rock 'n' roll stars are taken out of the scene.
+
 - Elvis, March 1958, Army.
 - Chuck Berry, December 1959, Arrested under the "Mann Act".
     - Serves over 2 years in jail.
@@ -420,22 +481,26 @@ The Pop top 10 was 15% Rock n Roll in 1955, 42% in 1959. The independent record 
     - Symbolically seen as the end of the golden age of rock 'n' roll.
 
 # The "In-Between" Years (1959 - 1963)
+
 > The end of the "Golden Age" of Rock and Roll, to the arrival of the Beatles (February 1964).
 
 Major labels recognize that Rock and Roll is not a fad and begin to produce music similar to Rock and Roll, aimed at teenagers of the late 1950s / early 1960s. The only difference was that they were produced with the *divsion of labour* system.
 
 ## Dance Craze
+
 > Starts by a song that came out of rythm and blues. "The Twist".
 
 The idea that a song that describes a dance becomes popular. Large music industries start to pump out songs about dances.
 
 Example: "The Locomotion" Little Eva (1962, Goffin, King)
+
 - Little Eva was the babysitter for Goffin's and King's children.
 
 - **Teel idols**. Clean-cut, idealized boyfriend. No "bad boy" image from the Golden Age.
     - Singing was almost secondary to looks.
 
 Example: "Blue Velvet" Bobby Vinton (1963)
+
 - Composed in 1950, was a major hit for Tony Bennett in 1951.
 - Smoother sounding, but there are instruments you would have not heard 10 years older.
     - Electric guitar.
@@ -451,6 +516,7 @@ Example: "Blue Velvet" Bobby Vinton (1963)
 To summarize the "In-Between Years", division of labour figures out how to create songs that teenagers will buy and parent will not be scared of.
 
 ## Rise of the Producer
+
 - The Magnetophon.
     - Sgt. Jack Mullin.
 - The Nazis invented reel-to-reel tape.
@@ -459,6 +525,7 @@ To summarize the "In-Between Years", division of labour figures out how to creat
 - 1948, Bing gives one of the first commercially produced reel-to-reel tape recorders to Les Paul.
 
 ### Les Paul (1915 - 2009)
+
 - Popularizes the solid-body electric guitar.
 - Wishes to create recordings by layering performances.
 - Assists in the development of the "multitrack" tape recording.
@@ -468,19 +535,25 @@ Example: "Sitting On Top Of The World" (Les Paul with Mary Ford, 1953)
 **Multitrack recording redefines the process of recording. Reproduction to Production.** Creating a moment that never actually happened. During the In-Between Years, the recording industry begins the transition from recording complete songs in a single "take" to the use of multitrack recording.
 
 ### Phil Spector
+
 > Was not a performer, but became incredibly famous.
+
 - the "Wall of Sound".
 
 Example: "Be My Baby" The Ronettes, (1963, Barry, Greenwich, Spector)
+
 > Spector and the Brill Building.
+
 - Texture was so thick that it would be very hard to isolate specific instrument sounds.
 
 ## Surf Music
+
 - Middle Class.
 - West Coast Prosperity.
 - Importance of Electric Guitar, Instrumental Tracks.
 
 "Surfin' USA" The Pendletones (*The Beach Boys*) (May 1963, Chuck Berry)
+
 - Amazing musicians, unrivaled background vocal complexity.
 - Brian Wilson was the creative force (*brains*).
     - Songwriter, arrangement, recording engineer, producer. Was allowed to produce the Beach Boy's records himself.
@@ -490,6 +563,7 @@ Example: "Be My Baby" The Ronettes, (1963, Barry, Greenwich, Spector)
 Beach Boys decline in popularity through the late 1960s because of Brian Wilson's mental illness and changes in approaching popular music that they cannot keep up with.
 
 ## Folk Revival
+
 - Many of the teen fans during the golden age of Rock 'n' Roll are now in their early 20s.
 - Now in University, many are looking for music that is more "serious".
     - Folk music tells stories about issues.
@@ -498,12 +572,15 @@ Beach Boys decline in popularity through the late 1960s because of Brian Wilson'
 # Textbook Readings I
 
 ## Chart Positions
+
 - Keep fan mentality at bay because we need to study history and development by looking at all influential / popular songs. Charts help to avoid fan mentality and keep us honest.
 - Charts are not the best because of faking but they are the best thing we have.
 - 500k, gold record. 1m, platinum record.
 
 ## Rise of Radio Networks 1920s
+
 One could broadcast to larger ranges by using a high power transmitter or by linking regional stations.
+
 - NBC used AT&T telephone lines to link 69 stations for the first coast-coast in 1928.
 - It was unethical to use records on air. The musician unions tried to keep live performaces on radio through bylaws (1940s).
 - Offered soap operas, adventure shows, comedies. The Guiding Light (1937), Lone Ranger, Superman (1930s-1940s).
@@ -511,6 +588,7 @@ One could broadcast to larger ranges by using a high power transmitter or by lin
     - X-Stations played on those frequencies below the border. Reach all the way to Chicago.
 
 ## Frank Sinatra
+
 - Bing Crosby was popular big band singer, but before 1945, it was rare for the singers to be stars.
     - By 1945, Big Bands were too expensive.
 - Sinatra came up with Harry James and Tom Dorsey bands.
@@ -519,7 +597,9 @@ One could broadcast to larger ranges by using a high power transmitter or by lin
 - One of the most successful post-WWII era singers, all the way to the 1980s.
 
 ## Regional Styles: Country & Western
+
 > Country and western music were regional unti lafter 1945.
+
 - Some of the first recordings by Ralph Peer.
 
 **Country Music**: Southeast and Appalacian. Folk traditions, ties to the British Isles. 
@@ -527,20 +607,24 @@ One could broadcast to larger ranges by using a high power transmitter or by lin
 **Western Music**: Southwest and California. Cowboy, western swing, made popular by Bob Wills and his Texas Playboys, Milton Brown and his Musical Brownies.
 
 "New San Antonio Rose" (1940) was redone by Bing Crosby in 1941 and got western swing more popular.
+
 - Holywood protrayal.
 
 ## Superstar Radio
+
 - Mainstream pop in 1930s and 1940s played to national, country and western were limited to regional.
 - 1932 WSM (Nashville - Grand Ole Opry) became clear-channel station. Reached most of southeast.
 - National BarnDance (WLS Chicago) did the same for the midwest.
 
 ## Nashville
+
 - After WWII, Nashville became the center of professional western and country music.
 - Castle recording company.
 - Catalyst was a publishing firm in 1942 by Ray Acuff and Fred Rose, they did not use sheet music but instead targeted recording and performance.
     - Patty Paige "The Tenessee Waltz" became a hit in 1950, and gave them enough financial success to expand.
 
 ## Gospel, Chess, Chicago
+
 - Similar to western music, many youth singing R&B learned to sing in church.
 - Doo-wop influenced by gospel harmony singing, call and response.
 - Talent scouts in Sun Records, Memphis would look to churches and bars for musicians.

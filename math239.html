@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>math239</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body);
+  });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="math239">MATH239</h1>
+<h1 id="enumeration">Enumeration</h1>
+<h2 id="sets-we-count">Sets We Count</h2>
+<ol type="1">
+<li><strong>Catesian Products</strong>, <span class="math inline">\(A \times B = \{(a, b) | a \in A, b \in B\}\)</span>, <span class="math inline">\(A^k = \{(a_1, ..., a_k)|a_i \in A\}\)</span>.</li>
+<li><strong>Disjoint Union</strong>, <span class="math inline">\(S = S_1 \cup S_2\)</span>, <span class="math inline">\(S_1 \cap S_2 = \emptyset\)</span>, then <span class="math inline">\(|S| = |S_1| + |S_2|\)</span>.</li>
+</ol>
+<p><strong>Binomial Coeff</strong>: How many subsets of <span class="math inline">\(\{1, ..., n\}\)</span> have size <span class="math inline">\(k\)</span>? <span class="math inline">\({n \choose k} = \frac{n!}{(n-k)!k!}\)</span></p>
+<p><strong>Binomial Theorem</strong>: <span class="math inline">\((1 + x)^n = \sum_{k = 0}^n{n \choose k}x^k\)</span>. Proof using counting arguments.</p>
+<blockquote>
+<p><span class="math inline">\((1 + x)^n = \sum a_1a_2...a_n, a_i \in \{1, x\}\)</span> &gt; Coeff <span class="math inline">\(x^k\)</span> represents the number of terms in the sum that have <span class="math inline">\(x^k\)</span>. To get <span class="math inline">\(x^k\)</span>, we need exactly <span class="math inline">\(k\)</span> “x”, and <span class="math inline">\(n - k\)</span> “1”. There are <span class="math inline">\(n \choose k\)</span> ways so the coeff of <span class="math inline">\(x^k\)</span> is <span class="math inline">\(n \choose k\)</span>.</p>
+</blockquote>
+<h1 id="combinatorial-proofs">Combinatorial Proofs</h1>
+<blockquote>
+<p>Idea: Count a set of objects in 2 different ways. The results must be equal.</p>
+</blockquote>
+<p>Example: <span class="math inline">\(2^n = \sum_{k = 0}^n {n \choose k}\)</span></p>
+<blockquote>
+<p>Let <span class="math inline">\(S\)</span> be the set of all binary strings of length <span class="math inline">\(n\)</span>. Then <span class="math inline">\(|S| = 2^n\)</span>. We count <span class="math inline">\(S\)</span> in a different way. Let <span class="math inline">\(S_k\)</span> be the set of all binary strings of length <span class="math inline">\(n\)</span> with exactly <span class="math inline">\(k\)</span> 0, <span class="math inline">\(k = 0,...,n\)</span>. Then <span class="math inline">\(S = \cup_{k = 0}^n S_k\)</span>. This is a disjoint union so <span class="math inline">\(|S| = \sum_{k = 0}^n |S_k|\)</span>. For each <span class="math inline">\(k\)</span>, <span class="math inline">\(|S_k| = {n \choose k}\)</span> since we are choosing exactly <span class="math inline">\(k\)</span> bits out of <span class="math inline">\(n\)</span> bits to be 0. So <span class="math inline">\(2^n = \sum_{k = 0}^n {n \choose k}\)</span>.</p>
+</blockquote>
+<p>Example: <span class="math inline">\({n \choose k} = {n - 1 \choose k} + {n - 1 \choose k - 1}\)</span></p>
+<blockquote>
+<p>Let <span class="math inline">\(S\)</span> be the set of all subsets of ${1, …, n} of size <span class="math inline">\(k\)</span>. So <span class="math inline">\(|S| = {n \choose k}\)</span>. Let <span class="math inline">\(S_1\)</span> be subsets that include the element <span class="math inline">\(n\)</span>, let <span class="math inline">\(S_2\)</span> be the subsets that do not include the element <span class="math inline">\(n\)</span>.<br />
+Each subset of <span class="math inline">\(S_1\)</span> consists of <span class="math inline">\(\{n\}\)</span> unin with <span class="math inline">\(k - 1\)</span> elements of <span class="math inline">\(\{1, ..., n - 1\}\)</span> so <span class="math inline">\(|S_1| = {n - 1 \choose k - 1}\)</span>.<br />
+Each subset of <span class="math inline">\(S_2\)</span> consists of <span class="math inline">\(k\)</span> elements of <span class="math inline">\(\{1, ..., n\}\)</span>, so <span class="math inline">\(|S_2| = {n - 1 \choose k}\)</span>. Since <span class="math inline">\(S = S_1 \cup S_2\)</span> is a disjoint union, <span class="math inline">\(|S| = |S_1| + |S_2|\)</span>. The result follows.</p>
+</blockquote>
+<p>Example: <span class="math inline">\({n + k \choose n} = \sum_{i = 0}^k {n + i - 1 \choose n - 1}\)</span></p>
+<blockquote>
+<p>Let <span class="math inline">\(S\)</span> be all subsets of <span class="math inline">\(\{1, ..., n + k\}\)</span> of size <span class="math inline">\(n\)</span>. Then <span class="math inline">\(|S| = {n + k \choose n}\)</span>. Let <span class="math inline">\(S_i\)</span> be the subsets of <span class="math inline">\(\{1, ..., n + k\}\)</span> of size <span class="math inline">\(n\)</span> where the largest element is <span class="math inline">\(n + i\)</span>. So <span class="math inline">\(i = 0, ..., k\)</span>. Then <span class="math inline">\(S = \cup_{i = 0}^k S_i\)</span> is a disjoint union and <span class="math inline">\(|S| = \sum_{i = 0}^k |S_i|\)</span>. Each subset <span class="math inline">\(S_i\)</span> consists of <span class="math inline">\(\{n + i\}\)</span> union with a subset of <span class="math inline">\(\{1, ..., n + i - 1\}\)</span> of size <span class="math inline">\(n - 1\)</span>. So <span class="math inline">\(|S_i| = {n + i - 1 \choose n - 1}\)</span>. The result follows.</p>
+</blockquote>
+<p>A <strong>bijection</strong> <span class="math inline">\(f: S \to T\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(f\)</span> is <strong>injective</strong> if every element of <span class="math inline">\(S\)</span> is mapped to a distinct element in <span class="math inline">\(T\)</span>.</li>
+<li><span class="math inline">\(f\)</span> is <strong>surjective</strong> if everything in the codomain is mapped to something in the domain.</li>
+<li><span class="math inline">\(f\)</span> is a <strong>bijection</strong> if <span class="math inline">\(f\)</span> is <strong>injective</strong> and <strong>surjective</strong>.</li>
+</ol>
+<p>Assume <span class="math inline">\(S, T\)</span> are finite. If <span class="math inline">\(f\)</span> is injective, <span class="math inline">\(|S| \le |T|\)</span>. If <span class="math inline">\(f\)</span> is surjective, <span class="math inline">\(|S| \geq |T|\)</span>. It follows that if <span class="math inline">\(f\)</span> is a bijection, <span class="math inline">\(|S| = |T|\)</span>.</p>
+<p><strong>Theorem</strong>: <span class="math inline">\(f\)</span> is a bijection if it has an inverse <span class="math inline">\(f^{-1}\)</span>.<br />
+An inverse of <span class="math inline">\(f: S \to T\)</span> is a function <span class="math inline">\(f^{-1}: T \to S\)</span> where for every <span class="math inline">\(x \in S\)</span>, <span class="math inline">\(f^{-1}(f(x)) = x\)</span> and for every <span class="math inline">\(y \in T\)</span>, <span class="math inline">\(f(f^{-1}(y)) = y\)</span>.</p>
+<p>Example: Let <span class="math inline">\(S\)</span> be all subsets of <span class="math inline">\(\{1, ..., n\}\)</span>. Let <span class="math inline">\(T\)</span> be all binary strings of length <span class="math inline">\(n\)</span>.</p>
+<blockquote>
+<p>Define <span class="math inline">\(f: S \to T\)</span> where <span class="math inline">\(f(A) = s_ns_{n-1}...s2s1\)</span>. <span class="math display">\[s_i \begin{cases}1, &amp;\text{if } i \in A \\ 0, &amp;\text{if } i \notin A\end{cases}\]</span> By our definition, <span class="math inline">\(f(A)\)</span> is a binary string of length <span class="math inline">\(n\)</span> so <span class="math inline">\(f(A) \in T\)</span>. The inverse <span class="math inline">\(f^{-1}: T \to S\)</span> where <span class="math inline">\(f^{-1}(t_n...t_1) = \{i \in \{1, ..., n\} \mid t_i = 1\}\)</span>. So <span class="math inline">\(f\)</span> is a bijection and <span class="math inline">\(|S| = |T| = 2^n\)</span>.</p>
+</blockquote>
+<h1 id="generating-series">Generating Series</h1>
+<p>Example: “How many subsets of <span class="math inline">\(\{1, 2, 3\}\)</span> have size <span class="math inline">\(k\)</span>?”. Define <span class="math inline">\(S\)</span> as the set of all subsets of <span class="math inline">\(\{1, 2, 3\}\)</span>.</p>
+<p>Define the weight <span class="math inline">\(w\)</span> of an element <span class="math inline">\(A\)</span> to be <span class="math inline">\(w(A) = |A|\)</span>. How many elements in <span class="math inline">\(S\)</span> have weight <span class="math inline">\(k\)</span>?</p>
+<p><span class="math inline">\(\Phi_S(x) = 1 + 3x + 3x^2 + x^3\)</span>. The coeffient of <span class="math inline">\(x^k\)</span> in the generating series is the answer.</p>
+<p><strong>Generating Series</strong>: Given set <span class="math inline">\(S\)</span> where <span class="math inline">\(\rho \in S\)</span> is given a non-negative integer weight <span class="math inline">\(w(\rho)\)</span>, the <strong>generating series</strong> of <span class="math inline">\(S\)</span> with respect to <span class="math inline">\(w\)</span> is <span class="math inline">\(\Phi_S(x) = \sum_{\rho \in S} x^{w(\rho)}\)</span>. If <span class="math inline">\(a_x\)</span> is the number of elements in <span class="math inline">\(S\)</span> of weight <span class="math inline">\(k\)</span>, then <span class="math inline">\(\Phi_S(x) = \sum_{k \ge 0}a_k x^k\)</span>. The <em>coefficients</em> store the answers to our counting problems.</p>
+<p>Notation: <span class="math inline">\([x^k]\Phi_S(x)\)</span> denotes the coefficient of <span class="math inline">\(x^k\)</span> in <span class="math inline">\(\Phi_S(x)\)</span>.</p>
+<p>Example: How many ways can we throw 2 dice to get a sum of <span class="math inline">\(k\)</span>?</p>
+<blockquote>
+<p>Define <span class="math inline">\(S = \{1, 2, 3, 4, 5, 6\} = \{(a, b) \mid a, b \in \{1, 2, 3, 4, 5, 6\}\}\)</span>. Define <span class="math inline">\(w(a, b) = a + b\)</span>. So <span class="math inline">\(\Phi_S(x) = (x + x^2 + x^3 + x^4 + x^5 + x^6)^2\)</span>.</p>
+</blockquote>
+<h2 id="format-power-series">Format Power Series</h2>
+<blockquote>
+<p>A formal power series has the form <span class="math inline">\(A(x) = \sum_{i \ge 0}a_i x_i\)</span>, where each <span class="math inline">\(a_i\)</span> is a well-defined, finite number. The coefficient of <span class="math inline">\(x_i \in A(x) = a_i\)</span>, denoted by <span class="math inline">\([x_i]A(x)\)</span>.</p>
+</blockquote>
+<p><strong>Equality</strong>: Let <span class="math inline">\(A(x) = \sum_{n \ge 0}a_n x^n\)</span>, <span class="math inline">\(B(x) = \sum_{n \ge 0}b_n x^n\)</span>. <span class="math inline">\(A(x) = B(x) \Leftrightarrow a_n = b_n \forall n \ge 0\)</span>.</p>
+<h3 id="operations">Operations</h3>
+<p><strong>Addition</strong>: <span class="math inline">\(A(x) + B(x) = \sum_{n \ge 0} (a_n + b_n) x^n\)</span>. Since <span class="math inline">\(a_n + b_n\)</span> is a well-defined finite number, <span class="math inline">\(A(x) + B(x)\)</span> is also a formal power series (<em>closed under addition</em>).</p>
+<p><strong>Multiplication</strong>: <span class="math display">\[\begin{aligned}
+A(x)B(x) &amp;= (\sum_{i \ge 0}a_i x^i)(\sum_{j \ge 0}b_i x^i) \\ 
+&amp;= \sum_{i \ge 0}\sum_{j \ge 0} a_i b_j x^{i + j} \\ 
+&amp;= \sum_{n \ge 0}(\sum_{i = 0}^n a_i b_{n - i})x^n
+\end{aligned}\]</span></p>
+<p>If we multiply <span class="math inline">\(A(x)\)</span> by <span class="math inline">\(x^k\)</span>, what is <span class="math inline">\([x^n]x^kA(x)\)</span>? <span class="math display">\[[x^n]x^kA(x) = \begin{cases}
+[x^{n - k}]A(x), &amp;n \ge k \\
+0, &amp;n &lt; k
+\end{cases}\]</span></p>
+<p>Example: <span class="math inline">\(A(x) = (1 + 3x)^2\)</span>, <span class="math inline">\(B(x) = \sum_{i \ge 0}2^i x^i\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}[x^n]A(x)B(x) &amp;= [x^n](1 + 6x + 9x^2)B(x)\\ &amp;= [x^n]B(x) + [x^n]6xB(x) + [x^n]9x^2B(x) \\ &amp;= 25n^{n - 2}\end{aligned}\]</span> This is only valid for <span class="math inline">\(n \ge 2\)</span>, so we can manually calculate for <span class="math inline">\(n \le 1\)</span>.<br />
+So <span class="math inline">\(A(x)B(x) = 1 + 8x + \sum_{n \ge 2} 25n^{n - 2}x^n\)</span>.</p>
+</blockquote>
+<p><strong>Inverse</strong>: The inverse of <span class="math inline">\(A(x)\)</span> is another series <span class="math inline">\(B(x)\)</span> such that <span class="math inline">\(A(x)B(x) = 1\)</span>.</p>
+<p>Example: Find the inverse for <span class="math inline">\(1 - x\)</span>. Suppose <span class="math inline">\(\frac{1}{1 - x} = \sum_{n \ge 0} a_n x^n\)</span>. <span class="math display">\[\begin{aligned}
+\frac{1}{1 - x}(1 - x) &amp;= (\sum_{n \ge 0} a_n x_n)(1 - x) \\
+1 &amp;= a_0 + a_1x + a_2x^2 + ... - a_0x - a_1x^2 - a_2x^3 - ... \\
+&amp;= a_0 + \sum_{n \ge 1}(a_n - a_{n - 1}) x^n
+\end{aligned}\]</span> Comparing coefficients, <span class="math inline">\(a_0 = 1\)</span>, <span class="math inline">\(a_i = a_{i + 1}\)</span> for <span class="math inline">\(i \ge 0\)</span>. So <span class="math inline">\(\frac{1}{1 - x} = \sum_{n \ge 0}x^n\)</span>.</p>
+<blockquote>
+<p>Some power series have <strong>no inverses</strong> …</p>
+</blockquote>
+<p>Example: <span class="math inline">\(\frac{1}{x}\)</span>. Suppose <span class="math inline">\(\frac{1}{x} = \sum_{n \ge 0} a_n x_n\)</span>. Then <span class="math inline">\(1 = \sum_{n \ge 0}a_n x^{n + 1}\)</span>. There is no constant on the right hand side so there is a contradiction. Therefore <span class="math inline">\(\frac{1}{x}\)</span> does not have an inverse.</p>
+<p><strong>Theorem</strong>: <span class="math inline">\(A(x)\)</span> has an inverse if and only if <span class="math inline">\([x^0]A(x) \not= 0\)</span>.</p>
+<p>Example: Let <span class="math inline">\(A(x) = \frac{1 - x}{1 - 2x - 3x^2}\)</span>. Suppose <span class="math inline">\(A(x) = \sum_{n \ge 0}a_n x^n\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned} A(x) &amp;= \frac{1 - x}{1 - 2x - 3x^2} \\ 1 - x &amp;= A(x)(1 - 2x - 3x^2) \\ &amp;= a_0 + (a_1 - 2a_0)x + \sum_{n \ge 2}(a_n - 2a_{n - 1} - 3a_{n - 2})x^n \end{aligned}\]</span> <strong>Comparing coefficients</strong>.<br />
+<span class="math inline">\(1 = a_0\)</span>,<br />
+<span class="math inline">\(-1 = a_1 - 2a_0 \Rightarrow a_1 = 1\)</span>,<br />
+<span class="math inline">\(a_n = 2a_{n - 1} + 3a_{n - 2}\)</span>.</p>
+<p>We can determine the coefficients of subsequent terms through the <em>recurrence</em>.</p>
+</blockquote>
+<h3 id="common-series">Common Series</h3>
+<ol type="1">
+<li><span class="math inline">\(\frac{1}{1 - x} = \sum_{n \ge 0} x^n\)</span>.</li>
+<li><span class="math inline">\(\frac{1 - x^{k + 1}}{1 - x} = 1 + x + x^2 + ... + x^k\)</span>.</li>
+<li><span class="math inline">\((\frac{1}{1 - x})^k = \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n\)</span> (<em>negative binomial theorem</em>).
+<ul>
+<li>Proof: Induction on <span class="math inline">\(k\)</span>.</li>
+</ul>
+<blockquote>
+<p><strong>Base Case</strong>: <span class="math inline">\(k = 1\)</span>, <span class="math inline">\({n - 1 \choose 0} = 1\)</span>, <span class="math inline">\(\sum_{n \ge 0}x^n\)</span> is the geometric series. <strong>Induction Step</strong>: Consider <span class="math inline">\(k\)</span>. <span class="math display">\[\begin{aligned} (\frac{1}{1 - x})^k &amp;= (\frac{1}{1 - x})(\frac{1}{1 - x})^{k - 1} \\ &amp;= (1 + x + x^2 + ...)(\sum_{n \ge 0}{n - k + 2 \choose k - 2}x^n) \\ &amp;= \sum_{n \ge 0}({n + k - 2 \choose k - 2} + {n + k - 3 \choose k - 2} + ... + {k - 2 \choose k - 2})x^n \\ &amp;= \sum_{n \ge 0} {n + k - 1 \choose k - 1}x^n \end{aligned}\]</span></p>
+</blockquote></li>
+</ol>
+<h3 id="composition-of-formal-power-series">Composition of Formal Power Series</h3>
+<blockquote>
+<p>Is <span class="math inline">\(A(B(x))\)</span> a formal power series?</p>
+</blockquote>
+<p>Example: <span class="math inline">\(G(x) = \frac{1}{1 - x}\)</span>, <span class="math inline">\(A(x) = \frac{x^2}{1 - x}\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned} G(A(x)) &amp;= 1 + (\frac{x^2}{1 - x}) + (\frac{x^2}{1 - x})^2 + ... \\ &amp;= \frac{1}{1 - \frac{x^2}{1 - x}} \\ &amp;= \frac{1 - x}{1 - x - x^2} \end{aligned}\]</span></p>
+</blockquote>
+<p>Example: <span class="math inline">\(G(1 + x^2)\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(G(1 + x^2) = 1 + (1 + x^2) + (1 + x^2)^2 + ...\)</span>.<br />
+Looking at the constant term, there it is not a well-defined, finite number, so <span class="math inline">\(G(1 + x^2)\)</span> is <strong>not</strong> a formal power series.</p>
+</blockquote>
+<p><strong>Theorem</strong>: If <span class="math inline">\(A(x)\)</span> and <span class="math inline">\(B(x)\)</span> are formal power series, where <span class="math inline">\([x^0]B(x) = 0\)</span>, then <span class="math inline">\(A(B(x))\)</span> is a formal power series.</p>
+<ul>
+<li>Intuition is that we need a finite bound for the terms where <span class="math inline">\([x^n]A(B(x))\)</span> can be found.</li>
+</ul>
+<h2 id="sum-and-product-lemmas">Sum and Product Lemmas</h2>
+<h3 id="sum-lemma">Sum Lemma</h3>
+<p>Let <span class="math inline">\(S = A \cup B\)</span>, <span class="math inline">\(A \cap B = \emptyset\)</span>. Let <span class="math inline">\(w\)</span> be the weight function on <span class="math inline">\(S\)</span>. Then <span class="math inline">\(\Phi_S(x) = \Phi_A(x) + \Phi_B(x)\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(\Phi_S(x) = \sum_{\rho \in S}x^{w(\rho)} = \sum_{\rho \in A} x^{w(\rho)} + \sum_{\rho \in B} x^{w(\rho)} = \Phi_A(x) + \Phi_B(x)\)</span>.</p>
+</blockquote>
+<h3 id="product-lemma">Product Lemma</h3>
+<p>Let <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> be sets with weight functions <span class="math inline">\(\alpha, \beta\)</span>. Consider <span class="math inline">\(A \times B\)</span> with the weight function <span class="math inline">\(w(a, b) = \alpha(a) + \beta(b)\)</span>, for all <span class="math inline">\((a, b) \in A \times B\)</span>. Then <span class="math inline">\(\Phi_{A \times B}(x) = \Phi_A(x)\Phi_B(x)\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned} \Phi_A(x)\Phi_B(x) &amp;= (\sum_{a \in A}x^{\alpha(a)})(\sum_{b \in B}x^{\beta(b)}) \\ &amp;= \sum_{a \in A}\sum_{b \in B}x^{w(a, b)} \\ &amp;= \sum_{(a, b) \in A \times B}x^{w(a, b)} \\ &amp;= \Phi_{A \times B}(x) \end{aligned}\]</span></p>
+</blockquote>
+<p>Example: How many ways can a sequence of <span class="math inline">\(k\)</span> non-negative integers sum up to <span class="math inline">\(n\)</span>?</p>
+<blockquote>
+<p>Define <span class="math inline">\(S = \mathbb{N}_0^k\)</span> (all sequences of <span class="math inline">\(k\)</span> non-negative integers). Define <span class="math inline">\(w(a_1, ..., a_k) = \sum_{i = 1}^k a_i\)</span>. Define <span class="math inline">\(\alpha(a) = a\)</span> for each copy of <span class="math inline">\(\mathbb{N}_0\)</span>. Then the produce lemma applies. <span class="math display">\[\begin{aligned}\Phi_S(x) &amp;= (\Phi_{\mathbb{N}_0}(x))^k \\ &amp;= \frac{1}{(1 - x)^k}\end{aligned}\]</span> Answer is <span class="math inline">\([x^n]\frac{1}{(1 - x)^k} = {n + k - 1 \choose k - 1}\)</span>.</p>
+</blockquote>
+<h2 id="integer-composition-problems">Integer Composition Problems</h2>
+<blockquote>
+<p>A <span class="math inline">\(k\)</span>-tuple <span class="math inline">\((a_1, ..., a_k)\)</span> of positive integers is a composition of <span class="math inline">\(n\)</span> if <span class="math inline">\(a_1 + ... + a_k = n\)</span>. Each <span class="math inline">\(a_i\)</span> is a part, and the composition has <span class="math inline">\(k\)</span> parts.</p>
+</blockquote>
+<p>Example: Compositions of <span class="math inline">\(n\)</span> with <span class="math inline">\(2k\)</span> parts. The first <span class="math inline">\(k\)</span> are at least <span class="math inline">\(5\)</span>, the last <span class="math inline">\(k\)</span> are multiples of <span class="math inline">\(3\)</span>.</p>
+<blockquote>
+<p>Define <span class="math inline">\(S = A^k \times B^k\)</span> where <span class="math inline">\(A = \{5, ... \}\)</span>, <span class="math inline">\(B = \{3, 6, 9, ...\}\)</span>. <span class="math inline">\(w(a_1, ..., a_k, b_1, ..., b_k) = a_1 + ... + a_k + b_1 + ... + b_k\)</span>. Use <span class="math inline">\(\alpha(a) = a\)</span> and <span class="math inline">\(\beta(b) = b\)</span>. <span class="math inline">\(\Phi_A(x) = \frac{x^5}{1 - x}\)</span>, <span class="math inline">\(\Phi_B(x) = \frac{x^3}{1 - x^3}\)</span>. By Product lemma, <span class="math inline">\(\Phi_S(x) = (\Phi_A(x))^k(\Phi_B(x))^k \frac{x^{8k}}{(1-x)^k(1-x^3)^k}\)</span>.</p>
+<p>The answer is <span class="math inline">\([x^{n-8k}](\frac{1}{1 - x})^k(\frac{1}{1 - x^3})^k\)</span>. We can reindex into <span class="math inline">\(\sum_{j = 0}^{\lfloor\frac{n - 8}{3}\rfloor}{k + n - 8k - 3j - 1 \choose k -1}{k + j - 1\choose k - 1}\)</span></p>
+</blockquote>
+<p>Example: How many compositions of <span class="math inline">\(n\)</span> are there?</p>
+<blockquote>
+<p>Define <span class="math inline">\(S = \mathbb{N}^0 \cup \mathbb{N} ... \ \cup_{k \ge 0}\mathbb{N}^k\)</span>. Define <span class="math inline">\(w\)</span> of a composition to be the sum of the parts. By sum lemma, <span class="math inline">\(\Phi_S(x) = \sum_{k \ge 0}(\Phi_{\mathbb{N}}(x))^k\)</span>. By product lemma, geometric series, and constant term is 0, <span class="math inline">\(\sum_{k \ge 0}(\frac{x}{1-x})^k = \frac{1}{1 - \frac{x}{1-x}} = \frac{1-x}{1-2x}\)</span>.</p>
+<p>The answer is <span class="math inline">\([x^n]\frac{1-x}{1-2x} = \begin{cases} 2^{n-1}, &amp;n &gt; 0 \\ 1, &amp;n = 0\end{cases}\)</span></p>
+</blockquote>
+<p>Example: How many compositions of <span class="math inline">\(n\)</span> where each part is odd?</p>
+<blockquote>
+<p>Let <span class="math inline">\(\mathbb{N}_{odd} = \{1, 3, ...\}\)</span>. Define <span class="math inline">\(S = \cup_{k \ge 0}\mathbb{N}_{odd}^k\)</span>. We use the usual weight function. <span class="math display">\[\begin{aligned}\Phi_S(x) &amp;= \sum_{k \ge 0}(\Phi_{\mathbb{N}_{odd}}(x))^k \\ &amp;= \sum_{k \ge 0}(\frac{x}{1-x^2})^k \\ &amp;= \frac{1}{1-\frac{x}{1-x^2}} \\ &amp;= \frac{1-x^2}{1-x-x^2}\end{aligned}\]</span> Answer is <span class="math inline">\([x^n]\frac{1-x^2}{1-x-x^2}\)</span>. Let <span class="math inline">\(A(x) = \frac{1-x^2}{1-x-x^2}\)</span>, <span class="math inline">\(A(x) - xA(x) - x^2A(x) = 1 - x^2\)</span>. By comparing coefficients, we have <span class="math inline">\(a_0 = 0, a_1 = 1, a_2 = 1, a_n = a_{n-1} + a_{n-2}\)</span>.</p>
+</blockquote>
+<p>We also have a combinatorial proof.</p>
+<blockquote>
+<p>Let <span class="math inline">\(S_n\)</span> be the set of all compositions of <span class="math inline">\(n\)</span> where every part is odd. We want a bijection <span class="math inline">\(f: S_n \to S_{n - 1} \cup S_{n-2}\)</span>. Define <span class="math inline">\(f(a_1, ... a_k) = \begin{cases}(a_1, ..., a_{k-1}), &amp;a_k = 1 \\ (a_1, ..., a_k - 2), &amp;a_k &gt; 1\end{cases}\)</span>. We see that every part in the output is still valid (-2 does not change parity), so it is either in <span class="math inline">\(S_{n - 1}\)</span> or <span class="math inline">\(S_{n-2}\)</span>. The inverse is <span class="math inline">\(f^{-1}: S_{n-1} \cup S_{n-2} \to S_n\)</span> where <span class="math inline">\(f^{-1}(b_1, ..., b_l) = \begin{cases}(b_1, ..., b_l, 1), &amp;\sum_{b_i} = n - 1 \\ (b_1, ..., b_l +2), &amp;\sum_{b_i} = n - 2\end{cases}\)</span>.</p>
+<p>So <span class="math inline">\(f\)</span> is a bijection and <span class="math inline">\(|S_n| = |S_{n-1}| + |S_{n-2}|\)</span></p>
+</blockquote>
+<h1 id="binary-strings">Binary Strings</h1>
+<ul>
+<li>Denote empty string <span class="math inline">\(\epsilon\)</span>.</li>
+<li>A block is a maximal non-empty substring of all 0’s or all 1’s.</li>
+</ul>
+<p>The general question given is how many binary strings of length <span class="math inline">\(n\)</span> have certain properties.</p>
+<ol type="1">
+<li>Find an expression for the set of all binary strings with these properties.</li>
+<li>Define the weight of a string to be its length.</li>
+<li>Find the generating series of <span class="math inline">\(S\)</span> with respect to <span class="math inline">\(w\)</span>.</li>
+<li>Answer is <span class="math inline">\([x^n]\Phi_S(x)\)</span>.</li>
+</ol>
+<h2 id="operations-on-sets-of-stringso">Operations on Sets of Stringso</h2>
+<ol type="1">
+<li>Concatenation of two strings <span class="math inline">\(A, B\)</span>. <span class="math inline">\(AB = \{ab | a \in A, b \in B\}\)</span>.</li>
+<li>Star. <span class="math inline">\(A^* = \cup_{k \ge 0} A^k\)</span>, <span class="math inline">\(A^0 = \{\epsilon\}\)</span>, <span class="math inline">\(\{0, 1\}^*\)</span> is the set of all binary strings.</li>
+</ol>
+<p>We want to be able to apply product and sum lemma to string operations, but we need to ensure that they are not ambiguous.</p>
+<h3 id="ambiguity">Ambiguity</h3>
+<blockquote>
+<p>Strings that can be generating in multiple ways.</p>
+</blockquote>
+<p><span class="math inline">\(AB\)</span> is ambiguous if <span class="math inline">\(\exists\)</span> <span class="math inline">\(s \in AB, s = a_1 b_1 = a_2 b_2\)</span> for distinct <span class="math inline">\(a_1, a_2 \in A\)</span>, <span class="math inline">\(b_1, b_2 \in B\)</span>. <span class="math inline">\(A \cup B\)</span> is ambiguous if <span class="math inline">\(A \cap B \neq \emptyset\)</span>.</p>
+<p><strong>Theorem</strong>: Let <span class="math inline">\(A, B\)</span> be sets of strings.</p>
+<ol type="1">
+<li>If <span class="math inline">\(A \cup B\)</span> is unambiguous, then <span class="math inline">\(\Phi_{A \cup B}(x) = \Phi_A(x) + \Phi_B(x)\)</span>.</li>
+<li>If <span class="math inline">\(AB\)</span> is unambiguous, then <span class="math inline">\(\Phi_{AB}(x) = \Phi_A(x)\Phi_B(x)\)</span>.</li>
+<li><p>If <span class="math inline">\(A^*\)</span> is unambiguous, then <span class="math inline">\(\Phi_{A^*}(x) = \frac{1}{1 = \Phi_A(x)}\)</span>.</p>
+<blockquote>
+<p>By 1 and 2, the sum and product lemma apply. <span class="math inline">\(\Phi_{A^*}(x) = \sum_{k \ge 0}(\Phi_A(x))^k\)</span> by geometric series and <span class="math inline">\([x^0]\Phi_A(x) = 0\)</span> (<span class="math inline">\(\epsilon\)</span> would make <span class="math inline">\(A^*\)</span> ambiguous).</p>
+</blockquote></li>
+</ol>
+<h3 id="unambiguous-expressions-for-strings">Unambiguous Expressions for Strings</h3>
+<ol type="1">
+<li><span class="math inline">\(\{0, 1\}^*\)</span>.</li>
+<li><span class="math inline">\(\{0\}^*(\{1\}\{0\}^*)^*\)</span>, or flip all the bits.</li>
+<li><strong>Block decomposition</strong>: <span class="math inline">\(\{0\}^*(\{1\}\{1\}^*\{0\}\{0\}^*)^*\{1\}^*\)</span>, or flip all the bits.</li>
+</ol>
+<p>For string generation problems, start with one of the three unambiguous expressions and then remove parts that violate our conditions.</p>
+<p>Example: The set of all strings with no three consecutive 0’s.</p>
+<blockquote>
+<p>Start with <span class="math inline">\(\{0\}^*(\{1\}\{0\}^*)^*\)</span>, we can find 000 in both instances of <span class="math inline">\(\{0\}^*\)</span>. Remove these instances <span class="math inline">\(\{0\}^* \to \{\epsilon, 0, 00\}\)</span>. We are left with <span class="math inline">\(\{\epsilon, 0, 00\}(\{1\}\{\epsilon, 0, 00\})^*\)</span>.</p>
+</blockquote>
+<p>Example: Set of all strings where an even block of 0’s cannot be followed by an odd block of 1’s.</p>
+<blockquote>
+<p>We start with block decomposition and break into cases with even and odd block of 0’s. In the odd case, we can leave the 1’s alone but in the even case, we need to ensure an even block of 1’s. We are left with <span class="math inline">\(\{1\}^*(\{00\}\{00\}^*\{11\}\{11\}^* \cup \{0\}\{00\}^*\{1\}\{1\}^*)^* \{0\}^*\)</span>.</p>
+</blockquote>
+<h2 id="string-recursion">String Recursion</h2>
+<p>Let <span class="math inline">\(S\)</span> be the set of all strings, we can recursively define <span class="math inline">\(S\)</span> as <span class="math inline">\(S = \{0, 1\}S \cup \{\epsilon\}\)</span>. We get a generating series expression <span class="math inline">\(\Phi_S(x) = 2x\Phi_S(x) + 1\)</span>, <span class="math inline">\(\Phi_S(x) = \frac{1}{1 - 2x}\)</span>.</p>
+<p>Example: Sets that do not have 1010 as a substring</p>
+<blockquote>
+<p>Let <span class="math inline">\(T\)</span> be a string with one copy of 1010, which is at the right end of the string.</p>
+<p>We have two equations.</p>
+<ol type="1">
+<li><span class="math inline">\(\{\epsilon\} \cup S\{0, 1\} = S \cup T\)</span>.
+<ul>
+<li>(<span class="math inline">\(\subseteq\)</span>): <span class="math inline">\(\epsilon \in S\)</span>. Let <span class="math inline">\(\sigma \in S\)</span>. Then <span class="math inline">\(\sigma\{0, 1\}\)</span> has no 1010 unless <span class="math inline">\(\sigma\)</span> ends with 101 and we attach a 0 at the end. If so, this would be the only copy of 1010 in <span class="math inline">\(\sigma 0\)</span> as no 1010 can be found in <span class="math inline">\(\sigma\)</span>. So <span class="math inline">\(\sigma 0\)</span> and <span class="math inline">\(\sigma 1\)</span> are in <span class="math inline">\(S \cup T\)</span>.</li>
+<li>(<span class="math inline">\(\supseteq\)</span>): A string in <span class="math inline">\(S\)</span> is either empty, or we can take off the rightmost bit and obtain another string in <span class="math inline">\(S\)</span>. <span class="math inline">\(S \subseteq \{\epsilon\} \cup S\{0, 1\}\)</span>. For a string in <span class="math inline">\(T\)</span>, removing the rightmost bit destroys the only copy of 1010 in the string. So <span class="math inline">\(T \subseteq S\{0\}\)</span>. So <span class="math inline">\(S \cup T \subseteq \{\epsilon\} \cup S\{0, 1\}\)</span>.</li>
+</ul></li>
+<li><span class="math inline">\(S\{1010\} = T \cup T\{10\}\)</span>.
+<ul>
+<li>(<span class="math inline">\(\subseteq\)</span>): Let <span class="math inline">\(\sigma \in S\)</span>. Then <span class="math inline">\(\sigma 1010\)</span> has at least 1 copy of 1010 at the right end. If that is the only copy then <span class="math inline">\(\sigma \{1010\} \in T\)</span>. A second copy can exist if <span class="math inline">\(\sigma\)</span> envds with 10, so <span class="math inline">\(\sigma 1010\)</span> ends with 101010. Then this is in <span class="math inline">\(T\{10\}\)</span>.</li>
+<li>(<span class="math inline">\(\supseteq\)</span>): Any string in <span class="math inline">\(T\)</span> ends with 1010. Removing this destroys all copies of 1010 in the string, so it is in <span class="math inline">\(S\{1010\}\)</span>.</li>
+</ul></li>
+</ol>
+<p>We can solve for <span class="math inline">\(\Phi_S(x)\)</span> using the two equations, and obtain <span class="math inline">\(\Phi_S(x) = \frac{1+x^2}{1-2x+x^2-2x^3+x^4}\)</span>.</p>
+</blockquote>
+<h1 id="coefficients-in-rational-expressions">Coefficients in Rational Expressions</h1>
+<blockquote>
+<p>Finding <span class="math inline">\([x^n]\frac{f(x)}{g(x)}\)</span>.</p>
+</blockquote>
+<p>Example: <span class="math inline">\(A(x) = \sum_{n \ge 0}a_n x^n\)</span> where <span class="math inline">\(A(x) = \frac{3-8x-2x^2}{1-7x+16x^2-12x^3}\)</span>.</p>
+<blockquote>
+<p>We can use partial fraction decomposition to see that <span class="math inline">\(A(x) = \frac{-1}{1-2x} + \frac{3}{(1-2x)^2} + \frac{1}{1-3x}\)</span>. This allows us to solve for <span class="math inline">\([x^n]A(x)\)</span>. <span class="math display">\[\begin{aligned}[x^n]A(x) &amp;= [x^n] \frac{-1}{1-2x} + [x^n]\frac{3}{(1-2x)^2} + [x^n]\frac{1}{1-3x} \\ &amp;= -1(2^n) + 3{n + 1 \choose 1}2^n + 3^n \\ &amp;= -(2^n) + 3(n+1)2^n + 3^n\end{aligned}\]</span></p>
+</blockquote>
+<p>Let us generalize this approach.</p>
+<p>Suppose <span class="math inline">\(A(x) = \frac{f(x)}{g(x)}\)</span>. If <span class="math inline">\(deg(f(x)) \ge deg(g(x))\)</span>, we can use polynomial long division to get <span class="math inline">\(A(x) = q(x) + \frac{r(x)}{g(x)}\)</span> where <span class="math inline">\(deg(r(x)) &lt; deg(g(x))\)</span>.</p>
+<p>Assume constant term of <span class="math inline">\(g(x) = 1\)</span> (if 0, then we cannot divide). Then we can factor <span class="math inline">\(g(x) = (1-r_1 x)^{e_1}(1 - r_2 x)^{e_2} ...(1-r_k x)^{e_k}\)</span> by the fundamental theorem of algebra. Using partial fraction decomposition, we can obtain <span class="math inline">\(A(x) = \frac{p_1(x)}{(1-r_1 x)^{e_1}} + ... + \frac{p_k(x)}{(1-r_k x)^{e_k}}\)</span>, where <span class="math inline">\(deg(p_i(x)) &lt; e_i\)</span>.</p>
+<p>Each <span class="math inline">\(\frac{p_i(x)}{(1-r_i)^{e_i}} = \frac{c_1}{1-r_1 x} + ... + \frac{c_{e_i}}{(1-r_i x)^{e_i}}\)</span>, <span class="math inline">\(c_j\)</span> constant.</p>
+<p><span class="math display">\[\begin{aligned}[x^n]\frac{p_i(x)}{(1-r_i)^{e_i}} &amp;= [x^n]\frac{c_1}{1-r_1 x} + ... + [x^n]\frac{c_{e_i}}{(1-r_i x)^{e_i}} \\ &amp;= \sum_{j = 1}^{e_i} [x^n]\frac{c_j}{(1-r_i x)^j} \\ &amp;= \sum_{j=1}^{e_i} c_j{n + j - 1 \choose j - 1}r_i^n \\ &amp;= \sum_{j = 1}^{e_i} c_j \frac{(n + j - 1)!}{(j - 1)!(n)!}r_i^n \\  &amp;= \sum_{j = 1}^{e_i} Q(n)r_i^n\end{aligned}\]</span> Where <span class="math inline">\(Q(n)\)</span> is a polynomial of <span class="math inline">\(n\)</span> of degree at most <span class="math inline">\(j - 1\)</span>.</p>
+<p>So <span class="math inline">\([x^n]\frac{p_i(x)}{(1-r_i x)^{e_i}} = Q_i(n)r_i^n\)</span>, where <span class="math inline">\(Q_i(n)\)</span> is a polynomial in <span class="math inline">\(n\)</span> of degree at most <span class="math inline">\(e_i - 1\)</span>. So <span class="math inline">\([x^n]A(x) = Q_1(n)r_1^n + ... + Q_k(n)r_k^n\)</span>, where <span class="math inline">\(Q_i(n)\)</span> has degree at most <span class="math inline">\(e_i - 1\)</span>.</p>
+<p><strong>Characteristic Polynomial</strong>: If <span class="math inline">\(g(x) = (1-r_1x)^e_i ... (1-r_kx)^{e_k}\)</span>, then its characteristic polynomial is <span class="math inline">\(g^*(x) = (x-r_1)^{e_i} ... (x-r_x)^{e_k}\)</span>. Then <span class="math inline">\(r_1, ..., r_k\)</span> are the roots of the characteristic polynomial with multiplicities <span class="math inline">\(e_1, ..., e_k\)</span>.</p>
+<p>Example: <span class="math inline">\(\{a_n\}\)</span> satisties <span class="math inline">\(a_0 = 1, a_5 = 5\)</span> and <span class="math inline">\(a_n - 5a_{n - 1} + 6a_{n-2} = 0\)</span> for <span class="math inline">\(n \ge 2\)</span>.</p>
+<blockquote>
+<p>First find <span class="math inline">\(A(x) = \sum_{n \ge 0}x^n\)</span> as a rational expression.<br />
+For each <span class="math inline">\(n \ge 2\)</span> multiply its recurrence by <span class="math inline">\(x^n\)</span>. <span class="math display">\[\begin{aligned}a_2x^2 - 5a_1x^2 + 6a_0x^2 &amp;= 0 \\ a_3x^3 - 5a_2x^3 + 6a1x^3 &amp;= 0 \\ ... \\ a_nx^n - 5a_{n-1}x^n + 6a_{n-2}x^n &amp;= 0\end{aligned}\]</span> Add all of the equations together. <span class="math display">\[\begin{aligned}\sum_{n \ge 2}a_nx^n - 5\sum_{n \ge 1}a_nx^{n+1} + 6\sum_{n \ge 0}a_nx^{n+2} &amp;= 0 \\ \sum_{n \ge 2}a_nx^n - 5x\sum_{n \ge 1}a_nx^n + 6x^2\sum_{n \ge 0}a_nx^n &amp;= 0 \\ (A(x) - a_0 - a_1x) - 5x(A(x) - a_0) + 6x^2A(x) &amp;= 0\end{aligned}\]</span> We have <span class="math inline">\(A(x)(1 - 5x + 6x^2) - 1 - 5x + 5x = 0\)</span> and <span class="math inline">\(A(x) = \frac{1}{1 - 5x + 6x^2}\)</span>. The characteristic polynomial is <span class="math inline">\(x^2 - 5x + 6 = (x-2)(x-3)\)</span>. The roots are <span class="math inline">\(x=2,3\)</span> with multiplicity 1 each.</p>
+<p>The answer is <span class="math inline">\([x^n]A(x) = a_n = A\cdot 2^n + B \cdot 3^n\)</span> for constants <span class="math inline">\(A, B\)</span>.<br />
+For <span class="math inline">\(a_0\)</span>: <span class="math inline">\(1 = A + B\)</span>.<br />
+For <span class="math inline">\(a_1\)</span>: <span class="math inline">\(5 = 2A + 3B\)</span>.<br />
+We have <span class="math inline">\(A = -2\)</span>, <span class="math inline">\(B = 3\)</span>, so <span class="math inline">\(a_n = (-2)2^n + (3)3^n\)</span>.</p>
+</blockquote>
+<p>We see that there is a shortcut from the recurrence to the characteristic polynomial. If <span class="math inline">\(\{a_n\}\)</span> satisfies the recurrence <span class="math inline">\(a_n + c_1a_{n - 1} + ... + c_ka_{n - k} = 0\)</span>, then its corresponding characteristic polynomial is <span class="math inline">\(x^k + c_1x^{k-1} + ... + c_k\)</span>. <span class="math inline">\(A(x) = \sum a_nx^n\)</span> has the form <span class="math inline">\(A(x) = \frac{...}{1 + c_1x + ... + c_kx^k}\)</span>.</p>
+<p>Example: <span class="math inline">\(\{a_n\}\)</span> satisties <span class="math inline">\(a_0 = 1, a_1, = 2, a_2 = 1\)</span> where <span class="math inline">\(a_n - 3a_{n-1} + 3a_{n-2} - a_{n-3} = 0\)</span> for <span class="math inline">\(n \ge 3\)</span>.</p>
+<blockquote>
+<p>The characteristic polynomial is <span class="math inline">\(x^3 - 3x^2 + 3x - 1 = (x-1)^3\)</span>. The root is <span class="math inline">\(x=1\)</span> with multiplicity 3. We have <span class="math inline">\(a_n = An^2 + Bn + C\)</span> for some constants <span class="math inline">\(A, B, C\)</span>.<br />
+For <span class="math inline">\(a_0\)</span>: <span class="math inline">\(1 = C\)</span>.<br />
+For <span class="math inline">\(a_1\)</span>: <span class="math inline">\(2 = A + B + C\)</span>.<br />
+For <span class="math inline">\(a_2\)</span>: <span class="math inline">\(1 = 4A + 2B + C\)</span>.<br />
+We have <span class="math inline">\(A = -1, B = 2, C = 1\)</span>, so <span class="math inline">\(a_n = (-1)n^2 + 2n + 1\)</span>.</p>
+</blockquote>
+<p>Example: <span class="math inline">\(a_0 = 7, a_1 = 10, a_2 = 13, a_n - 7a_{n-1} + 15a_{n-2}-9a_{n-3}=0\)</span> for <span class="math inline">\(n \ge 3\)</span>.</p>
+<blockquote>
+<p>The characteristic polynomial is <span class="math inline">\(x^3 - 7x^2 + 15x - 9 = (x-3)^2(x-1)\)</span>. The roots are <span class="math inline">\(x=3,1\)</span> with multiplicities <span class="math inline">\(2\)</span> and <span class="math inline">\(1\)</span> respectively. We have <span class="math inline">\(a_n = (An + B)3^n + C\)</span> for constants <span class="math inline">\(A, B, C\)</span>.<br />
+For <span class="math inline">\(a_0\)</span>: <span class="math inline">\(7 = B + C\)</span>.<br />
+For <span class="math inline">\(a_1\)</span>: <span class="math inline">\(10 = 3A + 3B + C\)</span>.<br />
+For <span class="math inline">\(a_1\)</span>: <span class="math inline">\(13 = 18A + 9B + C\)</span>.<br />
+We have <span class="math inline">\(A = -1, B = 3, C = 4\)</span>, so <span class="math inline">\(a_n = (-n + 3)3^n + 4\)</span>.</p>
+</blockquote>
+<p>Example: <span class="math inline">\(f_0 = 0, f_1 = 1, f_n - f_{n - 1} - f_{n - 2} = 0\)</span>, <span class="math inline">\(n \ge 2\)</span>.</p>
+<blockquote>
+<p>Characteristic polynomial is <span class="math inline">\(x^2 - x - 1\)</span>. The roots are <span class="math inline">\(x = \frac{1 \pm \sqrt 5}{2}\)</span>, so <span class="math inline">\(f_n = A(\frac{1+\sqrt 5}{2})^n + B(\frac{1-\sqrt 5}{2})^n\)</span> for constants <span class="math inline">\(A, B\)</span>.<br />
+For <span class="math inline">\(f_0\)</span>: <span class="math inline">\(0 = A + B\)</span>.<br />
+For <span class="math inline">\(f_1\)</span>: <span class="math inline">\(1 = (\frac{1+\sqrt 5}{2})A + (\frac{1 - \sqrt 5}{2})B\)</span>.<br />
+We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class="math inline">\(B = \frac{-1}{\sqrt 5}\)</span>, so <span class="math inline">\(f_n = \frac{(\frac{1 + \sqrt 5}{2})^n - (\frac{1-\sqrt 5}{2})^n}{\sqrt 5}\)</span>. We can show that <span class="math inline">\(f_n \in \mathbb{Z}\)</span>.</p>
+</blockquote>
+<h1 id="graph-theory">Graph Theory</h1>
+<p>A graph <span class="math inline">\(G\)</span> is a pair <span class="math inline">\((V(G), E(G))\)</span> where <span class="math inline">\(V(G)\)</span> is a set of objects called vertices, and <span class="math inline">\(E(G)\)</span> is a set of unordered pairs of <span class="math inline">\(V(G)\)</span> called edges. We might say <span class="math inline">\(G = (V, E)\)</span>.</p>
+<p><strong>Terminology</strong>:</p>
+<ol type="1">
+<li>Two vertices <span class="math inline">\(u, v\)</span> are adjacent if <span class="math inline">\(\{u, v\}\)</span> is an edge. They are also said to be neighbours.</li>
+<li>The set of all neighbours of <span class="math inline">\(v\)</span> in <span class="math inline">\(G\)</span> is its neighbourhood, denoted <span class="math inline">\(N_G(v)\)</span>.</li>
+<li>Edge <span class="math inline">\(e = \{u, v\}\)</span> is <strong>incident</strong> with its end points <span class="math inline">\(u, v\)</span>. We can also say that <span class="math inline">\(e\)</span> <strong>joins</strong> <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>.</li>
+</ol>
+<p><strong>Notes</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(e=uv\)</span> appreviates $ = {u, v}$.</li>
+<li><span class="math inline">\(uv = vu\)</span>, edges are unordered.</li>
+<li>For most of this course, our graphs are “simple”. There are no loops or multiple edges.</li>
+<li>Graphs are considered to be finite.</li>
+</ol>
+<h2 id="degrees">Degrees</h2>
+<p>Degree of vertex <span class="math inline">\(v\)</span> in <span class="math inline">\(G\)</span> is the number of edges in <span class="math inline">\(G\)</span> that are incident with <span class="math inline">\(v\)</span>, denoted <span class="math inline">\(deg_G(v)\)</span> or <span class="math inline">\(deg(v)\)</span>.</p>
+<p><span class="math inline">\(\sum_{v \in V(G)} deg(v)\)</span> is always even.</p>
+<blockquote>
+<p><strong>Handshaking Lemma</strong>: For any graph <span class="math inline">\(G\)</span>, <span class="math inline">\(\sum_{v \in V(G)}deg(v) = 2|E(G)|\)</span>.</p>
+<p>Each <span class="math inline">\(e = uv \in E(G)\)</span> contributes 2 to the sum, one for <span class="math inline">\(dev(u)\)</span> and one for <span class="math inline">\(deg(v)\)</span>.</p>
+</blockquote>
+<p><strong>Corollary</strong>: For any graph <span class="math inline">\(G\)</span>, the number of odd degree vertices is even.</p>
+<blockquote>
+<p><span class="math inline">\(O, E \in V(G)\)</span> with odd, even vertices respectively. Then <span class="math inline">\(\sum_{v \in V(G)}deg(V) = \sum_{v \in O}deg(v) + \sum_{v \in E}deg(v)\)</span>. By handshaking lemma, <span class="math inline">\(\sum_{v \in V(G)}deg(v)\)</span> is even. <span class="math inline">\(\sum_{v \in E}deg(v)\)</span> is even because it is a sum of even numbers. Therefore, <span class="math inline">\(\sum_{v \in O}deg(v)\)</span> is even. A sum of odd integers is even, so there are an even number of them.</p>
+</blockquote>
+<h2 id="isomorphism">Isomorphism</h2>
+<p><strong>Definition</strong>: Two graphs <span class="math inline">\(G_1\)</span>, <span class="math inline">\(G_2\)</span> are <strong>isomorphic</strong> if there exists a bijection <span class="math inline">\(f: V(G_1) \to V(G_2)\)</span> such that <span class="math inline">\(uv \in E(G_1)\)</span> if and only if <span class="math inline">\(f(u)f(v) \in E(G_2)\)</span> (edge adjacency is preserved). Such a function is an <strong>isomorphism</strong>.</p>
+<p>Assume <span class="math inline">\(|E(G_1)| \neq |E(G_2)|\)</span>, then there cannot possibly be a bijection between <span class="math inline">\(V(G_1)\)</span> and <span class="math inline">\(V(G_2)\)</span>. Similarily, we can look at the degree of certain vertices.</p>
+<p>To prove that two graphs are isomorphic, find an isomorphism. To prove that two graphs are not isomorphic, find an adjacency structure that exists in one but not the other.</p>
+<h2 id="classes-of-graphs">Classes of Graphs</h2>
+<ol type="1">
+<li><strong>Complete graph</strong>: a graph where every pair of vertices is an edge. A complete graph on <span class="math inline">\(n\)</span> vertices is <span class="math inline">\(K_n\)</span>. There are <span class="math inline">\(n \choose 2\)</span> edges in <span class="math inline">\(K_n\)</span>.</li>
+<li><p><strong>K-Regular</strong>: a graph where every vertex has degree <span class="math inline">\(k\)</span>. In a <span class="math inline">\(k\)</span>-regular graph of <span class="math inline">\(n\)</span> vertices, there are <span class="math inline">\(\frac{nk}{2}\)</span> edges.</p>
+<blockquote>
+<p>By handshaking lemma, <span class="math inline">\(2|E(G)| = \sum_{v \in V(G)}deg(v) = \sum_{v \in V(G)}k = nk\)</span>.</p>
+</blockquote></li>
+<li><p>G is <strong>bipartite</strong> if there exists a parition <span class="math inline">\((A, B)\)</span> of <span class="math inline">\(V(G)\)</span> such that every edge in <span class="math inline">\(G\)</span> joins one vertex in <span class="math inline">\(A\)</span> with one vertex in <span class="math inline">\(B\)</span>.</p></li>
+</ol>
+</body>
+</html>
