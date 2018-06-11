@@ -1215,6 +1215,72 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>3% of industry IP routers.</li>
 <li>11% of US government routers.</li>
 </ul></li>
+<li>It takes a long time to update, because we would need to replace every router on the Internet.</li>
+</ul>
+<h2 id="routing-algorithms">4.5 Routing Algorithms</h2>
+<blockquote>
+<p>Routing algorithm determines end-end path through the network. Forwarding table determines local forwarding at this router.</p>
+</blockquote>
+<h3 id="routing-algorithm-classification">Routing Algorithm Classification</h3>
+<p><strong>Global</strong>: All routers have complete topology and cost information (<em>link state</em> algorithms).</p>
+<p><strong>Decentralized</strong>: Router knows only physically-connected neighbours. There is a iterative process of computation (<em>distance vector</em> algorithms).</p>
+<p><strong>Static</strong>: Routes change slowly over time.</p>
+<p><strong>Dynamic</strong>: Periodic updates in response to link cost changes.</p>
+<h3 id="link-state-routing-algorithm">Link-State Routing Algorithm</h3>
+<p><strong>Dijkstra’s algorithm</strong> is used to compute least cost paths from one node (<em>source</em>) to all other nodes. Tracing predeccesor nodes gives a <strong>forwarding table</strong> for that node.</p>
+<p><img src="https://www.dropbox.com/s/ltdpp0uqs82djf3/Screenshot%202018-06-11%2008.50.26.png?raw=1" /></p>
+<h4 id="link-state-problems">Link-State Problems</h4>
+<p><strong>Oscillations</strong> are possible, when the support link cost is equal to the amount of carried traffic.</p>
+<h3 id="distance-vector-routing-algorithm">Distance Vector Routing Algorithm</h3>
+<p><strong>Bellman-Ford equation</strong> is used to compute least cost paths at each node. The node <span class="math inline">\(v\)</span> that achieves the minimum cost for <span class="math inline">\(y\)</span> is the next-hop in the <strong>forwarding table</strong>.</p>
+<p><span class="math display">\[ d_x(y) = \min_v\{c(x, v) + d_v(y)\}\]</span></p>
+<p>Each node <span class="math inline">\(x\)</span> knows the cost to each neighbour <span class="math inline">\(v\)</span> and maintains its neighbours distance vectors. For each neighbour <span class="math inline">\(v\)</span>, <span class="math inline">\(x\)</span> maintains <span class="math inline">\(\mathbf{D}_v = [D_v(y), y \in N]\)</span>. <span class="math inline">\(x\)</span> also maintains a distance vector for itself.</p>
+<p>From time-to-time, each node sends its own distance vector estimate to its neighbours. When <span class="math inline">\(x\)</span> receives a new distance vector estimate from a neighbour, it updates its own distance vector using the Bellman-Ford equation. Under minor, natural conditions, the estimate <span class="math inline">\(D_x(y)\)</span> will <strong>converge to the actual least cost <span class="math inline">\(d_x(y)\)</span></strong>.</p>
+<p><span class="math display">\[D_x(y) = \min_v\{c(x, y) + D_v(y)\}, \text{ for each node } y \in N\]</span></p>
+<ol type="1">
+<li><strong>Iterative, Asynchronous</strong>: Local iterations are caused by.
+<ul>
+<li>Local link cost change.</li>
+<li>Distance vector update message from neighbour.</li>
+</ul></li>
+<li><strong>Distributed</strong>: Each node notifies neighbours <em>only</em> when its distance vector changes.</li>
+</ol>
+<p><img src="https://www.dropbox.com/s/75in8s0xijxz5kg/Screenshot%202018-06-11%2009.16.19.png?raw=1" /></p>
+<h4 id="distance-vector-problems">Distance Vector Problems</h4>
+<p>When <strong>link cost</strong> changes, the node needs to update routing information, and recalculate the distance vector. If the distance vector changes, it must notify neighbours.</p>
+<p><strong>Bad news travels slow</strong>. There can be a routing loop between two nodes if a cost update reverses the minimum cost path. In order to broadcast the distance vector to its neighbours, nodes will keep passing information back to each other and updating distance vectors. <strong>Counting to infinity problem</strong>.</p>
+<p>We used <strong>poisoned reverse</strong> in order to solve the problem of routing loops. If <span class="math inline">\(Z\)</span> routes through <span class="math inline">\(Y\)</span> to get to <span class="math inline">\(X\)</span>, <span class="math inline">\(Z\)</span> tells <span class="math inline">\(Y\)</span> that <span class="math inline">\(D_y(x) = \infty\)</span>. This does not completely solve the problem, we need to poison every node from source to destination.</p>
+<h3 id="link-state-vs.distance-vector">Link-State vs. Distance Vector</h3>
+<ul>
+<li><strong>Message Complexity</strong>.
+<ul>
+<li><strong>LS</strong>: with <span class="math inline">\(n\)</span> nodes, <span class="math inline">\(E\)</span> links, <span class="math inline">\(O(nE)\)</span> messages sent.</li>
+<li><strong>DV</strong>: Exchange between neighbours only.</li>
+</ul></li>
+<li><strong>Speed of Convergence</strong>.
+<ul>
+<li><strong>LS</strong>: <span class="math inline">\(O(n^2)\)</span> algorithm which requires <span class="math inline">\(O(nE)\)</span> messages. There may be oscillations.</li>
+<li><strong>DV</strong>: Convergence time varies. There may be routing loops and count-to-infinity problems.</li>
+</ul></li>
+<li><strong>Robustness</strong> (router <em>malfunction</em>).
+<ul>
+<li><strong>LS</strong>: Nodes can advertise incorrect <em>link</em> costs. Each node only computes its <em>own</em> table.</li>
+<li><strong>DV</strong>: Nodes can only advertise incorrect <em>path</em> costs. Each node’s table is used by others, so errors will propogate through the network.</li>
+</ul></li>
+</ul>
+<h3 id="heirarchical-routing">Heirarchical Routing</h3>
+<blockquote>
+<p>In real life, all routers are not identical, and the network is not <em>flat</em>.</p>
+</blockquote>
+<p>With 600 million destinations, storing all destinations in routing tables would not be <strong>scalable</strong>. Routing table exchange would swamp links.</p>
+<p>The internet is a network of networks, and each network admin may want to control routing in its own network.</p>
+<ul>
+<li>Aggregate routers into regions, <strong>autonomous systems (<em>AS</em>)</strong>.</li>
+<li>Routers in AS run same routing protocol (<em>intra-AS</em> routing protocol).
+<ul>
+<li>Routers in different AS can run different protocols / algorithms.</li>
+</ul></li>
+<li><strong>Gateway routers</strong> are at the <em>edge</em> of its own AS and has links to routers in other AS.</li>
 </ul>
 </body>
 </html>
