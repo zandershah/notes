@@ -317,7 +317,7 @@ Example: An infinite number of Harolds are released in a gold mine. They scatter
 
     > $Bin(n=10, p=0.8488)$. $P(N=8) = {10 \choose 8}(0.8488)^8(1-0.8488)^2$.
 
-1. On 2 nuggets there are $t$ Harolds in total. What is the probability that $x$ of them are on the first of the two nuggets?
+3. On 2 nuggets there are $t$ Harolds in total. What is the probability that $x$ of them are on the first of the two nuggets?
 
     > Let $A$ be the event that there are $t$ Harolds on 2 nuggets. Let $B$ be the event that there are $x$ Harolds on the first nugget. $P(B|A) = \frac{P(A \cap B)}{P(A)}$. Where $A \cap B$ is the event where $x$ Harolds are on the first nugget, and $t-x$ Harolds are on nugget 2.
     >
@@ -330,7 +330,6 @@ Example: An infinite number of Harolds are released in a gold mine. They scatter
 If you order a set of random variables, they become **order statistics**.
 
 Question: Let $X_1, X_2, X_3$ denote the random variables for the outcome of three independent fair random number generators. Assume that their ranges are $\{1, 2, ..., 10\}$. Now let $X_{max}$ denote the maximum value, then $P(X_{max} \le x) = P(X_1 \le x)P(X_2 \le x)P(X_3 \le 3)$.
-
 
 # Expectation
 
