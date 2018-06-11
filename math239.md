@@ -374,4 +374,25 @@ To prove that two graphs are isomorphic, find an isomorphism. To prove that two 
 
     > By handshaking lemma, $2|E(G)| = \sum_{v \in V(G)}deg(v) = \sum_{v \in V(G)}k = nk$.
     
-4. G is **bipartite** if there exists a parition $(A, B)$ of $V(G)$ such that every edge in $G$ joins one vertex in $A$ with one vertex in $B$.
+3. G is **bipartite** if there exists a parition $(A, B)$ of $V(G)$ such that every edge in $G$ joins one vertex in $A$ with one vertex in $B$.
+
+    - Cycles with an odd number of vertices are not bipartite.
+
+    - For $m, n \ge 1$, the **complete bipartite graph** $K_{m,n}$ has bipartition $(A, B)$, $|A| = m$, $|B| = n$, and each vertex in $A$ is adjacent to all vertices in $B$. $|E(K_{m,n})| = mn$.
+
+## N-Cube
+
+**Definition**: The **n-cube** is the graph where the vertex set consists of all binary strings of length $n$, and two strings are adjacent if and only if they differ by exactly one bit.
+
+### N-Cube Properties
+
+1. $2^n$ vertices.
+2. $n$-regular. For any string $s$, it has $n$ bits. Changing 1 of them gives a neighbour of $s$. So $s$ has $n$ neighbours.
+3. $n2^{n-1}$ edges. Total degree is $n2^n$. By Handshaking Lemma, the number of edges is half.
+4. Bipartite. Let $A$ be a binary string of length $n$ with an even number of 1's, and $B$ be the binary string of length $n$ with an odd number of 1's. Suppose $st$ is an edge in the n-cube. We obtain $t$ from $s$ by either changing $0 \to 1$ or $1 \to 0$. The parities of $s$ and $t$ are different, so $st$ joins $A$ to $B$.
+
+### Recursive Construction
+
+1. Take 2 copies of the n-cube.
+2. Insert 1 into the front of all strings in one copy, and insert 0 in the other copy.
+3. Join the 1's to 0's for any $s$ in the n-cube.

@@ -331,7 +331,26 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <blockquote>
 <p>By handshaking lemma, <span class="math inline">\(2|E(G)| = \sum_{v \in V(G)}deg(v) = \sum_{v \in V(G)}k = nk\)</span>.</p>
 </blockquote></li>
-<li><p>G is <strong>bipartite</strong> if there exists a parition <span class="math inline">\((A, B)\)</span> of <span class="math inline">\(V(G)\)</span> such that every edge in <span class="math inline">\(G\)</span> joins one vertex in <span class="math inline">\(A\)</span> with one vertex in <span class="math inline">\(B\)</span>.</p></li>
+<li><p>G is <strong>bipartite</strong> if there exists a parition <span class="math inline">\((A, B)\)</span> of <span class="math inline">\(V(G)\)</span> such that every edge in <span class="math inline">\(G\)</span> joins one vertex in <span class="math inline">\(A\)</span> with one vertex in <span class="math inline">\(B\)</span>.</p>
+<ul>
+<li><p>Cycles with an odd number of vertices are not bipartite.</p></li>
+<li><p>For <span class="math inline">\(m, n \ge 1\)</span>, the <strong>complete bipartite graph</strong> <span class="math inline">\(K_{m,n}\)</span> has bipartition <span class="math inline">\((A, B)\)</span>, <span class="math inline">\(|A| = m\)</span>, <span class="math inline">\(|B| = n\)</span>, and each vertex in <span class="math inline">\(A\)</span> is adjacent to all vertices in <span class="math inline">\(B\)</span>. <span class="math inline">\(|E(K_{m,n})| = mn\)</span>.</p></li>
+</ul></li>
+</ol>
+<h2 id="n-cube">N-Cube</h2>
+<p><strong>Definition</strong>: The <strong>n-cube</strong> is the graph where the vertex set consists of all binary strings of length <span class="math inline">\(n\)</span>, and two strings are adjacent if and only if they differ by exactly one bit.</p>
+<h3 id="n-cube-properties">N-Cube Properties</h3>
+<ol type="1">
+<li><span class="math inline">\(2^n\)</span> vertices.</li>
+<li><span class="math inline">\(n\)</span>-regular. For any string <span class="math inline">\(s\)</span>, it has <span class="math inline">\(n\)</span> bits. Changing 1 of them gives a neighbour of <span class="math inline">\(s\)</span>. So <span class="math inline">\(s\)</span> has <span class="math inline">\(n\)</span> neighbours.</li>
+<li><span class="math inline">\(n2^{n-1}\)</span> edges. Total degree is <span class="math inline">\(n2^n\)</span>. By Handshaking Lemma, the number of edges is half.</li>
+<li>Bipartite. Let <span class="math inline">\(A\)</span> be a binary string of length <span class="math inline">\(n\)</span> with an even number of 1’s, and <span class="math inline">\(B\)</span> be the binary string of length <span class="math inline">\(n\)</span> with an odd number of 1’s. Suppose <span class="math inline">\(st\)</span> is an edge in the n-cube. We obtain <span class="math inline">\(t\)</span> from <span class="math inline">\(s\)</span> by either changing <span class="math inline">\(0 \to 1\)</span> or <span class="math inline">\(1 \to 0\)</span>. The parities of <span class="math inline">\(s\)</span> and <span class="math inline">\(t\)</span> are different, so <span class="math inline">\(st\)</span> joins <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span>.</li>
+</ol>
+<h3 id="recursive-construction">Recursive Construction</h3>
+<ol type="1">
+<li>Take 2 copies of the n-cube.</li>
+<li>Insert 1 into the front of all strings in one copy, and insert 0 in the other copy.</li>
+<li>Join the 1’s to 0’s for any <span class="math inline">\(s\)</span> in the n-cube.</li>
 </ol>
 </body>
 </html>
