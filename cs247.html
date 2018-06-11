@@ -917,7 +917,7 @@ rvalues are temporary objects.</p>
 <blockquote>
 <p>Bit vector stored in a char <span class="math inline">\(c\)</span>, integer <span class="math inline">\(i\)</span> is in set if and only iff c &amp; (1 &lt;&lt; i). <span class="math inline">\(AF(r) = \{\forall i \in [0, 255] | c \&amp; (1 &lt;&lt; i) \}\)</span></p>
 </blockquote>
-<h2 id="models">Models</h2>
+<h1 id="models-uml">Models (<em>UML</em>)</h1>
 <blockquote>
 <p>An abstraction of something.</p>
 </blockquote>
@@ -927,6 +927,70 @@ rvalues are temporary objects.</p>
 <li>Answer questions about the thing being modelled.</li>
 <li>We are going to mainly focus on UML class diagrams.</li>
 <li>UML consists of ~13 different modelling notations.</li>
+</ul>
+<h2 id="legend">Legend</h2>
+<ul>
+<li>+, public</li>
+<li>-, private</li>
+<li>#, protected</li>
+<li>underline, static</li>
+<li><em>italics</em>, pure virtual</li>
+</ul>
+<p><img src="https://i.stack.imgur.com/ZX2zM.jpg" /></p>
+<blockquote>
+<p><strong>Note</strong>: We do not use <strong>“in”</strong>. We also do not want to be too specific with types because UML are designed to be language agnostic.</p>
+</blockquote>
+<h2 id="associations">Associations</h2>
+<p>An association represents a relationship between two classes, share a physical or conceptual link.</p>
+<ul>
+<li><strong>Non-transient link</strong>, not just one parameter of a classes member function.</li>
+<li>One class contains another.</li>
+<li>We can name our associations (<em>optional</em>).</li>
+<li>We can name the roles of associations.</li>
+<li>Arrows denote who refers to whom.</li>
+<li>Self-association can exist.</li>
+<li><strong>Multiplicity</strong>, place them on the side of the relationship that they refer to. It can be just a number (0), a variable (p), a range (0..1), or an asterisk (*) to represent <strong>many</strong>.</li>
+</ul>
+<p><img src="https://www.researchgate.net/profile/Albert_Brugues/publication/275042032/figure/fig3/AS:294586963513347@1447246413985/UML-diagram-of-the-classes-used-for-generating-the-CDA-document.png" /></p>
+<blockquote>
+<p>Consider marks a student has in a course. To which class should we attribtue marks? Marks should be associated with a pair of (student, course).</p>
+</blockquote>
+<ul>
+<li>We can create association classes that allow for a unique value for each link. The name of the class is the name of the association.</li>
+<li>Instances of the association class exists only when a link exists between the associated classes.</li>
+<li><p>Association classes can be used as other classes in your diagram and have associations themselves.</p>
+<p><img src="https://holub.com/image/uml/association_class.gif" /></p></li>
+</ul>
+<h2 id="relationships">Relationships</h2>
+<h3 id="composition-relationship">Composition Relationship</h3>
+<blockquote>
+<p>A specialization of association, where one class <strong>owns</strong> an object(s) of another class.</p>
+</blockquote>
+<p>If A <em>owns</em> B, then typically …</p>
+<ul>
+<li>B has no identity outside of A (no independent existence).</li>
+<li>If A is destroyed / copied, B is destroyed / copied.</li>
+<li>In code, usually represented by one class having an object field of another, or by an <strong>owning</strong> pointer.</li>
+</ul>
+<p>Modelled in UML as a solid diamond on the owner connected to the owned.</p>
+<h3 id="aggregation-relationship">Aggregation Relationship</h3>
+<blockquote>
+<p>A specialization of association, where one class <strong>has</strong> objects(s) of a class.</p>
+</blockquote>
+<p>If A <em>has</em> B then …</p>
+<ul>
+<li>B has an identity outside of its association with A.</li>
+<li>If A is destroyed, B is not necessarily destroyed.</li>
+<li>If A is copied, B is not copied (<strong>shallow copy</strong>).</li>
+<li>In code, usually represented by <strong>non-owning</strong> pointers.</li>
+</ul>
+<p>Modelled in UML as a hollow diamond on the owner connected to the owned.</p>
+<h3 id="generalization-specialization-relationship">Generalization / Specialization Relationship</h3>
+<blockquote>
+<p>One class <strong>is</strong> another class.</p>
+</blockquote>
+<ul>
+<li>Public inheritance.</li>
 </ul>
 </body>
 </html>
