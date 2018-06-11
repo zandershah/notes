@@ -331,6 +331,7 @@ If you order a set of random variables, they become **order statistics**.
 
 Question: Let $X_1, X_2, X_3$ denote the random variables for the outcome of three independent fair random number generators. Assume that their ranges are $\{1, 2, ..., 10\}$. Now let $X_{max}$ denote the maximum value, then $P(X_{max} \le x) = P(X_1 \le x)P(X_2 \le x)P(X_3 \le 3)$.
 
+
 # Expectation
 
 **Definition**: Let $x_1, x_2, ..., x_n$ be outcomes of random variable $X$. Its **sample mean** is defined as $\overline{x} = \frac{\sum_{i=1}^nx_i}{n}$.
