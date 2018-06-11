@@ -130,7 +130,8 @@ Two events $A$ and $B$ are **mutually exclusive** if $A$ and $B$ are disjoint.
 
 Example: Pick Pharah, 20% chance of loss. Pick Winston, 10% chance of loss. Pick Winston 70% of the time, Pharah 30% of the time. Given that the game was lost, what is the probability that Pharah was picked?
 
-> $$\begin{aligned}P(Pharah | Loss) &= \frac{P(Loss | Pharah)P(Pharah)}{P(Loss)} \\ &= \frac{0.2 \cdot 0.3}{P(Loss | Pharah)P(Pharah) + P(Loss | Winston)P(Winston)} \\ &= \frac{0.2 \cdot 0.3}{0.2 \cdot 0.3 + 0.1 \cdot 0.7} \\ &= 0.461
+> Let $P$ be the event that Pharah is picked. Let $L$ be the event where the game is lost. Let $W$ be the event that Winston is picked.
+> $$\begin{aligned}P(P| L) &= \frac{P(L| P)P(P)}{P(L)} \\ &= \frac{0.2 \cdot 0.3}{P(L| P)P(P) + P(L| W)P(W)} \\ &= \frac{0.2 \cdot 0.3}{0.2 \cdot 0.3 + 0.1 \cdot 0.7} \\ &= 0.461
 > 5\end{aligned}$$
 
 **Probablity Function**: $f_X(x) = P(X = x)$.
@@ -303,3 +304,39 @@ Example: Shiny versions of Pokemon are possible to encounter and catch starting 
 2. How long would you have to run around in grass to have better than 50 percent chance of encountering at least one Shiny Pokemon?
 
 > Solve for $t$, where $0.5 = P(X_t \ge 1)$.
+
+Example: An infinite number of Harolds are released in a gold mine. They scatter randomly, so that on average, a gold nugget is surrounded by 6 Harolds. Assume that all gold nuggets are of equal size.
+
+> Let $H$ be the number of Harolds surrounding the nugget. $H \sim Poi(\lambda = 6\ Harolds / nugget)$.
+
+1. What is the probability that a nugget is surrounded by more than 3 Harolds?
+
+    > $$\begin{aligned}P(H > 3) &= 1 - P(H <= 3) \\ &= 1 - f(0) - f(1) - f(2) - f(3) \\ &=  0.8488 \\ f(x) &= \frac{e^{-6}6^x}{x!}\end{aligned}$$
+    
+2. When 10 nuggets are picked at random, what is the probability that 8 of those nuggets have more than 3 Harolds?
+
+    > $Bin(n=10, p=0.8488)$. $P(N=8) = {10 \choose 8}(0.8488)^8(1-0.8488)^2$.
+
+1. On 2 nuggets there are $t$ Harolds in total. What is the probability that $x$ of them are on the first of the two nuggets?
+
+    > Let $A$ be the event that there are $t$ Harolds on 2 nuggets. Let $B$ be the event that there are $x$ Harolds on the first nugget. $P(B|A) = \frac{P(A \cap B)}{P(A)}$. Where $A \cap B$ is the event where $x$ Harolds are on the first nugget, and $t-x$ Harolds are on nugget 2.
+    >
+    > These events are independent, so $P(A \cap B) = \frac{e^{-6}6^x}{x!} \cdot \frac{e^{-6}6^{t-x}}{(t-x)!} = \frac{e^{-12}6^t}{x!(t-x)!}$.
+    >
+    > We can double the original rate, $Poi(12)$ for the denominator. So $P(A) = \frac{e^{-12}12^t}{t!}$.
+    >
+    > So $P(B|A) = {t \choose x}\frac{1}{2}^t$.
+
+If you order a set of random variables, they become **order statistics**.
+
+Question: Let $X_1, X_2, X_3$ denote the random variables for the outcome of three independent fair random number generators. Assume that their ranges are $\{1, 2, ..., 10\}$. Now let $X_{max}$ denote the maximum value, then $P(X_{max} \le x) = P(X_1 \le x)P(X_2 \le x)P(X_3 \le 3)$.
+
+# Expectation
+
+**Definition**: Let $x_1, x_2, ..., x_n$ be outcomes of random variable $X$. Its **sample mean** is defined as $\overline{x} = \frac{\sum_{i=1}^nx_i}{n}$.
+
+We can calculate a theoretical mean of $X$ directly if we know its distribution. Suppose $X$ is a discrete random variable with probability function $f(x)$, then $E(X)$ is called the **expected value** of $X$ and is defined by $E(X) = \sum_{x \in X(S)}xf(x)$. The expected value is sometimes referred to as the **mean**, **expectation**, or **first moment** of $X$.
+
+Example: A lottery is conducted in which 7 numbers are drawn without replacement between the numbers 1 and 50. A player wins the lottery if the numbers selected on their ticket match all 7 of the drawn numbers.  A ticket to play the lottery costs $1, and the jackpot is valued at $5000000.  Compute the expected return.
+
+> If you win the lottery, the return is 4999999. If you did not win, the return is -1. Let $R$ denote the return amount. $E(R) = (-1)P(\overline{w}) + (4999999)P(w) < 0$.

@@ -148,7 +148,7 @@ Therefore, the answer is <span class="math inline">\(12!{7 \choose 3}{13 \choose
 <p><strong>Bayes Theorem</strong>: <span class="math inline">\(P(B_i | A) = \frac{P(A|B_i)P(B_i)}{\sum_{j = 1}^k P(A | B_j)P(B_j)}\)</span></p>
 <p>Example: Pick Pharah, 20% chance of loss. Pick Winston, 10% chance of loss. Pick Winston 70% of the time, Pharah 30% of the time. Given that the game was lost, what is the probability that Pharah was picked?</p>
 <blockquote>
-<p><span class="math display">\[\begin{aligned}P(Pharah | Loss) &amp;= \frac{P(Loss | Pharah)P(Pharah)}{P(Loss)} \\ &amp;= \frac{0.2 \cdot 0.3}{P(Loss | Pharah)P(Pharah) + P(Loss | Winston)P(Winston)} \\ &amp;= \frac{0.2 \cdot 0.3}{0.2 \cdot 0.3 + 0.1 \cdot 0.7} \\ &amp;= 0.461
+<p>Let <span class="math inline">\(P\)</span> be the event that Pharah is picked. Let <span class="math inline">\(L\)</span> be the event where the game is lost. Let <span class="math inline">\(W\)</span> be the event that Winston is picked. <span class="math display">\[\begin{aligned}P(P| L) &amp;= \frac{P(L| P)P(P)}{P(L)} \\ &amp;= \frac{0.2 \cdot 0.3}{P(L| P)P(P) + P(L| W)P(W)} \\ &amp;= \frac{0.2 \cdot 0.3}{0.2 \cdot 0.3 + 0.1 \cdot 0.7} \\ &amp;= 0.461
 5\end{aligned}\]</span></p>
 </blockquote>
 <p><strong>Probablity Function</strong>: <span class="math inline">\(f_X(x) = P(X = x)\)</span>.</p>
@@ -304,6 +304,36 @@ Therefore, the answer is <span class="math inline">\(12!{7 \choose 3}{13 \choose
 </ol>
 <blockquote>
 <p>Solve for <span class="math inline">\(t\)</span>, where <span class="math inline">\(0.5 = P(X_t \ge 1)\)</span>.</p>
+</blockquote>
+<p>Example: An infinite number of Harolds are released in a gold mine. They scatter randomly, so that on average, a gold nugget is surrounded by 6 Harolds. Assume that all gold nuggets are of equal size.</p>
+<blockquote>
+<p>Let <span class="math inline">\(H\)</span> be the number of Harolds surrounding the nugget. <span class="math inline">\(H \sim Poi(\lambda = 6\ Harolds / nugget)\)</span>.</p>
+</blockquote>
+<ol type="1">
+<li><p>What is the probability that a nugget is surrounded by more than 3 Harolds?</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}P(H &gt; 3) &amp;= 1 - P(H &lt;= 3) \\ &amp;= 1 - f(0) - f(1) - f(2) - f(3) \\ &amp;=  0.8488 \\ f(x) &amp;= \frac{e^{-6}6^x}{x!}\end{aligned}\]</span></p>
+</blockquote></li>
+<li><p>When 10 nuggets are picked at random, what is the probability that 8 of those nuggets have more than 3 Harolds?</p>
+<blockquote>
+<p><span class="math inline">\(Bin(n=10, p=0.8488)\)</span>. <span class="math inline">\(P(N=8) = {10 \choose 8}(0.8488)^8(1-0.8488)^2\)</span>.</p>
+</blockquote></li>
+<li><p>On 2 nuggets there are <span class="math inline">\(t\)</span> Harolds in total. What is the probability that <span class="math inline">\(x\)</span> of them are on the first of the two nuggets?</p>
+<blockquote>
+<p>Let <span class="math inline">\(A\)</span> be the event that there are <span class="math inline">\(t\)</span> Harolds on 2 nuggets. Let <span class="math inline">\(B\)</span> be the event that there are <span class="math inline">\(x\)</span> Harolds on the first nugget. <span class="math inline">\(P(B|A) = \frac{P(A \cap B)}{P(A)}\)</span>. Where <span class="math inline">\(A \cap B\)</span> is the event where <span class="math inline">\(x\)</span> Harolds are on the first nugget, and <span class="math inline">\(t-x\)</span> Harolds are on nugget 2.</p>
+<p>These events are independent, so <span class="math inline">\(P(A \cap B) = \frac{e^{-6}6^x}{x!} \cdot \frac{e^{-6}6^{t-x}}{(t-x)!} = \frac{e^{-12}6^t}{x!(t-x)!}\)</span>.</p>
+<p>We can double the original rate, <span class="math inline">\(Poi(12)\)</span> for the denominator. So <span class="math inline">\(P(A) = \frac{e^{-12}12^t}{t!}\)</span>.</p>
+<p>So <span class="math inline">\(P(B|A) = {t \choose x}\frac{1}{2}^t\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>If you order a set of random variables, they become <strong>order statistics</strong>.</p>
+<p>Question: Let <span class="math inline">\(X_1, X_2, X_3\)</span> denote the random variables for the outcome of three independent fair random number generators. Assume that their ranges are <span class="math inline">\(\{1, 2, ..., 10\}\)</span>. Now let <span class="math inline">\(X_{max}\)</span> denote the maximum value, then <span class="math inline">\(P(X_{max} \le x) = P(X_1 \le x)P(X_2 \le x)P(X_3 \le 3)\)</span>.</p>
+<h1 id="expectation">Expectation</h1>
+<p><strong>Definition</strong>: Let <span class="math inline">\(x_1, x_2, ..., x_n\)</span> be outcomes of random variable <span class="math inline">\(X\)</span>. Its <strong>sample mean</strong> is defined as <span class="math inline">\(\overline{x} = \frac{\sum_{i=1}^nx_i}{n}\)</span>.</p>
+<p>We can calculate a theoretical mean of <span class="math inline">\(X\)</span> directly if we know its distribution. Suppose <span class="math inline">\(X\)</span> is a discrete random variable with probability function <span class="math inline">\(f(x)\)</span>, then <span class="math inline">\(E(X)\)</span> is called the <strong>expected value</strong> of <span class="math inline">\(X\)</span> and is defined by <span class="math inline">\(E(X) = \sum_{x \in X(S)}xf(x)\)</span>. The expected value is sometimes referred to as the <strong>mean</strong>, <strong>expectation</strong>, or <strong>first moment</strong> of <span class="math inline">\(X\)</span>.</p>
+<p>Example: A lottery is conducted in which 7 numbers are drawn without replacement between the numbers 1 and 50. A player wins the lottery if the numbers selected on their ticket match all 7 of the drawn numbers. A ticket to play the lottery costs $1, and the jackpot is valued at $5000000. Compute the expected return.</p>
+<blockquote>
+<p>If you win the lottery, the return is 4999999. If you did not win, the return is -1. Let <span class="math inline">\(R\)</span> denote the return amount. <span class="math inline">\(E(R) = (-1)P(\overline{w}) + (4999999)P(w) &lt; 0\)</span>.</p>
 </blockquote>
 </body>
 </html>
