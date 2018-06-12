@@ -662,9 +662,9 @@ n! &amp;\le 2^{n + 1} \\
 <a class="sourceLine" id="cb16-15" data-line-number="15">    <span class="co"># Apply appropriate rotation to restructure at x, y, z</span></a>
 <a class="sourceLine" id="cb16-16" data-line-number="16">    ...</a></code></pre></div>
 <p>How do we “fix” an unbalanced AVL? Notice that there are many different BSTs with the same keys. Our <strong>goal</strong> is to change the <em>structure</em> among the three nodes without changing the <em>order</em> such that the subtree becomes balanced.</p>
-<p><img src="https://www.dropbox.com/s/tiq9xylng9hq53n/Screenshot%202018-06-05%2010.28.55.png?raw=1" /></p>
+<p><img src="https://i.imgur.com/Jqo6hwY.png" /></p>
 <h4 id="right-rotation">Right Rotation</h4>
-<p><img src="https://www.dropbox.com/s/1uxwmuxn2aasmp0/Screenshot%202018-06-05%2010.30.23.png?raw=1" /></p>
+<p><img src="https://i.imgur.com/7wZw4Ay.png" /></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">def</span> rotate_right(z):</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">    y <span class="op">=</span> z.left</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">    make y.right the new left child of z</a>
@@ -682,7 +682,7 @@ n! &amp;\le 2^{n + 1} \\
 <li>Right rotation at <span class="math inline">\(z\)</span>.</li>
 </ol>
 <p><strong>Rule</strong>: The median of <span class="math inline">\(x, y, z\)</span> becomes the new root.</p>
-<p><img src="https://www.dropbox.com/s/czwsn0mtnmxc9l5/Screenshot%202018-06-05%2010.50.43.png?raw=1" /></p>
+<p><img src="https://i.imgur.com/M8PFUvs.png" /></p>
 <h3 id="avl-deletion">AVL Deletion</h3>
 <ul>
 <li>Remove the key <span class="math inline">\(k\)</span> with BST_delete</li>
@@ -753,7 +753,7 @@ n! &amp;\le 2^{n + 1} \\
 <li>Insert <span class="math inline">\((k, v)\)</span> after <span class="math inline">\(p_0\)</span> in <span class="math inline">\(S_0\)</span>, and <span class="math inline">\(k\)</span> after <span class="math inline">\(p_j\)</span> in <span class="math inline">\(S_j\)</span> for <span class="math inline">\(1 \le j \le i\)</span>.</li>
 </ul></li>
 </ul>
-<p><img src="https://www.dropbox.com/s/bsniny3fq8a39fk/Screenshot%202018-06-07%2010.52.03.png?raw=1" /></p>
+<p><img src="https://i.imgur.com/deMn1xO.png" /></p>
 <h3 id="delete-in-skip-lists">Delete in Skip Lists</h3>
 <ul>
 <li>Search for <span class="math inline">\(k\)</span> with skip_search to get stack <span class="math inline">\(P\)</span>.</li>
@@ -761,12 +761,38 @@ n! &amp;\le 2^{n + 1} \\
 <li>For each <span class="math inline">\(0 \le j \le h\)</span>, if <span class="math inline">\(key(after(p_j)) = k\)</span>, then remove <span class="math inline">\(after(p_j)\)</span> from list <span class="math inline">\(S_j\)</span>.</li>
 <li>Remove all but one of the lists <span class="math inline">\(S_i\)</span> that contain only the two special keys.</li>
 </ul>
-<p><img src="https://www.dropbox.com/s/rqrx1by20ge232p/Screenshot%202018-06-07%2010.56.23.png?raw=1" /></p>
+<p><img src="https://i.imgur.com/9rqbJfQ.png" /></p>
 <h3 id="expected-performance">Expected Performance</h3>
 <ul>
 <li><span class="math inline">\(O(n)\)</span> space.</li>
-<li><span class="math inline">\(O(\log(n))\)</span> height. A skip list with <span class="math inline">\(n\)</span> items has height at most <span class="math inline">\(3\log(n)\)</span> with probability at least <span class="math inline">\(1 - \frac{1}{n^2}\)</span>.</li>
-<li><span class="math inline">\(O(\log(n))\)</span> search, insert, and delete.</li>
+<li><p><span class="math inline">\(O(\log(n))\)</span> height. A skip list with <span class="math inline">\(n\)</span> items has height at most <span class="math inline">\(3\log(n)\)</span> with probability at least <span class="math inline">\(1 - \frac{1}{n^2}\)</span>.</p>
+<blockquote>
+<p>Let <span class="math inline">\(X_k\)</span> be the height of tower <span class="math inline">\(k\)</span>.</p>
+<p><span class="math display">\[P(h \ge i) \le \sum_{k}P(X_k \ge i) \le \frac{n}{2^i}\]</span> It follows that <span class="math inline">\(P(h &lt; i) \ge 1 - \frac{n}{2^i}\)</span>. Imagine <span class="math inline">\(i = c\log(n)\)</span>. We would like to know <span class="math inline">\(P(h &lt; c\log(n))\)</span>. <span class="math display">\[P(h &lt; c\log(n)) \ge 1 - \frac{n}{2^{c\log(n)}} = 1 - \frac{n}{n^c}\]</span> We see that the height is bounded by <span class="math inline">\(O(\log(n))\)</span> with high probability.</p>
+</blockquote>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}E[h] &amp;= \sum_{t \ge 1} t P(h = t) \\ &amp;= \sum_{t = 1}^{2\log(n)}tP(h = t) + \sum_{t = 2\log(n) + 1}^n tP(h=t) + \sum_{t \ge n+1}tP(h = t) \\ &amp;\le \sum_{t = 1}^{2\log(n)}2\log(n)P(h=t) + \sum_{t=2\log(n)}^n nP(h=t) + (\sum_{t \ge 1}tP(h=t)-\sum_{t=1}^ntP(h=t))\\ &amp;\le 2\log(n)P(h \le 2\log(n)) +  nP(h \ge 2\log(n)) + n(\sum_{t \ge 1}\frac{t}{2^t} - \sum_{t = 1}^n\frac{t}{2^t}) \\ &amp;\le ... + n\frac{n}{2^{2\log(n)}} + \frac{n(n+2)}{2^n} \\ &amp;\le 2\log(n) + 1 + \frac{n(n+2)}{2} \end{aligned}\]</span> We see that the expected height is <span class="math inline">\(O(\log(n))\)</span>.</p>
+</blockquote></li>
+<li><p><span class="math inline">\(O(\log(n))\)</span> search, insert, and delete.</p></li>
 </ul>
+<h1 id="dictionaries-for-special-keys">Dictionaries for Special Keys</h1>
+<p><strong>Theorem</strong>: In the comparison model, <span class="math inline">\(\Omega(\log(n))\)</span> comparisons are required to search a size <span class="math inline">\(n\)</span> dictionary.</p>
+<h2 id="interpolation-search">Interpolation Search</h2>
+<blockquote>
+<p>Instead of binary searching, if we know relative distances, we can get a better estimation.</p>
+</blockquote>
+<p>If we are searching between incides <span class="math inline">\(l, r\)</span> of array <span class="math inline">\(A\)</span> for key <span class="math inline">\(k\)</span>, we compare at index <span class="math inline">\(l + \lfloor \frac{k - A[l]}{A[r] - A[l]}(r-l) \rfloor\)</span>. This approach works well if the keys are <strong>uniformly</strong> distributed.</p>
+<ul>
+<li>We can show that the side we recurse to has expected size <span class="math inline">\(\sqrt n\)</span>.</li>
+<li>Reccurence relation is <span class="math inline">\(T^{(avg)}(n) = T^{(avg)}(\sqrt n) + \Theta(1)\)</span> which resolves to a runtime of <span class="math inline">\(\Theta(\log(\log(n)))\)</span>.</li>
+</ul>
+<p><strong>But</strong>, worst-case performance is <span class="math inline">\(\Theta(n)\)</span>.</p>
+<h2 id="trie-radix-tree">Trie (<em>Radix Tree</em>)</h2>
+<blockquote>
+<p>Dictionary for binary strings based on <strong>bitwise comparisons</strong>.</p>
+</blockquote>
+<p><strong>Prefix</strong> of a string <span class="math inline">\(S[0 .. n - 1]\)</span> is a substring <span class="math inline">\(S[0..i]\)</span> of <span class="math inline">\(S\)</span> for some <span class="math inline">\(0 \le i &lt; n\)</span>.</p>
+<p><strong>Prefix-Free</strong>: there is no pair of binary strings in the dictionary where one is the prefix of the other.</p>
+<p>We <strong>assume</strong> that our dictionaries are prefix-free. This is always satisfied if all strings have the same length or are terminated with a unique character ‘$’.</p>
 </body>
 </html>
