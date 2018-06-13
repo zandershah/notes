@@ -352,5 +352,23 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <li>Insert 1 into the front of all strings in one copy, and insert 0 in the other copy.</li>
 <li>Join the 1’s to 0’s for any <span class="math inline">\(s\)</span> in the n-cube.</li>
 </ol>
+<h2 id="walks-and-paths">Walks and Paths</h2>
+<p>Define a <strong>u,v-walk</strong> as a sequence of alternating vertices and edges <span class="math inline">\(u=v_0, e_1, v_1, e_2, ..., e_k, v_k = v\)</span> where <span class="math inline">\(e_i = v_{i-1}v_i\)</span> for each <span class="math inline">\(i\)</span>. This walk has <strong>length</strong> <span class="math inline">\(k\)</span> (the number of edges used, including repetition). It is a <strong>closed</strong> walk if <span class="math inline">\(u=v\)</span>.</p>
+<ul>
+<li>We can uniquely define a walk by the sequence of vertices in simple graphs.</li>
+</ul>
+<p>Define a <strong>u,v-path</strong> as a u,v-walk with no repeated vertices or edges. A <strong>trivial</strong> path / walk is one with length 0.</p>
+<p><strong>Proposition</strong>: If there is a u,v-walk, then there is a u,v-path.</p>
+<blockquote>
+<p>Among all u,v-walks, let <span class="math inline">\(W\)</span> be one with the shortest length (Well-ordering Principle). If <span class="math inline">\(W\)</span> has no repeated vertices, then <span class="math inline">\(W\)</span> is a u,v-path and we are done. Suppose <span class="math inline">\(x\)</span> is used at least twice. Then we can decompose <span class="math inline">\(W\)</span> into <span class="math inline">\(W = u,W_1, x, W_2,x, W_3, v\)</span> where <span class="math inline">\(W_i\)</span> are walks in <span class="math inline">\(W\)</span>. Then <span class="math inline">\(u, W_1, x, W_3, v\)</span> is a u,v-walk which is shorter than <span class="math inline">\(W\)</span> since <span class="math inline">\(W_2\)</span> must be non-trivial.</p>
+</blockquote>
+<p><strong>Corollary</strong>: If there is a u,v-path and a v,w-path, then there is a u,w-path. <strong>Transitivity</strong> property.</p>
+<blockquote>
+<p>A u,v-path followed by a v,w-path is a u,w-walk. By the proposition above, there exists a u,w-path.</p>
+</blockquote>
+<p>This is also <strong>reflexive</strong> and <strong>symmetric</strong>. Therefore, it is an <strong>equivalence</strong> relation.</p>
+<h2 id="cycles">Cycles</h2>
+<p>We define a <strong>cycle</strong> as a nontrivial closed walk, with no repeated vertices or edges. Cycles have length of at least 3, have an equal number of vertices and edges and are 2-regular.</p>
+<p><strong>Theorem</strong>: If every vertex of <span class="math inline">\(G\)</span> has degree at least 2, then <span class="math inline">\(G\)</span> contains a cycle.</p>
 </body>
 </html>

@@ -396,3 +396,27 @@ To prove that two graphs are isomorphic, find an isomorphism. To prove that two 
 1. Take 2 copies of the n-cube.
 2. Insert 1 into the front of all strings in one copy, and insert 0 in the other copy.
 3. Join the 1's to 0's for any $s$ in the n-cube.
+
+## Walks and Paths
+
+Define a **u,v-walk** as a sequence of alternating vertices and edges $u=v_0, e_1, v_1, e_2, ..., e_k, v_k = v$ where $e_i = v_{i-1}v_i$ for each $i$. This walk has **length** $k$ (the number of edges used, including repetition). It is a **closed** walk if $u=v$.
+
+- We can uniquely define a walk by the sequence of vertices in simple graphs.
+
+Define a **u,v-path** as a u,v-walk with no repeated vertices or edges. A **trivial** path / walk is one with length 0.
+
+**Proposition**: If there is a u,v-walk, then there is a u,v-path.
+
+> Among all u,v-walks, let $W$ be one with the shortest length (Well-ordering Principle). If $W$ has no repeated vertices, then $W$ is a u,v-path and we are done. Suppose $x$ is used at least twice. Then we can decompose $W$ into $W = u,W_1, x, W_2,x, W_3, v$ where $W_i$ are walks in $W$. Then $u, W_1, x, W_3, v$ is a u,v-walk which is shorter than $W$ since $W_2$ must be non-trivial.
+
+**Corollary**: If there is a u,v-path and a v,w-path, then there is a u,w-path. **Transitivity** property.
+
+> A u,v-path followed by a v,w-path is a u,w-walk. By the proposition above, there exists a u,w-path.
+
+This is also **reflexive** and **symmetric**. Therefore, it is an **equivalence** relation.
+
+## Cycles
+
+We define a **cycle** as a nontrivial closed walk, with no repeated vertices or edges. Cycles have length of at least 3, have an equal number of vertices and edges and are 2-regular.
+
+**Theorem**: If every vertex of $G$ has degree at least 2, then $G$ contains a cycle.
