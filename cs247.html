@@ -76,6 +76,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="pandoc.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
     renderMathInElement(document.body);
   });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
@@ -936,7 +937,6 @@ rvalues are temporary objects.</p>
 <li>underline, static</li>
 <li><em>italics</em>, pure virtual</li>
 </ul>
-<p><img src="https://i.stack.imgur.com/ZX2zM.jpg" /></p>
 <blockquote>
 <p><strong>Note</strong>: We do not use <strong>“in”</strong>. We also do not want to be too specific with types because UML are designed to be language agnostic.</p>
 </blockquote>
@@ -951,15 +951,13 @@ rvalues are temporary objects.</p>
 <li>Self-association can exist.</li>
 <li><strong>Multiplicity</strong>, place them on the side of the relationship that they refer to. It can be just a number (0), a variable (p), a range (0..1), or an asterisk (*) to represent <strong>many</strong>.</li>
 </ul>
-<p><img src="https://www.researchgate.net/profile/Albert_Brugues/publication/275042032/figure/fig3/AS:294586963513347@1447246413985/UML-diagram-of-the-classes-used-for-generating-the-CDA-document.png" /></p>
 <blockquote>
 <p>Consider marks a student has in a course. To which class should we attribtue marks? Marks should be associated with a pair of (student, course).</p>
 </blockquote>
 <ul>
 <li>We can create association classes that allow for a unique value for each link. The name of the class is the name of the association.</li>
 <li>Instances of the association class exists only when a link exists between the associated classes.</li>
-<li><p>Association classes can be used as other classes in your diagram and have associations themselves.</p>
-<p><img src="https://holub.com/image/uml/association_class.gif" /></p></li>
+<li>Association classes can be used as other classes in your diagram and have associations themselves.</li>
 </ul>
 <h2 id="relationships">Relationships</h2>
 <h3 id="composition-relationship">Composition Relationship</h3>
@@ -992,5 +990,53 @@ rvalues are temporary objects.</p>
 <ul>
 <li>Public inheritance.</li>
 </ul>
+<p>Modelled in UML as a hollow triangle pointing to the base class.</p>
+<p><img src="https://i.imgur.com/Zm2Kwcj.jpg?1" /></p>
+<h2 id="uml-object-model">UML Object Model</h2>
+<ul>
+<li>An object model models a runtime instance of class model.
+<ul>
+<li>Every object in our object model is an instantiation of our particular class.</li>
+<li>Every link is an instantiation of a specific association.</li>
+</ul></li>
+</ul>
+<p><img src="https://i.imgur.com/ypbv44Q.jpg?1" /></p>
+<h2 id="uml-sequence-diagram">UML Sequence Diagram</h2>
+<ul>
+<li>Graphical model of communication events between objets as exhibited in one execution.</li>
+<li>Boxes are the execution patterns.</li>
+</ul>
+<p><img src="https://i.imgur.com/q2TAAbt.jpg?1" /></p>
+<h1 id="design-patterns">Design Patterns</h1>
+<ul>
+<li>If you have a problem <span class="math inline">\(p\)</span> which is a common problem or simliar to a common problem, then <strong>maybe</strong> design pattern <span class="math inline">\(D\)</span> is a good solution.</li>
+</ul>
+<h2 id="observer-pattern">Observer Pattern</h2>
+<blockquote>
+<p>We want to abstract away change.</p>
+</blockquote>
+<ul>
+<li>Publish and subscribe model.</li>
+<li>You need to maintain / propogate updates from a source to those it affects.</li>
+<li>We have one class called the <strong>publisher</strong> or the <strong>subject</strong> which generates the data.</li>
+<li>One or more classes are our <strong>subscribers</strong> or <strong>observers</strong>. They receive updates and react to it.</li>
+</ul>
+<p>Example: Publisher is spreadsheet cells and observers are our generated graphs.</p>
+<ul>
+<li>There can be many different kinds of observers, and the subject should not need to know details about them.</li>
+</ul>
+<p><img src="https://i.imgur.com/Mr3Seyk.jpg?1" /></p>
+<ul>
+<li>The abstract class subject contains all the code common to all subjects, the abstract class observer defines an interface common to all observers for subject to use.</li>
+</ul>
+<ol type="1">
+<li>Subject’s state is updated.</li>
+<li>Subject::notifyObservers is called, it calls notify() on all its observers.</li>
+<li>Each observer does their update, which likely involves calling concreteSubject::getState to query the state and react accordingly.</li>
+</ol>
+<p>Example: Horse Races. The subject publishes the winning horse, the observers are individual betters who will declare victory if their horse wins.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">class</span> Subject {</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">    vector&lt;Observer *&gt; observers;</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">};</a></code></pre></div>
 </body>
 </html>
