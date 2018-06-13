@@ -340,3 +340,68 @@ We can calculate a theoretical mean of $X$ directly if we know its distribution.
 Example: A lottery is conducted in which 7 numbers are drawn without replacement between the numbers 1 and 50. A player wins the lottery if the numbers selected on their ticket match all 7 of the drawn numbers.  A ticket to play the lottery costs $1, and the jackpot is valued at $5000000.  Compute the expected return.
 
 > If you win the lottery, the return is 4999999. If you did not win, the return is -1. Let $R$ denote the return amount. $E(R) = (-1)P(\overline{w}) + (4999999)P(w) < 0$.
+
+## "Law of the Unconscious Statistiation"
+
+If $g: \mathbb{R} \to \mathbb{R}$, then for a random variable $X$ with probability function $f(x), the expected value of $g(x) is given be $\sum_{x \in S(X)}g(x)f(x)$.
+
+To retrieve our original expectation function, we set $g(x) = x$.
+
+Example: If $g(x) = x^2$ and $X$ is the result of a fair six sided die roll, then compute $E[g(X)]$.
+
+> $E[g(x)] = E[x^2] = \sum_{x = 1}^6 x^2 \frac{1}{6}$.
+
+## Linearity of Expectation
+
+If $g(x)$ is a linear function $g(x) = ax + b$, then for a random variable $X$, $E[aX + b] = aE[X] + b$.
+
+> $$\begin{aligned}E[aX + b] &= \sum_{x \in X(S)}(ax + b)f(x) \\ &= a\sum_{x \in X(S)}xf(x) + b\sum_{x \in X(S)} \\ &= aE[x] + b\end{aligned}$$
+
+Note: It is **not true** in general that $g(E[X]) = E[g(X)]$.
+
+## Expectation of Binomial
+
+> If $X \sim Bin(n, p)$ then $E[X] = np$.
+
+$$\begin{aligned}
+E[X] &= \sum_{x = 0}^n xf(x) \\
+&= \sum_{x = 1}^n xf(x) \\
+&= \sum_{x = 1}^n x \frac{n!}{x!(n-x)!}p^x(1-p)^{n-x} \\
+&= \sum_{x=1}^n \frac{n(n-1)!}{(x-1)!((n-1) - (x-1))!}pp^{x-1}(1-p)^{(n-1)-(x-1)} \\
+&= np(1-p)^{n-1} \sum_{x=1}^n \left({n - 1 \choose x-1}p^{x-1}(1-p)^{-(x-1)} \right) \\
+&= np(1-p)^{n-1} \sum_{x=1}^n \left( {n-1\choose x-1} \left(\frac{p}{1 - p}\right)^{x-1} \right) \\
+&= np(1-p)^{n-1} \sum_{y=0}^{n-1} \left( {n-1\choose y} \left(\frac{p}{1 - p}\right)^{y} \right) \\
+&= np(1-p)^{n-1} \left(1+\frac{p}{1-p}\right)^{n-1} \\
+&= np(1-p)^{n-1} \left(\frac{1}{1-p}\right)^{n-1} \\
+&= np
+\end{aligned}$$
+
+Example: Suppose two fair six sided die are independently rolled 24 times, at let $X$ denote the number of times the sum of die rolls is 7. Compute $E[X]$.
+
+> 36 outcomes, 6 yield a sum of 7, so $p = \frac{1}{6}$. We are rolling 24 times, so $n = 24$. We have $E[X] = np = 4$.
+
+## Expectation of Poisson
+
+> If $Y \sim Poi(\lambda)$, then $E[Y] = \lambda$.
+
+$$\begin{aligned}
+E[Y] &= \sum_{y \ge 0}yf(y) \\
+&= \sum_{y \ge 1}y\frac{e^{-\lambda}\lambda^y}{y!} \\
+&= \sum_{y \ge 1}\frac{e^{-\lambda}\lambda \lambda^{y-1}}{(y-1)!} \\
+&= e^{-\lambda}\lambda \sum_{y \ge 1}\frac{\lambda^{y-1}}{(y-1)!} \\
+&= e^{-\lambda}\lambda \sum_{z \ge 0}\frac{\lambda^{z}}{z!} \\
+&= e^{-\lambda}\lambda e^{\lambda} \\
+&= \lambda
+\end{aligned}$$
+
+Example: Suppose that calls to Canadian Tire Financial call center follow a Poisson process with rate 30 calls per minute. Let $X$ denote the number of calls to the center after 1 hour. Compute $E[X]$.
+
+> $E[X] = 30 * 60$.
+
+## Expectation of Hypergeometric
+
+> If $X \sim hyp(N, r, n)$, then $E[X] = n\frac{r}{N}$.
+
+## Expectation of Negative Binomial 
+
+> If $Y \sim NB(k, p)$, then $E[Y] = \frac{k(1-p)}{p}$.

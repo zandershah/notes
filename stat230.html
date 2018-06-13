@@ -335,5 +335,63 @@ Therefore, the answer is <span class="math inline">\(12!{7 \choose 3}{13 \choose
 <blockquote>
 <p>If you win the lottery, the return is 4999999. If you did not win, the return is -1. Let <span class="math inline">\(R\)</span> denote the return amount. <span class="math inline">\(E(R) = (-1)P(\overline{w}) + (4999999)P(w) &lt; 0\)</span>.</p>
 </blockquote>
+<h2 id="law-of-the-unconscious-statistiation">“Law of the Unconscious Statistiation”</h2>
+<p>If <span class="math inline">\(g: \mathbb{R} \to \mathbb{R}\)</span>, then for a random variable <span class="math inline">\(X\)</span> with probability function $f(x), the expected value of $g(x) is given be <span class="math inline">\(\sum_{x \in S(X)}g(x)f(x)\)</span>.</p>
+<p>To retrieve our original expectation function, we set <span class="math inline">\(g(x) = x\)</span>.</p>
+<p>Example: If <span class="math inline">\(g(x) = x^2\)</span> and <span class="math inline">\(X\)</span> is the result of a fair six sided die roll, then compute <span class="math inline">\(E[g(X)]\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(E[g(x)] = E[x^2] = \sum_{x = 1}^6 x^2 \frac{1}{6}\)</span>.</p>
+</blockquote>
+<h2 id="linearity-of-expectation">Linearity of Expectation</h2>
+<p>If <span class="math inline">\(g(x)\)</span> is a linear function <span class="math inline">\(g(x) = ax + b\)</span>, then for a random variable <span class="math inline">\(X\)</span>, <span class="math inline">\(E[aX + b] = aE[X] + b\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}E[aX + b] &amp;= \sum_{x \in X(S)}(ax + b)f(x) \\ &amp;= a\sum_{x \in X(S)}xf(x) + b\sum_{x \in X(S)} \\ &amp;= aE[x] + b\end{aligned}\]</span></p>
+</blockquote>
+<p>Note: It is <strong>not true</strong> in general that <span class="math inline">\(g(E[X]) = E[g(X)]\)</span>.</p>
+<h2 id="expectation-of-binomial">Expectation of Binomial</h2>
+<blockquote>
+<p>If <span class="math inline">\(X \sim Bin(n, p)\)</span> then <span class="math inline">\(E[X] = np\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[\begin{aligned}
+E[X] &amp;= \sum_{x = 0}^n xf(x) \\
+&amp;= \sum_{x = 1}^n xf(x) \\
+&amp;= \sum_{x = 1}^n x \frac{n!}{x!(n-x)!}p^x(1-p)^{n-x} \\
+&amp;= \sum_{x=1}^n \frac{n(n-1)!}{(x-1)!((n-1) - (x-1))!}pp^{x-1}(1-p)^{(n-1)-(x-1)} \\
+&amp;= np(1-p)^{n-1} \sum_{x=1}^n \left({n - 1 \choose x-1}p^{x-1}(1-p)^{-(x-1)} \right) \\
+&amp;= np(1-p)^{n-1} \sum_{x=1}^n \left( {n-1\choose x-1} \left(\frac{p}{1 - p}\right)^{x-1} \right) \\
+&amp;= np(1-p)^{n-1} \sum_{y=0}^{n-1} \left( {n-1\choose y} \left(\frac{p}{1 - p}\right)^{y} \right) \\
+&amp;= np(1-p)^{n-1} \left(1+\frac{p}{1-p}\right)^{n-1} \\
+&amp;= np(1-p)^{n-1} \left(\frac{1}{1-p}\right)^{n-1} \\
+&amp;= np
+\end{aligned}\]</span></p>
+<p>Example: Suppose two fair six sided die are independently rolled 24 times, at let <span class="math inline">\(X\)</span> denote the number of times the sum of die rolls is 7. Compute <span class="math inline">\(E[X]\)</span>.</p>
+<blockquote>
+<p>36 outcomes, 6 yield a sum of 7, so <span class="math inline">\(p = \frac{1}{6}\)</span>. We are rolling 24 times, so <span class="math inline">\(n = 24\)</span>. We have <span class="math inline">\(E[X] = np = 4\)</span>.</p>
+</blockquote>
+<h2 id="expectation-of-poisson">Expectation of Poisson</h2>
+<blockquote>
+<p>If <span class="math inline">\(Y \sim Poi(\lambda)\)</span>, then <span class="math inline">\(E[Y] = \lambda\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[\begin{aligned}
+E[Y] &amp;= \sum_{y \ge 0}yf(y) \\
+&amp;= \sum_{y \ge 1}y\frac{e^{-\lambda}\lambda^y}{y!} \\
+&amp;= \sum_{y \ge 1}\frac{e^{-\lambda}\lambda \lambda^{y-1}}{(y-1)!} \\
+&amp;= e^{-\lambda}\lambda \sum_{y \ge 1}\frac{\lambda^{y-1}}{(y-1)!} \\
+&amp;= e^{-\lambda}\lambda \sum_{z \ge 0}\frac{\lambda^{z}}{z!} \\
+&amp;= e^{-\lambda}\lambda e^{\lambda} \\
+&amp;= \lambda
+\end{aligned}\]</span></p>
+<p>Example: Suppose that calls to Canadian Tire Financial call center follow a Poisson process with rate 30 calls per minute. Let <span class="math inline">\(X\)</span> denote the number of calls to the center after 1 hour. Compute <span class="math inline">\(E[X]\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(E[X] = 30 * 60\)</span>.</p>
+</blockquote>
+<h2 id="expectation-of-hypergeometric">Expectation of Hypergeometric</h2>
+<blockquote>
+<p>If <span class="math inline">\(X \sim hyp(N, r, n)\)</span>, then <span class="math inline">\(E[X] = n\frac{r}{N}\)</span>.</p>
+</blockquote>
+<h2 id="expectation-of-negative-binomial">Expectation of Negative Binomial</h2>
+<blockquote>
+<p>If <span class="math inline">\(Y \sim NB(k, p)\)</span>, then <span class="math inline">\(E[Y] = \frac{k(1-p)}{p}\)</span>.</p>
+</blockquote>
 </body>
 </html>
