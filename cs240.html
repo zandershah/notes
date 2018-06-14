@@ -102,8 +102,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Instead we write code for Random Access Machines (RAM)</p>
 <ul>
 <li>Set of memory cells, each of which stores one item of data.</li>
-<li>Access to memory in O(1).</li>
-<li>Primitive operations are O(1).</li>
+<li>Access to memory in <span class="math inline">\(O(1)\)</span>.</li>
+<li>Primitive operations are <span class="math inline">\(O(1)\)</span>.</li>
 <li>Runtime of a program is the number of memory accesses + the number of primitive operations.</li>
 </ul>
 <p>The efficiency is measured in terms of it’s <strong>growth rate</strong> (this is called the <strong>complexity</strong> of the algorithm).</p>
@@ -795,5 +795,62 @@ n! &amp;\le 2^{n + 1} \\
 <p><strong>Prefix</strong> of a string <span class="math inline">\(S[0 .. n - 1]\)</span> is a substring <span class="math inline">\(S[0..i]\)</span> of <span class="math inline">\(S\)</span> for some <span class="math inline">\(0 \le i &lt; n\)</span>.</p>
 <p><strong>Prefix-Free</strong>: there is no pair of binary strings in the dictionary where one is the prefix of the other.</p>
 <p>We <strong>assume</strong> that our dictionaries are prefix-free. This is always satisfied if all strings have the same length or are terminated with a unique character ‘$’.</p>
+<p><strong>Insert</strong>: We search for <span class="math inline">\(x\)</span> in the trie, and expand it by adding the missing nodes.</p>
+<p><strong>Delete</strong>: We search for <span class="math inline">\(x\)</span> in the trie and then delete the node, and all dangling nodes created by the deletion.</p>
+<p><strong>Time complexity</strong> for all operations on string <span class="math inline">\(s\)</span> over alphabet <span class="math inline">\(\Sigma\)</span> are <span class="math inline">\(O(|s|)\)</span>.</p>
+<h3 id="trie-variations">Trie Variations</h3>
+<ol type="1">
+<li><p>No Leaf Labels.</p>
+<blockquote>
+<p>We do not have to store the keys in leaves, it is implicitly stored along the path to a leaf. This halves the amount of storage needed.</p>
+</blockquote></li>
+<li><p>Remove Chains to Labels.</p>
+<blockquote>
+<p>We can stop adding nodes to the trie as soon as the key is unique. This saves space if there are only a few strings that are long.</p>
+<p><strong>Note</strong>: This cannot be combined with no leaf labels as we would not be able to search.</p>
+</blockquote></li>
+<li><p>Allow Proper Prefixes.</p>
+<blockquote>
+<p>We can allow internal nodes to be keys by adding a <strong>flag</strong> at each node indicating whether it represents a key in the dictionary.</p>
+</blockquote></li>
+</ol>
+<h3 id="compressed-tries-patricia">Compressed Tries (<em>Patricia</em>)</h3>
+<blockquote>
+<p><strong>Idea</strong>: Eliminate unflagged nodes to reduce space.</p>
+</blockquote>
+<ul>
+<li>Every chain is compressed to a single edge.</li>
+<li>Each node stores an <strong>index</strong> indicating which character should be tested against.</li>
+<li>A compressed trie storing <span class="math inline">\(n\)</span> keys always has at most <span class="math inline">\(n-1\)</span> internal nodes (<em>Induction</em>).</li>
+</ul>
+<h4 id="compressed-trie-search">Compressed Trie Search</h4>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">def</span> patricia_search(v, x):</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">    <span class="cf">if</span> v.is_leaf():</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">        <span class="cf">return</span> v.key() <span class="op">==</span> x</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">    </a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">    d <span class="op">=</span> v.index()</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">    c <span class="op">=</span> v.child(x[d])</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">    <span class="cf">if</span> c <span class="kw">is</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">        <span class="cf">return</span> <span class="st">&quot;Not Found!&quot;</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">    <span class="cf">return</span> particia_search(c, x)</a></code></pre></div>
+<h4 id="delete">Delete</h4>
+<ul>
+<li>Search for <span class="math inline">\(x\)</span> in the trie and then delete the node. Compress the path to <span class="math inline">\(x\)</span> whenever possible.</li>
+</ul>
+<h4 id="insert">Insert</h4>
+<ul>
+<li>Search for <span class="math inline">\(x\)</span> in the trie, end up at node <span class="math inline">\(v\)</span>.</li>
+<li>Conceptually simplest approach is to uncompress the path, insert <span class="math inline">\(x\)</span> normally, and then recompress.</li>
+</ul>
+<h3 id="multiway-tries">Multiway Tries</h3>
+<ul>
+<li>We can represent a string over any fixed alphabet <span class="math inline">\(\Sigma\)</span>.</li>
+<li>Each node has up to <span class="math inline">\(|\Sigma| + 1\)</span> references to children.
+<ul>
+<li>Storing in arrays would be <span class="math inline">\(O(1)\)</span> but <span class="math inline">\(O(|\Sigma|n)\)</span> space is required.</li>
+<li>We could store a list of children, which would require <span class="math inline">\(O(n)\)</span> space but <span class="math inline">\(O(|\Sigma|)\)</span> time to find a child. We could speed this search up using <strong>MTF</strong> heuristic.</li>
+<li>Storing children in dictionaries is the best in theory but is not practical unless the <span class="math inline">\(|\Sigma|\)</span> is very large.</li>
+</ul></li>
+</ul>
 </body>
 </html>
