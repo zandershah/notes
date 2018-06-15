@@ -359,6 +359,8 @@ If $g(x)$ is a linear function $g(x) = ax + b$, then for a random variable $X$, 
 
 Note: It is **not true** in general that $g(E[X]) = E[g(X)]$.
 
+An extention of linearity is, $E[af(X) + bg(X)] = aE[f(X)] + bE[g(X)]$.
+
 ## Expectation of Binomial
 
 > If $X \sim Bin(n, p)$ then $E[X] = np$.
@@ -405,3 +407,64 @@ Example: Suppose that calls to Canadian Tire Financial call center follow a Pois
 ## Expectation of Negative Binomial 
 
 > If $Y \sim NB(k, p)$, then $E[Y] = \frac{k(1-p)}{p}$.
+
+# Variability
+
+Expectation along may not be enough. Oftentimes, we want to study how much a random variable tends to deviate from its mean.
+
+1. **Deviation**: $E[X - \mu] = E[X] - \mu$.
+2. **Absolute Deviation**: $E[|X - \mu|]$.
+3. **Squared Deviation**: $E[(X - \mu)^2]$. Turns out to be a useful measure of variability.
+
+## Variance
+
+The **variance** of a random variable $X$ is denoted $Var(X)$ and is defined by $Var(X) = E[(X - E[X])^2]$. A simple calculation gives the *short cut formula*, $Var(X) = E[X^2] = E[X]^2$.
+
+$$\begin{aligned}
+E[(X - E[X])^2] &= E[X^2 - 2XE[X] + E[X]^2] \\
+&= E[X^2] - 2E[X]^2 + E[X]^2 \\
+&= E[X^2] - E[X]^2
+\end{aligned}$$
+
+We know that $E[(X - E[X])^2] \ge 0$ so we can say that $E[X^2] - E[X]^2 \ge 0$.
+
+### Variance of Linear Combination
+
+For any random variable $X$ and $a, b \in \mathbb{R}$.
+
+$$ Var(aX + b) = a^2Var(X)$$
+
+**Proposition**: $Var(X = 0)$ if and only if $P(X = E[X]) = 1$.
+
+Example: Let $X$ denote the outcome of a fair six sided die. Compute $Var(X)$.
+
+> **Recall**: $Var(X) = E[X^2] - E[X]^2$.   
+> We know $X \in \{1, .., 6\}$, $X^2 \in \{1, ..., 36\}$.
+>
+> $E[X] = 3.5 = \frac{7}{2}$.   
+> $E[X^2] = \sum x^2f(x) = \frac{1}{6}(1 + 4 + 9 + 16 + 25 + 36) = \frac{91}{6}$.
+> So, $Var(X) = \frac{91}{6} - \frac{49}{4}$.
+
+## Standard Deviation
+
+> **Note**: $Var(X)$ is a squared unit. To recover the original unit, we take the square root of variance.
+
+We define the **standard deviation** of a random variable $X$ as $SD(X)$, where $SD(X) = \sqrt{Var(X)}$.
+
+## Variability of Binomial
+
+> Suppose that $X \sim Bin(n, p)$. Then $Var(X) = np(1-p)$.
+
+## Variability of Poisson
+
+> Suppose that $X \sim Poi(\lambda)$. Then $Var(X) = \lambda$.
+
+Example: Suppose that $X_n$ is binomial with parameters $n$ and $p_n$, so that $np_n \to \lambda$ as $n \to \infty$. If $Y \sim Poi(\lambda)$, show that $\lim_{n \to \infty} Var(X_n) = Var(Y)$.
+
+## Variability of Hypergeometric
+
+> Suppose that $X \sim hyp(N, r, n)$. Then $Var(X) = n\frac{r}{N}(1 - \frac{r}{N})(\frac{N - n}{N - 1})$.
+
+## Variability of Hypergeometric
+
+> Suppose that $Z \sim NB(k, p)$. Then $Var(Z) = \frac{k(1-p)}{p^2}$.

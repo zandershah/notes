@@ -349,6 +349,7 @@ Therefore, the answer is <span class="math inline">\(12!{7 \choose 3}{13 \choose
 <p><span class="math display">\[\begin{aligned}E[aX + b] &amp;= \sum_{x \in X(S)}(ax + b)f(x) \\ &amp;= a\sum_{x \in X(S)}xf(x) + b\sum_{x \in X(S)} \\ &amp;= aE[x] + b\end{aligned}\]</span></p>
 </blockquote>
 <p>Note: It is <strong>not true</strong> in general that <span class="math inline">\(g(E[X]) = E[g(X)]\)</span>.</p>
+<p>An extention of linearity is, <span class="math inline">\(E[af(X) + bg(X)] = aE[f(X)] + bE[g(X)]\)</span>.</p>
 <h2 id="expectation-of-binomial">Expectation of Binomial</h2>
 <blockquote>
 <p>If <span class="math inline">\(X \sim Bin(n, p)\)</span> then <span class="math inline">\(E[X] = np\)</span>.</p>
@@ -393,6 +394,54 @@ E[Y] &amp;= \sum_{y \ge 0}yf(y) \\
 <h2 id="expectation-of-negative-binomial">Expectation of Negative Binomial</h2>
 <blockquote>
 <p>If <span class="math inline">\(Y \sim NB(k, p)\)</span>, then <span class="math inline">\(E[Y] = \frac{k(1-p)}{p}\)</span>.</p>
+</blockquote>
+<h1 id="variability">Variability</h1>
+<p>Expectation along may not be enough. Oftentimes, we want to study how much a random variable tends to deviate from its mean.</p>
+<ol type="1">
+<li><strong>Deviation</strong>: <span class="math inline">\(E[X - \mu] = E[X] - \mu\)</span>.</li>
+<li><strong>Absolute Deviation</strong>: <span class="math inline">\(E[|X - \mu|]\)</span>.</li>
+<li><strong>Squared Deviation</strong>: <span class="math inline">\(E[(X - \mu)^2]\)</span>. Turns out to be a useful measure of variability.</li>
+</ol>
+<h2 id="variance">Variance</h2>
+<p>The <strong>variance</strong> of a random variable <span class="math inline">\(X\)</span> is denoted <span class="math inline">\(Var(X)\)</span> and is defined by <span class="math inline">\(Var(X) = E[(X - E[X])^2]\)</span>. A simple calculation gives the <em>short cut formula</em>, <span class="math inline">\(Var(X) = E[X^2] = E[X]^2\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+E[(X - E[X])^2] &amp;= E[X^2 - 2XE[X] + E[X]^2] \\
+&amp;= E[X^2] - 2E[X]^2 + E[X]^2 \\
+&amp;= E[X^2] - E[X]^2
+\end{aligned}\]</span></p>
+<p>We know that <span class="math inline">\(E[(X - E[X])^2] \ge 0\)</span> so we can say that <span class="math inline">\(E[X^2] - E[X]^2 \ge 0\)</span>.</p>
+<h3 id="variance-of-linear-combination">Variance of Linear Combination</h3>
+<p>For any random variable <span class="math inline">\(X\)</span> and <span class="math inline">\(a, b \in \mathbb{R}\)</span>.</p>
+<p><span class="math display">\[ Var(aX + b) = a^2Var(X)\]</span></p>
+<p><strong>Proposition</strong>: <span class="math inline">\(Var(X = 0)\)</span> if and only if <span class="math inline">\(P(X = E[X]) = 1\)</span>.</p>
+<p>Example: Let <span class="math inline">\(X\)</span> denote the outcome of a fair six sided die. Compute <span class="math inline">\(Var(X)\)</span>.</p>
+<blockquote>
+<p><strong>Recall</strong>: <span class="math inline">\(Var(X) = E[X^2] - E[X]^2\)</span>.<br />
+We know <span class="math inline">\(X \in \{1, .., 6\}\)</span>, <span class="math inline">\(X^2 \in \{1, ..., 36\}\)</span>.</p>
+<p><span class="math inline">\(E[X] = 3.5 = \frac{7}{2}\)</span>.<br />
+<span class="math inline">\(E[X^2] = \sum x^2f(x) = \frac{1}{6}(1 + 4 + 9 + 16 + 25 + 36) = \frac{91}{6}\)</span>. So, <span class="math inline">\(Var(X) = \frac{91}{6} - \frac{49}{4}\)</span>.</p>
+</blockquote>
+<h2 id="standard-deviation">Standard Deviation</h2>
+<blockquote>
+<p><strong>Note</strong>: <span class="math inline">\(Var(X)\)</span> is a squared unit. To recover the original unit, we take the square root of variance.</p>
+</blockquote>
+<p>We define the <strong>standard deviation</strong> of a random variable <span class="math inline">\(X\)</span> as <span class="math inline">\(SD(X)\)</span>, where <span class="math inline">\(SD(X) = \sqrt{Var(X)}\)</span>.</p>
+<h2 id="variability-of-binomial">Variability of Binomial</h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(X \sim Bin(n, p)\)</span>. Then <span class="math inline">\(Var(X) = np(1-p)\)</span>.</p>
+</blockquote>
+<h2 id="variability-of-poisson">Variability of Poisson</h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(X \sim Poi(\lambda)\)</span>. Then <span class="math inline">\(Var(X) = \lambda\)</span>.</p>
+</blockquote>
+<p>Example: Suppose that <span class="math inline">\(X_n\)</span> is binomial with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p_n\)</span>, so that <span class="math inline">\(np_n \to \lambda\)</span> as <span class="math inline">\(n \to \infty\)</span>. If <span class="math inline">\(Y \sim Poi(\lambda)\)</span>, show that <span class="math inline">\(\lim_{n \to \infty} Var(X_n) = Var(Y)\)</span>.</p>
+<h2 id="variability-of-hypergeometric">Variability of Hypergeometric</h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(X \sim hyp(N, r, n)\)</span>. Then <span class="math inline">\(Var(X) = n\frac{r}{N}(1 - \frac{r}{N})(\frac{N - n}{N - 1})\)</span>.</p>
+</blockquote>
+<h2 id="variability-of-hypergeometric-1">Variability of Hypergeometric</h2>
+<blockquote>
+<p>Suppose that <span class="math inline">\(Z \sim NB(k, p)\)</span>. Then <span class="math inline">\(Var(Z) = \frac{k(1-p)}{p^2}\)</span>.</p>
 </blockquote>
 </body>
 </html>
