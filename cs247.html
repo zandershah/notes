@@ -1036,7 +1036,64 @@ rvalues are temporary objects.</p>
 </ol>
 <p>Example: Horse Races. The subject publishes the winning horse, the observers are individual betters who will declare victory if their horse wins.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">class</span> Subject {</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">    vector&lt;Observer *&gt; observers;</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">};</a></code></pre></div>
+<a class="sourceLine" id="cb34-2" data-line-number="2">    vector&lt;Observer *&gt; <span class="va">observers_</span>;</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">    <span class="dt">void</span> attach(Observer *ob) {</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">        <span class="va">observers_</span>.emplace_back(ob);</a>
+<a class="sourceLine" id="cb34-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb34-8" data-line-number="8">    <span class="dt">void</span> detach(Observer *ob);</a>
+<a class="sourceLine" id="cb34-9" data-line-number="9">    <span class="dt">void</span> notifyObservers() {</a>
+<a class="sourceLine" id="cb34-10" data-line-number="10">        <span class="cf">for</span> (<span class="kw">auto</span> &amp;p : <span class="va">observers_</span>) {</a>
+<a class="sourceLine" id="cb34-11" data-line-number="11">            p-&gt;notify();</a>
+<a class="sourceLine" id="cb34-12" data-line-number="12">        }</a>
+<a class="sourceLine" id="cb34-13" data-line-number="13">    }</a>
+<a class="sourceLine" id="cb34-14" data-line-number="14">    <span class="kw">virtual</span> ~Subject() = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb34-15" data-line-number="15">    Subject::Subject() {}</a>
+<a class="sourceLine" id="cb34-16" data-line-number="16">};</a>
+<a class="sourceLine" id="cb34-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb34-18" data-line-number="18"><span class="kw">class</span> Observer {</a>
+<a class="sourceLine" id="cb34-19" data-line-number="19"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb34-20" data-line-number="20">    <span class="kw">virtual</span> <span class="dt">void</span> notify() = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb34-21" data-line-number="21">    <span class="kw">virtual</span> ~Observer();</a>
+<a class="sourceLine" id="cb34-22" data-line-number="22">};</a>
+<a class="sourceLine" id="cb34-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb34-24" data-line-number="24"><span class="kw">class</span> Horserace : <span class="kw">public</span> Subject {</a>
+<a class="sourceLine" id="cb34-25" data-line-number="25">    ifstream <span class="va">in_</span>;</a>
+<a class="sourceLine" id="cb34-26" data-line-number="26">    string <span class="va">last_winner_</span>;</a>
+<a class="sourceLine" id="cb34-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb34-28" data-line-number="28"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb34-29" data-line-number="29">    Horserace(string source) : in{source} {}</a>
+<a class="sourceLine" id="cb34-30" data-line-number="30">    ~Horserace() {}</a>
+<a class="sourceLine" id="cb34-31" data-line-number="31">    <span class="dt">bool</span> runRace() {</a>
+<a class="sourceLine" id="cb34-32" data-line-number="32">        <span class="cf">return</span> <span class="va">in_</span> &gt;&gt; <span class="va">last_winner_</span>;</a>
+<a class="sourceLine" id="cb34-33" data-line-number="33">    }</a>
+<a class="sourceLine" id="cb34-34" data-line-number="34">    string getState() <span class="at">const</span> {</a>
+<a class="sourceLine" id="cb34-35" data-line-number="35">        <span class="cf">return</span> <span class="va">last_winner_</span>;</a>
+<a class="sourceLine" id="cb34-36" data-line-number="36">    }</a>
+<a class="sourceLine" id="cb34-37" data-line-number="37">};</a>
+<a class="sourceLine" id="cb34-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb34-39" data-line-number="39"><span class="kw">class</span> Bettor : <span class="kw">public</span> Observer {</a>
+<a class="sourceLine" id="cb34-40" data-line-number="40">    Horserace *<span class="va">subject_</span>;</a>
+<a class="sourceLine" id="cb34-41" data-line-number="41">    string <span class="va">name_</span>, <span class="va">horse_</span>;</a>
+<a class="sourceLine" id="cb34-42" data-line-number="42"></a>
+<a class="sourceLine" id="cb34-43" data-line-number="43"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb34-44" data-line-number="44">    Bettor(...) {</a>
+<a class="sourceLine" id="cb34-45" data-line-number="45">        <span class="va">subject_</span>-&gt;attach(<span class="kw">this</span>);</a>
+<a class="sourceLine" id="cb34-46" data-line-number="46">    }</a>
+<a class="sourceLine" id="cb34-47" data-line-number="47">    <span class="dt">void</span> notify() {</a>
+<a class="sourceLine" id="cb34-48" data-line-number="48">        string winner = <span class="va">subject_</span>-&gt;getState();</a>
+<a class="sourceLine" id="cb34-49" data-line-number="49">        cout &lt;&lt; (winner == <span class="va">horse_</span> ? <span class="st">&quot;Win!&quot;</span> : <span class="st">&quot;Lose.&quot;</span>) &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb34-50" data-line-number="50">    }</a>
+<a class="sourceLine" id="cb34-51" data-line-number="51">};</a></code></pre></div>
+<ul>
+<li>If you only have one ConcreteSubject, you may consider merging Subject and ConcreteSubject. Don’t do so lightly however, if you need to add another subject in the future you will have to refactor.</li>
+<li>If the state is trivial (i.e. getting notified is all the information you need), you may not need getState method.</li>
+<li>If the subject and the observer are the same (e.g. cells in a grid), you could merge these classes.</li>
+</ul>
+<h2 id="decorator-pattern">Decorator Pattern</h2>
+<p>Suppose you want to enhance an object (e.g. adding functionality or features).</p>
+<p>Example: Windowing System. We start with a basic window, and then add a toolbar, scrollbar, and a menu. We want the user to be able to choose these at runtime.</p>
+<p><img src="https://i.imgur.com/0tFP1IZ.jpg?1" /></p>
 </body>
 </html>
