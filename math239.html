@@ -370,6 +370,27 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <p>This is also <strong>reflexive</strong> and <strong>symmetric</strong>. Therefore, it is an <strong>equivalence</strong> relation.</p>
 <h2 id="cycles">Cycles</h2>
 <p>We define a <strong>cycle</strong> as a nontrivial closed walk, with no repeated vertices or edges. Cycles have length of at least 3, have an equal number of vertices and edges and are 2-regular.</p>
-<p><strong>Theorem</strong>: If every vertex of <span class="math inline">\(G\)</span> has degree at least 2, then <span class="math inline">\(G\)</span> contains a cycle.</p>
+<p><strong>Theorem</strong>: If every vertex of <span class="math inline">\(G\)</span> has degree at least 2, then <span class="math inline">\(G\)</span> contains a cycle. The converse is not true.</p>
+<blockquote>
+<p>Let <span class="math inline">\(v_0, v_1, ..., v_k\)</span> be a longest path in <span class="math inline">\(G\)</span> (such a path exists since every path uses at most <span class="math inline">\(|V(G)|\)</span> vertices). Vertex <span class="math inline">\(v_0\)</span> has a neighbour <span class="math inline">\(v_1\)</span>, but <span class="math inline">\(v_0\)</span> has a degree at least 2, so it has at least one other neighbour, say <span class="math inline">\(x\)</span>. If <span class="math inline">\(x\)</span> is not on the path, then the path <span class="math inline">\(x, v_0, ..., v_k\)</span> is longer than our longest path, which is a contradiction. So <span class="math inline">\(x = v_i\)</span> for some <span class="math inline">\(2 \le i \le k\)</span>, and <span class="math inline">\(v_0, v_1, ..., v_i, v_0\)</span> is a cycle in <span class="math inline">\(G\)</span>.</p>
+</blockquote>
+<h2 id="connectivity">Connectivity</h2>
+<p><strong>Definition</strong>: <span class="math inline">\(G\)</span> is <strong>connected</strong> if there is a u,v-path for every pair of vertices <span class="math inline">\(u, v\in V(G)\)</span>.</p>
+<p><strong>Theorem</strong>: If there exists a vertex <span class="math inline">\(u\)</span> such that a u,v-path exists for any <span class="math inline">\(v \in V(G)\)</span>, then <span class="math inline">\(G\)</span> is connected.</p>
+<blockquote>
+<p>Let <span class="math inline">\(x, y \in V(G)\)</span>. We are given that there exists an x,u-path and a u,y-path. Together they form a x,y-walk which means there exists an x,y-path. Since our choice of <span class="math inline">\(x, y\)</span> is arbitrary, <span class="math inline">\(G\)</span> is connected.</p>
+</blockquote>
+<p><strong>Theorem</strong>: The n-cube is connected.</p>
+<blockquote>
+<p>Let <span class="math inline">\(v_0\)</span> be the string of <span class="math inline">\(n\)</span> 0’s, let <span class="math inline">\(x\)</span> be any binary string of length <span class="math inline">\(n\)</span>. Suppose <span class="math inline">\(x\)</span> has <span class="math inline">\(k\)</span> 1’s, located at positions, <span class="math inline">\(i_1, ..., i_k\)</span>. Define <span class="math inline">\(k\)</span> strings <span class="math inline">\(v_1, ..., v_k\)</span> as follows. <span class="math inline">\(v_j\)</span> is a string of length <span class="math inline">\(n\)</span> with exactly <span class="math inline">\(j\)</span> 1’s positions <span class="math inline">\(i_1, ..., i_j\)</span>. Then <span class="math inline">\(V_j, V_{j+1}\)</span> differ in exactly one bit, at position <span class="math inline">\(i_{j+1}\)</span> for <span class="math inline">\(j = 0, ..., k - 1\)</span>. So they are adjacent in the n-cube. Then <span class="math inline">\(v_0, v_1, ..., v_k=x\)</span> is a <span class="math inline">\(v_0, x\)</span>-path. Therefore the n-cube is connected.</p>
+</blockquote>
+<h2 id="components-and-cut">Components and Cut</h2>
+<p><strong>Definition</strong>: A <strong>subgraph</strong> <span class="math inline">\(H\)</span> of <span class="math inline">\(G\)</span> has vertex set <span class="math inline">\(V(H) \subseteq V(G)\)</span> and edge set <span class="math inline">\(E(H) \subseteq E(G)\)</span> where each in edge in <span class="math inline">\(E(H)\)</span> joins 2 vertices in <span class="math inline">\(V(H)\)</span>. If <span class="math inline">\(|V(H)| = |V(G)|\)</span>, it is a <strong>spanning subgraph</strong>.</p>
+<p>Define a <strong>component</strong> of <span class="math inline">\(G\)</span> as a maximal connected nonempty subgraph of <span class="math inline">\(G\)</span>.</p>
+<ul>
+<li>A connected graph has exactly 1 component and a disconnected graph has at least 2 components.</li>
+<li>There is no edge joining a vertices from different components (if such an edge existed, our components would not be maximal).</li>
+</ul>
+<p>Let <span class="math inline">\(X \subseteq V(G)\)</span>. The <strong>cut induced by X</strong> is the set of all endpoints with exactly one endpoint in <span class="math inline">\(X\)</span>.</p>
 </body>
 </html>

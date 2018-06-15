@@ -419,4 +419,29 @@ This is also **reflexive** and **symmetric**. Therefore, it is an **equivalence*
 
 We define a **cycle** as a nontrivial closed walk, with no repeated vertices or edges. Cycles have length of at least 3, have an equal number of vertices and edges and are 2-regular.
 
-**Theorem**: If every vertex of $G$ has degree at least 2, then $G$ contains a cycle.
+**Theorem**: If every vertex of $G$ has degree at least 2, then $G$ contains a cycle. The converse is not true.
+
+> Let $v_0, v_1, ..., v_k$ be a longest path in $G$ (such a path exists since every path uses at most $|V(G)|$ vertices). Vertex $v_0$ has a neighbour $v_1$, but $v_0$ has a degree at least 2, so it has at least one other neighbour, say $x$. If $x$ is not on the path, then the path $x, v_0, ..., v_k$ is longer than our longest path, which is a contradiction. So $x = v_i$ for some $2 \le i \le k$, and $v_0, v_1, ..., v_i, v_0$ is a cycle in $G$.
+
+## Connectivity
+
+**Definition**: $G$ is **connected** if there is a u,v-path for every pair of vertices $u, v\in V(G)$. 
+
+**Theorem**: If there exists a vertex $u$ such that a u,v-path exists for any $v \in V(G)$, then $G$ is connected.
+
+> Let $x, y \in V(G)$. We are given that there exists an x,u-path and a u,y-path. Together they form a x,y-walk which means there exists an x,y-path. Since our choice of $x, y$ is arbitrary, $G$ is connected.
+
+**Theorem**: The n-cube is connected.
+
+> Let $v_0$ be the string of $n$ 0's, let $x$ be any binary string of length $n$. Suppose $x$ has $k$ 1's, located at positions, $i_1, ..., i_k$. Define $k$ strings $v_1, ..., v_k$ as follows. $v_j$ is a string of length $n$ with exactly $j$ 1's positions $i_1, ..., i_j$. Then $V_j, V_{j+1}$ differ in exactly one bit, at position $i_{j+1}$ for $j = 0, ..., k - 1$. So they are adjacent in the n-cube. Then $v_0, v_1, ..., v_k=x$ is a $v_0, x$-path. Therefore the n-cube is connected.
+
+## Components and Cut
+
+**Definition**: A **subgraph** $H$ of $G$ has vertex set $V(H) \subseteq V(G)$ and edge set $E(H) \subseteq E(G)$ where each in edge in $E(H)$ joins 2 vertices in $V(H)$. If $|V(H)| = |V(G)|$, it is a **spanning subgraph**.
+
+Define a **component** of $G$ as a maximal connected nonempty subgraph of $G$. 
+
+- A connected graph has exactly 1 component and a disconnected graph has at least 2 components.
+- There is no edge joining a vertices from different components (if such an edge existed, our components would not be maximal).
+
+Let $X \subseteq V(G)$. The **cut induced by X** is the set of all endpoints with exactly one endpoint in $X$.
