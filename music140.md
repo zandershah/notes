@@ -568,6 +568,96 @@ Beach Boys decline in popularity through the late 1960s because of Brian Wilson'
 - Now in University, many are looking for music that is more "serious".
     - Folk music tells stories about issues.
 - Sounds similar to Folk music that we studied before, except that these are professional musicians.
+- **Authentic** because it is not surrounded by money (at least on the surface).
+    - Attention was not called to the music industry.
+- Heavily involved in politics (*left*).
+
+**Woody Guthrie**: "This machine kills fascists".
+
+Example: "This Land Is Your Land" (Woody Guthrie, 1940)
+
+- Performed by The Weavers: Pete Seeger.
+- Very good musicians, not flashy.
+- Try hard to not seem **self-concious**.
+- Lyric content about the political left.
+
+After WWII, Weavers are blacklisted on suspicion of communism. Communist witch hunt Paul McCarthy (MyCarthyism). Folk music almost disappears until the baby boomers.
+
+The music industry creates a style of folk music, which is simlar to early music but more *produced*, smoother sounding, more *arranged*. Targetted to the leading age of baby boomers.
+
+Example: "Tom Dooley" (The Kingston Trio, 1959)
+
+**Bob Dylan** (1961 - 1965): Traditional fold singer / songwriter. Leader in new generation of folk musicians.
+
+Example: "A Hard Rain's A Gonna Fall" (Bob Dylan, 1963)
+
+- Started in 1962, finished in 1963.
+- Timelessness, many allegories.
+- Numeric references.
+- Cuban missile crisis, October 1962. US Navy surrounds Cuba.
+
+> Pop music is about to grow up as its audience is growing up.
+
+At the end of the **In-Between Years**, the music industry is worth the exact same as when it started.
+
+# The British Invasion
+
+- US early 1960s.
+- Optimism with Kennedy (Camelot) / ML King, Civil Rights.
+    - Kennedy was Catholic, an outsider. Young, understood the concerns of youth.
+-  Kennedy put forward an idea of what the United States could become, "The New Frontier".
+    - "Ask not what your country can do for you, but what you can do for your country."
+- August 1963, Washington, Martin Luther King Jr. "I Have a Dream".
+- November 1963, Kennedy assassinated.
+- Beatles arrive, very funny, very talented, not American.
+
+## Post War Britain
+
+> Return to DIY culture.
+
+Rebuilding the country goes on for years after the war. Young people get hit the hardest in terms of employment and opportunities.
+
+- **Skiffle**: Acoustic guitars, would variations of Rythmn & Blues / Rock 'n' Roll.
+- **The Quarrymen**: 1957 **John Lennon** / **Paul McCartney** (Vocals and Guitar). They both wrote songs very frequently.
+    - Paul had a friend who could play the guitar solos, **George Harrison** (Lead Guitar).
+    - Got very good at writing songs from intense practice.
+    - August 1960, **Pete Best** (Drums).
+    - Finalized on name **The Beatles**.
+- Temporarily have a bass player, Paul McCartney switches to bass.
+- Spend a lot of time playing in Hamburg, Germany, and Liverpool - The Cavern Club.
+    - At this time, Germany was split up, American soldiers were stationed in West Germany.
+    - The Beatles have a **"Rocker"** image.
+- **Brian Epstein**: Manager. December, 1961.
+    - Never managed a band, so he did things different.
+    - Change of image, from grease to puffy hair, teen idol look.
+    - Does not attempt to control them in interviews.
+    - Spends 6 months trying to get them a record contract. Every record company in Britain turned them down. They did not think there was any future in guitar-based popular music.
+- June, 1962. Parlophone, Comedy Division of EMI.
+    - Producer, **George Martin**. Master at recording and producing, sound effects in comedy.
+    - New drummer, **Ringo Starr**.
+
+Example: "Love Me Do" (September, 1962)
+
+- Does not feature Ringo.
+- Sells well enough to get them a second song.
+
+Example: "Please Please Me" (January, 1963)
+
+- AABA form.
+- Numerous rehearsed details.
+- Changes in rythmic density in vocal in A / B section.
+- Highest note at the end of the B section.
+- TPA-style attention to arrangement.
+
+No British bands have been popular in America recently. **Mythology**: Brian Epstein says he will not bring the Beatles to America until they have a hit record. "I Want To Hold Your Hand". February 1964, **The Beatles are coming**, branded as the new **British Invasion**.
+
+February 9th, 1964. Ed Sullivan Show, 70 million viewers. Tour lasts for two weeks, 2 million albums, $2.5 million merchandising.
+
+- Hysteria known as "Beatlemania".
+- April 1964, 12 songs on Billboard Top 100 **simultaneously**, including positions **1 to 5**.
+- End of 4th US Tour in 1965, $65 million.
+
+> The modern stadium concert happens because of the Beatles.
 
 # Textbook Readings I
 
