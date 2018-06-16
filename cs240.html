@@ -512,8 +512,8 @@ T(n) &amp;= cn + \frac{1}{n}\sum_{i = 0}^{n - 1}T(i) + \frac{1}{n}\sum_{i = 0}^{
 <p>In a decision tree that sorts n integers, there are at least n! leaves.</p>
 <p>We claim that in a binary tree of height <span class="math inline">\(h\)</span>, with <span class="math inline">\(L\)</span> leaves, <span class="math inline">\(L \le 2^{h + 1}\)</span>. We see that <span class="math inline">\(L \le \#\ nodes\)</span> and that is less than or equal to the number of nodes in a complete heap of height <span class="math inline">\(h\)</span>.</p>
 <p><span class="math display">\[\begin{aligned}
-n! &amp;\le 2^{n + 1} \\
-\log(n!) &amp;\le n + 1 \\
+n! &amp;\le 2^{h + 1} \\
+\log(n!) &amp;\le h + 1 \\
 \end{aligned}\]</span> We know that <span class="math inline">\(\log(n!) \in \Theta(n\log n)\)</span> so <span class="math inline">\(h \in \Omega({n \log n})\)</span>.</p>
 <h2 id="non-comparison-based-sorting">Non-Comparison-Based Sorting</h2>
 <ul>
