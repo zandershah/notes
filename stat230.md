@@ -468,3 +468,60 @@ Example: Suppose that $X_n$ is binomial with parameters $n$ and $p_n$, so that $
 ## Variability of Hypergeometric
 
 > Suppose that $Z \sim NB(k, p)$. Then $Var(Z) = \frac{k(1-p)}{p^2}$.
+
+Example: Suppose $X_n$ is binomial with parameters $n$ and $p_n$ so that $np_n \to \lambda$ as $n \to \infty$. If $Y \sim Poi(\lambda)$, show that $\lim_{n \to \infty}Var(X_n) = Var(Y)$.
+
+> **Recall**: $Var(X_n) = np_n(1-p_n)$. We also know that $\lim_{n \to \infty} np_n = \lambda$ and $\lim_{n \to \infty}(1 - p_n) = 1$. We can use the limit law.
+> $$\begin{aligned}\lim_{n \to \infty} Var(X_n) &= \lim_{n \to \infty}np_n \lim_{n \to \infty}(1-p_n) \\ &= \lambda \\ &= Var(Y)\end{aligned}$$
+
+# Skewness
+
+$$E\left[\left(\frac{X - E[X]}{SD(X)}\right)^3\right]$$
+
+# Kurtosis
+
+$$E\left[\left(\frac{X - E[X]}{SD(X)}\right)^4\right]$$
+
+**Remark**: There exists distributions without expectation. Suppose $X$ is a random variable with $f_X(x) = \frac{6}{(\pi x)^2}$. Then $E(X) = \infty$ and $Var(X)$ is not defined.
+
+Example: Let $X \sim Geo(p)$. Compute $E[X]$.
+
+> $f(x) = p(1-p)^x$, $x = 0, 1, 2 , ...$.
+> $$\begin{aligned}E[X] &= \sum_{x \ge 1} xp(1-p)^x \\ &= p(1-p)\sum_{x \ge 1}x(1-p)^{x-1}\end{aligned}$$
+> **Note**: $\frac{d}{d(1-p)} \frac{1}{1 - (1-p)} = \sum_{x \ge 1} x(1-p)^{x-1}$.
+>
+> $$\begin{aligned}E[X] &= p(1-p) \frac{d}{d(1-p)} \frac{1}{1 - (1-p)} \\ &= p(1-p)\frac{1}{p^2} \\ &= \frac{1-p}{p}\end{aligned}$$
+
+> $f(x) = p(1-p)^x$, $x = 0,1,2...$.
+> $$\begin{aligned}\sum_{x \ge 1}P(X \ge x) &= \sum_{x \ge 1}(1-P(X \le x-1)) \\ &= \sum_{x \ge 1}(1-(1-(1-p)^x)) \\ &= \frac{1-p}{1 - (1-p)} \\ &= \frac{1-p}{p}\end{aligned}$$
+
+**Theorem**: Darth Vader Rule. Let $X$ be a non-negative discrete random variable.
+
+$$E[X] = \sum_{x = 1}^\infty P(X \ge x) = \sum_{x \ge 0}P(X > x)$$
+
+Example: A person plays a game in which a fair coin is tossed until the first tail occurs. The person wins $\$2^x$ if $x$ tosses are needed for $x = 1,2,3,4,5$ but loses $\$256$ if $x > 5$.
+
+1. Determine the expected winnings.
+
+    > Let $W$ be the amount of winnings. $W = \begin{cases}2^x, &X = 1, 2,...5 \\ -256, &x > 5\end{cases}$. $W$ is a function of $X \sim Geo(p=\frac{1}{2})$. By law of unconcious statistician.
+    > $$\begin{aligned}E[W] &= \sum_{x = 1}^5 2^x P(X = x) - 256P(X > 5) \\ &= 2p + 2^2p(1-p) + ... 2^5p(1-p)^4 - 256(1-p)^5 \\ &= 1 + 1 + 1 + 1 + 1 - \frac{2^8}{2^5} \\ &= 5 - 8 \\ &= -3\end{aligned}$$
+
+2. Determine the variance of the winnings.
+
+    > $$\begin{aligned}Var(W) &= E[W^2] - E[W]^2 \\ &= 2101 \text{ Dollars}^2\end{aligned}$$
+
+Example: Yasmin and Zack are BMath students taking the exact same courses. Let $X$ be the number of assignments that they have in one week. The probability function of $X$ is.
+
+$x$ | 0 | 1 | 2 | 3 | 4 | 5
+---|---|---|---|---|---|---
+$f(x)$ | 0.09 | 0.1|0.25|0.4|0.15|0.01
+
+Yasmin drinks $2X^2$ cups per week and Zack drinks $|2X - 1|$ cups per week.
+
+1. Compute the expected number of cups that Yasmin and Zack individually drink in a week.
+
+    > $E[2X^2] = \sum_{x = 0}^5 2x^2 P(X = x)$
+    >
+    > $E[|2X-1|] = \sum_{x = 0}^5 |2x - 1|P(X = x)$.
+
+2. Compute the variance individually.

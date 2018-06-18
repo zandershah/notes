@@ -347,7 +347,8 @@ Persistent HTTP Response Time = RTT + n(RTT + transmission time).</p>
 <p>For non-persistent HTTP, we require 2 RTT per object. There is OS overhead for <em>each</em> TCP connection. Browsers often open parallel TCP connections to fetch referenced objects.</p>
 <p>For persistent HTTP, subsequent HTTP messages between client / server will be over the same connection so the client will sent requests as soon as it encounters a referenced object. There is as little as on RTT per referenced object.</p>
 <h3 id="http-request">HTTP Request</h3>
-<ol type="1">
+<p><img src="https://i.imgur.com/loyZ7qQ.png" /></p>
+<ul>
 <li><p>Request Line (method URL version).</p>
 <blockquote>
 <p>GET /index.html HTTP/1.1</p>
@@ -357,8 +358,7 @@ Persistent HTTP Response Time = RTT + n(RTT + transmission time).</p>
 <p>Host: www-net.cs.umass.edu User-Agent: Firefox/3.6.10 Keep-Alive: 115 Connection: keep-alive(requesting <em>persistent</em>)<br />
 (carriage return, line feed at start of line indicates end of header lines)</p>
 </blockquote></li>
-<li><p>Body.</p></li>
-</ol>
+</ul>
 <h3 id="http1.0">HTTP/1.0</h3>
 <ul>
 <li>GET (request data).</li>
@@ -371,11 +371,12 @@ Persistent HTTP Response Time = RTT + n(RTT + transmission time).</p>
 <li>DELETE (delete files specified in URL).</li>
 </ul>
 <h3 id="http-response">HTTP Response</h3>
-<ol type="1">
+<p><img src="https://i.imgur.com/gvVkbUt.png" /></p>
+<ul>
 <li>Status Line (protocol status_code status_phrase).</li>
 <li>Header Lines (content_length).</li>
 <li>Data Requested (e.g. HTML file).</li>
-</ol>
+</ul>
 <h3 id="cookies">Cookies</h3>
 <blockquote>
 <p>Used to identify users. ID is stored in client side which is sent in the header of subsequent messages.</p>

@@ -443,5 +443,69 @@ We know <span class="math inline">\(X \in \{1, .., 6\}\)</span>, <span class="ma
 <blockquote>
 <p>Suppose that <span class="math inline">\(Z \sim NB(k, p)\)</span>. Then <span class="math inline">\(Var(Z) = \frac{k(1-p)}{p^2}\)</span>.</p>
 </blockquote>
+<p>Example: Suppose <span class="math inline">\(X_n\)</span> is binomial with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p_n\)</span> so that <span class="math inline">\(np_n \to \lambda\)</span> as <span class="math inline">\(n \to \infty\)</span>. If <span class="math inline">\(Y \sim Poi(\lambda)\)</span>, show that <span class="math inline">\(\lim_{n \to \infty}Var(X_n) = Var(Y)\)</span>.</p>
+<blockquote>
+<p><strong>Recall</strong>: <span class="math inline">\(Var(X_n) = np_n(1-p_n)\)</span>. We also know that <span class="math inline">\(\lim_{n \to \infty} np_n = \lambda\)</span> and <span class="math inline">\(\lim_{n \to \infty}(1 - p_n) = 1\)</span>. We can use the limit law. <span class="math display">\[\begin{aligned}\lim_{n \to \infty} Var(X_n) &amp;= \lim_{n \to \infty}np_n \lim_{n \to \infty}(1-p_n) \\ &amp;= \lambda \\ &amp;= Var(Y)\end{aligned}\]</span></p>
+</blockquote>
+<h1 id="skewness">Skewness</h1>
+<p><span class="math display">\[E\left[\left(\frac{X - E[X]}{SD(X)}\right)^3\right]\]</span></p>
+<h1 id="kurtosis">Kurtosis</h1>
+<p><span class="math display">\[E\left[\left(\frac{X - E[X]}{SD(X)}\right)^4\right]\]</span></p>
+<p><strong>Remark</strong>: There exists distributions without expectation. Suppose <span class="math inline">\(X\)</span> is a random variable with <span class="math inline">\(f_X(x) = \frac{6}{(\pi x)^2}\)</span>. Then <span class="math inline">\(E(X) = \infty\)</span> and <span class="math inline">\(Var(X)\)</span> is not defined.</p>
+<p>Example: Let <span class="math inline">\(X \sim Geo(p)\)</span>. Compute <span class="math inline">\(E[X]\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(f(x) = p(1-p)^x\)</span>, <span class="math inline">\(x = 0, 1, 2 , ...\)</span>. <span class="math display">\[\begin{aligned}E[X] &amp;= \sum_{x \ge 1} xp(1-p)^x \\ &amp;= p(1-p)\sum_{x \ge 1}x(1-p)^{x-1}\end{aligned}\]</span> <strong>Note</strong>: <span class="math inline">\(\frac{d}{d(1-p)} \frac{1}{1 - (1-p)} = \sum_{x \ge 1} x(1-p)^{x-1}\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}E[X] &amp;= p(1-p) \frac{d}{d(1-p)} \frac{1}{1 - (1-p)} \\ &amp;= p(1-p)\frac{1}{p^2} \\ &amp;= \frac{1-p}{p}\end{aligned}\]</span></p>
+</blockquote>
+<blockquote>
+<p><span class="math inline">\(f(x) = p(1-p)^x\)</span>, <span class="math inline">\(x = 0,1,2...\)</span>. <span class="math display">\[\begin{aligned}\sum_{x \ge 1}P(X \ge x) &amp;= \sum_{x \ge 1}(1-P(X \le x-1)) \\ &amp;= \sum_{x \ge 1}(1-(1-(1-p)^x)) \\ &amp;= \frac{1-p}{1 - (1-p)} \\ &amp;= \frac{1-p}{p}\end{aligned}\]</span></p>
+</blockquote>
+<p><strong>Theorem</strong>: Darth Vader Rule. Let <span class="math inline">\(X\)</span> be a non-negative discrete random variable.</p>
+<p><span class="math display">\[E[X] = \sum_{x = 1}^\infty P(X \ge x) = \sum_{x \ge 0}P(X &gt; x)\]</span></p>
+<p>Example: A person plays a game in which a fair coin is tossed until the first tail occurs. The person wins <span class="math inline">\(\$2^x\)</span> if <span class="math inline">\(x\)</span> tosses are needed for <span class="math inline">\(x = 1,2,3,4,5\)</span> but loses <span class="math inline">\(\$256\)</span> if <span class="math inline">\(x &gt; 5\)</span>.</p>
+<ol type="1">
+<li><p>Determine the expected winnings.</p>
+<blockquote>
+<p>Let <span class="math inline">\(W\)</span> be the amount of winnings. <span class="math inline">\(W = \begin{cases}2^x, &amp;X = 1, 2,...5 \\ -256, &amp;x &gt; 5\end{cases}\)</span>. <span class="math inline">\(W\)</span> is a function of <span class="math inline">\(X \sim Geo(p=\frac{1}{2})\)</span>. By law of unconcious statistician. <span class="math display">\[\begin{aligned}E[W] &amp;= \sum_{x = 1}^5 2^x P(X = x) - 256P(X &gt; 5) \\ &amp;= 2p + 2^2p(1-p) + ... 2^5p(1-p)^4 - 256(1-p)^5 \\ &amp;= 1 + 1 + 1 + 1 + 1 - \frac{2^8}{2^5} \\ &amp;= 5 - 8 \\ &amp;= -3\end{aligned}\]</span></p>
+</blockquote></li>
+<li><p>Determine the variance of the winnings.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}Var(W) &amp;= E[W^2] - E[W]^2 \\ &amp;= 2101 \text{ Dollars}^2\end{aligned}\]</span></p>
+</blockquote></li>
+</ol>
+<p>Example: Yasmin and Zack are BMath students taking the exact same courses. Let <span class="math inline">\(X\)</span> be the number of assignments that they have in one week. The probability function of <span class="math inline">\(X\)</span> is.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(f(x)\)</span></td>
+<td>0.09</td>
+<td>0.1</td>
+<td>0.25</td>
+<td>0.4</td>
+<td>0.15</td>
+<td>0.01</td>
+</tr>
+</tbody>
+</table>
+<p>Yasmin drinks <span class="math inline">\(2X^2\)</span> cups per week and Zack drinks <span class="math inline">\(|2X - 1|\)</span> cups per week.</p>
+<ol type="1">
+<li><p>Compute the expected number of cups that Yasmin and Zack individually drink in a week.</p>
+<blockquote>
+<p><span class="math inline">\(E[2X^2] = \sum_{x = 0}^5 2x^2 P(X = x)\)</span></p>
+<p><span class="math inline">\(E[|2X-1|] = \sum_{x = 0}^5 |2x - 1|P(X = x)\)</span>.</p>
+</blockquote></li>
+<li><p>Compute the variance individually.</p></li>
+</ol>
 </body>
 </html>
