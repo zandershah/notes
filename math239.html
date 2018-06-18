@@ -392,5 +392,28 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <li>There is no edge joining a vertices from different components (if such an edge existed, our components would not be maximal).</li>
 </ul>
 <p>Let <span class="math inline">\(X \subseteq V(G)\)</span>. The <strong>cut induced by X</strong> is the set of all endpoints with exactly one endpoint in <span class="math inline">\(X\)</span>.</p>
+<ul>
+<li>The cut induced by a <strong>component</strong> is empty.</li>
+<li>If there is an empty cut, then is the graph is not connected? False, <span class="math inline">\(X = \emptyset, V(G)\)</span>.</li>
+</ul>
+<p><strong>Theorem</strong>: <span class="math inline">\(G\)</span> is not connected if and only if there exists a non-empty proper subset <span class="math inline">\(X\)</span> of <span class="math inline">\(V(G)\)</span> such that the cut induced by <span class="math inline">\(X\)</span> is empty.</p>
+<blockquote>
+<p>(<span class="math inline">\(\Rightarrow\)</span>) If <span class="math inline">\(G\)</span> is not connected, then <span class="math inline">\(G\)</span> has at least 2 components. Let <span class="math inline">\(H\)</span> be one of them. The set <span class="math inline">\(V(H)\)</span> is non-empty since <span class="math inline">\(H\)</span> is a component, and it is a proper subset of <span class="math inline">\(V(G)\)</span> since there is at least one other component. By previous observation, the cut induced by <span class="math inline">\(V(H)\)</span> is empty.</p>
+<p>(<span class="math inline">\(\Leftarrow\)</span>) Suppose <span class="math inline">\(X\)</span> is a non-empty proper subset of <span class="math inline">\(V(G)\)</span> that induces an empty cut. Let <span class="math inline">\(u \in X, v \notin X\)</span>. These vertices exist since <span class="math inline">\(X\)</span> is a non-empty proper subset. Assume there exist a u,v-path, say <span class="math inline">\(u=w_1,w_2,...,w_k=v\)</span>. Let <span class="math inline">\(i\)</span> be the largest index such that <span class="math inline">\(w_i \in X\)</span>. Such <span class="math inline">\(i\)</span> exists since <span class="math inline">\(w_1 \in X\)</span> and <span class="math inline">\(i &lt; k\)</span> since <span class="math inline">\(w_k \notin X\)</span>. So <span class="math inline">\(w_{i+1} \notin X\)</span>. Therefore <span class="math inline">\(w_i w_{i+1}\)</span> is in the cut induced by <span class="math inline">\(X\)</span>, which is a contradiction. So no u,v-path exists, so <span class="math inline">\(G\)</span> is not connected.</p>
+</blockquote>
+<p>Example: Let <span class="math inline">\(G_n\)</span> be the graph with all binary strings of length <span class="math inline">\(n\)</span> as vertices, and two strings are adjacent if and only if they differ in exactly 2 bits. We claim that <span class="math inline">\(G_n\)</span> is not connected.</p>
+<blockquote>
+<p>Let <span class="math inline">\(X\)</span> be all binary strings of length <span class="math inline">\(n\)</span> with even number of 1’s. This is a non-empty proper subset <span class="math inline">\(0..0 \in X\)</span> and <span class="math inline">\(1..0 \notin X\)</span>. Suppose <span class="math inline">\(st\)</span> is an edge where <span class="math inline">\(s \in X\)</span>. <span class="math inline">\(s\)</span> has an even number of 1’s. By changing 2 bits, <span class="math inline">\(t\)</span> also has an even number of 1’s. <span class="math inline">\(t \in X\)</span>, so no edge joins <span class="math inline">\(X\)</span> with <span class="math inline">\(V(G) \setminus X\)</span>. So the cut induced by <span class="math inline">\(X\)</span> is empty, and <span class="math inline">\(G_n\)</span> is not connected.</p>
+</blockquote>
+<h1 id="eulerian-circuits">Eulerian Circuits</h1>
+<blockquote>
+<p>An <strong>Eulerian Circuit</strong> is a closed walk that uses every edge of the graph exactly once.</p>
+</blockquote>
+<h2 id="properies-of-eulerian-circuits">Properies of Eulerian Circuits</h2>
+<p>Suppose <span class="math inline">\(G\)</span> has an Eulerian circuit.</p>
+<ul>
+<li>Assume <span class="math inline">\(G\)</span> is connected. Each time we visit a vertex, we need to use 2 distinct edges, one to get in, and one to get out. So the degree of each vertex is even.</li>
+</ul>
+<p>Which graphs have Eulerian ciruits?</p>
 </body>
 </html>

@@ -445,3 +445,28 @@ Define a **component** of $G$ as a maximal connected nonempty subgraph of $G$.
 - There is no edge joining a vertices from different components (if such an edge existed, our components would not be maximal).
 
 Let $X \subseteq V(G)$. The **cut induced by X** is the set of all endpoints with exactly one endpoint in $X$.
+
+- The cut induced by a **component** is empty.
+- If there is an empty cut, then is the graph is not connected? False, $X = \emptyset, V(G)$.
+
+**Theorem**: $G$ is not connected if and only if there exists a non-empty proper subset $X$ of $V(G)$ such that the cut induced by $X$ is empty.
+
+> ($\Rightarrow$) If $G$ is not connected, then $G$ has at least 2 components. Let $H$ be one of them. The set $V(H)$ is non-empty since $H$ is a component, and it is a proper subset of $V(G)$ since there is at least one other component. By previous observation, the cut induced by $V(H)$ is empty.
+>
+> ($\Leftarrow$) Suppose $X$ is a non-empty proper subset of $V(G)$ that induces an empty cut. Let $u \in X, v \notin X$. These vertices exist since $X$ is a non-empty proper subset. Assume there exist a u,v-path, say $u=w_1,w_2,...,w_k=v$. Let $i$ be the largest index such that $w_i \in X$. Such $i$ exists since $w_1 \in X$ and $i < k$ since $w_k \notin X$. So $w_{i+1} \notin X$. Therefore $w_i w_{i+1}$ is in the cut induced by $X$, which is a contradiction. So no u,v-path exists, so $G$ is not connected.
+
+Example: Let $G_n$ be the graph with all binary strings of length $n$ as vertices, and two strings are adjacent if and only if they differ in exactly 2 bits. We claim that $G_n$ is not connected.
+
+> Let $X$ be all binary strings of length $n$ with even number of 1's. This is a non-empty proper subset $0..0 \in X$ and $1..0 \notin X$. Suppose $st$ is an edge where $s \in X$. $s$ has an even number of 1's. By changing 2 bits, $t$ also has an even number of 1's. $t \in X$, so no edge joins $X$ with $V(G) \setminus X$. So the cut induced by $X$ is empty, and $G_n$ is not connected.
+
+# Eulerian Circuits
+
+> An **Eulerian Circuit** is a closed walk that uses every edge of the graph exactly once.
+
+## Properies of Eulerian Circuits
+
+Suppose $G$ has an Eulerian circuit.
+
+- Assume $G$ is connected. Each time we visit a vertex, we need to use 2 distinct edges, one to get in, and one to get out. So the degree of each vertex is even.
+
+Which graphs have Eulerian ciruits?
