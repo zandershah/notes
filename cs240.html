@@ -310,7 +310,11 @@ Therefore <span class="math inline">\(T(n) \in \Theta(n\log(n))\)</span>, for <s
 <blockquote>
 <p>A (binary) heap is a certain type of tree.</p>
 </blockquote>
-<p>Any binary tree with <span class="math inline">\(n\)</span> nodes has height at least <span class="math inline">\(\log(n + 1) - 1 \in \Omega(\log(n))\)</span>. 1. <strong>Structural Property</strong>: All levels of the heap are completely filled, except for the last level potentially. The entries in the last level are <em>left-justified</em>. 2. <strong>Heap-order Property</strong>: For any node <span class="math inline">\(i\)</span>, the <em>key</em> of <span class="math inline">\(i\)</span>’s parent is greater or equal to the <em>key</em> of <span class="math inline">\(i\)</span>.</p>
+<p>Any binary tree with <span class="math inline">\(n\)</span> nodes has height at least <span class="math inline">\(\log(n + 1) - 1 \in \Omega(\log(n))\)</span>.</p>
+<ol type="1">
+<li><strong>Structural Property</strong>: All levels of the heap are completely filled, except for the last level potentially. The entries in the last level are <em>left-justified</em>.</li>
+<li><strong>Heap-order Property</strong>: For any node <span class="math inline">\(i\)</span>, the <em>key</em> of <span class="math inline">\(i\)</span>’s parent is greater or equal to the <em>key</em> of <span class="math inline">\(i\)</span>.</li>
+</ol>
 <p>These are the properties for a <strong>max-heap</strong>. A <strong>min-heap</strong> is the same but with opposite order property.</p>
 <p><strong>Lemma</strong>: The height of a heap with <span class="math inline">\(n\)</span> nodes is <span class="math inline">\(\Theta(\log(n))\)</span>.</p>
 <blockquote>
@@ -594,7 +598,7 @@ n! &amp;\le 2^{h + 1} \\
 </blockquote>
 <h3 id="height-of-a-bst">Height of a BST</h3>
 <p>All of the functions above have cost <span class="math inline">\(\Theta(h)\)</span>, where <span class="math inline">\(h\)</span> is the height of the tree.</p>
-<p>If <span class="math inline">\(n\)</span> items are inserted, the worst case if <span class="math inline">\(\Theta(n)\)</span>. The best case is <span class="math inline">\(\Theta(\log(n))\)</span> because any binary tree with <span class="math inline">\(n\)</span> nodes has height <span class="math inline">\(\ge \log(n + 1) - 1\)</span>. It can be shown that the average case is <span class="math inline">\(\Theta(\log(n))\)</span>.</p>
+<p>If <span class="math inline">\(n\)</span> items are inserted, the worst case is <span class="math inline">\(\Theta(n)\)</span>. The best case is <span class="math inline">\(\Theta(\log(n))\)</span> because any binary tree with <span class="math inline">\(n\)</span> nodes has height <span class="math inline">\(\ge \log(n + 1) - 1\)</span>. It can be shown that the average case is <span class="math inline">\(\Theta(\log(n))\)</span>.</p>
 <h2 id="avl-trees">AVL Trees</h2>
 <blockquote>
 <p>Introduced by Adel’son-Vel’ski˘ı and Landis in 1962.</p>
