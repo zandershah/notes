@@ -1217,5 +1217,68 @@ rvalues are temporary objects.</p>
 <a class="sourceLine" id="cb37-15" data-line-number="15">    }</a>
 <a class="sourceLine" id="cb37-16" data-line-number="16">    <span class="kw">virtual</span> <span class="dt">void</span> drawShell() = <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb37-17" data-line-number="17">};</a></code></pre></div>
+<p>Subclasses cannot change the way a turtle is drawn, nor can they change how feet or head are drawn, but they can change how shell is drawn.</p>
+<h2 id="non-virtual-interface-nvi-idiom">Non-Virtual Interface (<em>NVI</em>) Idiom</h2>
+<blockquote>
+<p>The NVI idiom extends the template method by wrapping every virtual method with a non-virtual method.</p>
+</blockquote>
+<ul>
+<li>A public virtual method is really two things.
+<ul>
+<li>An interface to the client. Indicates provided behaviour, and pre / post conditions, as well as promise representation invariants.</li>
+<li>An interface (node) for subclasses. A hook for subclasses to insert specialized behaviour.</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>Hard to separate these 2 ideas if they’re wrapped up in one function declaration.</p>
+</blockquote>
+<ul>
+<li>What if you want to separate the customizable behaviour into two methods, with some non-customizable steps in between? We don’t want to change the public interface.</li>
+<li>How to make sure all derived classes conform to the pre / post conditions that the parent class promises?</li>
+</ul>
+<p>The NVI idiom says that all public methods should be <strong>non-virtual</strong>.</p>
+<p>All public methods should be non-virtual. All virtual methods should be private, or at the very least protected, with the exception of the destructor.</p>
+<p><strong>Bad Example</strong></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">class</span> DigitalMedia {</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">    <span class="co">// We cannot have control over play without changing all derived classes.</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">    <span class="kw">virtual</span> <span class="dt">void</span> play() = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">    <span class="kw">virtual</span> ~DigitalMedia();</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">};</a></code></pre></div>
+<p><strong>Translated to NVI</strong></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">class</span> DigitalMedia {</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">    <span class="kw">virtual</span> <span class="dt">void</span> doPlay() = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">    <span class="dt">void</span> play() {</a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">        doPlay();</a>
+<a class="sourceLine" id="cb39-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb39-7" data-line-number="7">    <span class="kw">virtual</span> ~DigitalMedia();</a>
+<a class="sourceLine" id="cb39-8" data-line-number="8">};</a></code></pre></div>
+<p><strong>Now</strong> if we want to exert extra control over play, we just put the behaviour we want in the superclass play method. We can add more <em>hooks</em> by calling more virtual methods.</p>
+<ul>
+<li>It’s much easier to keep control of our interface from the beginning than having to refactor after the fact.</li>
+</ul>
+<h2 id="adapter-pattern">Adapter Pattern</h2>
+<blockquote>
+<p>Solves the problem of interface mismatch between two modules.</p>
+</blockquote>
+<ul>
+<li>We want to reuse an existing subsystem (class or library) but its interface doesn’t match our needs.</li>
+<li>The interface of one of our modules may change and we dont want to make major changes to the existing working code.</li>
+<li>An adapter calss maps one interface (<strong>adaptee</strong>) to another (<strong>target</strong>).</li>
+</ul>
+<p>Example: STL Stacks are implemented as an adapter of a container class (usually a deque).</p>
+<ol type="1">
+<li><strong>Object Adapater</strong>.
+<ul>
+<li>Done through composition, the adapter owns an object of adaptee type.</li>
+<li>Generally preferred, better, and cleaner.</li>
+</ul></li>
+<li><strong>Class Adapter</strong>.
+<ul>
+<li>Done through inheritance.</li>
+<li>Should only be used if behaviour needs to be adjusted and it is easier to do so with overriding.</li>
+</ul></li>
+</ol>
 </body>
 </html>
