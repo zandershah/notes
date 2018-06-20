@@ -467,6 +467,28 @@ Example: Let $G_n$ be the graph with all binary strings of length $n$ as vertice
 
 Suppose $G$ has an Eulerian circuit.
 
-- Assume $G$ is connected. Each time we visit a vertex, we need to use 2 distinct edges, one to get in, and one to get out. So the degree of each vertex is even.
-
 Which graphs have Eulerian ciruits?
+
+**Theorem**: Let $G$ be a connected graph. Then $G$ has an Eulerian circuit if and only if every vertex of $G$ has even degree.
+
+> ($\Rightarrow$) Assume $G$ is connected. Each time we visit a vertex, we need to use 2 distinct edges, one to get in, and one to get out. So the degree of each vertex is even.
+>
+> ($\Leftarrow$) We prove by induction on the number of edges of $G$, $m$.
+>
+> **Base Case**: When $G$ has 0 edges, it has a trivial Eulerian circuit.   
+>
+> **Induction Hypothesis**: Assume that any graph with less than $m$ edges that is connected with all even degrees has an Eulerian circuit.     
+>
+> **Induction Step**: Suppose $G$ has $m$ edges. Start at a vertex $v$, and continue to walk in $G$ without repeating edges until we cannot continue. We must have stopped at $v$, since each time we visit another vertex, an odd number of edges are used at that vertex, so we can continue. Let $W$ be this closed walk. If $W$ contains all edges of $G$, then it is an Eulerian circuit, and we are done. Otherwise, we remove the edges $W$ from $G$ to obtain the graph $G^\prime$. Since every vertex is incident with an even number of edges in $W$, and it has an even degree in $G$, every vertex has even degree in $G^\prime$. Now, $G^\prime$ consists of components with even degrees, and each has less than $m$ edges. By induction, each component has of $G^\prime$ has an Eulerian circuit. Since $G$ is connected, each component of $G^\prime$ has a vertex in common with $W$. So we can obtain an Eulerian circuit for $G$ by attaching each Eulerian circuit of the components of $G^\prime$ at the vertex it has in common with $W$.
+
+**Corollary**: **Edge Disjoint Walks**. If $G$ has $2k$ odd-degree vertices and is connected, then the edges of $G$ can be covered in $k$ edge-disjoint walks. We can add edges $k$ that pair up odd degree vertices in order to obtain an Eulerian circuit. Removing these $k$ added edges will result in a $k$ edge disjoint walks.
+
+# Bridges
+
+**Definition**: An edge $e$ is a **bridge** of $G$ if removing $e$ from $G$ increases the number of components. Alternate names are **cut-edge**, **isthmus**.
+
+**Notation**: We represent removing $e$ from $G$ as $G - e$.
+
+**Theorem**: If $e=uv$ is a bridge of a connected graph $G$, then $G - e$ has exactly 2 components. Also $u,v$ are in different components of $G - e$.
+
+**Theorem**: $e$ is a bridge of $G$ if and only if $e$ is not in any cycle in $G$.
