@@ -490,12 +490,39 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <blockquote>
 <p>Distributed database storing resource records (RR).</p>
 </blockquote>
-<p><strong>RR Format: (Name, Value, Type, TTL).</strong> - type = A. - <strong>name</strong> is hostname. - <strong>value</strong> is IP address. - (www.amazon.com, 220.180.90.10, A, TTL). - type = NS. - <strong>name</strong> is domain (e.g. foo.com). - <strong>value</strong> is hostname of authorative name server for this domain. - (uwaterloo.ca, dns.uwaterloo.ca, NS, TTL). - type = CNAME. - <strong>name</strong> is alias name for some “canonical” (the real) name. - <strong>value</strong> is canonical name. - (www.ibm.com, servereast.backup2.ibm.com, CNAME, TTL). - type = MX. - <strong>value</strong> is the name fo mailserver associated with <strong>name</strong>.</p>
+<p><strong>RR Format: (Name, Value, Type, TTL).</strong></p>
+<ul>
+<li>type = A.
+<ul>
+<li><strong>name</strong> is hostname.</li>
+<li><strong>value</strong> is IP address.</li>
+<li>(www.amazon.com, 220.180.90.10, A, TTL).</li>
+</ul></li>
+<li>type = NS.
+<ul>
+<li><strong>name</strong> is domain (e.g. foo.com).</li>
+<li><strong>value</strong> is hostname of authorative name server for this domain.</li>
+<li>(uwaterloo.ca, dns.uwaterloo.ca, NS, TTL).</li>
+</ul></li>
+<li>type = CNAME.
+<ul>
+<li><strong>name</strong> is alias name for some “canonical” (the real) name.</li>
+<li><strong>value</strong> is canonical name.</li>
+<li>(www.ibm.com, servereast.backup2.ibm.com, CNAME, TTL).</li>
+</ul></li>
+<li>type = MX.
+<ul>
+<li><strong>value</strong> is the name fo mailserver associated with <strong>name</strong>.</li>
+</ul></li>
+</ul>
 <h3 id="dns-protocol-messages">DNS Protocol, Messages</h3>
 <blockquote>
 <p><em>Query</em> and <em>reply</em> messages have the same <em>message format</em>.</p>
 </blockquote>
-<p><strong>msg Header</strong>: &gt; Chapter 2 slides have a better visualization for format.</p>
+<p><strong>msg Header</strong>:</p>
+<blockquote>
+<p>Chapter 2 slides have a better visualization for format.</p>
+</blockquote>
 <ul>
 <li><strong>Identification</strong> (<em>2 bytes</em>)16 bit number for query, reply to user uses the same number.</li>
 <li><strong>Flags</strong> (<em>2 bytes</em>):
