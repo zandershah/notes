@@ -856,5 +856,93 @@ n! &amp;\le 2^{h + 1} \\
 <li>Storing children in dictionaries is the best in theory but is not practical unless the <span class="math inline">\(|\Sigma|\)</span> is very large.</li>
 </ul></li>
 </ul>
+<h1 id="hashing">Hashing</h1>
+<h2 id="direct-addressing">Direct Addressing</h2>
+<p>Consider every key <span class="math inline">\(k\)</span> is an integer with <span class="math inline">\(0 \le k &lt; M\)</span>. We can implement a dictionary easily, using an array <span class="math inline">\(A\)</span> of size <span class="math inline">\(M\)</span> that stores <span class="math inline">\((k,v)\)</span> via <span class="math inline">\(A[k] = v\)</span>. <span class="math inline">\(\Theta(M)\)</span>.</p>
+<blockquote>
+<p>Direct addressing isn’t possible if keys are not integers. The storate is very wasteful if <span class="math inline">\(n &lt;&lt; M\)</span>.</p>
+</blockquote>
+<p><strong>Hashing</strong>: Map the keys to a small range of integers and then use direct addressing.</p>
+<h2 id="collisions">Collisions</h2>
+<p>Generally, hash function <span class="math inline">\(h\)</span> is not injective, so many keys can map to the same integer. We get <strong>collisions</strong> when we want to insert <span class="math inline">\((k,v)\)</span> into the table, but <span class="math inline">\(T[h(k)]\)</span> is already occupied.</p>
+<p>Assume we have <span class="math inline">\(n\)</span> random integers in <span class="math inline">\(\{0, ..., M - 1\}\)</span>. <span class="math display">\[P(\text{no collisions}) = \frac{M^{(n)}}{M^n} = (1)\left(1 - \frac{1}{M}\right)\left(1 - \frac{2}{M}\right)...\left(1-\frac{n-1}{M}\right)\]</span></p>
+<ol type="1">
+<li>Allow multiple items at each table location (<strong>chaining</strong>).</li>
+<li>Allow each item to go into multiple locations (<strong>open addressing</strong>).
+<ul>
+<li>Could allow many other locations (probe sequence) or just one other (cuckoo hacking).</li>
+</ul></li>
+</ol>
+<h2 id="load-factor-and-re-hashing">Load Factor and Re-Hashing</h2>
+<p>We evaluate strategies by the cost of <strong>search</strong>, <strong>insert</strong>, and <strong>delete</strong> functions. This evaluation is done in terms of the <strong>load factor</strong> <span class="math inline">\(\alpha = \frac{n}{M}\)</span>.</p>
+<p>We keep the load factor small by <strong>rehashing</strong> when needed.</p>
+<ul>
+<li>Keep track of <span class="math inline">\(n\)</span> and <span class="math inline">\(M\)</span> throughout operations.</li>
+<li>If <span class="math inline">\(\alpha\)</span> gets too large, we create a new, larger hash-table, and re-insert all items into the new table.</li>
+<li>Rehashing costs <span class="math inline">\(\Theta(M + n)\)</span> but we can ignore this term when amortizing over all operations.</li>
+<li>We should also re-hash when <span class="math inline">\(\alpha\)</span> gets too small, so that the space is always <span class="math inline">\(\Theta(n)\)</span>.</li>
+</ul>
+<h2 id="separate-chaining">Separate Chaining</h2>
+<p>Each table entry is a <strong>bucket</strong> containing 0 or more KVPs. This could be implemented by any dictionary (or even another hash-table). The simplest approach is to use an unsorted linked list in each bucket. This is called collision resolution by <strong>separate chaining</strong>.</p>
+<ul>
+<li>We insert to the front of the list.</li>
+</ul>
+<h3 id="complexity-of-chaining">Complexity of Chaining</h3>
+<p>Recall the <strong>load factor</strong> <span class="math inline">\(\alpha = \frac{n}{M}\)</span>. We have a <strong>Uniform Hashing Assumption</strong>, each value is equally likely.</p>
+<p><strong>Proposition</strong>: Under uniform hashing, the average length of a bucket is <span class="math inline">\(\alpha = \frac{n}{M}\)</span>.</p>
+<blockquote>
+<p>We define <span class="math inline">\(X_{i,j} = \begin{cases}1, &amp;\text{ if } h(k_i) = j \\ 0\end{cases}\)</span> as the probability that element <span class="math inline">\(i\)</span> is in bucket <span class="math inline">\(j\)</span>. The length of bucket <span class="math inline">\(j\)</span> is then <span class="math inline">\(\sum_{i = 1}^n X_{i,j}\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}E(\text{length } B_j) &amp;= E(\sum_{i = 1}^n X_{i,j}) \\ &amp;= \sum_{i = 1}^n E(X_{i,j}) \\ &amp;= \sum_{i=1}^n \frac{1}{M} \\ &amp;= \frac{n}{M} = \alpha\end{aligned}\]</span></p>
+</blockquote>
+<ul>
+<li><strong>Search / Delete</strong>: <span class="math inline">\(\Theta(1 + \alpha)\)</span> average case, <span class="math inline">\(\Theta(n)\)</span> worst case.</li>
+<li><strong>Insert</strong>: <span class="math inline">\(O(1)\)</span> worst case.</li>
+<li><strong>Space</strong>: <span class="math inline">\(\Theta(M + n) = \Theta(\frac{n}{\alpha} + n)\)</span>.</li>
+</ul>
+<p>If we maintain <span class="math inline">\(\alpha \in \Theta(1)\)</span>, then the average costs are <span class="math inline">\(\Theta(1)\)</span> and space is <span class="math inline">\(\Theta(n)\)</span>.</p>
+<h2 id="open-addressing">Open Addressing</h2>
+<blockquote>
+<p>Each hash table entry holds only one item, but any key <span class="math inline">\(k\)</span> can go in multiple locations.</p>
+</blockquote>
+<p><strong>search</strong> and <strong>insert</strong> follow a <strong>probe sequence</strong> of possible locations for key <span class="math inline">\(k\)</span> until an empty spot is found.</p>
+<p><strong>delete</strong> becomes problematic. We cannot leave an <em>empty spot</em> behind, because the next search might not go far enough.</p>
+<ol type="1">
+<li>We can move later items in the probe sequence forward.</li>
+<li><strong>Lazy deletion</strong>: Mark the spot in <em>deleted</em> rather than empty, and continue searching past deleted spots.</li>
+</ol>
+<p>The simplest method for open addressing is <strong>linear probing</strong>. <span class="math inline">\(h(k,i) = (h(k)+1) \mod M\)</span>, for some has function <span class="math inline">\(h\)</span>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">def</span> insert(T, (k, v)):</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(M):</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">        <span class="cf">if</span> T[h(k, j)] <span class="kw">is</span> <span class="st">&quot;empty&quot;</span> <span class="kw">or</span> <span class="st">&quot;deleted&quot;</span>:</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">            T[h(k, j)] <span class="op">=</span> v</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">            <span class="cf">return</span> <span class="st">&quot;success&quot;</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">    <span class="cf">return</span> <span class="st">&quot;faliure&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">def</span> search(T, k):</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(M):</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">        <span class="cf">if</span> T[h(k, j)] <span class="kw">is</span> <span class="st">&quot;deleted&quot;</span>:</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">            <span class="cf">return</span> <span class="st">&quot;not found&quot;</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">        <span class="cf">elif</span> key(T[h(k, j)]) <span class="op">==</span> k:</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">            <span class="cf">return</span> T[h(k, j)]</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">    <span class="cf">return</span> <span class="st">&quot;not found&quot;</span></a></code></pre></div>
+<h2 id="indepedent-hash-functions">Indepedent Hash Functions</h2>
+<ul>
+<li>Some hashing methods require <strong>two</strong> hash functions, <span class="math inline">\(h_1, h_2\)</span>.</li>
+<li>These hash functions should be <strong>independent</strong> in the sense that the random variables are independent.</li>
+<li>Using two modular hash-functions may often lead to dependencies.</li>
+<li>A better idea is to use a <strong>multiplicative method</strong> for the second hash function. <span class="math inline">\(h(k) = \lfloor M(kA - \lfloor kA \rfloor)\rfloor\)</span>.
+<ul>
+<li><span class="math inline">\(A\)</span> is some floating-point number with <span class="math inline">\(0&lt; A &lt; 1\)</span>.</li>
+<li>Knuth suggests <span class="math inline">\(A = \frac{\sqrt 5 - 1}{2}\)</span>.</li>
+</ul></li>
+</ul>
+<h3 id="double-hashing">Double Hashing</h3>
+<ul>
+<li>Assume we have two hash indepenent functions <span class="math inline">\(h_1, h_2\)</span>.</li>
+<li>Assume further that <span class="math inline">\(h_2(k) \neq 0\)</span> and that <span class="math inline">\(h_2(k)\)</span> is relatively prime with the table-size <span class="math inline">\(M\)</span> for all keys <span class="math inline">\(k\)</span>. (Choose <span class="math inline">\(M\)</span> prime).</li>
+</ul>
+<p>Suppose <span class="math inline">\(M = 16, h_1(k) = 3\)</span>, <span class="math inline">\(h_2(k) = 6\)</span>. Then the cycle is of length <span class="math inline">\(\frac{16}{\gcd(6, 16)} = 8\)</span>. If <span class="math inline">\(M\)</span> is prime, the cycle length is guaranteed to be <span class="math inline">\(M\)</span>.</p>
+<ul>
+<li><strong>Double hashing</strong>: Open addressing with probe sequence, <span class="math inline">\(h(k,i) = h_1(k) + i \cdot h_2(k) \mod M\)</span>.</li>
+</ul>
 </body>
 </html>
