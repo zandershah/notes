@@ -659,6 +659,58 @@ February 9th, 1964. Ed Sullivan Show, 70 million viewers. Tour lasts for two wee
 
 > The modern stadium concert happens because of the Beatles.
 
+## The Beatles
+
+- Going to stadium sand concerts.
+- Brought back the core idea of the golden age of rock 'n' roll. To produce and write their own songs.
+
+**Mersey Beat**: Gerry and the Pacemakers, The Searchers, Thw Swinging Blue Jeans. Named after a river close to their hometown.
+
+======================
+
+- Went beyond having a bunch of songs in an album, they were linked by a theme. Storied from their childhood.
+- The first **"concept"** album? Only about half of their songs were about the concept.
+- They wanted people to listen to the entire thing in order because the songs are seen as a part of a larger whole.
+
+> Shift to "Hippie Aesthetic".
+
+- Marks the shift form Rock 'n' Roll to **Rock**.
+- Moving from singles to albums, dancing to listening, entertainers to *serious* musicians. We start to hear the word **artist** used to describe musicians.
+- FM radio, **AOR** (Album Oriented Rock). FM could broadcast radio in stereo.
+
+Brian Epstein dies of a drug overdose just after Sgt. Peppers comes out. Beatles begin to fragment (John / Paul). Spring of 1970, Paul McCartney announces that he is leaving the band, Beatles break up. 6 years and 2 months from Ed Sullivan to the end of the band.
+
+## The British Blues Revival
+
+Interest in blues in London. Chess Tour, Muddy Waters had a huge following in London.
+
+### Rolling Stones
+
+- Fleetwood Mac, Cream, Eric Clapton, Led Zepplin, The Rolling Stones.
+- Leader of Rolling Stones is Brian Jones. Put the band together, organizer. Loved African-American blues, band was named after a Muddy Waters song.
+    - Debut at the Marquee Club in July 1962.
+- Andrew Long Oldham becomes the manager in Spring (April) 1963. Had worked for Brian Epstein before, tried to do the same for the Rolling Stones.
+
+1. "Dont try to out-beatle the Beatles".
+    - Change of image in 1963. Mick Jagger gets his dangerous style. Anti-Beatles.
+    - In 1963-1964, all of their singles are covers.
+    - 1964, "England's Newest Hitmakers". Mostly blues covers.
+
+Example: "King Bee" (April 1964)
+
+- Blues form.
+- Cover of song by Slim Harpo (1957).
+
+> Kieth Richards and Mick Jagger trying to write songs, John and Paul are helping them out.
+
+Example: "(I Can't Get No) Satisfaction" (Jagger / Richard)
+
+- First US #1 pop for the Rolling Stones.
+
+Compared to the Beatles, they have a very different image (working class), almost like they traded places. The way they made music is the difference between **process** versus **product**. 
+
+The Beatles were about the destination, had a clear goal in mind, even give up live performances because they can't reproduce the same sound. The Rolling Stones are about the journey, they never play a song in the exact same way.
+
 # Textbook Readings I
 
 ## Chart Positions
