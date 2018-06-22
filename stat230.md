@@ -525,3 +525,55 @@ Yasmin drinks $2X^2$ cups per week and Zack drinks $|2X - 1|$ cups per week.
     > $E[|2X-1|] = \sum_{x = 0}^5 |2x - 1|P(X = x)$.
 
 2. Compute the variance individually.
+
+# Continuous Random Variables
+
+## Expectation
+
+If $X$ is a continuous random variable with pdf $f(x)$ and $g: \mathbb{R} \to \mathbb{R}$.
+
+$$E[g(X)] = \int_{-\infty}^\infty g(x)f(x)dx$$
+
+$$\begin{aligned}Var(X) &= E[(X - E[X])^2] \\ &= \int_{-\infty}^\infty(x-E[X])^2 f(x)dx \\ &= E[X^2] - E[X]^2\end{aligned}$$
+
+Example: $X$ has pdf $f(x) = \begin{cases}6x(1-x), &0 \le x \le 1 \\ 0, &\text{otherwise}\end{cases}$. Compute $E[X]$.
+
+> $$\begin{aligned}E[X] &= \int_0^1 xf(x)dx \\ &=\int_0^1 x(6x-1)dx \\ &= 6\int_0^1 x^2 - x^3 dx \\ &= 6\left[\frac{x^3}{3} - \frac{x^4}{4}\right]_0^1 \\ &= 6\left(\frac{1}{3} - \frac{1}{4}\right) \\ &= \frac{1}{2} \end{aligned}$$
+
+Question: Suppose $X$ has pdf $f(x)$ and $f$ is an even function around the origin on $\mathbb{R}$. If $E[X]$ is well defined, what can we say about it?
+
+> $E[X] = 0$.
+
+Example: Suppose $X$ has CDF $F(x) = \begin{cases}0, &x<0\\\frac{x^2}{2}, &0\le x<\frac{1}{2} \\ \frac{7x}{4} - \frac{3}{4}, &\frac{1}{2} \le x < 1 \\ 1, &x \ge 1 \end{cases}$. Compute $E[X]$ and $Var(X)$.
+
+> We are given **cdf**, but $f(x) = \frac{d}{dx} F(x)$, so we can obtain the pdf.
+>
+> $f(x) = \begin{cases}0, &x < 0\\x, &0\le x < \frac{1}{2} \\ \frac{7}{4} &\frac{1}{2} \le x < 1 \\ 0, &x \ge 1\end{cases}$.
+>
+> $$\begin{aligned}E[X] &= \int_0^1 xf(x)dx \\ &= \int_0^\frac{1}{2}x^2dx + \int_\frac{1}{2}^1 \frac{7x}{4}dx \\ &= \left(\frac{x^3}{3}\right)_0^\frac{1}{2} + \left(\frac{7x^2}{8}\right)_\frac{1}{2}^1 \\ &= 0.6979\end{aligned}$$
+
+If we have a function $g$ which has an inverse over the range of $X$, then we have a fairly easy way of obtaining $Y = g(X)$. In short, the method is as follows.
+
+1. Write the CDF of $Y$ as a function of $X$.
+2. Use the CDF of $X$ to find the CDF of $Y$. If you want the pdf, take derivatives.
+3. Find the range of $Y$.
+
+Example: Let $X$ be a continous random variable with the following pdf and cdf.
+
+$$f(x) = \begin{cases}\frac{1}{4}, &0 < x \le 4\\ 0, &\text{otherwise}\end{cases}$$
+
+$$F(x) = \begin{cases}1, &x \le 0\\ \frac{x}{4} &0<x< 4\\ 1, &x \ge 4\end{cases}$$
+
+Find the pdf of $Y = X^{-1}$.
+
+> $$\begin{aligned}P(Y \le y) &= P(\frac{1}{X} \le y) \\ &= P(\frac{1}{y} \le X) \\ &= 1 - P(X \le \frac{1}{y} \\&= 1 - F_x\left(\frac{1}{y}\right) \\ &= -f_x\left(\frac{1}{y}\right) \frac{d}{dy} \cdot \frac{1}{y} \\ &= -\frac{1}{4} \cdot \frac{-1}{y^2}, \text{ when } 0 < \frac{1}{y} \le 4 \\ &= \frac{1}{4y}, \text {when } \frac{1}{4} \le y < \infty\end{aligned}$$
+
+## Continuous Uniform Distribution
+
+We say that $X$ has a **continuous uniform distribution** on interval $(a, b)$ if $X$ has pdf $f(x) = \begin{cases}\frac{1}{b-a}, &x \in (a, b)\\ 0, &\text{otherwise}\end{cases}$.
+
+This is abbreviated $X \sim U(a, b)$.
+
+Example: Let $X \sim U(a, b). Show that $E[X] = \frac{a+b}{2}$ and the $V(X) = \frac{(b-a)^2}{12}$.
+
+> $$\begin{aligned}E[X] &= \int_a^b x\frac{1}{b-a}dx \\ &= \frac{1}{b-a} \int_a^b xdx \\ &= \frac{1}{b-a}\left[\frac{x^2}{2}\right]_a^b \\ &= \frac{b^2 - a^2}{2(b - a)} \\ &= \frac{a+b}{2}\end{aligned}$$

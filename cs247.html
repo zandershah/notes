@@ -1280,5 +1280,26 @@ rvalues are temporary objects.</p>
 <li>Should only be used if behaviour needs to be adjusted and it is easier to do so with overriding.</li>
 </ul></li>
 </ol>
+<h2 id="facade-pattern">Facade Pattern</h2>
+<ul>
+<li>When subsystem interfaces change, we only need to update Facade.</li>
+<li>Supports teamwork, not everyone needs to dedicate time understanding complex subsystem.</li>
+<li>Reduce code complexity.</li>
+<li>Decoupling subsystem from client code, promotes reuse of subsystems.</li>
+<li>Important to note that original subsystem is still available for the client to use.
+<ul>
+<li>The major difference between Facade and Adapter.</li>
+</ul></li>
+</ul>
+<h2 id="strategy-pattern">Strategy Pattern</h2>
+<blockquote>
+<p>We want to vary an algorithm (<em>strategy</em>) at runtime.</p>
+</blockquote>
+<p>We encapsulate the algorithm itself. We define an algorithm as a component object of our class that uses. We will have an ABC for algorithm and use inheritance to specialize.</p>
+<p><img src="https://i.imgur.com/wxPLhKQ.jpg?1" /></p>
+<ul>
+<li>Goal is allowed to switch strategies at runtime. Simply swap strategy pointers.</li>
+<li>Similar to Factory Method.</li>
+</ul>
 </body>
 </html>
