@@ -491,4 +491,38 @@ Which graphs have Eulerian ciruits?
 
 **Theorem**: If $e=uv$ is a bridge of a connected graph $G$, then $G - e$ has exactly 2 components. Also $u,v$ are in different components of $G - e$.
 
-**Theorem**: $e$ is a bridge of $G$ if and only if $e$ is not in any cycle in $G$.
+> Suppose, by way of contradiction, that $G - e$ has at least 3 components. Let $H$ be a component of $G-e$ that does not contain $u$ nor $v$. So the cut induced by $V(H)$ in $G-e$ is empty. Since $u, v$ are not in $V(H)$, the edge $uv$ is not in the cut induced by $V(H)$ in $G$. So this cut is still empty in $G$, hence $G$ is disconnected. Contradiction.
+
+> Now suppose $u,v$ are in the same component of $G-e$. Let $J$ be the other component. So the cut induced by $V(J)$ in $G - e$ is empty. But $e=uv$ is not in the cut induced by $V(J)$ in $G$. So this cut is empty in $G$, contradiction.
+
+**Theorem**: $e$ is a bridge of $G$ if and only if $e$ is not in any cycle of $G$.
+
+> ($\Rightarrow$) Suppose $e$ is in a cycle $C$. Then in $G - e$, it contains the path $C - e$, which joins the two endpoints of $e$. So they are in the same component. So $e$ cannot be a bridge, since the two endpoints of a bridge are in different components of $G - e$.
+>
+> ($\Leftarrow$) Suppose $e$ is not a bridge. Consider component $H$ of $G$ that contains $e$. Then $H - e$ is connected, and has a path $P$ joining the two endpoints of $e$. Since $P$ does not contain $e$, $P + e$ is a cycle in $G$ containing $e$.
+
+# Trees
+
+**Definition**: A **tree** is a connected graph with no cycles. A tree is minimally connected.
+
+**Definition**: A **forest** is a graph with no cycles.
+
+**Lemma**: Every edge in a tree / forest is a bridge.
+
+> No edge is in a cycle, so all edges are bridges.
+
+**Definition**: A **leaf** in a tree / forest is a vertex of degree 1.
+
+**Theorem**: A tree with at least 2 vertices has at least 2 leaves.
+
+> Let $v_0, v_1, ..., v_k$ be a longest path in a tree $T$. Since $T$ has at least 2 vertices, this path has at least one edge. Consider $v_0$. Now $v_0$ has a neigbour $v_1$, but $v_0$ cannot have a neighbour outside the path, for otherwise we obtain a longer path. Also, $v_0$ can not have another neighbour $v_i$ in the path, since $v_0, ..., v_i, v_0$ would be a cycle. So $v_0$ has degree 1, so it is a leaf. Similarily, $v_k$ is a leaf. So $T$ has at least 2 leaves.
+
+**Theorem**: Every tree with $n$ vertices has $n-1$ edges.
+
+> We prove by induction on the number of vertices $n$.
+>
+> **Base Case**: When $n=1$, there are $0 = 1-1$ edges.
+>
+> **Induction Hypothesis**: Assume that every any tree with $n - 1$ vertices has $n - 2$ edges, for some $n \ge 2$.
+>
+> **Induction Step**: Let $T$ be a tree with $n$ vertices. Let $v$ be a leaf of $T$, let $e$ be its incident edge. $T - e$ has 2 components, one of which is just $v$. Let $T^\prime$ be obtained from $T$ by removing $e$ and $v$. $T^\prime$ has only one component, and has no cycles. So $T^\prime$ is a tree with $n-1$ vertices. By induction, $T^\prime$ has $n-2$ edges. Together with $e$, $T$ has $n-1$ edges.
