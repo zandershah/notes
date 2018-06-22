@@ -1385,6 +1385,138 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Routers in different AS can run different protocols / algorithms.</li>
 </ul></li>
 <li><strong>Gateway routers</strong> are at the <em>edge</em> of its own AS and has links to routers in other AS.</li>
+<li>The forwarding table is updated by both Intra-AS and Inter-AS routing algorithms.</li>
 </ul>
+<h4 id="inter-as-tasks">Inter-AS Tasks</h4>
+<p><img src="https://i.imgur.com/nIIb3oV.png" /></p>
+<p>Example: Single AS.</p>
+<ul>
+<li>Suppose router in AS1 receives a datagram destined outside of AS1. The router should forward packet to a gateway router, but which one?</li>
+<li>AS1 must learn which destinations are reachable through AS2, and which are reachable through AS3. AS1 must propogate this reachability information to all routers in AS1.</li>
+</ul>
+<p>Example: Multiple ASes.</p>
+<ul>
+<li>Now suppose AS1 learns from the inter-AS protocol that subnet <span class="math inline">\(x\)</span> is reachable from both AS2 <strong>and</strong> AS3.</li>
+<li>To configure the forwarding table, router 1d must determine which gateway it should forward packets to.
+<ul>
+<li>This is also the job of inter-AS routing protocol.</li>
+</ul></li>
+</ul>
+<p><strong>Hot Potato Routing</strong>: We want to get rid of our package as fast as possible, so we choose the gateway that has the lowest local cost.</p>
+<h2 id="routing-in-the-internet">4.6 Routing in the Internet</h2>
+<h3 id="intra-as-routing">Intra-AS Routing</h3>
+<blockquote>
+<p><strong>Interior Gateway Protocols (<em>IGP</em>)</strong>.</p>
+</blockquote>
+<ul>
+<li><strong>RIP</strong>: Routing Information Protocol.</li>
+<li><strong>OSPF</strong>: Open Shortest Path First.</li>
+<li><strong>IGRP</strong>: Interior Gateway Routing Protocol (Cisco proprietary)&gt;</li>
+</ul>
+<h4 id="rip-routing-information-protocol">RIP (<em>Routing Information Protocol</em>)</h4>
+<ul>
+<li>Distance vector algorithm except the distance is measured by the number of hops (edge cost of 1), with a maximumum of 15 hops.</li>
+<li>DVs are exchanged every 30s in response messages (<strong>advertistements</strong>).
+<ul>
+<li>Up to 25 destination <strong>subnets</strong> in each advertisement.</li>
+</ul></li>
+</ul>
+<p>If no advertistement is heard after 180s, the neighbour / link is declared dead.</p>
+<ul>
+<li>Routes via neighbour are invalidated.</li>
+<li>New advertisements send to neighbours.
+<ul>
+<li>Neighbours in turn send out new advertisements (if tables are changed).</li>
+</ul></li>
+<li>We use <strong>poison reverse</strong> to prevent ping-pong loops.
+<ul>
+<li>Infinite distance is 16 hops.</li>
+</ul></li>
+</ul>
+<p>RIP routing tables are managed by <strong>application-level</strong> process called route-d (daemon).</p>
+<ul>
+<li>Routers need more than the bottom 3 layers to run RIP.</li>
+<li>Advertistements are sent in UDP packets, periodically repeated.</li>
+</ul>
+<h4 id="ospf-open-shortest-path-first">OSPF (<em>Open Shortest Path First</em>)</h4>
+<ul>
+<li>“<strong>Open</strong>”: Publicly available.</li>
+<li>Uses link state algorithm.
+<ul>
+<li>LS packet dissemination.</li>
+<li>Topology map at each node.</li>
+<li>Route computation using Dijkstra’s algorithm.</li>
+</ul></li>
+<li>OSPF advertistement carries one entry per neighbours.</li>
+<li>Advertisements are flooded to the <strong>entire</strong> AS.
+<ul>
+<li>Carried in OSPF messages directly over IP rather than TCP or UDP.</li>
+</ul></li>
+<li><strong>IS-IS Routing Protocol</strong>: Nearly identical to OSPF.</li>
+<li><strong>Security</strong>: All messages are authenticated to prevent malicious intrusion.</li>
+<li><strong>Multi</strong>ple same-cost <strong>path</strong>s are allowed. Allows for load balancing.</li>
+<li>For each link, multiple cost metrics for different <strong>TOS</strong>.</li>
+<li><strong>Unicast</strong> and <strong>multicast</strong> support. Unicast is 1-to-1, multicast is 1-to-many.</li>
+<li>Allows for <strong>hierarchical</strong> OSPF in large domains.</li>
+</ul>
+<h4 id="hierarchical-ospf">Hierarchical OSPF</h4>
+<ul>
+<li><strong>Two-level hierarchy</strong>: Local area, backbone.
+<ul>
+<li>Link-state advertisements only done in areas.</li>
+<li>Each node has detailed area topology, only knows direction to networks in other areas.</li>
+</ul></li>
+<li><strong>Area border routers</strong>: <em>“Summarize”</em> distances to nets in own area, and avertise to other area border routers.</li>
+<li><strong>Backbone routers</strong>: Run OSPF limited to backbone.</li>
+<li><strong>Boundary routers</strong>: Connect to others AS’s.</li>
+</ul>
+<h3 id="inter-as-routing-bgp">Inter-AS Routing (BGP)</h3>
+<blockquote>
+<p>Border Gateway Protocol. De facto inter-domain routing protocol, the glue that holds the Internet together.</p>
+</blockquote>
+<ul>
+<li><strong>eBGP</strong> (<em>external</em>): Obtains subnet reachability from neighbouring ASs.</li>
+<li><strong>iBGP</strong> (<em>internal</em>): Propogate reachability information to all AS-internal routers.</li>
+<li>Determines <em>good</em> routes to other networks based on reachabaility information and policy.</li>
+</ul>
+<h4 id="bgp-messages">BGP Messages</h4>
+<ul>
+<li>Exchanged between peers over TCP connection.</li>
+<li><strong>OPEN</strong>: Opens TCP connection to peer and authenticates sender.</li>
+<li><strong>UPDATE</strong>: Advertise new path or withdraw old.</li>
+<li><strong>KEEPALIVE</strong>: Keep connection alive, ACKs OPEN requests.</li>
+<li><strong>NOTIFICATION</strong>: Reports errors in previous messages, also used to close connections.</li>
+</ul>
+<h4 id="path-attributes-and-bgp-routers">Path Attributes and BGP Routers</h4>
+<ul>
+<li>Advertised prefix includes BGP attributes.</li>
+<li><strong>AS-PATH</strong>: Contains ASs through which prexix advertisement has passed.</li>
+<li><strong>NEXT-HOP</strong>: Indicates specific internal-AS router to next-hop AS.</li>
+<li>Gateway router receiving route advertisement uses <strong>import policy</strong> to accept / decline.</li>
+</ul>
+<h4 id="bgp-route-selection">BGP Route Selection</h4>
+<p>We only continue to the next step if there are still ties.</p>
+<ol type="1">
+<li>Local preference value attribute, policy decision.</li>
+<li>Shortest AS-PATH.</li>
+<li>Closest NEXT-HOP (OSPF).</li>
+<li>Additional criteria.</li>
+</ol>
+<h3 id="entry-in-forwarding-table">Entry in Forwarding Table</h3>
+<ol type="1">
+<li>Router becomes aware of prefix.
+<ul>
+<li>BGP message contains <strong>“routes”</strong>. Route is a prefix and attributes, AS-PATH, NEXT-HOP, …</li>
+<li>Router may receive multiple routes for the <strong>same</strong> prefix. We must select one route using the routine above.</li>
+<li>Use selected route’s NEXT-HOP attribute.</li>
+</ul></li>
+<li>Router determines output port for prefix.
+<ul>
+<li>Use BGP route selection to find the best inter-AS route.</li>
+<li>Use OSPF to find the best intra-AS route.</li>
+<li>Router identify router port for that best route.</li>
+</ul></li>
+<li>Router enters prefix-port in forwarding table.</li>
+</ol>
 </body>
 </html>
