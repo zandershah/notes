@@ -343,7 +343,7 @@ Example: A lottery is conducted in which 7 numbers are drawn without replacement
 
 ## "Law of the Unconscious Statistiation"
 
-If $g: \mathbb{R} \to \mathbb{R}$, then for a random variable $X$ with probability function $f(x), the expected value of $g(x) is given be $\sum_{x \in S(X)}g(x)f(x)$.
+If $g: \mathbb{R} \to \mathbb{R}$, then for a random variable $X$ with probability function $f(x)$, the expected value of $g(x)$ is given be $\sum_{x \in S(X)}g(x)f(x)$.
 
 To retrieve our original expectation function, we set $g(x) = x$.
 
