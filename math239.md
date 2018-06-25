@@ -526,3 +526,43 @@ Which graphs have Eulerian ciruits?
 > **Induction Hypothesis**: Assume that every any tree with $n - 1$ vertices has $n - 2$ edges, for some $n \ge 2$.
 >
 > **Induction Step**: Let $T$ be a tree with $n$ vertices. Let $v$ be a leaf of $T$, let $e$ be its incident edge. $T - e$ has 2 components, one of which is just $v$. Let $T^\prime$ be obtained from $T$ by removing $e$ and $v$. $T^\prime$ has only one component, and has no cycles. So $T^\prime$ is a tree with $n-1$ vertices. By induction, $T^\prime$ has $n-2$ edges. Together with $e$, $T$ has $n-1$ edges.
+
+**Theorem**: In a forest with $n$ vertices and $k$ components, there are $n - k$ edges.
+
+> In each component, there is one fewer edge than vertices. Over $k$ components, there are $k$ fewer edges.
+
+**Theorem**: In a tree $T$, there is a unique u,v-path for any $u,v \in T$.
+
+> Suppose there are two u,v-paths, $P_1$, $P_2$. There is an edge $e$ in one path, say $P_1$, but not in the other. Consider $T - e$. Suppose $x$ is closer to $u$ than $y$ in $P_1$. Then, the $xu$ path in $P_1$ followed by the $uv$ path $P_2$ followed by the $vy$ path in $P_1$ is an x,y-walk in $T-e$. So $x,y$ are in the same component of $T-e$, constradicting the fact that $e$ is a bridge. So there is a unique u,v-path in $T$.
+
+**Theorem**: A tree is bipartite.
+
+> Induction on a tree with $n$ vertices.
+
+## Spanning Trees
+
+> $T$ is a **spanning tree** of $G$ if $T$ is a spanning subgraph of $G$ that is a tree.
+
+**Theorem**: $G$ connected if and only if $G$ has a spanning tree.
+
+> ($\Leftarrow$) If $T$ is a spanning tree, then there is a u,v-path in $T$ for any $u,v \in V(T)$. This path is also in $G$, so $G$ is connected.
+>
+> ($\Rightarrow$) Induction on the number of cycles.
+> 
+> **Base Case**: When there are no cycles, $G$ is already its own spanning tree.
+>
+> **Induction Hypothesis**: Any connected grpah with fewer cycles than $G$ has a spanning tree.
+>
+> **Induction Step**: Since $G$ has at least one cycle, $G$ has an edge $e$ that is not a bridge. Then $G - e$ is connected, and has fewer cycles. By induction, $G - e$ has a spanning tree $T$. Then $T$ is a spanning tree for $G$.
+
+**Corollary**: If $G$ is connected with $n$ vertices and $n-1$ edges, then $G$ is a tree.
+
+> Since $G$ is connected, it has a spanning tree $T$. Now $T$ has $n-1$ edges, the same as $G$, so $G = T$.
+
+**Theorem**: Let $G$ be a graph with $n$ vertices. If any of the 2 conditions hold for $G$, then $G$ is a tree.
+
+1. $G$ is connected.
+2. $G$ has no cycles.
+3. $G$ has $n-1$ edges.
+
+**Theorem**: If $T$ is a spanning tree of $G$ and $e$ is an edge of $G$ that is not in $T$, then $T + e$ contains exactly one cycle $C$. Moreover, if $e^\prime$ is any edge in $C$, then $T + e - e^\prime$ is also a spanning tree of $G$.

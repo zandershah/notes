@@ -455,5 +455,40 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <p><strong>Induction Hypothesis</strong>: Assume that every any tree with <span class="math inline">\(n - 1\)</span> vertices has <span class="math inline">\(n - 2\)</span> edges, for some <span class="math inline">\(n \ge 2\)</span>.</p>
 <p><strong>Induction Step</strong>: Let <span class="math inline">\(T\)</span> be a tree with <span class="math inline">\(n\)</span> vertices. Let <span class="math inline">\(v\)</span> be a leaf of <span class="math inline">\(T\)</span>, let <span class="math inline">\(e\)</span> be its incident edge. <span class="math inline">\(T - e\)</span> has 2 components, one of which is just <span class="math inline">\(v\)</span>. Let <span class="math inline">\(T^\prime\)</span> be obtained from <span class="math inline">\(T\)</span> by removing <span class="math inline">\(e\)</span> and <span class="math inline">\(v\)</span>. <span class="math inline">\(T^\prime\)</span> has only one component, and has no cycles. So <span class="math inline">\(T^\prime\)</span> is a tree with <span class="math inline">\(n-1\)</span> vertices. By induction, <span class="math inline">\(T^\prime\)</span> has <span class="math inline">\(n-2\)</span> edges. Together with <span class="math inline">\(e\)</span>, <span class="math inline">\(T\)</span> has <span class="math inline">\(n-1\)</span> edges.</p>
 </blockquote>
+<p><strong>Theorem</strong>: In a forest with <span class="math inline">\(n\)</span> vertices and <span class="math inline">\(k\)</span> components, there are <span class="math inline">\(n - k\)</span> edges.</p>
+<blockquote>
+<p>In each component, there is one fewer edge than vertices. Over <span class="math inline">\(k\)</span> components, there are <span class="math inline">\(k\)</span> fewer edges.</p>
+</blockquote>
+<p><strong>Theorem</strong>: In a tree <span class="math inline">\(T\)</span>, there is a unique u,v-path for any <span class="math inline">\(u,v \in T\)</span>.</p>
+<blockquote>
+<p>Suppose there are two u,v-paths, <span class="math inline">\(P_1\)</span>, <span class="math inline">\(P_2\)</span>. There is an edge <span class="math inline">\(e\)</span> in one path, say <span class="math inline">\(P_1\)</span>, but not in the other. Consider <span class="math inline">\(T - e\)</span>. Suppose <span class="math inline">\(x\)</span> is closer to <span class="math inline">\(u\)</span> than <span class="math inline">\(y\)</span> in <span class="math inline">\(P_1\)</span>. Then, the <span class="math inline">\(xu\)</span> path in <span class="math inline">\(P_1\)</span> followed by the <span class="math inline">\(uv\)</span> path <span class="math inline">\(P_2\)</span> followed by the <span class="math inline">\(vy\)</span> path in <span class="math inline">\(P_1\)</span> is an x,y-walk in <span class="math inline">\(T-e\)</span>. So <span class="math inline">\(x,y\)</span> are in the same component of <span class="math inline">\(T-e\)</span>, constradicting the fact that <span class="math inline">\(e\)</span> is a bridge. So there is a unique u,v-path in <span class="math inline">\(T\)</span>.</p>
+</blockquote>
+<p><strong>Theorem</strong>: A tree is bipartite.</p>
+<blockquote>
+<p>Induction on a tree with <span class="math inline">\(n\)</span> vertices.</p>
+</blockquote>
+<h2 id="spanning-trees">Spanning Trees</h2>
+<blockquote>
+<p><span class="math inline">\(T\)</span> is a <strong>spanning tree</strong> of <span class="math inline">\(G\)</span> if <span class="math inline">\(T\)</span> is a spanning subgraph of <span class="math inline">\(G\)</span> that is a tree.</p>
+</blockquote>
+<p><strong>Theorem</strong>: <span class="math inline">\(G\)</span> connected if and only if <span class="math inline">\(G\)</span> has a spanning tree.</p>
+<blockquote>
+<p>(<span class="math inline">\(\Leftarrow\)</span>) If <span class="math inline">\(T\)</span> is a spanning tree, then there is a u,v-path in <span class="math inline">\(T\)</span> for any <span class="math inline">\(u,v \in V(T)\)</span>. This path is also in <span class="math inline">\(G\)</span>, so <span class="math inline">\(G\)</span> is connected.</p>
+<p>(<span class="math inline">\(\Rightarrow\)</span>) Induction on the number of cycles.</p>
+<p><strong>Base Case</strong>: When there are no cycles, <span class="math inline">\(G\)</span> is already its own spanning tree.</p>
+<p><strong>Induction Hypothesis</strong>: Any connected grpah with fewer cycles than <span class="math inline">\(G\)</span> has a spanning tree.</p>
+<p><strong>Induction Step</strong>: Since <span class="math inline">\(G\)</span> has at least one cycle, <span class="math inline">\(G\)</span> has an edge <span class="math inline">\(e\)</span> that is not a bridge. Then <span class="math inline">\(G - e\)</span> is connected, and has fewer cycles. By induction, <span class="math inline">\(G - e\)</span> has a spanning tree <span class="math inline">\(T\)</span>. Then <span class="math inline">\(T\)</span> is a spanning tree for <span class="math inline">\(G\)</span>.</p>
+</blockquote>
+<p><strong>Corollary</strong>: If <span class="math inline">\(G\)</span> is connected with <span class="math inline">\(n\)</span> vertices and <span class="math inline">\(n-1\)</span> edges, then <span class="math inline">\(G\)</span> is a tree.</p>
+<blockquote>
+<p>Since <span class="math inline">\(G\)</span> is connected, it has a spanning tree <span class="math inline">\(T\)</span>. Now <span class="math inline">\(T\)</span> has <span class="math inline">\(n-1\)</span> edges, the same as <span class="math inline">\(G\)</span>, so <span class="math inline">\(G = T\)</span>.</p>
+</blockquote>
+<p><strong>Theorem</strong>: Let <span class="math inline">\(G\)</span> be a graph with <span class="math inline">\(n\)</span> vertices. If any of the 2 conditions hold for <span class="math inline">\(G\)</span>, then <span class="math inline">\(G\)</span> is a tree.</p>
+<ol type="1">
+<li><span class="math inline">\(G\)</span> is connected.</li>
+<li><span class="math inline">\(G\)</span> has no cycles.</li>
+<li><span class="math inline">\(G\)</span> has <span class="math inline">\(n-1\)</span> edges.</li>
+</ol>
+<p><strong>Theorem</strong>: If <span class="math inline">\(T\)</span> is a spanning tree of <span class="math inline">\(G\)</span> and <span class="math inline">\(e\)</span> is an edge of <span class="math inline">\(G\)</span> that is not in <span class="math inline">\(T\)</span>, then <span class="math inline">\(T + e\)</span> contains exactly one cycle <span class="math inline">\(C\)</span>. Moreover, if <span class="math inline">\(e^\prime\)</span> is any edge in <span class="math inline">\(C\)</span>, then <span class="math inline">\(T + e - e^\prime\)</span> is also a spanning tree of <span class="math inline">\(G\)</span>.</p>
 </body>
 </html>
