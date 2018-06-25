@@ -1301,5 +1301,82 @@ rvalues are temporary objects.</p>
 <li>Goal is allowed to switch strategies at runtime. Simply swap strategy pointers.</li>
 <li>Similar to Factory Method.</li>
 </ul>
+<h1 id="measures-of-design-quality">Measures of Design Quality</h1>
+<h2 id="coupling">Coupling</h2>
+<blockquote>
+<p>The degree to which distinct modules interact and rely / <strong>depend</strong> on each other.</p>
+</blockquote>
+<ul>
+<li>If multiple modules are highly coupled, it is indicative to bad design.</li>
+</ul>
+<h3 id="severity-of-coupling">Severity of Coupling</h3>
+<ol type="1">
+<li>(<strong>Low</strong>) Modules communicate via function calls with basic parameters / results.</li>
+<li>Modules pass arrays / structs back and forth.</li>
+<li>Modules affect each other’s control flow.</li>
+<li>Modules share global data.</li>
+<li>(<strong>High</strong>) Modules share / have access to each other’s implementations (<em>friends</em>).</li>
+</ol>
+<h3 id="high-coupling">High Coupling</h3>
+<ul>
+<li>Bad since changes to one module require greater changes to another.</li>
+<li>Hard to reuse individual modules.</li>
+</ul>
+<h2 id="cohesion">Cohesion</h2>
+<blockquote>
+<p>How closely elements of a module are related to each other.</p>
+</blockquote>
+<h3 id="levels-of-cohesion">Levels of Cohesion</h3>
+<ol type="1">
+<li>(<strong>Low</strong>) Arbitrary grouping of unrelated elements. Example: utility.</li>
+<li>Element share a common theme, otherwise unrelated.</li>
+<li>Elements manipulate the state over the lifetime of an entity.</li>
+<li>(<strong>High</strong>) Elements cooperate to perform exactly one task.</li>
+</ol>
+<h3 id="low-cohesion">Low Cohesion</h3>
+<ul>
+<li>Indicates poorly organized code.</li>
+<li>Hard to understand or maintain.</li>
+</ul>
+<blockquote>
+<p><strong>Goal</strong>: Low coupling and high cohesion.</p>
+</blockquote>
+<h1 id="decoupling-the-interface-mvc">Decoupling the Interface (<strong>MVC</strong>)</h1>
+<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">class</span> ChessBoard {</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">    ...</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">    cout &lt;&lt; <span class="st">&quot;Your Move&quot;</span> &lt;&lt; ...</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">};</a></code></pre></div>
+<ul>
+<li>This is bad design, inhibits code reuse.</li>
+<li>What if you wanted to reuse ChessBoard class, but not have it communicate through stdout.</li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">class</span> ChessBoard {</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">    ostream &amp;out;</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">    ...</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">    out &lt;&lt; <span class="st">&quot;Your Move&quot;</span> &lt;&lt; ...</a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">};</a></code></pre></div>
+<ul>
+<li>Better, but what if we want a graphical interface?</li>
+<li>ChessBoard should not be communicating at all.</li>
+<li><strong>“Single Responsibilty Principle”</strong>: A class should only have one reason to change.</li>
+</ul>
+<h2 id="model-view-controller">Model-View-Controller</h2>
+<ul>
+<li>Separate the distinct notions of data (state), the presentation of the data, and the control of the data.</li>
+<li><strong>Model</strong>: The main data you are manipulating.</li>
+<li><strong>View</strong>: How the model is displayed to the user.</li>
+<li><strong>Controller</strong>: How the model is manipulated.</li>
+</ul>
+<h3 id="model">Model</h3>
+<ul>
+<li>Can have multiple views (e.g. graphical / text).</li>
+<li>Does not need to know about their detials.</li>
+<li>Could be implemented as a class observer, or communicate through the controller.</li>
+</ul>
+<h3 id="controller">Controller</h3>
+<ul>
+<li>Mediates communication between model and view.</li>
+<li>May encapsulate turn-taking, or full game rules (trade-off with model).</li>
+</ul>
 </body>
 </html>
