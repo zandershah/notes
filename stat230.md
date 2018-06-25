@@ -577,3 +577,67 @@ This is abbreviated $X \sim U(a, b)$.
 Example: Let $X \sim U(a, b). Show that $E[X] = \frac{a+b}{2}$ and the $V(X) = \frac{(b-a)^2}{12}$.
 
 > $$\begin{aligned}E[X] &= \int_a^b x\frac{1}{b-a}dx \\ &= \frac{1}{b-a} \int_a^b xdx \\ &= \frac{1}{b-a}\left[\frac{x^2}{2}\right]_a^b \\ &= \frac{b^2 - a^2}{2(b - a)} \\ &= \frac{a+b}{2}\end{aligned}$$
+
+## Exponential Distribution
+
+We say that $X$ has an exponential distribution with paramter $\lambda$ ($X \sim \exp(\lambda)$) with $f(x)$.
+
+$$f(x) = \begin{cases}\lambda e^{-\lambda x}, &x > 0 \\ 0, &x \le 0\end{cases}$$
+
+Consider the CDF of $X$.
+
+$$\begin{aligned}
+F(x) &= P(X \le x) \\
+&= 1 - P(\text{no occurances between }(0, x)) \\
+&= 1 - e^{-\lambda x} \\
+\end{aligned}$$
+
+We can then the derivative to obtain the pdf.
+
+$$f(x) = \frac{d}{dx}F(x) = \lambda e^{-\lambda x}$$
+
+We can use a $\theta$ parameterization of exponetial distribution (where $\lambda = \frac{1}{\theta})$ where $\theta$ can represent the expected waiting time.
+
+$$f(x) = \frac{1}{\theta}e^{-\frac{x}{\theta}}$$
+
+**Theorem**: If $X$ is the time to the first event of Poisson process with paramter $\lambda$, then $X \sim \exp(\frac{1}{\lambda})$.
+
+Example: Let $X \sim \exp(\theta)$. Find $E[X]$.
+
+> By definition, $\int_0^\infty x \frac{1}{\theta} e^{-\frac{x}{\theta}} dx$.
+
+> $$\begin{aligned}E[X] &= \int_0^\infty x \frac{1}{\theta} e^{-\frac{x}{\theta}} dx \\ &= \left(x \frac{1}{\theta} e^{-\frac{x}{\theta}}(-\theta)\right)_0^\infty - \int_0^\infty \frac{1}{\theta}e^{-\frac{x}{\theta}}(-\theta) dx \\ &= 0 + \theta \\ &= \theta \end{aligned}$$
+
+> $$\begin{aligned}E[X^2] &= \left(x^2 \frac{1}{\theta} e^{-\frac{x}{\theta}} (-\theta)\right)_0^\infty \int_0^\infty 2x e^{-\frac{x}{\theta}} dx \\ &= 0 + \left(2xe^{-\frac{x}{\theta}}(-\theta)\right)_0^\infty + \int_0^\infty 2\theta e^{-\frac{x}{\theta}}dx \\ &= 0 + 0 + 2\theta^2 \\ &= 2\theta^2 \end{aligned}$$
+> $Var(X) = E[X^2] - E[X]^2 = \theta^2$.
+
+## Gamma Function
+
+$$\Gamma(\alpha) = \int_0^\infty y^{\alpha-1}e^{-y}dy,\ \alpha > 0$$
+
+- $\Gamma(\alpha) = (\alpha-1)\Gamma(\alpha-1)$, for $\alpha > 1$.
+- $\Gamma(\alpha) = (\alpha - 1)!$, for $\alpha \in \mathbb{N}$
+- $\Gamma(\frac{1}{2}) = \sqrt \pi$.
+
+> $$\begin{aligned}E[X] &= \int_0^\infty x \frac{1}{\theta} e^{-\frac{x}{\theta}}dx \\ &= \int_0^\infty ye^{-y}\theta dy \\ &= \theta \int_0^\infty y^{2 - 1}e^{-y} dy \\ &= \theta \Gamma(2) \\ &= \theta(2 - 1)! \\ &= \theta\end{aligned}$$
+
+> $$\begin{aligned}E[X^2] &= \int_0^\infty x^2 \frac{1}{\theta} e^{-\frac{x}{\theta}}dx \\ &= \int_0^\infty x \frac{x}{\theta} e^{-\frac{x}{\theta}} dx \\ &= \int_0^\infty \theta y^2 e^{-y} \\ &= \theta^2 \int_0^\infty y^{3-1} e^{-y} \\ &= \theta^2 \Gamma(3) \\ &= \theta^2 2! \\ &= 2\theta^2 \end{aligned}$$
+> $Var(X) = E[X^2] - E[X]^2 = \theta^2$.
+
+Example: Busses arrive according to Poisson process with an average of 3 busses per hour.
+
+> Let $T$ be the waiting time for the first bus. $T \sim \exp(\theta = \frac{1}{3})$.
+
+1. Find the probability of waiting at least 15 minutes.
+
+    > $$\begin{aligned}P(T > \frac{1}{4} \text{hour}) &= 1 - P(T \le \frac{1}{4} \text{hour}) \\ &= 1 - F_t(\frac{1}{4}) \\ &= 1 - (1 - e^{-\frac{\frac{1}{4}}{\frac{1}{3}}}) \\&= e^{-\frac{3}{4}}\end{aligned}$$
+
+2. Find the probability of waiting at least another 15 minutes given that you have already been waiting for 6 minutes.
+
+    > $$\begin{aligned}P(T \ge 6 + 15 | T \ge 6) &= \frac{P(T \ge 6 + 15 \cap T \ge 6}{P(T \ge 6)} \\ &= \frac{P(T \ge 21)}{P(T \ge 6)} \\ &= \frac{e^{-\frac{63}{60}}}{e^{-\frac{18}{60}}} \\ &= e^{-\frac{45}{60}} \\ &= e^{-\frac{3}{4}}\end{aligned}
+
+## Memoryless Exponential
+
+> If $X \sim \exp(\theta)$, we have $P(X > s + t | X > s) = P(X > t)$.
+
+- If a continuous random variable has memoryless property, it must follow exponential distribution.
