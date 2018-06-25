@@ -1502,6 +1502,17 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Closest NEXT-HOP (OSPF).</li>
 <li>Additional criteria.</li>
 </ol>
+<h4 id="bgp-routing-policy">BGP Routing Policy</h4>
+<ul>
+<li>Customers will not advertise worse paths for themselves.</li>
+<li>Providers will not advertise links to competitors because they only want to route to / from its customers.</li>
+</ul>
+<h3 id="why-intra-as-and-inter-as-routing">Why Intra-AS <strong>and</strong> Inter-AS Routing?</h3>
+<ul>
+<li><strong>Policy</strong>: Inter admins wants to control how traffic is routed, intra is a singel admin, so no policy decisions are needed.</li>
+<li><strong>Scale</strong>: Hierarchical routing saves table slides, reduced update traffic.</li>
+<li><strong>Performance</strong>: Intra will focus on performance, but inter may be dominated by policy.</li>
+</ul>
 <h3 id="entry-in-forwarding-table">Entry in Forwarding Table</h3>
 <ol type="1">
 <li>Router becomes aware of prefix.
@@ -1518,5 +1529,118 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul></li>
 <li>Router enters prefix-port in forwarding table.</li>
 </ol>
+<h2 id="broadcast-routing">4.7 Broadcast Routing</h2>
+<ul>
+<li>A simple approach is to transmit <span class="math inline">\(N\)</span> copies to the <span class="math inline">\(N\)</span> destinations using unicast routing. <strong>N-way-unicast</strong>.</li>
+<li><strong>Uncontrolled flodding</strong>: When a node receives a broadcast, it sends a copy to all neighbours (except the one who send the packet).
+<ul>
+<li><strong>Cycles</strong>: Endless cycling of one clockwise, one counterclockwise.</li>
+<li><strong>Broadcast Storm</strong>: When a node is connected to more than two other nodes, it will create and forward multiple copies of the broadcast packet, endless multiplication of broadcast packets.</li>
+</ul></li>
+</ul>
+<h3 id="controller-flooding">Controller Flooding</h3>
+<blockquote>
+<p>Node only broadcasts packet if it has not broadcasted the same packet before.</p>
+</blockquote>
+<ul>
+<li><strong>Sequence-number-controlled Flooding</strong>: Source nodes put <strong>address</strong> as well as <strong>broadcast sequence number</strong> into a broadcast packet.</li>
+<li>Each node maintains a <strong>list</strong> to the source address and sequence number of each broadcast packet.</li>
+<li>When a node receives a broadcast packet, if it has already been seen, then it is dropped. If not, the packet is duplicated and sent to all relevant neighbours.</li>
+<li><strong>Reverse Path Forwarding (<em>RPF</em>)</strong>: Only forward packet if it arrived on the shortest path between the node and source.</li>
+<li>RPF does not require that a router know the compute shortest path, only local shortest.</li>
+<li><strong>Spanning Tree</strong>: Construct spanning tree and then only forward / make copies along it. Creation is done by having nodes in the network send unicast <strong>join</strong> messages to the center node and tracking the path until a node already belonging to the spanning tree.</li>
+</ul>
+<h1 id="link-layer">5: Link Layer</h1>
+<blockquote>
+<p>Responsible for transferring datagram from one node to <strong>physically adjacent</strong> node over a link.</p>
+</blockquote>
+<ul>
+<li>Host and routers: <strong>nodes</strong>.</li>
+<li>Commucation channels that connect adjacent nodes across communication path: <strong>links</strong>.
+<ul>
+<li>Wired, wireless, LANs.</li>
+</ul></li>
+<li>Layer-2 packet: <strong>frame</strong>, encapsulates datagram.</li>
+</ul>
+<h2 id="link-layer-services">Link Layer Services</h2>
+<ul>
+<li><strong>Framing, link access</strong>.
+<ul>
+<li>Encapsulates datagram into frame, adding header and trailer.</li>
+<li>Channel access if shared medium.</li>
+<li><strong>“MAC”</strong> address used in frame headers to identify source, destination. This is different from IP address!</li>
+</ul></li>
+<li><strong>Reliable delivery between adjacent nodes</strong>.
+<ul>
+<li>Chapter 3. (Go-Back-N, Selective Repeat, …).</li>
+<li>Seldom used on low bit-error link such as fiber.</li>
+<li>Wireless links have higher error rates.</li>
+</ul></li>
+<li><strong>Flow Controll</strong>.
+<ul>
+<li>Pacing between adjacent sending and receiving nodes.</li>
+</ul></li>
+<li><strong>Error Detection</strong>.
+<ul>
+<li>Errors caused by signal attenuation, noise.</li>
+<li>Receiver detects presence of errors and signals sender for retransmission or drops frame.</li>
+</ul></li>
+<li><strong>Error Correction</strong>.
+<ul>
+<li>Receiver identifies and <strong>corrects</strong> bit errors without resorting to retransmission.</li>
+</ul></li>
+<li><strong>Half-Duplex and Full-Duplex</strong>.
+<ul>
+<li>With half dupliex, nodes at both ends of the link can transmit, but not at the same time.</li>
+</ul></li>
+</ul>
+<h2 id="where-is-link-layer">Where is Link Layer?</h2>
+<ul>
+<li>In each and every host.</li>
+<li>Link layer implemented in <strong>“adaptor”</strong>, also known as <strong>NIC</strong> (<em>network interface card</em>), or on a chip.
+<ul>
+<li>Ethernet card, 802.11 card. Ethernet chipset.</li>
+<li>Implements link, physical layer.</li>
+</ul></li>
+<li>Attaches into host’s system busses.</li>
+<li>Combination of hardware, software, firmware.</li>
+</ul>
+<h2 id="error-detection-and-correction">5.1 Error Detection and Correction</h2>
+<ul>
+<li>EDC = Error Detection and Correction bits.</li>
+<li>D = Data protected by error checking, may include header fields.</li>
+<li>Error detection is not 100% reliable.
+<ul>
+<li>Protocol may miss some errors, but rarely.</li>
+<li>Larger EDC field yields better detection and correction.</li>
+</ul></li>
+</ul>
+<h3 id="parity-checking">Parity Checking</h3>
+<blockquote>
+<p>Detect and correct single bit errors.</p>
+</blockquote>
+<ul>
+<li><strong>Single bit parity</strong>: store the parity of the <span class="math inline">\(d\)</span> data bits.</li>
+<li><strong>Two-dimensional bit parity</strong>. Store the parity of rows and columns for the <span class="math inline">\(d\)</span> data bits (group into words of <span class="math inline">\(j\)</span> bits). Find where errors should lie by analyzing single bit parity errors across all rows and columns.</li>
+</ul>
+<h3 id="internet-checksum-review">Internet Checksum (<em>Review</em>)</h3>
+<h3 id="cylic-redundancy-check">Cylic Redundancy Check</h3>
+<ul>
+<li>More powerful error-detection coding.</li>
+<li>View data bits, <span class="math inline">\(D\)</span>, as a binary number.</li>
+<li>Choose <span class="math inline">\(r+1\)</span> bit pattern (generator), <span class="math inline">\(G\)</span>.</li>
+<li>Goal: choose <span class="math inline">\(r\)</span> CRC bits, <span class="math inline">\(R\)</span>, such that …
+<ul>
+<li>&lt;D, R&gt; exactly divisible by <span class="math inline">\(G \mod 2\)</span>.</li>
+<li>Receiver knows <span class="math inline">\(G\)</span>, divides &lt;D, R&gt; by <span class="math inline">\(G\)</span>. If non-zero remainder, error detected!</li>
+<li>Can detect all burst errors less than <span class="math inline">\(r+1\)</span> bits.</li>
+</ul></li>
+<li>Widely used in practice.</li>
+</ul>
+<p>Example: <span class="math inline">\(D = 101110\)</span>, <span class="math inline">\(G = 1001\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(|G| = 4 = r + 1\)</span>. Shift <span class="math inline">\(D\)</span> left by <span class="math inline">\(r\)</span>, <span class="math inline">\(101110000\)</span>.</p>
+<p><img src="https://i.imgur.com/9FGGvhB.png" /></p>
+</blockquote>
 </body>
 </html>
