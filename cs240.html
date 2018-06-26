@@ -944,5 +944,113 @@ n! &amp;\le 2^{h + 1} \\
 <ul>
 <li><strong>Double hashing</strong>: Open addressing with probe sequence, <span class="math inline">\(h(k,i) = h_1(k) + i \cdot h_2(k) \mod M\)</span>.</li>
 </ul>
+<h2 id="cuckoo-hashing">Cuckoo Hashing</h2>
+<ul>
+<li>We use independent hash functions <span class="math inline">\(h_1, h_2\)</span>.</li>
+<li>Main idea is that an item with key <span class="math inline">\(k\)</span> can only be in <span class="math inline">\(T[h_1(k)]\)</span> or <span class="math inline">\(T[h_2(k)]\)</span>.
+<ul>
+<li><strong>Search / Delete</strong> then take constant time.</li>
+<li><strong>Insert</strong> always puts a new item into <span class="math inline">\(T[h_1(k)]\)</span>. If it is already occupied, you <em>kick out</em> the other item, which we then attempt to reinsert into its alternate position.
+<ul>
+<li>May lead to a loop of kicks. We detect this by aborting after too many attempts.</li>
+<li>In case of faliure, we rehash with a larger <span class="math inline">\(M\)</span> and new hash functions.</li>
+<li>Slow, but expected to be constant time if the load factor is small enough.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">def</span> cuckoo_insert(T, x):</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">    y <span class="op">=</span> x</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">    i <span class="op">=</span> h_1(x.key)</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">        swap(y, T[i])</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">        <span class="cf">if</span> y <span class="kw">is</span> <span class="st">&quot;empty&quot;</span>:</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">            <span class="cf">return</span> <span class="st">&quot;success&quot;</span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">        <span class="cf">if</span> i <span class="op">=</span> h_1(y.key):</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9">            i <span class="op">=</span> h_2(y.key)</a>
+<a class="sourceLine" id="cb22-10" data-line-number="10">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb22-11" data-line-number="11">            i <span class="op">=</span> h_1(y.key)</a>
+<a class="sourceLine" id="cb22-12" data-line-number="12">    <span class="cf">return</span> <span class="st">&quot;faliure&quot;</span></a></code></pre></div>
+<h2 id="complexity-of-open-addressing-strategies">Complexity of Open Addressing Strategies</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Strategy</strong></th>
+<th><strong>Search</strong></th>
+<th><strong>Insert</strong></th>
+<th><strong>Delete</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Linear Probing</td>
+<td><span class="math inline">\(\frac{1}{1 - \alpha}\)</span></td>
+<td><span class="math inline">\(\frac{1}{(1 - \alpha)^2}\)</span></td>
+<td><span class="math inline">\(\frac{1}{1 - \alpha}\)</span></td>
+</tr>
+<tr class="even">
+<td>Double Hashing</td>
+<td><span class="math inline">\(\frac{1}{1 - \alpha}\)</span></td>
+<td><span class="math inline">\(\frac{1}{1 - \alpha}\)</span></td>
+<td><span class="math inline">\(\frac{1}{\alpha}\log\left(\frac{1}{1 - \alpha}\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td>Cuckoo Hashing</td>
+<td><span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(\frac{\alpha}{(1 - 2\alpha)^2}\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Summary</strong>: All operations have <span class="math inline">\(O(1)\)</span> average-case run-time if the hash-function is uniform and <span class="math inline">\(\alpha\)</span> is sufficiently small.</p>
+<ul>
+<li>Linear probing has good data locality (cache coherent).</li>
+</ul>
+<h2 id="multi-dimensional-data">Multi-Dimensional Data</h2>
+<blockquote>
+<p>What if the keys are multi-dimensional, such as strings in <span class="math inline">\(\Sigma^*\)</span>?</p>
+</blockquote>
+<ul>
+<li>Standard approach is the <strong>flatten</strong> string <span class="math inline">\(w\)</span> into integer <span class="math inline">\(f(w) \in \mathbb{N}\)</span>.</li>
+<li>We combine this with a popular modular hash function such as <span class="math inline">\(h(w) = f(w) \mod M\)</span>.</li>
+<li>To compute this in <span class="math inline">\(O(|w|)\)</span> time without overflow, we use Horner’s rule and apply mod incrementally.</li>
+</ul>
+<h2 id="choosing-good-hash-functions">Choosing Good Hash Functions</h2>
+<ul>
+<li>Goal is to satisfy uniform hashing assumption.</li>
+<li>Try to choose hash-function that is unrelated to any possible pattersn in the data and depends on all parts of the key.</li>
+</ul>
+<ol type="1">
+<li><strong>Modular Method</strong>: <span class="math inline">\(h(k) = k \mod M\)</span>, <span class="math inline">\(M\)</span> should be prime.</li>
+<li><strong>Multiplicative Method</strong>: <span class="math inline">\(h(k) = \lfloor M (kA - \lfloor kA \rfloor)\rfloor\)</span>.</li>
+</ol>
+<h2 id="universal-hashing">Universal Hashing</h2>
+<blockquote>
+<p>We again shift the average-case performance to expected performance via randomization.</p>
+</blockquote>
+<ul>
+<li>We can attempt randomization. When initializing or re-hashing, we choose a prime number <span class="math inline">\(p &gt; M\)</span>, and <strong>random</strong> numbers <span class="math inline">\(a, b \in \{0, ..., p - 1\}\)</span>, <span class="math inline">\(a \neq 0\)</span>.</li>
+</ul>
+<p><span class="math display">\[h(k) = ((ak + p) \mod p) \mod M\]</span></p>
+<p>We can prove that for any fixed numbers <span class="math inline">\(x \neq y\)</span>, the probability of a collision using this function <span class="math inline">\(h\)</span> is at most <span class="math inline">\(\frac{1}{M}\)</span>. So, the expected runtime is <span class="math inline">\(O(1)\)</span> if we keep the load factor small enough.</p>
+<h1 id="range-searching">Range Searching</h1>
+<h2 id="quadtrees">Quadtrees</h2>
+<ul>
+<li>We have <span class="math inline">\(n\)</span> points <span class="math inline">\(S = \{(x_0, y_0), ..., (x_{n-1}, y_{n-1})\}\)</span>.</li>
+<li><strong>Assume</strong>: All points are within square <span class="math inline">\(R\)</span>, ideally a power of 2.</li>
+<li><strong>Convention</strong>: Points on split lines belong to right / top side.</li>
+</ul>
+<p><img src="https://i.imgur.com/u25psWw.png" /></p>
+<ul>
+<li><strong>Spread factor</strong> of point <span class="math inline">\(S: \beta(S) = \frac{len(R)}{d_{min}}\)</span>.</li>
+<li><strong>Height</strong> of quadree, <span class="math inline">\(h \in \Theta(\log(\beta(S)))\)</span>.</li>
+<li>Complexity to build initial tree, <span class="math inline">\(\Theta(nh)\)</span>.</li>
+<li>Complexity of range sarch, <span class="math inline">\(\Theta(nh)\)</span> worst-case, even if the answer is <span class="math inline">\(\emptyset\)</span>.</li>
+</ul>
 </body>
 </html>
