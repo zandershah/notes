@@ -30,12 +30,14 @@ Example of Big Band Music: 1944 "Sentimental Journey" (Brown / Homer / Green)
         - Origins in poor, rural part of southern US but is migrating to urban areas (particularily in the south).
 
 Example of Race Music: "Good Rockin' Tonight" (Roy Brown 1947)
+
 - Performed by Wynonie Harris in 1948.
 - Specifically Jump Blues.
 - A lot of the same instruments seem as the big bands but smaller (trumpets, saxophone, bass).
 - Rougher / grunge / aggressive voice, harder to understand, chest sound; due to different intended audience.
 
 Example of Hillbilly Music: "Blue Moon of Kentucky" (Bill Monroe 1946, recorded/released in 1947)
+
 - Specifically Blue Grass.
 - Different instruments: guitar, fiddle, mandelin.
 - Controlled but forward nasal sound.
@@ -773,3 +775,122 @@ One could broadcast to larger ranges by using a high power transmitter or by lin
 - Chess Records founded by two white fans of black music (1947).
     - Featured rough-edge emotional style.
     - Simple equipment, raw compared to major labels (aura of honesty).
+
+# Textbook Readings II
+
+## Rockabilly in the Wake of Presley
+
+### Carl Perkins, Johnny Cash, Jerry Lee Lewis at Sun
+
+- After Presley left Sun Records, Sam Phillips focused on other artists who would help develop *rockabilly*.
+- "Honey, Don't", "Blue Suede Shoes" December 1955, Carl Perkins. "Blue Suede Shoes" rose to #2 on pop charts, crossover hit, first million-selling single for Sun.
+    - Serious auto accident.
+    - Songs were later covered by the Beatles.
+- "Folsom Prison Blues", "I Walk The Line" 1956, Johnny Cash. Regular on the *Lousiana Hayride* broadcasts.
+    - "I Walk The Line" country charts, crossover #17 pop.
+- 1957 Carl and Perkins sign with new contracts.
+- Jerry Lee Lewis, *The Steve Allen Show*, crazy performance. Three hits before it breaks that he was marrying his cousin.
+
+### Gene Vincent, Eddie Cochran
+
+- Artists from other records who had stylist resemblance to Elvis.
+- Virginian Gene Vencent, three top 40 hits for Capitol.
+- Oklahoman guitarist-vocalist Eddia Cochran, three top 40 hits.
+- Both artists appeared in 1956 *The Girl Can't help It*, Cochran's performace made an impression on teenage Paul McCartney.
+- Auto accident while on tour in UK.
+
+### Rockabilly Ladies
+
+- "Bigelow 6-200" Brenda Lee (1956). Only twelve when song was recorded in Nashville.
+- Janis Margin, *"Female Elvis"*, signed to RCA just weeks after Elvis.
+
+### Buddy Holly
+
+- Plane crash early 1959.
+- One of the first major figures influenced by rock and rollers in 1955-1956. Elvis, Little Richard, Chuck Berry.
+- 7 top 40 hits, biggest hits also popular in rythmn and blues market.
+- Songwriter, similar to Chuck Berry, more adventurous in formal design.
+
+## The Payole Investigations
+
+- Record labels and distributors often paid DJs to play records on the radio.
+    - Practice goes back to 19th century American pop music business.
+- Two organizations that collected public performance royalties for songwriters.
+    - ASCAP represented traditional pop song composers, would not allow rythmn and blues or country and western songs.
+    - BMI was a new organization who would take the rejected songwriters.
+- Rock 'n' roll had little respect in the minds of seasoned musical professionals, and listeners over 30.
+- Testimonies were used to manipulate stereotypes that rythm and blues workers are more likely to be dishonest.
+- Highest profile subjects were Alan Freed and Dick Clark.
+    - Clark was cooperative and emerged with reputation intact. Forced to divest from financial holdings that might have conflict of interest with broadcast activities.
+    - Freed lost both his radio job and television show. Driven out of the music industry.
+
+## Brill Building and Aldon Publishing
+
+- An actual place, but refers to a set of business practices.
+- Aldon Music, run by Al Nevins and Don Kirschner, offices consisted of small rooms with pianos, songwriter / songwriter teams would work all day to pump out new pop songs.
+- Actual recording artist was not at the center of the process, but the public focused on these performers.
+
+## The Dance Craze
+
+- Early 1960s, American teenagers would head home and watch television show *American Bandstand*..
+    - Teenagers would dance in the studio to current hit records.
+    - Made famous by Dick Clark, first host was Bob Horn.
+    - Appearances were almost always lip-synched.
+- Cover of "The Twist" 1960, Ernest Evans (Chubby Checker). Quickly rose to #1 on pop, initiated a craze for named dances.
+- Solidified youth culture.
+
+## Rise of the Producer
+
+- Many pop songs in the period created by well-known producers such as Leiber and Stroller and Phil Spector.
+- A&R was an early version of record producer.
+- Role of A&R / producer was shifting, role of record producer began to develop.
+- First important team was Jerry Leiber and Mike Stroller.
+- Increased focuson recording studio and possible sounds would resonate in rock music.
+
+## Producers in the Brill Building
+
+- By early 1960s, many producers were directing many female vocal groups, referred to as "girl groups".
+    - Chantels, Shirelles, Crystals, Chiffons, Cookies, Dixie Cups, Ronettes.
+    - Mostly comprised of black teenagers.
+    - Unlike teen idols, most vocalists were strong singers.
+- Dominated by the industry's drive to control the music.
+    - Performers could not have control because so little depended on them.
+
+## Phil Spector and the Wall of Sound
+
+- Phil Spetor was the most ambitious producer of the 1960s.
+- Most important producer of girl-group pop.
+- Signature sound was the Wall of Sound.
+    - Enormous number of instruments in a small space.
+- "Be My Baby" Ronettes' (1963) was one of the important hits ("Da Doo Ron Ron" Crystals, and "Then He Kissed Me Darlene Love).
+- Made songs almost impossible to cover and added mysteriousness.
+
+## Sweet Soul on the Rise
+
+### Sam Cooke Turns to Pop
+
+- Late 1950s, new and softer approach to black pop emerged, tremendous crossover potential.
+- Leiber and Stoller produced series of hits in a style known as *sweet soul*.
+- Sam Cooke had light pop with elements of black music. Gospel influenced.
+
+### The Drifters and Ben E. King
+
+- One of the most successful groups on Atlantic roster.
+- In 1958, floundering, Atlantic decided to let them be taken over by the Crowns.
+- Brought in Leiber and Stoller and followed a string of hits.
+- Influence of Cooke's singing found throughout Ben E. King's performance on "There Goes My Baby".
+- Ben E. King fired from Drifters in May 1960, Leiber and Stoller offered to produce King as a solo act for Atlantic.
+
+## Teenage Romanticization of Death
+
+> Found online, not from 4th edition textbook.
+
+- Number of songs dealt with teenage death, products under Brill Building control.
+    - "Tell Laura I Love Her" 1960, Ray Peterson
+    - "Ebony Eyes" 1961, Everly Brothers
+    - "Last Kiss" 1964, J. Frank Wilson and the Cavaliers
+    - "Leader of the Pack" 1964, Shangri-Las
+    - "Dead Man's Curve" 1966, Jan and Dean. Predated Jan Berry's automobile accident.
+    - "Tell Laura I Love Her" 1960, Ray Peterson
+- Songs about death coincided with the end of the Brill Building control of popular mainstream music.
+- Many of the songwriter-producer teams went off to form their own labels.
