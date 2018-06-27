@@ -314,7 +314,7 @@ Mid 1950s, WWII has changed everything. USA was able to build massive industry a
 Example: Little Richard (Richard Wayne Penniman)
 
 - Born in 1932, Macon Georgia.
-- First bit hit was "Tutti Frutti".
+- First big hit was "Tutti Frutti".
 - Released late 1955 on Specialty Records (lyrics revised by Dorothy LaBostrie).
 - "Crossover" hit: #2 R&B, #17 Pop.
 - Verse-chorus structure but each section is based on 12-bar blues.
@@ -325,7 +325,7 @@ Example: Little Richard (Richard Wayne Penniman)
 Example: "Sh-Boom" (The Chords / The Crew Cuts)
 
 - Do-wop (singers take the place of instruments). Nonsense syllables.
-- Originally released by The Cords in 1954 on an independent label Cat Records.
+- Originally released by The Chords in 1954 on an independent label Cat Records.
     - #3 R&B, #5 Pop.
 - Covered by a Canadian group The Crew Cuts in 1954 by a major record Mercury Records.
     - Different musical structure (repeats the AABA twice).
@@ -371,11 +371,11 @@ July 1954 "That's Alright Mamma" / "Blue Moon of Kentucky"
 - Before Rock 'n' Roll, they call his song Rockabilly, he had a nickname "The Hillbilly Cat".
 - 12 songs, all covers. He does not write songs.
 
-Sam Phillips sells Elvis's record contract to RCA for $35,000 (high for the standards of the time). He uses this money to promote more new artists, most notably, Johnny Cash.
+Sam Phillips sells Elvis's record contract to RCA in 1956 for $35,000 (high for the standards of the time). He uses this money to promote more new artists, most notably, Johnny Cash.
 
 11 appearances on national television (there are 3 channels in 1956). Tens of millions people watching. Everyone knows who he is.
 
-Example: "Heartbreak Hotel" (Aril-May 1956)
+Example: "Heartbreak Hotel" (April-May 1956)
 
 - #1 Pop, #1 Country, #5 R&B.
 
@@ -589,7 +589,7 @@ The music industry creates a style of folk music, which is simlar to early music
 
 Example: "Tom Dooley" (The Kingston Trio, 1959)
 
-**Bob Dylan** (1961 - 1965): Traditional fold singer / songwriter. Leader in new generation of folk musicians.
+**Bob Dylan** (1961 - 1965): Traditional folk singer / songwriter. Leader in new generation of folk musicians.
 
 Example: "A Hard Rain's A Gonna Fall" (Bob Dylan, 1963)
 
