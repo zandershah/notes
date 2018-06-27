@@ -566,3 +566,19 @@ Which graphs have Eulerian ciruits?
 3. $G$ has $n-1$ edges.
 
 **Theorem**: If $T$ is a spanning tree of $G$ and $e$ is an edge of $G$ that is not in $T$, then $T + e$ contains exactly one cycle $C$. Moreover, if $e^\prime$ is any edge in $C$, then $T + e - e^\prime$ is also a spanning tree of $G$.
+
+> Let $e = uv$. Since $T$ does not have a cycle, any cycle in $T + e$ must use $e$. Any such cycle consists of $e$ and u,v-path in $T$. But there is a unique u,v-path in $T$, so $T + e$ has exactly one cycle $C$. Let $e^\prime$ be an edge in $C$. Then $e^\prime$ is not a bridge, so $T + e - e^\prime$ is connected. Also, removing $e^\prime$ destroys the only cycle in $T + e$ (or, $T + e - e^\prime$ has the same number of edges as $T$). So it is a spanning tree.
+
+## Bipartite Characterization
+
+**Theorem**: $G$ is bipartite if and only if $G$ does not contain any odd cycle.
+
+> ($\Rightarrow$) Suppose $G$ has an odd cycle $v_1, v_2, ..., v_k, v_1$. Suppose $G$ has bipartition $(A, B)$, WLOG, assume $v_1 \in A$. Then $v_2 \in B, v_3 \in A, ...$. So $v_i \in A$ if and only if $i$ is odd. But $k$ is odd, and $v_1v_k$ is an edge where $v_k, v_1 \in A$. Contradiction.
+>
+> ($\Leftarrow$) Suppose $G$ is not bipartite. Then there is a component $H$ of $G$ that is not bipartite. Since $H$ is connected, it has a spanning tree $T$. Now $T$ is bipartite, say with bipartition $(A, B)$. Since $H$ is not bipartite, there exists an edge joining two vertices of $A$, or 2 vertices of $B$. WLOG, say $e=uv$ where both $u,v \in A$. Let $P = v_1, v_2, ..., v_k$ by the unique u,v-path in $T$. Since $(A, B)$ is a bipartition of $T$, $v_1, v_3, ... \in A$, $v_2, v_4, ..., \in B$. Since $v_k \in A$, $k$ is odd, so $P$ has even length. So $P + e$ is a cycle of odd length in $G$.
+
+## Minimum Spanning Trees
+
+**Given** a connected graph $G$ with weights / costs on edges $w: E(G) \to \mathbb{R}$.
+
+**Goal**: Find a spanning tree in $G$ whose total edge weight is minimized.
