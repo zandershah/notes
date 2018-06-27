@@ -1370,13 +1370,49 @@ rvalues are temporary objects.</p>
 <h3 id="model">Model</h3>
 <ul>
 <li>Can have multiple views (e.g. graphical / text).</li>
-<li>Does not need to know about their detials.</li>
+<li>Does not need to know about their details.</li>
 <li>Could be implemented as a class observer, or communicate through the controller.</li>
 </ul>
 <h3 id="controller">Controller</h3>
 <ul>
 <li>Mediates communication between model and view.</li>
 <li>May encapsulate turn-taking, or full game rules (trade-off with model).</li>
+<li>May communicate with the user, or receive messages from view.</li>
+</ul>
+<h1 id="oo-design-principles">OO Design Principles</h1>
+<ul>
+<li><strong>Separation of Concerns</strong>, decompose our programs along distinct lines of entities, features, or behaviours.</li>
+<li><strong>Low Coupling</strong>.</li>
+<li><strong>Info Hiding</strong>, hide implementation and design details behind an abstraction (our interface).</li>
+<li>Includes knowledge of our complex object’s structure (pImpl).</li>
+<li>Least knowledge principle (law of demeter).</li>
+<li>Avoid duplicate code.
+<ul>
+<li>Shared helper methods.</li>
+<li>Inherited method swith implementations when applicable.</li>
+<li>Default parameters.</li>
+</ul></li>
+</ul>
+<h2 id="open-closed-principle">Open Closed Principle</h2>
+<blockquote>
+<p>A module should be <strong>open</strong> to extension, but <strong>closed</strong> to modification. Program to an interface and not to an implementation.</p>
+</blockquote>
+<p>The idea is that your client code should depend only on ABC’s that can be extended, not on concrete classes (e.g. the <strong>target</strong> interface in Adapter Pattern rather than Client using Adapter directly).</p>
+<p><strong>Suggestion</strong>: All base classes should be ABC’s. This implies that you should never inherit from a concrete class.</p>
+<ul>
+<li>We may not know 100% what we need in our interface when starting out but some subscription to the open closed principle is better than none.</li>
+</ul>
+<h2 id="inheritance-or-composition">Inheritance or Composition?</h2>
+<blockquote>
+<p>When defining a new class that includes attributes or behaviour from an existing class, do we inherit or compose?</p>
+</blockquote>
+<ul>
+<li>In general, favour composition over inheritance.
+<ul>
+<li>Keeps classes focused.</li>
+<li>Helps maintain encapsulation.</li>
+<li>Can allow for objects to be swapped out at runtime.</li>
+</ul></li>
 </ul>
 </body>
 </html>
