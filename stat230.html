@@ -604,5 +604,24 @@ $$
 <ul>
 <li>If a continuous random variable has memoryless property, it must follow exponential distribution.</li>
 </ul>
+<h1 id="normal">Normal</h1>
+<p>Example:</p>
+<ol type="1">
+<li><p>75th percentile of the standard normal distribution.</p>
+<blockquote>
+<p>We want <span class="math inline">\(x\)</span> such that <span class="math inline">\(P(Z \le x) = 0.75\)</span>. In the <span class="math inline">\(Z\)</span> table, <span class="math inline">\(P(Z \le 0.67) = 0.74857\)</span> and <span class="math inline">\(P(Z \le 0.68) = 0.75175\)</span>, so we know that <span class="math inline">\(x \in [0.67, 0.68]\)</span>.</p>
+</blockquote></li>
+<li><p>58th percentile of the <span class="math inline">\(N(5, 9)\)</span> distribution.</p>
+<blockquote>
+<p>Again, we want <span class="math inline">\(x\)</span> such that <span class="math inline">\(P(X \le x) = 0.58\)</span>. So <span class="math inline">\(P(Z \le \frac{x - 5}{3}) = 0.58\)</span>. We have <span class="math inline">\(\frac{x - 5}{3} \in (0.2, 0.21)\)</span>. So <span class="math inline">\(x \in [5.6, 5.63]\)</span>.</p>
+</blockquote></li>
+<li><p>Let <span class="math inline">\(Z \sim N(0, 1)\)</span>. Find <span class="math inline">\(c\)</span> such that <span class="math inline">\(P(-c \le Z \le c) = 0.95\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}P(-c \le Z \le c) &amp;= P(Z \le c) - P(Z \le -c) \\ &amp;= 2P(Z \le c) - 1 \\ &amp;= 0.95\end{aligned}\]</span> So <span class="math inline">\(c = 1.96\)</span>.</p>
+</blockquote></li>
+</ol>
+<p>An interesting empirical rule about normal distributino is the <strong>68-95-99.7</strong> rule, which states the probability of <span class="math inline">\(P(\mu - \alpha \sigma \le X \le \mu + \alpha \sigma)\)</span>, for <span class="math inline">\(\alpha \in \{1, 2, 3\}\)</span> respectively.</p>
+<h1 id="inverse-transform-method">Inverse Transform Method</h1>
+<p><strong>Theorem</strong>: Let <span class="math inline">\(U \sim U(0, 1)\)</span>, and <span class="math inline">\(X\)</span> be a continuous random variable with cdf <span class="math inline">\(F\)</span>. Then <span class="math inline">\(F^{-1}(U)\)</span> the same distribution as <span class="math inline">\(X\)</span>.</p>
 </body>
 </html>

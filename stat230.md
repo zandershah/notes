@@ -641,3 +641,26 @@ Example: Busses arrive according to Poisson process with an average of 3 busses 
 > If $X \sim \exp(\theta)$, we have $P(X > s + t | X > s) = P(X > t)$.
 
 - If a continuous random variable has memoryless property, it must follow exponential distribution.
+
+# Normal
+
+Example:
+
+1. 75th percentile of the standard normal distribution.
+
+    > We want $x$ such that $P(Z \le x) = 0.75$. In the $Z$ table, $P(Z \le 0.67) = 0.74857$ and $P(Z \le 0.68) = 0.75175$, so we know that $x \in [0.67, 0.68]$.
+
+2. 58th percentile of the $N(5, 9)$ distribution.
+
+    > Again, we want $x$ such that $P(X \le x) = 0.58$. So $P(Z \le \frac{x - 5}{3}) = 0.58$. We have $\frac{x - 5}{3} \in (0.2, 0.21)$. So $x \in [5.6, 5.63]$.
+
+3. Let $Z \sim N(0, 1)$. Find $c$ such that $P(-c \le Z \le c) = 0.95$.
+
+    > $$\begin{aligned}P(-c \le Z \le c) &= P(Z \le c) - P(Z \le -c) \\ &= 2P(Z \le c) - 1 \\ &= 0.95\end{aligned}$$
+    > So $c = 1.96$.
+
+An interesting empirical rule about normal distributino is the **68-95-99.7** rule, which states the probability of $P(\mu - \alpha \sigma \le X \le \mu + \alpha \sigma)$, for $\alpha \in \{1, 2, 3\}$ respectively.
+
+# Inverse Transform Method
+
+**Theorem**: Let $U \sim U(0, 1)$, and $X$ be a continuous random variable with cdf $F$. Then $F^{-1}(U)$ the same distribution as $X$.
