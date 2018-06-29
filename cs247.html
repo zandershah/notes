@@ -1413,6 +1413,80 @@ rvalues are temporary objects.</p>
 <li>Helps maintain encapsulation.</li>
 <li>Can allow for objects to be swapped out at runtime.</li>
 </ul></li>
+<li>Use inheritance when you are …
+<ul>
+<li>Using <strong>subtyping</strong> (polymorphic behaviour), when the new class should be substitutable for the old class.</li>
+<li>Use the <strong>entire</strong> interface from the old class.</li>
+</ul></li>
+</ul>
+<h2 id="liskov-substitutability-principle-lsp">Liskov Substitutability Principle (LSP)</h2>
+<blockquote>
+<p>A derived class <strong>must</strong> be substitutable for its base class.</p>
+</blockquote>
+<ul>
+<li>Objects accept all base class messages.</li>
+<li>Methods must require <strong>no more</strong> than the base class methods.</li>
+<li>Methods promise <strong>no less</strong> than the base class methods.</li>
+</ul>
+<p>Example: A BoundedStack is a specialized type of Stack that cannot grow past a certain size. Is a BoundedStack substitutable for a Stack? Assume BoundedStack has a limit of 255 elements.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb42-1" data-line-number="1">Stack *s;</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i &lt; <span class="dv">1000</span>; ++i) {</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">    s-&gt;push(i);</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">}</a></code></pre></div>
+<p><strong>No</strong>, a BoundedStack is <strong>not</strong> substitutable for a Stack. Instead, BoundedStack should be <strong>composed</strong> with a Stack.</p>
+<p><strong>Note</strong>: On overriding in c++.</p>
+<ul>
+<li>Parameter types must match exactly.</li>
+<li>Name must match exactly.</li>
+<li>Return type must be the same type <strong>or</strong> be a subtype of the original return type.</li>
+<li>Use <strong>override</strong> keyword to make sure there are no mistakes.</li>
+</ul>
+<h2 id="law-of-demeter">Law of Demeter</h2>
+<blockquote>
+<p>A class should only talk to its neighbours.</p>
+</blockquote>
+<ul>
+<li>Method A::m should only call methods on …
+<ul>
+<li>A itself.</li>
+<li>A’s data members.</li>
+<li>m’s parameters.</li>
+<li>Objects constructed by A’s methods.</li>
+</ul></li>
+</ul>
+<h3 id="advantages">Advantages</h3>
+<ul>
+<li>Reduces complexity sine there is at most 1 level of indirection to follow.</li>
+<li>Interface is easier to understand for outsiders.</li>
+<li>Testing client code and composition object code is easier.</li>
+</ul>
+<h3 id="disadvantages">Disadvantages</h3>
+<ul>
+<li>Larger interfaces per class.</li>
+<li>Small performance hit.
+<ul>
+<li>In general, don’t design for performance, design for modularity and cleanly. Then test for bottlenecks and optimize, couple if necessary, those code points.</li>
+</ul></li>
+</ul>
+<p>Examples:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="dt">void</span> A::m1(SomeObj b) {</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">    b.m2() <span class="co">// Ok. Params.</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">    <span class="kw">this</span>-&gt;otherObj.m3(); <span class="co">// Ok. A&#39;s data members.</span></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">    b.gen().m4(); <span class="co">// Not ok.</span></a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">    AnotherObj obj{};</a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">    obj.m5(); <span class="co">// Ok. Object constructed by A&#39;s methods.</span></a>
+<a class="sourceLine" id="cb43-7" data-line-number="7">}</a></code></pre></div>
+<h1 id="refactoring">Refactoring</h1>
+<blockquote>
+<p>Changing existing code to “clean it up”.</p>
+</blockquote>
+<ul>
+<li>You are not making externally observable changes. <strong>Not</strong> changing behaviour or interface.</li>
+<li>Test suites should be still usable and give the same results after proper refactoring.</li>
+<li>You <strong>are</strong> changing the <strong>design</strong> of your software to improve upon it.
+<ul>
+<li>Easier to understand and modify, striving for a better, cleaner design.</li>
+</ul></li>
 </ul>
 </body>
 </html>
