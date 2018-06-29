@@ -711,7 +711,98 @@ Example: "(I Can't Get No) Satisfaction" (Jagger / Richard)
 
 Compared to the Beatles, they have a very different image (working class), almost like they traded places. The way they made music is the difference between **process** versus **product**. 
 
-The Beatles were about the destination, had a clear goal in mind, even give up live performances because they can't reproduce the same sound. The Rolling Stones are about the journey, they never play a song in the exact same way.
+The Beatles were about the destination, had a clear goal in mind, even give up live performances because they can't reproduce the same sound. The Rolling Stones are about the journey, they never play a song in the exact same **way**.
+
+# Soul To Funk
+
+- Development connected to the Civil Rights movement and development of African-American industry.
+- Late 1950s, growing anticipation of civil rights.
+- Rejection of blues as the sound of the past, rural south, slavery.
+- New sound of the urban, Soul Music.
+- Shift to idealized romance. Sounding more sophisticated.
+
+1. Vocal style from Gospel. Not as important in Motown.
+2. Rythmn and back beat of R&B.
+3. Arrangement and lyric style from TPA.
+
+## Important Locations
+
+1. Motown, Detroit.
+
+    - Hitsville, USA.
+
+2. Stax, Memphis.
+
+    - Soulsville, USA.
+
+### Motown
+
+- Motown was center of automotive world.
+- Founded by Berry Gordy.
+- First important label owned by an African American.
+- Starts in 1959, based on Gordy's experience in automotive plants.
+- Bands were not promoted, mainly vocal groups.
+
+Assembly Line, everything under one roof.
+
+- Song Writers: Holland / Dozier / Holland, Smokey Robinson.
+- Maxine Powell: Finishing School. How to carry interviews, carry themselves in public.
+- Cholly Atkins: Choreographer.
+- The Funk Brothers: House band.
+
+> Only thing that changed between records was the vocal group. The result is absolute consistency of product.
+
+Example: "You'd Better Shop Around" (Smokey and the Miracles, 1960)
+
+- Polished, restrained presentation, "sophistication".
+
+Example: "Stop in the Name of Love" (The Supremes, 1965)
+
+- Diana Ross leader singer, far from strongest singer. Made the lead singer because she would have the strongest appeal to middle-class white listener.
+- Idealized romance lyrics. Would be at home in a TPA style song.
+- Heavy beat.
+- Elaborate arrangement.
+- Not rare to hear both a piano and an electric organ.
+- Vibraphone (xylophone family). Commonly seen in Jazz. Jazz is seen as an artform, seen on par with Classical musicians.
+
+#### Sound and Production Practice
+
+- Focus on arrangement.
+- Clarity of sound.
+- Accuracy of performance.
+- "Quality Control", comparison to other hit records.
+
+### Stax
+
+- Formed in 1959, Satelitte Records (Stax, 1961).
+- Jim Steward and Estelle Axton.
+- House Band: Booker T and the M.G.s.
+    - Mixed band, there were clubs in Memphis that they could not play.
+- Different approach to recording.
+    - No multi-track recording, recorded in mono.
+    - Collective decision making.
+    - Less emphasis on arrangements.
+    - Focus on energy of performance over accuracy.
+
+Example: "Try A Little Tenderness" (Otis Redding, 1966)
+
+- AABA, TPA song written in the 1920s.
+- Hit for Bing Crosby in 1933.
+- Way more distortion, not as carefully restrained choreography.
+- Far simpler arrangement.
+
+Example: "Soul Man" (1967, Sam and Dave)
+
+- Still the optimistic sound.
+- "Soul" has become a term for black culture.
+
+1966, Atlantic begins working at FAME.
+
+Example: "Respect" (Aretha Franklin, 1967)
+
+- 1965, written by Odis Redding, had a minor hit with it.
+- Beginning of a more militant sound.
+- Anthem for the frustration of civil rights movement.
 
 # Textbook Readings I
 

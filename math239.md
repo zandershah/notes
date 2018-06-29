@@ -46,7 +46,7 @@ An inverse of $f: S \to T$ is a function $f^{-1}: T \to S$ where for every $x \i
 
 Example: Let $S$ be all subsets of $\{1, ..., n\}$. Let $T$ be all binary strings of length $n$.
 
-> Define $f: S \to T$ where $f(A) = s_ns_{n-1}...s2s1$.
+> Define $f: S \to T$ where $f(A) = s_ns_{n-1}...s_2 s_1$.
 > $$s_i \begin{cases}1, &\text{if } i \in A \\ 0, &\text{if } i \notin A\end{cases}$$
 > By our definition, $f(A)$ is a binary string of length $n$ so $f(A) \in T$. The inverse $f^{-1}: T \to S$ where $f^{-1}(t_n...t_1) = \{i \in \{1, ..., n\} \mid t_i = 1\}$. So $f$ is a bijection and $|S| = |T| = 2^n$.
 
@@ -58,7 +58,7 @@ Define the weight $w$ of an element $A$ to be $w(A) = |A|$. How many elements in
 
 $\Phi_S(x) = 1 + 3x + 3x^2 + x^3$. The coeffient of $x^k$ in the generating series is the answer.
 
-**Generating Series**: Given set $S$ where $\rho \in S$ is given a non-negative integer weight $w(\rho)$, the **generating series** of $S$ with respect to $w$ is $\Phi_S(x) = \sum_{\rho \in S} x^{w(\rho)}$. If $a_x$ is the number of elements in $S$ of weight $k$, then $\Phi_S(x) = \sum_{k \ge 0}a_k x^k$. The *coefficients* store the answers to our counting problems.
+**Generating Series**: Given set $S$ where $\rho \in S$ is given a non-negative integer weight $w(\rho)$, the **generating series** of $S$ with respect to $w$ is $\Phi_S(x) = \sum_{\rho \in S} x^{w(\rho)}$. If $a_k$ is the number of elements in $S$ of weight $k$, then $\Phi_S(x) = \sum_{k \ge 0}a_k x^k$. The *coefficients* store the answers to our counting problems.
 
 Notation: $[x^k]\Phi_S(x)$ denotes the coefficient of $x^k$ in $\Phi_S(x)$.
 
