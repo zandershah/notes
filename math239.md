@@ -582,3 +582,42 @@ Which graphs have Eulerian ciruits?
 **Given** a connected graph $G$ with weights / costs on edges $w: E(G) \to \mathbb{R}$.
 
 **Goal**: Find a spanning tree in $G$ whose total edge weight is minimized.
+
+### Prim's Algorithm
+
+1. Let $v$ be any vertex in $G$. Let $T$ be the tree consists of only $v$.
+2. While $T$ is not a spanning tree ...
+    - Look at edges in the cut induced by $V(T)$.
+    - Let $e=uv$ be an edge with the smallest weight in the cut, say $u\in V(T), v \notin V(T)$.
+    - Add $v$ to $V(T)$, add $e$ to $E(T)$.
+
+**Theorem**: Prim's algorithm produces a MST.
+
+> Let $T_1, T_2, ..., T_n$ be the trees produced by the algorithm at each step. Suppose the edges we select in order are $e_1, e_2, .., e_{n-1}$, so we get $T_{i+1}$ by adding $e_i$ to $T_i$. We will prove by induction on $k$ that there exists a MST containing $T_k$ as a subgraph.
+>
+> **Base Case**: $T_1$ is a single vertex, which is a subgraph of any MST.
+>
+> **Induction Hypothesis**: Assume that $T_k$ is a subgraph of some MST $T^*$.
+>
+> **Induction Step**: If $T^*$ contains $e_k$, then $T^*$ is a MST containing $T_{k+1}$, and we are done. Assume $e_k$ is not in $T^*$. Then, $T^* + e_k$ has exactly one cycle $C$. Then there is an edge $e^\prime$ in $C$ that is not $e_k$, but is in the cut induced by $V(T_k)$. In Prim's algorithm, $e_k$ is chosen to be an edge of minimum weight in the cut induced by $V(T_k)$. So $w(e^\prime) \ge w(e_k)$.
+>
+> Suppose $w(e^\prime) > w(e_k)$. Let $T^\prime = T^* + e_k - e^\prime$. $T^\prime$ is a spanning tree with a lower weight than $T^*$, but $T^*$ is a MST. Contradiction.
+>
+> Suppose $w(e^\prime) = w(e_k)$. Then $T^\prime$ is a spanning tree with the same weight of $T^*$. So $T^\prime$ is a MST containing $T_{k+1}$.
+>
+> So $T_n$ is a spanning tree that contains a MST. But they have the same number of edges, so they are the same.
+
+# Travelling Salesman Problem (TSP)
+
+Given $K_n$ with edge weights $w$, we want to find a cycle containing all vertices (**Hamilton cycle**) that has minimum weight.
+
+## Heuristic for Euclidean TSP
+
+1. Find MST $T$.
+2. Double edges.
+3. Find Eulerian circuit.
+4. Go through Eulerian circuit, skipping vertices.
+
+**Theorem**: If $C$ is the cycle produced by the heuristic, and $C^*$ a best cycle, then $w(C) \le 2w(C^*)$.
+
+> $C^*$ minus an edge is a spanning tree, so the cost of $w(C^*) \ge w(T)$. With $C$, we take "shortcuts" using the triangle inequality, so $W(C) \le 2W(T)$. So $W(C) \le 2w(C^*)$.

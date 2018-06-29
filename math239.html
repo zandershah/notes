@@ -502,5 +502,38 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <h2 id="minimum-spanning-trees">Minimum Spanning Trees</h2>
 <p><strong>Given</strong> a connected graph <span class="math inline">\(G\)</span> with weights / costs on edges <span class="math inline">\(w: E(G) \to \mathbb{R}\)</span>.</p>
 <p><strong>Goal</strong>: Find a spanning tree in <span class="math inline">\(G\)</span> whose total edge weight is minimized.</p>
+<h3 id="prims-algorithm">Prim’s Algorithm</h3>
+<ol type="1">
+<li>Let <span class="math inline">\(v\)</span> be any vertex in <span class="math inline">\(G\)</span>. Let <span class="math inline">\(T\)</span> be the tree consists of only <span class="math inline">\(v\)</span>.</li>
+<li>While <span class="math inline">\(T\)</span> is not a spanning tree …
+<ul>
+<li>Look at edges in the cut induced by <span class="math inline">\(V(T)\)</span>.</li>
+<li>Let <span class="math inline">\(e=uv\)</span> be an edge with the smallest weight in the cut, say <span class="math inline">\(u\in V(T), v \notin V(T)\)</span>.</li>
+<li>Add <span class="math inline">\(v\)</span> to <span class="math inline">\(V(T)\)</span>, add <span class="math inline">\(e\)</span> to <span class="math inline">\(E(T)\)</span>.</li>
+</ul></li>
+</ol>
+<p><strong>Theorem</strong>: Prim’s algorithm produces a MST.</p>
+<blockquote>
+<p>Let <span class="math inline">\(T_1, T_2, ..., T_n\)</span> be the trees produced by the algorithm at each step. Suppose the edges we select in order are <span class="math inline">\(e_1, e_2, .., e_{n-1}\)</span>, so we get <span class="math inline">\(T_{i+1}\)</span> by adding <span class="math inline">\(e_i\)</span> to <span class="math inline">\(T_i\)</span>. We will prove by induction on <span class="math inline">\(k\)</span> that there exists a MST containing <span class="math inline">\(T_k\)</span> as a subgraph.</p>
+<p><strong>Base Case</strong>: <span class="math inline">\(T_1\)</span> is a single vertex, which is a subgraph of any MST.</p>
+<p><strong>Induction Hypothesis</strong>: Assume that <span class="math inline">\(T_k\)</span> is a subgraph of some MST <span class="math inline">\(T^*\)</span>.</p>
+<p><strong>Induction Step</strong>: If <span class="math inline">\(T^*\)</span> contains <span class="math inline">\(e_k\)</span>, then <span class="math inline">\(T^*\)</span> is a MST containing <span class="math inline">\(T_{k+1}\)</span>, and we are done. Assume <span class="math inline">\(e_k\)</span> is not in <span class="math inline">\(T^*\)</span>. Then, <span class="math inline">\(T^* + e_k\)</span> has exactly one cycle <span class="math inline">\(C\)</span>. Then there is an edge <span class="math inline">\(e^\prime\)</span> in <span class="math inline">\(C\)</span> that is not <span class="math inline">\(e_k\)</span>, but is in the cut induced by <span class="math inline">\(V(T_k)\)</span>. In Prim’s algorithm, <span class="math inline">\(e_k\)</span> is chosen to be an edge of minimum weight in the cut induced by <span class="math inline">\(V(T_k)\)</span>. So <span class="math inline">\(w(e^\prime) \ge w(e_k)\)</span>.</p>
+<p>Suppose <span class="math inline">\(w(e^\prime) &gt; w(e_k)\)</span>. Let <span class="math inline">\(T^\prime = T^* + e_k - e^\prime\)</span>. <span class="math inline">\(T^\prime\)</span> is a spanning tree with a lower weight than <span class="math inline">\(T^*\)</span>, but <span class="math inline">\(T^*\)</span> is a MST. Contradiction.</p>
+<p>Suppose <span class="math inline">\(w(e^\prime) = w(e_k)\)</span>. Then <span class="math inline">\(T^\prime\)</span> is a spanning tree with the same weight of <span class="math inline">\(T^*\)</span>. So <span class="math inline">\(T^\prime\)</span> is a MST containing <span class="math inline">\(T_{k+1}\)</span>.</p>
+<p>So <span class="math inline">\(T_n\)</span> is a spanning tree that contains a MST. But they have the same number of edges, so they are the same.</p>
+</blockquote>
+<h1 id="travelling-salesman-problem-tsp">Travelling Salesman Problem (TSP)</h1>
+<p>Given <span class="math inline">\(K_n\)</span> with edge weights <span class="math inline">\(w\)</span>, we want to find a cycle containing all vertices (<strong>Hamilton cycle</strong>) that has minimum weight.</p>
+<h2 id="heuristic-for-euclidean-tsp">Heuristic for Euclidean TSP</h2>
+<ol type="1">
+<li>Find MST <span class="math inline">\(T\)</span>.</li>
+<li>Double edges.</li>
+<li>Find Eulerian circuit.</li>
+<li>Go through Eulerian circuit, skipping vertices.</li>
+</ol>
+<p><strong>Theorem</strong>: If <span class="math inline">\(C\)</span> is the cycle produced by the heuristic, and <span class="math inline">\(C^*\)</span> a best cycle, then <span class="math inline">\(w(C) \le 2w(C^*)\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(C^*\)</span> minus an edge is a spanning tree, so the cost of <span class="math inline">\(w(C^*) \ge w(T)\)</span>. With <span class="math inline">\(C\)</span>, we take “shortcuts” using the triangle inequality, so <span class="math inline">\(W(C) \le 2W(T)\)</span>. So <span class="math inline">\(W(C) \le 2w(C^*)\)</span>.</p>
+</blockquote>
 </body>
 </html>
