@@ -664,3 +664,42 @@ An interesting empirical rule about normal distributino is the **68-95-99.7** ru
 # Inverse Transform Method
 
 **Theorem**: Let $U \sim U(0, 1)$, and $X$ be a continuous random variable with cdf $F$. Then $F^{-1}(U)$ the same distribution as $X$.
+
+# Multivariate Distributions
+
+**Definition**: Suppose $X$ and $Y$ are discrete random variables defined on the same sample space. The **joint probability function** of $X$ and $Y$ is.
+
+$$f(x, y) = P(\{X = x\} \cap \{Y = y\}), x \in X(S), y \in Y(S)$$
+
+A shorthand for this is.
+
+$$f(x, y) = P(X = x, Y = y)$$
+
+Example: Two fair six sided die are rolled. Let $X$ denote the outcome of the first roll, and let $Y$ denote the outcome of the second die roll. Compute the joint probability of $X$ and $Y$.
+
+> $X, Y$ are independent, so $f(x,y) = \frac{1}{36}$ for all $(x, y) in the same space.
+
+## Properties of Joint Probability Function
+
+1. $f(x, y) \ge 0$.
+2. $\sum_{x, y}f(x, y) = 1$.
+
+Example: Suppose a fair coin is tossed 3 times. Define the random variables $X$ as the number of heads, and $Y$ as whether a head occured on the first toss. Find the joint probability function for $(X, Y)$.
+
+## Marginal Probability Function
+
+Suppose that $X, Y$ are discrete random variables. The **marginal probability function** of $X$ is.
+
+$$f_X(x) = P(X = x) = \sum_{y \in Y(S)} f(x, y)$$
+
+Example: Suppose $X, Y$ has joint probability function.
+
+$$f(x, y) = \frac{1}{6}\left(\frac{1}{2}\right)^x \left(\frac{2}{3}\right)^y$$
+
+1. Compute the marginal probability functions $f_X(x)$ and $f_Y(y)$.
+
+    > $$\begin{aligned}f_X(x) &= \sum_{y}f(x,y) \\ &= \sum_{y = 0}^\infty \frac{1}{6}\frac{1}{2^x} \sum_{y = 0}^\infty \left(\frac{2}{3}\right)^y \\ &= \frac{1}{6} \frac{1}{2^x} \frac{1}{1 - \frac{2}{3}} \\ &= \frac{1}{2^{x+1}} \end{aligned}$$
+
+2. Compute $P(X < Y)$.
+
+    > $$\begin{aligned}P(X < Y) &= \sum_{x = 0}^\infty \left(\sum_{y = x + 1}^\infty f(x, y)\right) \\ &= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^x} \sum_{y = x + 1}^\infty \left(\frac{2}{3}\right)^y \\ &= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^{x}} \left(\frac{2}{3}\right)^{x + 1} 3\end{aligned}$$

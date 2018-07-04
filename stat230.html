@@ -623,5 +623,35 @@ $$
 <p>An interesting empirical rule about normal distributino is the <strong>68-95-99.7</strong> rule, which states the probability of <span class="math inline">\(P(\mu - \alpha \sigma \le X \le \mu + \alpha \sigma)\)</span>, for <span class="math inline">\(\alpha \in \{1, 2, 3\}\)</span> respectively.</p>
 <h1 id="inverse-transform-method">Inverse Transform Method</h1>
 <p><strong>Theorem</strong>: Let <span class="math inline">\(U \sim U(0, 1)\)</span>, and <span class="math inline">\(X\)</span> be a continuous random variable with cdf <span class="math inline">\(F\)</span>. Then <span class="math inline">\(F^{-1}(U)\)</span> the same distribution as <span class="math inline">\(X\)</span>.</p>
+<h1 id="multivariate-distributions">Multivariate Distributions</h1>
+<p><strong>Definition</strong>: Suppose <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are discrete random variables defined on the same sample space. The <strong>joint probability function</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is.</p>
+<p><span class="math display">\[f(x, y) = P(\{X = x\} \cap \{Y = y\}), x \in X(S), y \in Y(S)\]</span></p>
+<p>A shorthand for this is.</p>
+<p><span class="math display">\[f(x, y) = P(X = x, Y = y)\]</span></p>
+<p>Example: Two fair six sided die are rolled. Let <span class="math inline">\(X\)</span> denote the outcome of the first roll, and let <span class="math inline">\(Y\)</span> denote the outcome of the second die roll. Compute the joint probability of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(X, Y\)</span> are independent, so <span class="math inline">\(f(x,y) = \frac{1}{36}\)</span> for all $(x, y) in the same space.</p>
+</blockquote>
+<h2 id="properties-of-joint-probability-function">Properties of Joint Probability Function</h2>
+<ol type="1">
+<li><span class="math inline">\(f(x, y) \ge 0\)</span>.</li>
+<li><span class="math inline">\(\sum_{x, y}f(x, y) = 1\)</span>.</li>
+</ol>
+<p>Example: Suppose a fair coin is tossed 3 times. Define the random variables <span class="math inline">\(X\)</span> as the number of heads, and <span class="math inline">\(Y\)</span> as whether a head occured on the first toss. Find the joint probability function for <span class="math inline">\((X, Y)\)</span>.</p>
+<h2 id="marginal-probability-function">Marginal Probability Function</h2>
+<p>Suppose that <span class="math inline">\(X, Y\)</span> are discrete random variables. The <strong>marginal probability function</strong> of <span class="math inline">\(X\)</span> is.</p>
+<p><span class="math display">\[f_X(x) = P(X = x) = \sum_{y \in Y(S)} f(x, y)\]</span></p>
+<p>Example: Suppose <span class="math inline">\(X, Y\)</span> has joint probability function.</p>
+<p><span class="math display">\[f(x, y) = \frac{1}{6}\left(\frac{1}{2}\right)^x \left(\frac{2}{3}\right)^y\]</span></p>
+<ol type="1">
+<li><p>Compute the marginal probability functions <span class="math inline">\(f_X(x)\)</span> and <span class="math inline">\(f_Y(y)\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}f_X(x) &amp;= \sum_{y}f(x,y) \\ &amp;= \sum_{y = 0}^\infty \frac{1}{6}\frac{1}{2^x} \sum_{y = 0}^\infty \left(\frac{2}{3}\right)^y \\ &amp;= \frac{1}{6} \frac{1}{2^x} \frac{1}{1 - \frac{2}{3}} \\ &amp;= \frac{1}{2^{x+1}} \end{aligned}\]</span></p>
+</blockquote></li>
+<li><p>Compute <span class="math inline">\(P(X &lt; Y)\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}P(X &lt; Y) &amp;= \sum_{x = 0}^\infty \left(\sum_{y = x + 1}^\infty f(x, y)\right) \\ &amp;= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^x} \sum_{y = x + 1}^\infty \left(\frac{2}{3}\right)^y \\ &amp;= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^{x}} \left(\frac{2}{3}\right)^{x + 1} 3\end{aligned}\]</span></p>
+</blockquote></li>
+</ol>
 </body>
 </html>
