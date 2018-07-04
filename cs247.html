@@ -1488,5 +1488,93 @@ rvalues are temporary objects.</p>
 <li>Easier to understand and modify, striving for a better, cleaner design.</li>
 </ul></li>
 </ul>
+<h2 id="why-refactor">Why Refactor?</h2>
+<ul>
+<li>Even if you wrote perfectly clean code the first time around (you didn’t), better solutions may become apparent.</li>
+<li>Does not happen in reality, <em>“quick and dirty”</em> solutions are used all the time to meet deadlines.</li>
+<li>After a while, these sketchy solutions add up and build what is called <strong>“Technical Debt”</strong>.</li>
+</ul>
+<h2 id="when-refactor">When Refactor?</h2>
+<ul>
+<li>Upon recognizing a <em>“bad smell”</em>.</li>
+<li>When you add a function, it is likely not isolated. We may need to factor to support it.</li>
+<li>Code review.</li>
+<li>When you fix a bug, it may have been caused by bad design.</li>
+</ul>
+<h2 id="when-not-to-refactor">When Not To Refactor?</h2>
+<ul>
+<li>When a deadline is approaching.</li>
+<li>Invasive changes that will break other engineers’ mental model of the code.</li>
+<li>When prohibitively expensive or time consuming.</li>
+<li>Generally, earlier refactoring is less expensive.</li>
+</ul>
+<h2 id="what-to-refactor">What to Refactor?</h2>
+<ul>
+<li>Bad smells (indications of bad design).</li>
+</ul>
+<h3 id="duplicated-code">Duplicated Code</h3>
+<ul>
+<li>Expressions in different methods of the same class.</li>
+<li>Duplicate / similar expressions in “sibling” subclasses.</li>
+<li>Methods that perform the same function but with different algorithms.</li>
+</ul>
+<h3 id="long-method">Long Method</h3>
+<ul>
+<li>Best to think carefully about major tasks and how they inter-relate.
+<ul>
+<li>Often a sign of trying to do too much.</li>
+<li>Often indicative of poorly thought out abstractions and boundaries.</li>
+</ul></li>
+<li><strong>Fowler’s Heuristic</strong>: When you see a comment, make a method.</li>
+</ul>
+<h3 id="large-class">Large Class</h3>
+<ul>
+<li>Too many member variables, may be trying to do too many things.</li>
+<li>Try to eliminate redundancy by gathering codependent pieces and separate into aggregate subparts. Compose yourself of these subparts.</li>
+</ul>
+<h3 id="long-parameter-list">Long Parameter List</h3>
+<ul>
+<li>Again, trying to do too much?
+<ul>
+<li>Trying to do too much, too far from home with too many subparts?</li>
+</ul></li>
+</ul>
+<h3 id="divergent-changes">Divergent Changes</h3>
+<ul>
+<li>One class commonly refactored / changed in different ways for different reasons.</li>
+<li>Containing too many unrelated subparts.</li>
+<li>Sign of poor cohesion and responsibility creep (poor boundaries).</li>
+</ul>
+<h3 id="shotgun-surgery">Shotgun Surgery</h3>
+<blockquote>
+<p>Opposite of divergent change.</p>
+</blockquote>
+<ul>
+<li>Often when making a seemingly coherent change, you must make many little changes to many classes.</li>
+<li>Poor cohesion, possibly high coupling.</li>
+</ul>
+<h3 id="primitive-obsession">Primitive Obsession</h3>
+<ul>
+<li>Many member variables all of primitive types.</li>
+<li>Probably have constraints and invariants that apply to these values.</li>
+<li>Perhaps should be pulled out and wrapped up in a value ADT, or some other aggregate type.</li>
+</ul>
+<h3 id="feature-envy">Feature Envy</h3>
+<ul>
+<li>Method <strong>A::m</strong> uses other classes’ methods, features, and data much more than its own.
+<ul>
+<li>Consider moving <strong>m</strong> to class B.</li>
+<li>Some patterns are deliberate exceptions, Strategy, Iterator, Visitor.</li>
+</ul></li>
+</ul>
+<h3 id="lazy-class">Lazy Class</h3>
+<ul>
+<li>A class that doesn’t do much different than other classes.
+<ul>
+<li>Could be vestigial, and should be deprecated then removed.</li>
+<li>Could be relic from ambitious design hopes.</li>
+<li>Could have been gutted from previous refactoring.</li>
+</ul></li>
+</ul>
 </body>
 </html>
