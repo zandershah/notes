@@ -535,5 +535,18 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <blockquote>
 <p><span class="math inline">\(C^*\)</span> minus an edge is a spanning tree, so the cost of <span class="math inline">\(w(C^*) \ge w(T)\)</span>. With <span class="math inline">\(C\)</span>, we take “shortcuts” using the triangle inequality, so <span class="math inline">\(W(C) \le 2W(T)\)</span>. So <span class="math inline">\(W(C) \le 2w(C^*)\)</span>.</p>
 </blockquote>
+<h1 id="planar-graphs">Planar Graphs</h1>
+<p><strong>Definition</strong>: A <strong>planar embedding</strong> of <span class="math inline">\(G\)</span> is a drawing of <span class="math inline">\(G\)</span> on the plane such that the vertices are at different points, and the edges are lines that do not cross each other. A graph that has a planar embedding is a <strong>planar graph</strong>.</p>
+<p><strong>Definition</strong>: A <strong>face</strong> of a planar embedding is a connected region on the plane that includes no point of any edges.</p>
+<p><strong>Definition</strong>: For a connected planar embedding, the <strong>boundary walk</strong> for a face is a closed walk on the edges that form the boundary of the region, going around once. The <strong>degree</strong> of a face is the length of its boundary walk, <span class="math inline">\(deg(f)\)</span>.</p>
+<p><strong>Handshaking Lemma for Faces</strong>: Let <span class="math inline">\(G\)</span> be a planar graph with an embedding with <span class="math inline">\(F\)</span> as the set of all faces. Then <span class="math inline">\(\sum_{f \in F}deg(f) = 2|E(G)|\)</span>.</p>
+<blockquote>
+<p>Each edge contributes 2 to the sum of the face degrees, one for each side of the edge.</p>
+</blockquote>
+<p><strong>Observation</strong>: <span class="math inline">\(e\)</span> is a bridge if and only if the two sides of <span class="math inline">\(e\)</span> are in the same face.</p>
+<p><strong>Jordon Curve Theorem</strong>: Every simple closed curve on the plane separates it into 2 parts, one inside, one outside.</p>
+<h2 id="eulers-formula">Euler’s Formula</h2>
+<p>A planar graph could have several non-equivalent embeddings (different faces). The number of faces is always the same. This is a result of Euler’s formula.</p>
+<p><strong>Euler’s Formula</strong>: For a planar embedding of a connected graph <span class="math inline">\(G\)</span>, with <span class="math inline">\(n\)</span> vertices, <span class="math inline">\(m\)</span> edges, and <span class="math inline">\(s\)</span> faces, <span class="math inline">\(n - m + s = 2\)</span>.</p>
 </body>
 </html>

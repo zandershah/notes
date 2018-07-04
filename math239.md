@@ -621,3 +621,25 @@ Given $K_n$ with edge weights $w$, we want to find a cycle containing all vertic
 **Theorem**: If $C$ is the cycle produced by the heuristic, and $C^*$ a best cycle, then $w(C) \le 2w(C^*)$.
 
 > $C^*$ minus an edge is a spanning tree, so the cost of $w(C^*) \ge w(T)$. With $C$, we take "shortcuts" using the triangle inequality, so $W(C) \le 2W(T)$. So $W(C) \le 2w(C^*)$.
+
+# Planar Graphs
+
+**Definition**: A **planar embedding** of $G$ is a drawing of $G$ on the plane such that the vertices are at different points, and the edges are lines that do not cross each other. A graph that has a planar embedding is a **planar graph**.
+
+**Definition**: A **face** of a planar embedding is a connected region on the plane that includes no point of any edges.
+
+**Definition**: For a connected planar embedding, the **boundary walk** for a face is a closed walk on the edges that form the boundary of the region, going around once. The **degree** of a face is the length of its boundary walk, $deg(f)$.
+
+**Handshaking Lemma for Faces**: Let $G$ be a planar graph with an embedding with $F$ as the set of all faces. Then $\sum_{f \in F}deg(f) = 2|E(G)|$.
+
+> Each edge contributes 2 to the sum of the face degrees, one for each side of the edge.
+
+**Observation**: $e$ is a bridge if and only if the two sides of $e$ are in the same face.
+
+**Jordon Curve Theorem**: Every simple closed curve on the plane separates it into 2 parts, one inside, one outside.
+
+## Euler's Formula
+
+A planar graph could have several non-equivalent embeddings (different faces). The number of faces is always the same. This is a result of Euler's formula.
+
+**Euler's Formula**: For a planar embedding of a connected graph $G$, with $n$ vertices, $m$ edges, and $s$ faces, $n - m + s = 2$.
