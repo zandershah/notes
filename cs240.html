@@ -1052,5 +1052,108 @@ n! &amp;\le 2^{h + 1} \\
 <li>Complexity to build initial tree, <span class="math inline">\(\Theta(nh)\)</span>.</li>
 <li>Complexity of range sarch, <span class="math inline">\(\Theta(nh)\)</span> worst-case, even if the answer is <span class="math inline">\(\emptyset\)</span>.</li>
 </ul>
+<h1 id="missing-2-lectures">MISSING 2 LECTURES</h1>
+<h2 id="d-range-trees">2D Range Trees</h2>
+<p>We are given <span class="math inline">\(n\)</span> points in a sorted array with respect to <span class="math inline">\(x\)</span>. We can build a balanaced BST for these points in time <span class="math inline">\(O(n)\)</span>.</p>
+<blockquote>
+<p>Recursively, we spend <span class="math inline">\(O(1)\)</span> at every node, total <span class="math inline">\(O(n)\)</span>.</p>
+</blockquote>
+<p>A range tree is a <strong>tree of trees</strong>. The <strong>primary structure</strong> is a BST <span class="math inline">\(T\)</span> that uses the <strong>x-coordinates</strong> as keys. Each node <span class="math inline">\(v \in T\)</span> stores an <strong>auxilliary structure</strong> <span class="math inline">\(T(v)\)</span>.</p>
+<ul>
+<li>Let <span class="math inline">\(P(v)\)</span> be all points in the descendants of <span class="math inline">\(v \in T\)</span>, (including <span class="math inline">\(v\)</span>).</li>
+<li><span class="math inline">\(T(v)\)</span> stores <span class="math inline">\(P(v)\)</span> in a binary search tree, using the <strong>y-coordinates</strong> as keys.</li>
+<li><strong>Note</strong>: <span class="math inline">\(v\)</span> is not necessarily the root of <span class="math inline">\(T(v)\)</span>.</li>
+</ul>
+<h3 id="space-analysis">Space Analysis</h3>
+<ul>
+<li>Primary tree uses <span class="math inline">\(O(n)\)</span> space.</li>
+<li>Associate tree <span class="math inline">\(T(v)\)</span> uses <span class="math inline">\(O(|P(v))\)</span> space.</li>
+</ul>
+<blockquote>
+<p>Let <span class="math inline">\(S(n)\)</span> be the space complexity of a range tree over <span class="math inline">\(n\)</span> points. <span class="math inline">\(S(n)\)</span> satisfies. <span class="math display">\[S(n) = 2S\left(\frac{n}{2}\right) + O(n)\]</span> So <span class="math inline">\(S(n) \in O(n\log(n))\)</span>.</p>
+</blockquote>
+<p>Range tree space usage is <span class="math inline">\(O(n\log(n))\)</span>.</p>
+<h3 id="dictionary-operations">Dictionary Operations</h3>
+<ul>
+<li><strong>Search</strong>: as in a BST.</li>
+<li><strong>Insert</strong>: first, insert point by x-coordinate in <span class="math inline">\(T\)</span>. Then walk back up to the root and insert the point by y-cooridnate in <strong>all</strong> <span class="math inline">\(T(v)\)</span> of nodes <span class="math inline">\(v\)</span> on path to the root.</li>
+<li><strong>Delete</strong>: analogous to insertion.</li>
+</ul>
+<p>We have a <strong>problem</strong> with balancing. If we use AVL trees, insertion / deletions are very slow (rotation at <span class="math inline">\(v\)</span> changes <span class="math inline">\(P(v)\)</span> and hence requires a rebuid of <span class="math inline">\(T(v)\)</span>). Instead of rotations, we can do something similar as for kd-trees, allow certain imbalance, and rebuild the entire subtree if violated.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">def</span> build(P):</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    <span class="co"># O(|P|log|P|)</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    x_list <span class="op">=</span> <span class="bu">sorted</span>(P, key<span class="op">=</span><span class="kw">lambda</span> p: p.x)</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">    y_list <span class="op">=</span> <span class="bu">sorted</span>(P, key<span class="op">=</span><span class="kw">lambda</span> p: p.y)</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">    build_recursive(x_list, y_list)</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="kw">def</span> build_recursive(x_list, y_list):</a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">    T <span class="op">=</span> RangeTree()</a>
+<a class="sourceLine" id="cb23-9" data-line-number="9">    <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb23-10" data-line-number="10">    T.key <span class="op">=</span> x_list[n <span class="op">//</span> <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb23-11" data-line-number="11">    <span class="co"># O(|y_list|)</span></a>
+<a class="sourceLine" id="cb23-12" data-line-number="12">    T.y_tree <span class="op">=</span> BST(y_list)</a>
+<a class="sourceLine" id="cb23-13" data-line-number="13">    <span class="co"># O(|x_list|)</span></a>
+<a class="sourceLine" id="cb23-14" data-line-number="14">    x_left <span class="op">=</span> x_list[<span class="dv">0</span> : n <span class="op">//</span> <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb23-15" data-line-number="15">    x_right <span class="op">=</span> x_list[n <span class="op">//</span> <span class="dv">2</span> :]</a>
+<a class="sourceLine" id="cb23-16" data-line-number="16">    <span class="co"># O(|y_list|)</span></a>
+<a class="sourceLine" id="cb23-17" data-line-number="17">    y_left <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> y_list <span class="cf">if</span> p.x <span class="op">&lt;</span> x_list[n <span class="op">//</span> <span class="dv">2</span>].x]</a>
+<a class="sourceLine" id="cb23-18" data-line-number="18">    y_right <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> y_list <span class="cf">if</span> p.x <span class="op">&gt;</span> x_list[n <span class="op">//</span> <span class="dv">2</span>].x]</a>
+<a class="sourceLine" id="cb23-19" data-line-number="19">    <span class="co"># We have |x_list| = |y_list|, x_list is sorted by x, y_list sorted by y</span></a>
+<a class="sourceLine" id="cb23-20" data-line-number="20">    T.left <span class="op">=</span> build_recursive(x_left, y_left)</a>
+<a class="sourceLine" id="cb23-21" data-line-number="21">    T.right <span class="op">=</span> build_recursive(x_right, y_right)</a>
+<a class="sourceLine" id="cb23-22" data-line-number="22">    <span class="cf">return</span> T</a></code></pre></div>
+<p>We see that the runtime of <strong>build_recursive</strong> is <span class="math inline">\(T(n) = 2T\left(\frac{n}{2}\right) + O(n)\)</span>, so <span class="math inline">\(T(n) \in O(n\log(n))\)</span>.</p>
+<h3 id="range-search">Range Search</h3>
+<ul>
+<li>Perform a range query <span class="math inline">\(A = [x_1, x_2] \times [y_1, y_2]\)</span>.
+<ul>
+<li>Perform a range search (on the x-coordinates) for the interval <span class="math inline">\([x_1, x_2]\)</span> in primary tree <span class="math inline">\(T\)</span>.</li>
+<li>Obtain <strong>boundary</strong>, <strong>topmost outside</strong>, and <strong>allocation</strong> nodes as before.</li>
+<li>For every <strong>allocation</strong> node <span class="math inline">\(v\)</span>, perform a range search (on the y-coordinates) for the interval <span class="math inline">\([y_1, y_2]\)</span> in <span class="math inline">\(T(v)\)</span>.</li>
+<li>For every <strong>boundary</strong> node, text to see if the corresponding point is within the region <span class="math inline">\(A\)</span>.</li>
+</ul></li>
+<li><span class="math inline">\(O(\log(n))\)</span> time to find boundary and allocation nodes in primary tree.</li>
+<li>There are <span class="math inline">\(O(\log(n))\)</span> allocation nodes.</li>
+<li><span class="math inline">\(O(\log(n) + s_v)\)</span> time for each allocation node <span class="math inline">\(v\)</span>.</li>
+<li>Every point is reported in at most one auxiliary structure, <span class="math inline">\(\sum s_v \le s\)</span>.</li>
+</ul>
+<p>Time for range-query in range tree is <span class="math inline">\(O(s + \log^2(n))\)</span>. This can be further reduced to <span class="math inline">\(O(s + \log(n))\)</span>.</p>
+<h3 id="higher-dimensions">Higher Dimensions</h3>
+<ul>
+<li>Range trees can be generalized into d-dimensional space.</li>
+<li><strong>Space</strong>: <span class="math inline">\(O(n\log^{d-1}(n))\)</span>.</li>
+<li><strong>Construction</strong>: <span class="math inline">\(O(n\log^{d-1}(n))\)</span>.</li>
+<li><strong>Query</strong>: <span class="math inline">\(O(s + \log^{d}(n))\)</span>.</li>
+</ul>
+<h2 id="comparison-of-range-query-data-structures">Comparison of Range Query Data Structures</h2>
+<ul>
+<li>Quadtrees.
+<ul>
+<li>Simple even for dynamic set of points.</li>
+<li>Works well only if points are evenly distributed.</li>
+<li>Wasted space for higher dimensions.</li>
+</ul></li>
+<li>KD-Trees.
+<ul>
+<li>Linear space.</li>
+<li><span class="math inline">\(O(\sqrt n)\)</span> queries.</li>
+<li>Care needed for duplicate coordinates.</li>
+<li>Insertions and deletions destroy balance.</li>
+</ul></li>
+<li>Range Trees.
+<ul>
+<li>Fastest range search <span class="math inline">\(O(\log^2(n))\)</span>.</li>
+<li>Wastes some space.</li>
+<li>Insertions and deletions more complicated.</li>
+</ul></li>
+</ul>
+<h1 id="string-matching">String Matching</h1>
+<h2 id="brute-force">Brute Force</h2>
+<p>Example: <span class="math inline">\(T = abbbababbab\)</span>, <span class="math inline">\(P = abba\)</span>.</p>
+<ul>
+<li>What is the worst possible input, <span class="math inline">\(P = a^{m-1}b\)</span>, <span class="math inline">\(T = a^n\)</span>.</li>
+<li>Worst case performance <span class="math inline">\(\Theta((n - m + 1)m)\)</span>.</li>
+<li>This is <span class="math inline">\(\Theta(nm)\)</span>.</li>
+</ul>
 </body>
 </html>
