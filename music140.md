@@ -803,6 +803,83 @@ Example: "Respect" (Aretha Franklin, 1967)
 - 1965, written by Odis Redding, had a minor hit with it.
 - Beginning of a more militant sound.
 - Anthem for the frustration of civil rights movement.
+- FAME studios.
+
+## James Brown
+
+> Soul Brother #1.
+
+- First hit in 1956, "Please Please Please".
+- **Live at the Apollo** (1963) one of the first African-American records to sell over 1 million.
+- First crossover hit in 1965, "Papa's Got a Brand New Bag".
+- No real relationship with any of the famous soul labels.
+
+Example "I Feel Good" (Recorded in 1964)
+
+- 1965, Brown's big pop hit (#3) after "Papa's Got a Brand New Bag".
+- Follows AABA with the As as 12-bar blues, and the B as 4 bar break and 8 bar bridge.
+    - Made the song more popular to potential pop audience.
+
+Summer of 1965-1967. Inner city riots.
+
+Martin Luther King, assassinated April 4, 1968. The Black Panthers.
+
+Re-Africanization of culture, separating from White culture. James Brown decided to follow this musically. Funk.
+
+- "Cold Sweat" (1967), introduces a new style.
+
+Example "Get Up (I feel like a) Sex Machine" (1970).
+
+- Deprivilage of melody and harmony.
+- Privilage of rhythm, articulation.
+- Interlock groove, based on African Drum Groups.
+    - James fulfills the role of the master drummer. "Improvises" after establishing the interlock groove.
+- Open-ended forms, cyclical vs. linear.
+
+# Folk Revival Revisited
+
+- Bob Dylan and the Beatles had profound impacts on them.
+- Dylan admired the reach of the Beatles' audience.
+
+Newport Folk Festival (1965), "Dylan Goes Electric". Creation of **Folk Rock**.
+
+# The Counter Culture
+
+- Influence of The Beats (Jack Kerouac, Allan Ginsberg).
+- Jazz Beat / Beaten down / Beatitude.
+- Two main "centers" in USA.
+    - Greenwich Villace (New York).
+    - Haight-Ashbury (San Fransisco).
+- Symbolic idea of a higher order of conciousness.
+- Homology of Sensory Stimulation (Psychedelic).
+    - Poster Art.
+    - Clothing.
+    - Drugs.
+- Music.
+    - Loud.
+    - Lighting Shows.
+    - Longer or unusual song forms.
+    - Jamming (collective improvisation).
+
+Example: "Truckin'" The Grateful Dead (1970).
+
+- Influenced by Folk Rock.
+
+More aggressive sound develops. Less obvious fold image. **Acid Rock**.
+
+Example: "White Rabbit" Jefferson Airplane (1967).
+
+- Long crescendo.
+- References to drugs and questions parent culture.
+
+After 1967, youth culture becomes more politically active.
+
+- Focus on Civil Rights and the Draft / Vietnam.
+- Youth International Party (Yippies). Leaders Jerry Rubin / Abbie Hoffman.
+- Music becomes louder, more aggresive.
+- Return to Blues influence, **Psychedelic Blues**.
+
+## Jimi Hendrix
 
 # Textbook Readings I
 

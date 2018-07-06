@@ -1605,7 +1605,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Attaches into host’s system busses.</li>
 <li>Combination of hardware, software, firmware.</li>
 </ul>
-<h2 id="error-detection-and-correction">5.1 Error Detection and Correction</h2>
+<h2 id="error-detection-and-correction">5.2 Error Detection and Correction</h2>
 <ul>
 <li>EDC = Error Detection and Correction bits.</li>
 <li>D = Data protected by error checking, may include header fields.</li>
@@ -1642,5 +1642,211 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <p><span class="math inline">\(|G| = 4 = r + 1\)</span>. Shift <span class="math inline">\(D\)</span> left by <span class="math inline">\(r\)</span>, <span class="math inline">\(101110000\)</span>.</p>
 <p><img src="https://i.imgur.com/9FGGvhB.png" /></p>
 </blockquote>
+<h2 id="multiple-access-protocols">5.3 Multiple Access Protocols</h2>
+<ol type="1">
+<li><strong>Point-to-Point</strong>.
+<ul>
+<li>PPP for dial-up access.</li>
+<li>Link between Ethernet switch, host.</li>
+</ul></li>
+<li><strong>Boardcast</strong>.
+<ul>
+<li>Old-fashined Ethernet.</li>
+<li>Upstream HFC.</li>
+<li>802.11 wireless LAN.</li>
+</ul></li>
+</ol>
+<h3 id="multiple-access-protocol">Multiple Access Protocol</h3>
+<blockquote>
+<p>Distributed algorithm that can determine how nodes share channel, determine when node can transmit.</p>
+</blockquote>
+<ul>
+<li>Single shared broadcast channel.</li>
+<li>Two or more simultaneous transmissions by nodes can cause a <strong>collision</strong> if the node receives two or more signals at the same time.</li>
+</ul>
+<h3 id="ideal-protocol">Ideal Protocol</h3>
+<blockquote>
+<p>Given a broadcast channel rate <span class="math inline">\(R\)</span> bps.</p>
+</blockquote>
+<ol type="1">
+<li>When one node wants to transmit, it can send at rate <span class="math inline">\(R\)</span>.</li>
+<li>WHen <span class="math inline">\(M\)</span> nodes want to transmit, each can send at average rate <span class="math inline">\(\frac{R}{M}\)</span>.</li>
+<li><p>Fully decentralized.</p>
+<ul>
+<li>No special node to coordinate transmissions.</li>
+<li>No synchronization of clocks, slots.</li>
+</ul></li>
+<li><p>Simple.</p></li>
+</ol>
+<h3 id="mac-protocol-taxonomy">MAC Protocol Taxonomy</h3>
+<blockquote>
+<p>Three broad classses.</p>
+</blockquote>
+<ol type="1">
+<li><strong>Channel Partitioning</strong>.</li>
+<li><strong>Random Access</strong>.</li>
+<li><strong>Taking Turns</strong>.</li>
+</ol>
+<h3 id="channel-partitioning">Channel Partitioning</h3>
+<ol type="1">
+<li><p><strong>TDMA</strong>: Time Division Multiple Access.</p>
+<ul>
+<li>Access to channel in <em>rounds</em>.</li>
+<li>Each station gets a fixed length slot in each round. Unused slots go idle.</li>
+<li><strong>Advantages</strong>: Fair, collision free.</li>
+<li><strong>Disadvantages</strong>: Waste of bandwidth, unnecessary waiting.</li>
+</ul></li>
+<li><p><strong>FDMA</strong>: Frequency Division Multiple Access.</p>
+<ul>
+<li>Channel spectrum divided into frequency bands.</li>
+<li>Each station assigned fixed frequency band. Unused bands go idle.</li>
+<li>Similar advantages and disadvantages as TDMA.</li>
+</ul></li>
+<li><p><strong>CDMA</strong>: Code Division Multiple Access.</p>
+<ul>
+<li>Each user is allocated a unique code to transmit.</li>
+</ul></li>
+</ol>
+<h3 id="random-access-protocols">Random Access Protocols</h3>
+<ul>
+<li>When node has a packet to send, it transmits at full channel data rate <span class="math inline">\(R\)</span>.</li>
+<li><strong>Random Access MAC Protocol</strong> specifies how to detect collisions and how to record from collisions.</li>
+<li>Slotted ALOHA, ALOHA, CSMA, CSMA/CD, CSMA/CA.</li>
+</ul>
+<h4 id="slotted-aloha">Slotted ALOHA</h4>
+<blockquote>
+<p>Collisions can be detected in physical medium based on superposition.</p>
+</blockquote>
+<p><strong>Assumptions</strong>.</p>
+<ul>
+<li>All frames are the same size.</li>
+<li>Time divided into equal size slots.</li>
+<li>Nodes start to transmit only at slot beginning.</li>
+<li>Nodes are synchronized.</li>
+<li>If 2 or more nodes transmit in slot, all nodes detect collision.</li>
+</ul>
+<p><strong>Operation</strong>.</p>
+<ul>
+<li>When a node obtains a fresh frame, transmit in next slot.</li>
+<li>If there is no collision, we send new frame in next slot.</li>
+<li>If there is a collision, we retransmit frame in each subsequent slot with probability <span class="math inline">\(p\)</span> until success.
+<ul>
+<li>Each one picks a different probability.</li>
+</ul></li>
+</ul>
+<p><strong>Pros</strong>.</p>
+<ul>
+<li>Single active node can continuously transmit at full rate.</li>
+<li>Highly decentralized, only slots in nodes need to be in sync.</li>
+<li>Simple.</li>
+</ul>
+<p><strong>Cons</strong>.</p>
+<ul>
+<li>Collisions, wasting slots.</li>
+<li>Idle slots.</li>
+<li>Nodes may be able to detect collision in less than time to transit packet. If they detect collisions, they must continue to transmit for the entire time slot.</li>
+<li>Clock synchronization.</li>
+</ul>
+<p>The <strong>efficiency</strong> is the long-run fraction of successful slots.</p>
+<ul>
+<li>Probability that a given node has success in a slot is <span class="math inline">\(p(1-p)^{N-1}\)</span>.</li>
+<li>Probability that <em>any</em> node has a success is <span class="math inline">\(Np(1-p)^{N-1}\)</span>.</li>
+<li><strong>Max efficiency</strong> is <span class="math inline">\(p^&amp;\)</span> which maximizes <span class="math inline">\(Np(1-p)^{N-1}\)</span>.</li>
+<li>As <span class="math inline">\(N \to \infty\)</span>, the max efficiency is <span class="math inline">\(\frac{1}{e} = 0.37\)</span>.</li>
+</ul>
+<h4 id="pure-unslotted-aloha.">Pure (Unslotted) ALOHA.</h4>
+<blockquote>
+<p>No synchronization between nodes.</p>
+</blockquote>
+<ul>
+<li>When a frame first arrives, we immediately transmit.</li>
+<li>Collision probability increases, frame sent at <span class="math inline">\(t_0\)</span> collides with any other frames sent in <span class="math inline">\([t_0 - 1, t_0 + 1]\)</span>.</li>
+<li>Calculating the efficiency will lead to <span class="math inline">\(\frac{1}{2e}\)</span>, which is <strong>worse</strong> than slotted ALOHA.</li>
+</ul>
+<h4 id="csma-carrier-sense-multiple-access">CSMA (Carrier Sense Multiple Access)</h4>
+<blockquote>
+<p>Listen before retransmit.</p>
+</blockquote>
+<ul>
+<li>If channel sensed idle, transmit the entire frame.</li>
+<li>If channel sensed busy, defer transmission.</li>
+<li><strong>Collisions <em>can</em> still occur</strong>, mainly due to propogation delays.
+<ul>
+<li>Entire packet transmission time wasted.</li>
+<li>Distance and propogation delay play a role in determining collision probability.</li>
+</ul></li>
+</ul>
+<h4 id="csmacd-collision-detection">CSMA/CD (Collision Detection)</h4>
+<ul>
+<li>Colliding transmissions are aborted, reducing channel wastage.</li>
+<li>Easy in wired LANs, measure signal strengths, compare transitted, received signals.</li>
+<li>Difficult in wireless LANs, received signal strength overwhelmed by local transmission strength.</li>
+</ul>
+<ol type="1">
+<li>NIC (Network Interface Card) receives datagram, encapsulates into creates frame.</li>
+<li>If NIC senses channel is busy, waits until idle, then transmits.</li>
+<li>If NIC transmits entire frame without detecting another transmission, then we are done.</li>
+<li>If NIC detects another transmission, abort and send a jam signal.</li>
+<li><p>After aborting NIC enters <strong>binary (<em>exponential</em>) backoff</strong>.</p>
+<ul>
+<li>Maintain a counter for collisions, after the <span class="math inline">\(m\)</span>th collision, pick a <span class="math inline">\(K\)</span> randomly from ${0, 1, …, 2^{m} - 1} $. NIC waits for <span class="math inline">\(K \cdot 512\)</span> bit times, then returns to step 2. Counter is reset upon successful transmission.</li>
+<li>Longer backoff interval with more collisions.</li>
+</ul></li>
+</ol>
+<ul>
+<li>Medium sensing is done for 96 bit times.</li>
+<li>Jamming signal length is 48 bits.</li>
+<li>The maximum amount of collisions is set to 10. Any more will generate an error.</li>
+</ul>
+<p>Assume that <span class="math inline">\(T_{prop}\)</span> is the maximum propogation delay between 2 nodes in LAN, and <span class="math inline">\(t_{trans}\)</span> is the time to transmit a max-size frame.</p>
+<p><span class="math display">\[\text{efficiency} = \frac{1}{1 + 5\frac{t_{prop}}{t_{trans}}}\]</span></p>
+<ul>
+<li><p><strong>Efficiency</strong> <span class="math inline">\(\to 1\)</span> as <span class="math inline">\(t_{prop} \to 0\)</span> or <span class="math inline">\(t_{trans} \to \infty\)</span>.</p>
+<blockquote>
+<p>Do <strong>not</strong> need to memorize effiency formulas, just which is better and why).</p>
+</blockquote></li>
+<li><p>Better performance than ALOHA, simple, cheap, decentralized!</p></li>
+</ul>
+<h3 id="taking-turns">Taking Turns</h3>
+<blockquote>
+<p>We look for the best mix of channel partitioning and random access.</p>
+</blockquote>
+<ol type="1">
+<li><strong>Polling</strong>.
+<ul>
+<li>Master node <em>invites</em> slave nodes to transmit in turn by polling.</li>
+<li>Typically used with <em>dumb</em> slave devices.</li>
+<li>No collisions and no empty slots.</li>
+<li>Concerns with polling overhead, latency, and single point of faliure.</li>
+</ul></li>
+<li><strong>Token Passing</strong>.
+<ul>
+<li>Control <strong>token</strong> passed from one node to next sequentially.</li>
+<li>Token message.</li>
+<li>Concerns with token overhead, latency, and single point of faliure (token).</li>
+</ul></li>
+</ol>
+<h3 id="cable-access-network">Cable Access Network</h3>
+<blockquote>
+<p>An example of how we can use multiple access.</p>
+</blockquote>
+<ul>
+<li>Two channels, upstream and downstream.
+<ul>
+<li>Downstream has only one sender (CMTS / IP), so we do not need multiple access.</li>
+<li>Upstream requires multiple access since we have multiple senders.</li>
+</ul></li>
+<li><strong>DOCSIS</strong>: Data Over Cable Service Interface Spec.
+<ul>
+<li>FDM over upstream, downstream frequency channels.</li>
+<li>TDM upstream, some slots assigned, some have contention.
+<ul>
+<li>Downstream MAP frame assigns upstream slots.</li>
+<li>Request for upstream slots (and data) transitted random access (binary backoff) in selected slots.</li>
+</ul></li>
+<li>Visualized as FDM split up into time slots similar to TDM.</li>
+</ul></li>
+</ul>
+<h2 id="lans">5.4 LANs</h2>
 </body>
 </html>
