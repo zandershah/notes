@@ -643,3 +643,11 @@ Given $K_n$ with edge weights $w$, we want to find a cycle containing all vertic
 A planar graph could have several non-equivalent embeddings (different faces). The number of faces is always the same. This is a result of Euler's formula.
 
 **Euler's Formula**: For a planar embedding of a connected graph $G$, with $n$ vertices, $m$ edges, and $s$ faces, $n - m + s = 2$.
+
+A planar graph $G$ with $n$ vertices and $m$ edges can have at most $3n - 6$ edges.
+
+> We know that if a face has degree greater than 3, we can always add an edge between them, so in an edge-maximal planar graph, all faces must be triangles. Let us count the number of edges in the graph. We have that $2m = 3F$. Using $F = 2 - n + m$, we can obtain an upper bound on the number of edges.
+> $$\begin{aligned}2m &\ge 3(2 - n + m) \\ 2m &\ge 6 - 3n + 3m \\ 3n - 6 &\ge m\end{aligned}$$
+
+> For bipartite graphs, the smallest face now must have an even degree, so 4.
+> $$\begin{aligned}2m &\ge 4(2 - n + m) \\ 2m &\ge 8 - 4n + 4m \\ 2n - 4 &\ge m\end{aligned}$$

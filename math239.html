@@ -548,5 +548,12 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <h2 id="eulers-formula">Euler’s Formula</h2>
 <p>A planar graph could have several non-equivalent embeddings (different faces). The number of faces is always the same. This is a result of Euler’s formula.</p>
 <p><strong>Euler’s Formula</strong>: For a planar embedding of a connected graph <span class="math inline">\(G\)</span>, with <span class="math inline">\(n\)</span> vertices, <span class="math inline">\(m\)</span> edges, and <span class="math inline">\(s\)</span> faces, <span class="math inline">\(n - m + s = 2\)</span>.</p>
+<p>A planar graph <span class="math inline">\(G\)</span> with <span class="math inline">\(n\)</span> vertices and <span class="math inline">\(m\)</span> edges can have at most <span class="math inline">\(3n - 6\)</span> edges.</p>
+<blockquote>
+<p>We know that if a face has degree greater than 3, we can always add an edge between them, so in an edge-maximal planar graph, all faces must be triangles. Let us count the number of edges in the graph. We have that <span class="math inline">\(2m = 3F\)</span>. Using <span class="math inline">\(F = 2 - n + m\)</span>, we can obtain an upper bound on the number of edges. <span class="math display">\[\begin{aligned}2m &amp;\ge 3(2 - n + m) \\ 2m &amp;\ge 6 - 3n + 3m \\ 3n - 6 &amp;\ge m\end{aligned}\]</span></p>
+</blockquote>
+<blockquote>
+<p>For bipartite graphs, the smallest face now must have an even degree, so 4. <span class="math display">\[\begin{aligned}2m &amp;\ge 4(2 - n + m) \\ 2m &amp;\ge 8 - 4n + 4m \\ 2n - 4 &amp;\ge m\end{aligned}\]</span></p>
+</blockquote>
 </body>
 </html>
