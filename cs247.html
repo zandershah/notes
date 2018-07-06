@@ -1301,6 +1301,92 @@ rvalues are temporary objects.</p>
 <li>Goal is allowed to switch strategies at runtime. Simply swap strategy pointers.</li>
 <li>Similar to Factory Method.</li>
 </ul>
+<h2 id="visitor-pattern">Visitor Pattern</h2>
+<blockquote>
+<p>For implementing <strong>double dispatch</strong>.</p>
+</blockquote>
+<ul>
+<li>Virtual methods are chosen based on the actual runtime type of the object.</li>
+<li>What if we want to choose a method based on two objects?
+<ul>
+<li>e.g. Striking an enemy with a weapon.</li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">virtual</span> <span class="dt">void</span> strike(Enemy &amp;e, Weapon &amp;w);</a></code></pre></div>
+<ul>
+<li>If we put it in Enemy, Enemy::strike(Weapon &amp;w) then you choose based on enemy but not weapon.</li>
+<li>If we put it in Weapon, Weapon::strike(Enemy &amp;e) then you choose based on weapon but not enemy.</li>
+</ul></li>
+<li>The trick is to use <strong>both</strong> overriding, and overloading.</li>
+<li>We will have some coupling between the classes inherent to the visitor pattern.</li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">class</span> Enemy {</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">    <span class="kw">virtual</span> <span class="dt">void</span> beStruckBy(Weapon &amp;w) = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">};</a>
+<a class="sourceLine" id="cb41-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6"><span class="kw">class</span> Turtle : <span class="kw">public</span> Enemy {</a>
+<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb41-8" data-line-number="8">    <span class="dt">void</span> beStruckBy(Weapon &amp;w) <span class="kw">override</span> {</a>
+<a class="sourceLine" id="cb41-9" data-line-number="9">        <span class="co">// Turtle object type.</span></a>
+<a class="sourceLine" id="cb41-10" data-line-number="10">        w.strike(*<span class="kw">this</span>);</a>
+<a class="sourceLine" id="cb41-11" data-line-number="11">    }</a>
+<a class="sourceLine" id="cb41-12" data-line-number="12">};</a>
+<a class="sourceLine" id="cb41-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb41-14" data-line-number="14"><span class="kw">class</span> Bullet : <span class="kw">public</span> Enemy {</a>
+<a class="sourceLine" id="cb41-15" data-line-number="15"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb41-16" data-line-number="16">    <span class="dt">void</span> beStruckBy(Weapon &amp;w) <span class="kw">override</span> {</a>
+<a class="sourceLine" id="cb41-17" data-line-number="17">        <span class="co">// Bullet object type.</span></a>
+<a class="sourceLine" id="cb41-18" data-line-number="18">        w.strike(*<span class="kw">this</span>);</a>
+<a class="sourceLine" id="cb41-19" data-line-number="19">    }</a>
+<a class="sourceLine" id="cb41-20" data-line-number="20">};</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">class</span> Weapon {</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">    <span class="kw">virtual</span> <span class="dt">void</span> strike(Turtle &amp;t) = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">    <span class="kw">virtual</span> <span class="dt">void</span> strike(Bullet &amp;b) = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">};</a>
+<a class="sourceLine" id="cb42-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb42-7" data-line-number="7"><span class="kw">class</span> Stick : <span class="kw">public</span> Weapon {</a>
+<a class="sourceLine" id="cb42-8" data-line-number="8"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb42-9" data-line-number="9">    <span class="dt">void</span> strike(Turtle &amp;t) <span class="kw">override</span>;</a>
+<a class="sourceLine" id="cb42-10" data-line-number="10">    <span class="dt">void</span> strike(Bullet &amp;b) <span class="kw">override</span>;</a>
+<a class="sourceLine" id="cb42-11" data-line-number="11">};</a>
+<a class="sourceLine" id="cb42-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb42-13" data-line-number="13"><span class="kw">class</span> Rock : <span class="kw">public</span> Weapon {</a>
+<a class="sourceLine" id="cb42-14" data-line-number="14"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb42-15" data-line-number="15">    <span class="dt">void</span> strike(Turtle &amp;t) <span class="kw">override</span>;</a>
+<a class="sourceLine" id="cb42-16" data-line-number="16">    <span class="dt">void</span> strike(Bullet &amp;b) <span class="kw">override</span>;</a>
+<a class="sourceLine" id="cb42-17" data-line-number="17">};</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">    Enemy *e = EnemyFactory();</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">    Weapon *w = WeaponFactory();</a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">    e-&gt;beStruckBy(*w);</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">    <span class="co">// Turtle::beStruckBy gets called (virtual dispatch).</span></a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">    <span class="co">// This calls Weapon::strike(Turtle &amp;) (overload).</span></a>
+<a class="sourceLine" id="cb43-7" data-line-number="7">    <span class="co">// Which is actually calling Stick::strike(Turtle &amp;) (virtual override).</span></a>
+<a class="sourceLine" id="cb43-8" data-line-number="8">}</a></code></pre></div>
+<ul>
+<li>Visitor can be used to add functionality to existing classes, without having to change or recompile them.</li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">class</span> MyClass {</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">    <span class="kw">virtual</span> <span class="dt">void</span> accept(MyClassVisitor &amp;v) {</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">        v.visit(*<span class="kw">this</span>);</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">    }</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">};</a>
+<a class="sourceLine" id="cb44-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb44-7" data-line-number="7"><span class="kw">class</span> MyClassVisitor {</a>
+<a class="sourceLine" id="cb44-8" data-line-number="8">    <span class="kw">virtual</span> <span class="dt">void</span> visit(MyClassA &amp;) = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb44-9" data-line-number="9">    <span class="kw">virtual</span> <span class="dt">void</span> visit(MyClassB &amp;) = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb44-10" data-line-number="10">};</a></code></pre></div>
+<h2 id="composite-pattern">Composite Pattern</h2>
+<ul>
+<li>When written with tree structures, code must be written such that it specializes actions / operations depending on if the data is a leaf or not.</li>
+<li>When creating tree-like structures of similar objects, we have a better solution.</li>
+<li>A collection of Heroes, which itself contains.
+<ul>
+<li>An individual hero(s). Leaf.</li>
+<li>A collection (team) of heroes. Non-leaf.</li>
+</ul></li>
+</ul>
 <h1 id="measures-of-design-quality">Measures of Design Quality</h1>
 <h2 id="coupling">Coupling</h2>
 <blockquote>
@@ -1342,19 +1428,19 @@ rvalues are temporary objects.</p>
 <p><strong>Goal</strong>: Low coupling and high cohesion.</p>
 </blockquote>
 <h1 id="decoupling-the-interface-mvc">Decoupling the Interface (<strong>MVC</strong>)</h1>
-<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">class</span> ChessBoard {</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">    ...</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">    cout &lt;&lt; <span class="st">&quot;Your Move&quot;</span> &lt;&lt; ...</a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">};</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">class</span> ChessBoard {</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">    ...</a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">    cout &lt;&lt; <span class="st">&quot;Your Move&quot;</span> &lt;&lt; ...</a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">};</a></code></pre></div>
 <ul>
 <li>This is bad design, inhibits code reuse.</li>
 <li>What if you wanted to reuse ChessBoard class, but not have it communicate through stdout.</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">class</span> ChessBoard {</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">    ostream &amp;out;</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">    ...</a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">    out &lt;&lt; <span class="st">&quot;Your Move&quot;</span> &lt;&lt; ...</a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">};</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">class</span> ChessBoard {</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">    ostream &amp;out;</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">    ...</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">    out &lt;&lt; <span class="st">&quot;Your Move&quot;</span> &lt;&lt; ...</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">};</a></code></pre></div>
 <ul>
 <li>Better, but what if we want a graphical interface?</li>
 <li>ChessBoard should not be communicating at all.</li>
@@ -1429,10 +1515,10 @@ rvalues are temporary objects.</p>
 <li>Methods promise <strong>no less</strong> than the base class methods.</li>
 </ul>
 <p>Example: A BoundedStack is a specialized type of Stack that cannot grow past a certain size. Is a BoundedStack substitutable for a Stack? Assume BoundedStack has a limit of 255 elements.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb42-1" data-line-number="1">Stack *s;</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i &lt; <span class="dv">1000</span>; ++i) {</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">    s-&gt;push(i);</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb47-1" data-line-number="1">Stack *s;</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i &lt; <span class="dv">1000</span>; ++i) {</a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">    s-&gt;push(i);</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4">}</a></code></pre></div>
 <p><strong>No</strong>, a BoundedStack is <strong>not</strong> substitutable for a Stack. Instead, BoundedStack should be <strong>composed</strong> with a Stack.</p>
 <p><strong>Note</strong>: On overriding in c++.</p>
 <ul>
@@ -1469,13 +1555,13 @@ rvalues are temporary objects.</p>
 </ul></li>
 </ul>
 <p>Examples:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="dt">void</span> A::m1(SomeObj b) {</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">    b.m2() <span class="co">// Ok. Params.</span></a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">    <span class="kw">this</span>-&gt;otherObj.m3(); <span class="co">// Ok. A&#39;s data members.</span></a>
-<a class="sourceLine" id="cb43-4" data-line-number="4">    b.gen().m4(); <span class="co">// Not ok.</span></a>
-<a class="sourceLine" id="cb43-5" data-line-number="5">    AnotherObj obj{};</a>
-<a class="sourceLine" id="cb43-6" data-line-number="6">    obj.m5(); <span class="co">// Ok. Object constructed by A&#39;s methods.</span></a>
-<a class="sourceLine" id="cb43-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="dt">void</span> A::m1(SomeObj b) {</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">    b.m2() <span class="co">// Ok. Params.</span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">    <span class="kw">this</span>-&gt;otherObj.m3(); <span class="co">// Ok. A&#39;s data members.</span></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">    b.gen().m4(); <span class="co">// Not ok.</span></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">    AnotherObj obj{};</a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">    obj.m5(); <span class="co">// Ok. Object constructed by A&#39;s methods.</span></a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">}</a></code></pre></div>
 <h1 id="refactoring">Refactoring</h1>
 <blockquote>
 <p>Changing existing code to “clean it up”.</p>
