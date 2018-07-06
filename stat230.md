@@ -702,4 +702,14 @@ $$f(x, y) = \frac{1}{6}\left(\frac{1}{2}\right)^x \left(\frac{2}{3}\right)^y$$
 
 2. Compute $P(X < Y)$.
 
-    > $$\begin{aligned}P(X < Y) &= \sum_{x = 0}^\infty \left(\sum_{y = x + 1}^\infty f(x, y)\right) \\ &= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^x} \sum_{y = x + 1}^\infty \left(\frac{2}{3}\right)^y \\ &= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^{x}} \left(\frac{2}{3}\right)^{x + 1} 3\end{aligned}$$
+    > $$\begin{aligned}P(X < Y) &= \sum_{x = 0}^\infty \left(\sum_{y = x + 1}^\infty f(x, y)\right) \\ &= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^x} \sum_{y = x + 1}^\infty \left(\frac{2}{3}\right)^y \\ &= \sum_{x = 0}^\infty 3\cdot \frac{1}{6} \frac{1}{2^{x}} \left(\frac{2}{3}\right)^{x + 1} \end{aligned}$$
+
+## Conditional Probability Function
+
+The **conditional probability function** of $X$ given $Y = y$ is denoted $f_X(x|y)$ and is defined to be.
+
+$$f_X(x|y)= P(X = x | Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)} = \frac{f(x,y)}{f_Y(y)}$$
+
+**Proposition**: If $X \sim Poi(\lambda_1)$ and $Y \sim Poi(\lambda_2)$, then $T = X + Y \sim Poi(\lambda_1 + \lambda_2)$.
+
+**Proposition**: If $X \sim Bin(n, p)$ and $Y \sim Bin(m, p)$ independently, then $T = X + Y \sim Bin(n + m, p)$.

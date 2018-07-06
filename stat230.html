@@ -650,8 +650,13 @@ $$
 </blockquote></li>
 <li><p>Compute <span class="math inline">\(P(X &lt; Y)\)</span>.</p>
 <blockquote>
-<p><span class="math display">\[\begin{aligned}P(X &lt; Y) &amp;= \sum_{x = 0}^\infty \left(\sum_{y = x + 1}^\infty f(x, y)\right) \\ &amp;= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^x} \sum_{y = x + 1}^\infty \left(\frac{2}{3}\right)^y \\ &amp;= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^{x}} \left(\frac{2}{3}\right)^{x + 1} 3\end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}P(X &lt; Y) &amp;= \sum_{x = 0}^\infty \left(\sum_{y = x + 1}^\infty f(x, y)\right) \\ &amp;= \sum_{x = 0}^\infty \frac{1}{6} \frac{1}{2^x} \sum_{y = x + 1}^\infty \left(\frac{2}{3}\right)^y \\ &amp;= \sum_{x = 0}^\infty 3\cdot \frac{1}{6} \frac{1}{2^{x}} \left(\frac{2}{3}\right)^{x + 1} \end{aligned}\]</span></p>
 </blockquote></li>
 </ol>
+<h2 id="conditional-probability-function">Conditional Probability Function</h2>
+<p>The <strong>conditional probability function</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y = y\)</span> is denoted <span class="math inline">\(f_X(x|y)\)</span> and is defined to be.</p>
+<p><span class="math display">\[f_X(x|y)= P(X = x | Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)} = \frac{f(x,y)}{f_Y(y)}\]</span></p>
+<p><strong>Proposition</strong>: If <span class="math inline">\(X \sim Poi(\lambda_1)\)</span> and <span class="math inline">\(Y \sim Poi(\lambda_2)\)</span>, then <span class="math inline">\(T = X + Y \sim Poi(\lambda_1 + \lambda_2)\)</span>.</p>
+<p><strong>Proposition</strong>: If <span class="math inline">\(X \sim Bin(n, p)\)</span> and <span class="math inline">\(Y \sim Bin(m, p)\)</span> independently, then <span class="math inline">\(T = X + Y \sim Bin(n + m, p)\)</span>.</p>
 </body>
 </html>
