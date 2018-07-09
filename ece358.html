@@ -1848,5 +1848,156 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul></li>
 </ul>
 <h2 id="lans">5.4 LANs</h2>
+<h3 id="mac-addresses-and-arp">MAC Addresses and ARP</h3>
+<blockquote>
+<p><strong>Analogy</strong>: MAC address like SSN, IP address like postal address.</p>
+</blockquote>
+<ul>
+<li>Used <strong>locally</strong> to get frame from one interface to another physically-connected interface (same network, in IP-addressing).
+<ul>
+<li>48 bit MAC address (for most LANs) burned in NIC ROM, also sometimes software settable.</li>
+<li>Hexadecimal notation.</li>
+</ul></li>
+</ul>
+<h3 id="lan-addresses">LAN Addresses</h3>
+<ul>
+<li>Each adapter on LAN has a unique <strong>LAN</strong> address.</li>
+<li>MAC address allocation administered by IEEE.</li>
+<li>Flat address allows for portability, we can move from one LAN card to another.</li>
+</ul>
+<h3 id="arp-address-resolution-protocol">ARP (Address Resolution Protocol)</h3>
+<blockquote>
+<p>How to determine interface’s MAC address, knowing its IP address.</p>
+</blockquote>
+<p><strong>ARP Table</strong>: Each IP node (host, router) on LAN has table.</p>
+<ul>
+<li>IP to MAC address mappings for some LAN nodes.</li>
+<li>TTL time after which address mapping will be forgotten (typically 20 min).</li>
+</ul>
+<p>Consideer <span class="math inline">\(A\)</span> wants to send a datagram to <span class="math inline">\(B\)</span> but <span class="math inline">\(B\)</span>’s MAC address is not in <span class="math inline">\(A\)</span>’s ARP table.</p>
+<ul>
+<li><span class="math inline">\(A\)</span> <strong>broadcasts</strong> ARP query packet, containing <span class="math inline">\(B\)</span>’s IP address.
+<ul>
+<li>Destination MAC address set to FF-FF-FF-FF.</li>
+<li>All nodes on LAN receive ARP query.</li>
+</ul></li>
+<li><span class="math inline">\(B\)</span> receives ARP packet, replies to <span class="math inline">\(A\)</span> with its MAC addres (unicast to <span class="math inline">\(A\)</span>’s MAC address).</li>
+<li><span class="math inline">\(A\)</span> caches IP to MAC address pair in its ARP table until the information becomes old.</li>
+<li>ARP is <strong>“plug-and-play”</strong>. Nodes create their ARP tables <em>without intervention from network administrator</em>.</li>
+</ul>
+<p>Example: Sending a datagram from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> via <span class="math inline">\(R\)</span>. Assume that <span class="math inline">\(A\)</span> knows <span class="math inline">\(B\)</span>’s IP address, IP address of first hop router <span class="math inline">\(R\)</span> (DHCP), and <span class="math inline">\(R\)</span>’s MAC address (ARP).</p>
+<blockquote>
+<p><img src="https://i.imgur.com/i7E8K6A.png" /> - A creates IP datagram with IP source <span class="math inline">\(A\)</span>, destination <span class="math inline">\(B\)</span>. - A creates link-layer frame with <span class="math inline">\(R\)</span>’s MAC address at destination, frame contains <span class="math inline">\(A\)</span>-to-<span class="math inline">\(B\)</span> IP datagram. - Frame sent from <span class="math inline">\(A\)</span> to <span class="math inline">\(R\)</span>, upon arrival, datagram is removed and passed up to IP. - <span class="math inline">\(R\)</span> forwards datagram with IP source <span class="math inline">\(A\)</span>, destination <span class="math inline">\(B\)</span>. - <span class="math inline">\(R\)</span> creates link-layer frame with <span class="math inline">\(B\)</span>’s MAC address as destination, frame contains <span class="math inline">\(A\)</span>-to-<span class="math inline">\(B\)</span> IP datagram.</p>
+</blockquote>
+<h3 id="ethernet">Ethernet</h3>
+<blockquote>
+<p>“Dominant” wired LAN technology. Family of protocols.</p>
+</blockquote>
+<ul>
+<li>First widely used LAN technology.</li>
+<li>Simpler, cheap than token LANs and ATM.</li>
+</ul>
+<h4 id="physical-topology">Physical Topology</h4>
+<ul>
+<li><strong>Bus</strong>, popular through the mid 90s. All nodes are in the same collision comain.</li>
+<li><strong>Star</strong>, prevails today. Active <strong>switch</strong> is in the center, and each “spoke” runs a seaprate Ethernet protocol (nodes do not collide with each other).</li>
+</ul>
+<h4 id="frame-structure">Frame Structure</h4>
+<p>Sending adapter encapsulates IP datagram (or other network layer protocol packet) in <strong>Ethernet frame</strong>.</p>
+<ul>
+<li><strong>Preamble</strong>. 7 bytes with pattern <span class="math inline">\(10101010\)</span> followed by one byte with pattern <span class="math inline">\(10101011\)</span> (wake up bytes). Used to synchronize receiver to the clock of the sender.</li>
+<li><strong>Addresses</strong>, 6 byte source, destination MAC addresses.</li>
+<li><strong>Type</strong>, indicates higher layer protocol (mostly IP).</li>
+<li><strong>CYC</strong>, cyclic redundancy check at receiver.</li>
+</ul>
+<p>Ethernet is unreliable, connectionless.</p>
+<ul>
+<li><strong>Connectionless</strong>, no handshaking between sending and receiving NICs.</li>
+<li><strong>Unreliable</strong>, receiving NIC doesnt send ACKs or NACKs to sending NIC.
+<ul>
+<li>Data in dropped frames recovered only if initial sender uses higher layer rdt, otherwise dropped data is lost.</li>
+</ul></li>
+<li>Ethernet’s MAC protocol, unslotted <strong>CSMA/CD with binary backoff</strong>.</li>
+</ul>
+<p>There are <strong>many</strong> difference Ethernet standards. They each have common MAC protocol and frame format. Offer different speeds, and different physical layer media.</p>
+<h3 id="ethernet-switches">Ethernet Switches</h3>
+<blockquote>
+<p>Implement the bottom two levels.</p>
+</blockquote>
+<ul>
+<li><strong>Link-layer device, takesn an <em>active</em> role</strong>.
+<ul>
+<li>Store, <strong>forward</strong>, Ethernet frames.</li>
+<li>Examine incoming frame’s MAC address, <strong>selectively</strong> forward frame to one-or-more outgoing links when frame is to be forwarded on segment, uses CSMA/CD to access segment.</li>
+</ul></li>
+<li><strong>Transparent</strong>. Hosts are unaware of the presence of switches.</li>
+<li><strong>Plug-and-play, self-learning</strong>. Switches to not have to be configured.</li>
+</ul>
+<p>Swithes allow for <em>multiple</em> simulatenous transmissions.</p>
+<p><img src="https://i.imgur.com/jyYDbBE.png" /></p>
+<ul>
+<li>Hosts have dedicated, direct connection to switch.</li>
+<li>Switches buffer packets.</li>
+<li>Ethernet protocol used on <em>each</em> incoming link, but no collisions. Full duplex.
+<ul>
+<li>Each link is in its own collision domain.</li>
+</ul></li>
+<li><strong>Switching</strong> can transmit <span class="math inline">\(A\)</span>-to-<span class="math inline">\(A^\prime\)</span> and <span class="math inline">\(B\)</span>-to-<span class="math inline">\(B^\prime\)</span> simultaneously, without collisions.</li>
+</ul>
+<h4 id="switch-forwarding-table">Switch Forwarding Table</h4>
+<blockquote>
+<p>How does the switch know <span class="math inline">\(A^\prime\)</span> is reachable via interface 4, etc.</p>
+</blockquote>
+<ul>
+<li>Each switch has a <strong>switch table</strong>, similar to routing table but for MAC address.
+<ul>
+<li>(MAC address of host, interface to reach host, timestamp).</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>How are entries created and maintained in the switch table?</p>
+</blockquote>
+<ul>
+<li>Switch <strong>learns</strong> which hosts can be reached through which interfaces.
+<ul>
+<li>When frame received, switch <strong>learns</strong> location of sender, incoming LAN segment.</li>
+<li>Records sender, location pair in switch table.</li>
+</ul></li>
+<li><p>When a frame is received at switch.</p>
+<ol type="1">
+<li>Record incoming link, MAC address of sending host.</li>
+<li>Index switch table using MAC destination address.</li>
+<li>If the entry is not found for the destination, then we flood. If the destination is on the segment that the frame arrived, drop it.</li>
+</ol></li>
+</ul>
+<h4 id="interconnecting-switches">Interconnecting Switches</h4>
+<blockquote>
+<p>Switches can be connected in order to create a heirarchy.</p>
+</blockquote>
+<ul>
+<li>Very similar to other heirarchies that we have studied.</li>
+<li>Self learning (flooding) is still used, exactly the same as in the single-switch case.</li>
+</ul>
+<p><img src="https://i.imgur.com/dfYdiql.png" /></p>
+<h4 id="switches-vs.routers">Switches vs. Routers</h4>
+<p>Both are <strong>store-and-forward</strong>.</p>
+<ul>
+<li><strong>Routers</strong>: Network-layer devices.
+<ul>
+<li><strong>Advantages</strong>: Hierarchical addressing, traffic isolation. We can send information within subnets without worrying about information leaking to the outside.</li>
+<li><strong>Disadvantages</strong>: Large processing time, needs IP configuration.</li>
+</ul></li>
+<li><strong>Swithces</strong>: Link-layer devices.
+<ul>
+<li><strong>Advantages</strong>: Fast plug-and-play.</li>
+<li><strong>Disadvantages</strong>: Broadcast storm if loops exist, large ARP table for large network.</li>
+</ul></li>
+</ul>
+<p>Both have <strong>forwarding tables</strong>.</p>
+<ul>
+<li><strong>Routers</strong>: Compute tables using routing algorithms, IP addresses.</li>
+<li><strong>Swithces</strong>: Learn forwarding table using flooding, learning, MAC addresses.</li>
+</ul>
+<p><strong>A router has multiple IP addresses</strong>. There is one for every interface.</p>
 </body>
 </html>
