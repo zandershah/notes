@@ -651,3 +651,44 @@ A planar graph $G$ with $n$ vertices and $m$ edges can have at most $3n - 6$ edg
 
 > For bipartite graphs, the smallest face now must have an even degree, so 4.
 > $$\begin{aligned}2m &\ge 4(2 - n + m) \\ 2m &\ge 8 - 4n + 4m \\ 2n - 4 &\ge m\end{aligned}$$
+
+# Platonic Solids
+
+Given a planar embedding, we can draw it on a sphere, then cut across each face to obtain a polyhedron.
+
+**Definition**: A connected planar graph is **platonic** if it has an embedding where every vertex has the same degree ($\ge 3$) and every face has the same degree ($\ge 3$).
+
+Suppose a platonic graph has $n$ vertices, $m$ edges, $s$ faces, vertex degree $d_v \ge 3$, and face degree $d_f \ge 3$.
+
+1. By handshaking lemma, $2m = d_v n \Rightarrow n = \frac{2m}{d_v}$.
+2. By handshaking lemma for faces, $2m = d_f s \Rightarrow s = \frac{2m}{d_f}$.
+3. By Euler's formula, $n - m + s = 2$.
+
+By substituting $1,2\to 3$.
+
+$$\begin{aligned}
+\frac{2m}{d_v} - m + \frac{2m}{d_f} &= 2 \\
+2md_f - md_vd_f + 2md_v &= 2d_vd_f \\
+2md_f - md_vd_f + 2md_v &> 0 \\
+2d_f - d_vd_f + 2d_v -4 + 4 &> 0 \\
+-(d_v -2 )(d_f - 2) + 4 &> 0 \\
+4 &> (d_v - 2)(d_f - 2)
+\end{aligned}$$
+
+Combinations of $(d_v, d_f)$ that satisfy the inequality:
+
+$d_v$ | $d_f$
+--- | ---
+$3$ | $3,4,5$
+$4$ | $3$
+$5$ | $3$
+
+# Kuratowski's Theorem
+
+**Definition**: An **edge subdivision** of a graph is obtained by replacing each edge with a new path of length at least 1. Drawing an edge is equivalent to drawing a path.
+
+**Lemma**: $G$ is planar if and only if any edge subdivision of $G$ is planar.
+
+So any edge subdivisions of $K_5$ and $K_{3,3}$ are non-planar.
+
+**Kuratowski's Theorem**: $G$ is planar if and only if $G$ does not contain any edge subdivision of $K_5$ or $K_{3,3}$.

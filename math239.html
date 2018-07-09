@@ -555,5 +555,51 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <blockquote>
 <p>For bipartite graphs, the smallest face now must have an even degree, so 4. <span class="math display">\[\begin{aligned}2m &amp;\ge 4(2 - n + m) \\ 2m &amp;\ge 8 - 4n + 4m \\ 2n - 4 &amp;\ge m\end{aligned}\]</span></p>
 </blockquote>
+<h1 id="platonic-solids">Platonic Solids</h1>
+<p>Given a planar embedding, we can draw it on a sphere, then cut across each face to obtain a polyhedron.</p>
+<p><strong>Definition</strong>: A connected planar graph is <strong>platonic</strong> if it has an embedding where every vertex has the same degree (<span class="math inline">\(\ge 3\)</span>) and every face has the same degree (<span class="math inline">\(\ge 3\)</span>).</p>
+<p>Suppose a platonic graph has <span class="math inline">\(n\)</span> vertices, <span class="math inline">\(m\)</span> edges, <span class="math inline">\(s\)</span> faces, vertex degree <span class="math inline">\(d_v \ge 3\)</span>, and face degree <span class="math inline">\(d_f \ge 3\)</span>.</p>
+<ol type="1">
+<li>By handshaking lemma, <span class="math inline">\(2m = d_v n \Rightarrow n = \frac{2m}{d_v}\)</span>.</li>
+<li>By handshaking lemma for faces, <span class="math inline">\(2m = d_f s \Rightarrow s = \frac{2m}{d_f}\)</span>.</li>
+<li>By Euler’s formula, <span class="math inline">\(n - m + s = 2\)</span>.</li>
+</ol>
+<p>By substituting <span class="math inline">\(1,2\to 3\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{2m}{d_v} - m + \frac{2m}{d_f} &amp;= 2 \\
+2md_f - md_vd_f + 2md_v &amp;= 2d_vd_f \\
+2md_f - md_vd_f + 2md_v &amp;&gt; 0 \\
+2d_f - d_vd_f + 2d_v -4 + 4 &amp;&gt; 0 \\
+-(d_v -2 )(d_f - 2) + 4 &amp;&gt; 0 \\
+4 &amp;&gt; (d_v - 2)(d_f - 2)
+\end{aligned}\]</span></p>
+<p>Combinations of <span class="math inline">\((d_v, d_f)\)</span> that satisfy the inequality:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(d_v\)</span></th>
+<th><span class="math inline">\(d_f\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(3\)</span></td>
+<td><span class="math inline">\(3,4,5\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(4\)</span></td>
+<td><span class="math inline">\(3\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(5\)</span></td>
+<td><span class="math inline">\(3\)</span></td>
+</tr>
+</tbody>
+</table>
+<h1 id="kuratowskis-theorem">Kuratowski’s Theorem</h1>
+<p><strong>Definition</strong>: An <strong>edge subdivision</strong> of a graph is obtained by replacing each edge with a new path of length at least 1. Drawing an edge is equivalent to drawing a path.</p>
+<p><strong>Lemma</strong>: <span class="math inline">\(G\)</span> is planar if and only if any edge subdivision of <span class="math inline">\(G\)</span> is planar.</p>
+<p>So any edge subdivisions of <span class="math inline">\(K_5\)</span> and <span class="math inline">\(K_{3,3}\)</span> are non-planar.</p>
+<p><strong>Kuratowski’s Theorem</strong>: <span class="math inline">\(G\)</span> is planar if and only if <span class="math inline">\(G\)</span> does not contain any edge subdivision of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span>.</p>
 </body>
 </html>
