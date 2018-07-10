@@ -1155,5 +1155,52 @@ n! &amp;\le 2^{h + 1} \\
 <li>Worst case performance <span class="math inline">\(\Theta((n - m + 1)m)\)</span>.</li>
 <li>This is <span class="math inline">\(\Theta(nm)\)</span>.</li>
 </ul>
+<h2 id="rabin-karp-algorithm">Rabin-Karp Algorithm</h2>
+<ul>
+<li>Compute hash functions for each guess and compare with the pattern hash.
+<ul>
+<li>If the values are unequal, then the guess cannot be an occurence.</li>
+</ul></li>
+<li>Never misses a match since <span class="math inline">\(h(k_1) \neq h(k_2) \Rightarrow k_1 \neq k_2\)</span>.</li>
+<li><span class="math inline">\(h(T[k..k+m-1])\)</span> depends on <span class="math inline">\(m\)</span> characters, so naive computation takes <span class="math inline">\(\Theta(m)\)</span> time per shift.</li>
+<li>Running time is <span class="math inline">\(\Theta(mn)\)</span> for search miss.</li>
+<li>If we are using a rolling hash function, we can expect a runtime of <span class="math inline">\(O(n + m)\)</span>.
+<ul>
+<li>The worst case is still <span class="math inline">\(\Theta(mn)\)</span>, but this is (unbelievably) unlikely.</li>
+</ul></li>
+</ul>
+<h2 id="boyer-moore-algorithm">Boyer-Moore Algorithm</h2>
+<blockquote>
+<p>Brute-force search with two changes.</p>
+</blockquote>
+<ol type="1">
+<li><strong>Reverse-order searching</strong>: Compare <span class="math inline">\(P\)</span> with a guess moving <strong>backwards</strong>.</li>
+<li><strong>Bad character jumps</strong>: When a mismatch occurs, then eliminate guesses where <span class="math inline">\(P\)</span> does not agree with this character of <span class="math inline">\(T\)</span>.</li>
+</ol>
+<ul>
+<li>In practice, large parts of <span class="math inline">\(T\)</span> will not be looked at.</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">def</span> BoyerMoore(T, P):</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">    L <span class="op">=</span> [] <span class="co"># Last occurence array computed from P.</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">    k <span class="op">=</span> <span class="dv">0</span> <span class="co"># Current guess.</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">    <span class="cf">while</span> k <span class="op">&lt;=</span> n <span class="op">-</span> m:</a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">        j <span class="op">=</span> m <span class="op">-</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">        <span class="cf">while</span> j <span class="op">&gt;=</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">            <span class="cf">if</span> T[k <span class="op">+</span> j] <span class="op">!=</span> P[j]:</a>
+<a class="sourceLine" id="cb24-9" data-line-number="9">                <span class="cf">break</span></a>
+<a class="sourceLine" id="cb24-10" data-line-number="10">            j <span class="op">-=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb24-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb24-12" data-line-number="12">        <span class="cf">if</span> j <span class="op">==</span> <span class="dv">-1</span>:</a>
+<a class="sourceLine" id="cb24-13" data-line-number="13">            <span class="cf">return</span> k</a>
+<a class="sourceLine" id="cb24-14" data-line-number="14">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb24-15" data-line-number="15">            k <span class="op">=</span> k <span class="op">+</span> <span class="bu">max</span>(<span class="dv">1</span>, j <span class="op">-</span> L[T[k <span class="op">+</span> j]])</a>
+<a class="sourceLine" id="cb24-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb24-17" data-line-number="17">    <span class="cf">return</span> FAIL</a></code></pre></div>
+<ul>
+<li>Worse case runtime with only bad-character heuristic is <span class="math inline">\(\Theta(mn + |\Sigma|)\)</span>.</li>
+<li>Worse-case runtime can be reduced to <span class="math inline">\(\Theta(n + m + |\Sigma|)\)</span> with <strong>good-suffix heuristic</strong>.</li>
+<li>In pratice, bad-character heristic alone is good enough.</li>
+</ul>
 </body>
 </html>
