@@ -601,5 +601,21 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <p><strong>Lemma</strong>: <span class="math inline">\(G\)</span> is planar if and only if any edge subdivision of <span class="math inline">\(G\)</span> is planar.</p>
 <p>So any edge subdivisions of <span class="math inline">\(K_5\)</span> and <span class="math inline">\(K_{3,3}\)</span> are non-planar.</p>
 <p><strong>Kuratowski’s Theorem</strong>: <span class="math inline">\(G\)</span> is planar if and only if <span class="math inline">\(G\)</span> does not contain any edge subdivision of <span class="math inline">\(K_5\)</span> or <span class="math inline">\(K_{3,3}\)</span>.</p>
+<p><strong>Notes</strong></p>
+<ol type="1">
+<li>In your edge subdivision vertices that are not the main 5/6 vertices of <span class="math inline">\(K_5\)</span>/<span class="math inline">\(K_{3,3}\)</span> can be used at most once.</li>
+<li>Usually you can find a <span class="math inline">\(K_{3,3}\)</span> subdivision.</li>
+</ol>
+<h1 id="colouring">Colouring</h1>
+<p><strong>Definition</strong>: A <strong>k-colouring</strong> in <span class="math inline">\(G\)</span> is an assigment of a colour to each vertex of <span class="math inline">\(G\)</span> using at most <span class="math inline">\(k\)</span> colours, such that adjacent vertices receive different colours. A graph that has a k-colouring is called <strong>k-colourable</strong>.</p>
+<p><strong>General Question</strong>: What is the <strong>minimum</strong> number of colours we need to colour a graph?</p>
+<p><strong>Theorem</strong>: <span class="math inline">\(K_n\)</span> is n-colourable, but not (n-1)-colourable.</p>
+<p><strong>Theorem</strong>: A graph is 2-colourable if and only if it is bipartite.</p>
+<h2 id="colouring-planar-graphs">Colouring Planar Graphs</h2>
+<p><strong>Theorem</strong>: Every planar graph is 6-colourable.</p>
+<p><strong>Lemma</strong>: Every planar graph has a vertex of degree at most 5.</p>
+<blockquote>
+<p>Suppose, by way of contradiction, that every vertex has degree at least 6. By Handshaking Lemma, the number of edges is at least <span class="math inline">\(3n\)</span>. But <span class="math inline">\(G\)</span> is planar, and has at most <span class="math inline">\(3n-6\)</span>, contradiction.</p>
+</blockquote>
 </body>
 </html>

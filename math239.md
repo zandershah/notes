@@ -692,3 +692,26 @@ $5$ | $3$
 So any edge subdivisions of $K_5$ and $K_{3,3}$ are non-planar.
 
 **Kuratowski's Theorem**: $G$ is planar if and only if $G$ does not contain any edge subdivision of $K_5$ or $K_{3,3}$.
+
+**Notes**
+
+1. In your edge subdivision vertices that are not the main 5/6 vertices of $K_5$/$K_{3,3}$ can be used at most once.
+2. Usually you can find a $K_{3,3}$ subdivision.
+
+# Colouring
+
+**Definition**: A **k-colouring** in $G$ is an assigment of a colour to each vertex of $G$ using at most $k$ colours, such that adjacent vertices receive different colours. A graph that has a k-colouring is called **k-colourable**.
+
+**General Question**: What is the **minimum** number of colours we need to colour a graph?
+
+**Theorem**: $K_n$ is n-colourable, but not (n-1)-colourable.
+
+**Theorem**: A graph is 2-colourable if and only if it is bipartite.
+
+## Colouring Planar Graphs
+
+**Theorem**: Every planar graph is 6-colourable.
+
+**Lemma**: Every planar graph has a vertex of degree at most 5.
+
+> Suppose, by way of contradiction, that every vertex has degree at least 6. By Handshaking Lemma, the number of edges is at least $3n$. But $G$ is planar, and has at most $3n-6$, contradiction.
