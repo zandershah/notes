@@ -1389,6 +1389,9 @@ rvalues are temporary objects.</p>
 <li>We want a unified interface for our client code to work with the Hero groups or just an individual Hero.</li>
 </ul>
 <p><img src="https://i.imgur.com/PwG1XIS.jpg?1" /></p>
+<blockquote>
+<p>Missing a large example about using iterators with HeroTeam and Hero pointer. Please send if you have ~</p>
+</blockquote>
 <h1 id="measures-of-design-quality">Measures of Design Quality</h1>
 <h2 id="coupling">Coupling</h2>
 <blockquote>
@@ -1670,5 +1673,29 @@ rvalues are temporary objects.</p>
 <li>Should also re-test all of your old tests, to make sure nothing broke.</li>
 <li>Build test suite to have a list of automated tests, display which ones fail and any information.</li>
 </ul>
+<h1 id="casting">Casting</h1>
+<blockquote>
+<p>Casting should be avoided, and in particular, c-style casting should be avoided. If you must cast, use c++-style.</p>
+</blockquote>
+<h2 id="casting-in-c">Casting in C</h2>
+<div class="sourceCode" id="cb49"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb49-1" data-line-number="1">Node n;</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="dt">int</span> *ip = (<span class="dt">int</span>*) &amp;n;</a></code></pre></div>
+<h2 id="casting-in-c-1">Casting in C++</h2>
+<ol type="1">
+<li><p><strong>static_cast</strong> is for “sensible-casts” between types where conversion has well-defined behaviour.</p>
+<ul>
+<li>e.g. DerivedClass pointer to SuperClass pointer (upcast).</li>
+</ul>
+<div class="sourceCode" id="cb50"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="dt">double</span> d;</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="dt">int</span> i = <span class="kw">static_cast</span>&lt;<span class="dt">int</span>&gt;(d);</a>
+<a class="sourceLine" id="cb50-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">Hero *h;</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="co">// Not needed, can implicitly upcast.</span></a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">Heroic *heroic = <span class="kw">static_cast</span>&lt;Heroic*&gt;(h);</a></code></pre></div></li>
+<li><p><strong>reinterpret_cast</strong> is for unsafe, implementation dependent “weird” conversions. Nearly all uses result in undefined behaviour.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb51-1" data-line-number="1">Student s;</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">Turtle *t = <span class="kw">reinterpret_cast</span>&lt;Turtle*&gt;(&amp;s);</a></code></pre></div></li>
+<li><p><strong>const_cast</strong> is for converting between const and non-const. It is the only c++ cast that can “cast away” constness.</p></li>
+</ol>
 </body>
 </html>
