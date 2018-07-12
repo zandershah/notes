@@ -1202,5 +1202,59 @@ n! &amp;\le 2^{h + 1} \\
 <li>Worse-case runtime can be reduced to <span class="math inline">\(\Theta(n + m + |\Sigma|)\)</span> with <strong>good-suffix heuristic</strong>.</li>
 <li>In pratice, bad-character heristic alone is good enough.</li>
 </ul>
+<h2 id="suffix-tree">Suffix Tree</h2>
+<ul>
+<li>Text <span class="math inline">\(T\)</span> has <span class="math inline">\(n\)</span> characters and <span class="math inline">\(n+1\)</span> suffixes.</li>
+<li>We can build the suffix tree in <span class="math inline">\(\Theta(n^2)\)</span> time by inserting each suffix of <span class="math inline">\(T\)</span> into a compressed trie.</li>
+<li>There is a way to build it in <span class="math inline">\(\Theta(n)\)</span>.</li>
+</ul>
+<p><strong>Claim</strong>: The suffix tree for a string of length <span class="math inline">\(n\)</span> has <span class="math inline">\(\Theta(n)\)</span> nodes.</p>
+<ol type="1">
+<li>Suffix tree has <span class="math inline">\(n+1\)</span> leaves.</li>
+<li><p>Suffix tree has at most <span class="math inline">\(n\)</span> internal nodes.</p>
+<blockquote>
+<p><strong>Key Property</strong>: Every internal node in a suffix tree has <strong>at least</strong> 2 children.</p>
+<p>We prove by induction. A tree with <span class="math inline">\(m\)</span> leaves that satisfies this property, has <span class="math inline">\(\le m-1\)</span> internal nodes.</p>
+<p>Consider a tree with <span class="math inline">\(m+1\)</span> leaves, the root has <span class="math inline">\(s \ge 2\)</span> children, all <span class="math inline">\(s\)</span> subtrees satisfy the induction hypothesis. Taking sums across every subtree will result in <span class="math inline">\(\le m\)</span> internal nodes.</p>
+</blockquote></li>
+</ol>
+<h1 id="compression">Compression</h1>
+<ul>
+<li><strong>Source Text</strong>: Original data, string <span class="math inline">\(S\)</span> from source alphabet <span class="math inline">\(\Sigma_S\)</span>.</li>
+<li><strong>Coded Text</strong>: Encoded data, string <span class="math inline">\(C\)</span> of characters from the coded alphabet <span class="math inline">\(\Sigma_C\)</span>.</li>
+<li><strong>Encoding</strong>: An algorithm mapping source texts to coded texts.</li>
+<li><strong>Decoding</strong>: An algorithm mapping coded texts to source texts.</li>
+</ul>
+<h2 id="judging-encoding-schemes">Judging Encoding Schemes</h2>
+<ul>
+<li>Processing speed.</li>
+<li>Reliability (e.g. error-correcting codes).</li>
+<li>Security (e.g. encryption).</li>
+<li>Size. Encoding schemes that try to minimize the size of the coded text perform <em>data compression</em>. We will measure the <em>compression</em> ratio <span class="math inline">\(\frac{|C|\log|\Sigma_C|}{|S|\log|\Sigma_S|}\)</span>.</li>
+</ul>
+<h2 id="types-of-data-compression">Types of Data Compression</h2>
+<ul>
+<li><strong>Logical vs. Physical</strong>.
+<ul>
+<li><strong>Logical Compression</strong> uses the meaning of the data and only applies to a certain domain.</li>
+<li><strong>Physical Compression</strong> only knows the physical bits in the data, no the meaning behind them.</li>
+</ul></li>
+<li><strong>Lossy vs. Lossless</strong>.
+<ul>
+<li><strong>Lossy Compression</strong> achieves better compression ratios, but the decoding is approximate. The exact source text <span class="math inline">\(S\)</span> is not recoverable.</li>
+<li><strong>Lossless Compression</strong> always decodes <span class="math inline">\(S\)</span> exactly.</li>
+</ul></li>
+</ul>
+<h2 id="decoding">Decoding</h2>
+<blockquote>
+<p>The code must be <em>uniquely decodable</em>.</p>
+</blockquote>
+<ul>
+<li><strong>Prefix-free</strong> codes <span class="math inline">\(E\)</span>, <span class="math inline">\(E(c)\)</span> is not a prefix of <span class="math inline">\(E(c^\prime)\)</span> for any <span class="math inline">\(c, c^\prime \in \Sigma_S\)</span>.
+<ul>
+<li>This corresponds to a <strong>trie</strong> with the characters of <span class="math inline">\(\Sigma_S\)</span> only at leaves. So the trie does not need the <span class="math inline">\(\$\)</span> character.</li>
+</ul></li>
+</ul>
+<h2 id="huffman-encoding">Huffman Encoding</h2>
 </body>
 </html>
