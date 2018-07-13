@@ -658,5 +658,33 @@ $$
 <p><span class="math display">\[f_X(x|y)= P(X = x | Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)} = \frac{f(x,y)}{f_Y(y)}\]</span></p>
 <p><strong>Proposition</strong>: If <span class="math inline">\(X \sim Poi(\lambda_1)\)</span> and <span class="math inline">\(Y \sim Poi(\lambda_2)\)</span>, then <span class="math inline">\(T = X + Y \sim Poi(\lambda_1 + \lambda_2)\)</span>.</p>
 <p><strong>Proposition</strong>: If <span class="math inline">\(X \sim Bin(n, p)\)</span> and <span class="math inline">\(Y \sim Bin(m, p)\)</span> independently, then <span class="math inline">\(T = X + Y \sim Bin(n + m, p)\)</span>.</p>
+<h2 id="multinomial-distribution">Multinomial Distribution</h2>
+<p>If <span class="math inline">\((X_1, X_2, .., X_k) \sim Mult(n, p_1, ..., p_k)\)</span>, then <span class="math inline">\(X_j \sim Bin(n, p_j)\)</span>. Also, <span class="math inline">\(X_i + X_j \sim Bin(n, p_i + p_j)\)</span>.</p>
+<ul>
+<li>In multinomial distribution, the trials are independent, but the marginal random variables are not! That is because <span class="math inline">\(x_1 + ... + x_k = n\)</span>.</li>
+</ul>
+<p>Suppose <span class="math inline">\(X, Y\)</span> are discrete random variables with joint probability function <span class="math inline">\(f(x,y)\)</span>, Then for a function <span class="math inline">\(g: \mathbb{R}^2 \to \mathbb{R}\)</span> then <span class="math inline">\(E[g(X, Y)] = \sum_{(x, y)}g(x,y)f(x,y)\)</span>. This generalizes to multiple variables.</p>
+<p>Linearity of expectation carries through as well.</p>
+<ol type="1">
+<li><span class="math inline">\(E[ag_1(X,Y) + bg_2(X,Y)] = aE[g_1(X, Y)] + bE[g_2(X, Y)]\)</span>.</li>
+<li><span class="math inline">\(E[X + Y] = E[X] + E[Y]\)</span>.</li>
+</ol>
+<p>Example: Let <span class="math inline">\((X_1, X_2, X_3) \sim Mult(n, p_1, p_2, p_3)\)</span>. Show that <span class="math inline">\(E[X_1X_2] = n(n-1)p_1p_2\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}E[X_1X_2] &amp;= \frac{1}{2}E[2X_1X_2] \\ &amp;= \frac{1}{2}E[(X_1 + X_2)^2 - X_1^2 - X_2^2] \\ &amp;= \frac{1}{2}(E[(X_1 + X_2)^2] - E[X_1^2] - E[X_2^2]) \\ &amp;= \frac{1}{2}(Var(X_1 + X_2) + E[X_1 + X_2]^2 - Var(X_1) - E[X_1]^2 - Var(X_2) - E[X_2]^2) \\ &amp;= \frac{1}{2}(n(p_1 + p_2)(1 - p_1 - p_2) + (n(p_1+p_2))^2 - np_1(1-p_1) - (np_1)^2 - np_2(1-p_2) - (np_2)^2) \\ &amp;= n(n-1)p_1p_2\end{aligned}\]</span></p>
+</blockquote>
+<h1 id="covariance">Covariance</h1>
+<p>If <span class="math inline">\(X, Y\)</span> are joint distribution, then <span class="math inline">\(Cov(X, Y)\)</span> denotes the <strong>covariance</strong> between <span class="math inline">\(X, Y\)</span>.</p>
+<p><span class="math display">\[Cov(X, Y) = E[(X - E[X])(Y - E[Y])]\]</span></p>
+<p>Shortcut formula.</p>
+<p><span class="math display">\[Cov(X, Y) = E[X]E[Y] - E[XY]\]</span></p>
+<p><strong>Theorem</strong>: If <span class="math inline">\(X,Y\)</span> are independent, then <span class="math inline">\(Cov(X, Y) = 0\)</span>. The converse is <strong>false</strong> with counter example <span class="math inline">\(X \sim N(0,1)\)</span>, <span class="math inline">\(Y \sim X^2 - 1\)</span>.</p>
+<h2 id="correlation">Correlation</h2>
+<p>The <strong>correlation</strong> of <span class="math inline">\(X, Y\)</span> is denoted <span class="math inline">\(corr(X, Y)\)</span>.</p>
+<p><span class="math display">\[corr(X, Y) = \rho = \frac{Cov(X, Y)}{SD(X)SD(Y)}\]</span></p>
+<p>It follows from the Cauchy-Schawrz inequality that <span class="math inline">\(-1 \le corr(X, Y) \le 1\)</span> and if <span class="math inline">\(|corr(X, Y)| = 1\)</span>, <span class="math inline">\(X = aY + b\)</span>.</p>
+<p>We say that <span class="math inline">\(X, Y\)</span> are uncorrelated if <span class="math inline">\(Cov(X, Y) = 0\)</span>.</p>
+<p><strong>Remark</strong>: If <span class="math inline">\(X, Y\)</span> are independent, then <span class="math inline">\(X, Y\)</span> are uncorrelated.</p>
+<p><strong>Remark</strong>: <span class="math inline">\(Cov(X, X) = Var(X)\)</span>.</p>
 </body>
 </html>

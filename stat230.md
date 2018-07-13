@@ -713,3 +713,46 @@ $$f_X(x|y)= P(X = x | Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)} = \frac{f(x,y)}{
 **Proposition**: If $X \sim Poi(\lambda_1)$ and $Y \sim Poi(\lambda_2)$, then $T = X + Y \sim Poi(\lambda_1 + \lambda_2)$.
 
 **Proposition**: If $X \sim Bin(n, p)$ and $Y \sim Bin(m, p)$ independently, then $T = X + Y \sim Bin(n + m, p)$.
+
+## Multinomial Distribution
+
+If $(X_1, X_2, .., X_k) \sim Mult(n, p_1, ..., p_k)$, then $X_j \sim Bin(n, p_j)$. Also, $X_i + X_j \sim Bin(n, p_i + p_j)$.
+
+- In multinomial distribution, the trials are independent, but the marginal random variables are not! That is because $x_1 + ... + x_k = n$.
+
+Suppose $X, Y$ are discrete random variables with joint probability function $f(x,y)$, Then for a function $g: \mathbb{R}^2 \to \mathbb{R}$ then $E[g(X, Y)] = \sum_{(x, y)}g(x,y)f(x,y)$. This generalizes to multiple variables.
+
+Linearity of expectation carries through as well.
+
+1. $E[ag_1(X,Y) + bg_2(X,Y)] = aE[g_1(X, Y)] + bE[g_2(X, Y)]$.
+2. $E[X + Y] = E[X] + E[Y]$.
+
+Example: Let $(X_1, X_2, X_3) \sim Mult(n, p_1, p_2, p_3)$. Show that $E[X_1X_2] = n(n-1)p_1p_2$.
+
+> $$\begin{aligned}E[X_1X_2] &= \frac{1}{2}E[2X_1X_2] \\ &= \frac{1}{2}E[(X_1 + X_2)^2 - X_1^2 - X_2^2] \\ &= \frac{1}{2}(E[(X_1 + X_2)^2] - E[X_1^2] - E[X_2^2]) \\ &= \frac{1}{2}(Var(X_1 + X_2) + E[X_1 + X_2]^2 - Var(X_1) - E[X_1]^2 - Var(X_2) - E[X_2]^2) \\ &= \frac{1}{2}(n(p_1 + p_2)(1 - p_1 - p_2) + (n(p_1+p_2))^2 - np_1(1-p_1) - (np_1)^2 - np_2(1-p_2) - (np_2)^2) \\ &= n(n-1)p_1p_2\end{aligned}$$
+
+# Covariance
+
+If $X, Y$ are joint distribution, then $Cov(X, Y)$ denotes the **covariance** between $X, Y$.
+
+$$Cov(X, Y) = E[(X - E[X])(Y - E[Y])]$$
+
+Shortcut formula.
+
+$$Cov(X, Y) = E[X]E[Y] - E[XY]$$
+
+**Theorem**: If $X,Y$ are independent, then $Cov(X, Y) = 0$. The converse is **false** with counter example $X \sim N(0,1)$, $Y \sim X^2 - 1$.
+
+## Correlation
+
+The **correlation** of $X, Y$ is denoted $corr(X, Y)$.
+
+$$corr(X, Y) = \rho = \frac{Cov(X, Y)}{SD(X)SD(Y)}$$
+
+It follows from the Cauchy-Schawrz inequality that $-1 \le corr(X, Y) \le 1$ and if $|corr(X, Y)| = 1$, $X = aY + b$.
+
+We say that $X, Y$ are uncorrelated if $Cov(X, Y) = 0$.
+
+**Remark**: If $X, Y$ are independent, then $X, Y$ are uncorrelated.
+
+**Remark**: $Cov(X, X) = Var(X)$.
