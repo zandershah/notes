@@ -1999,5 +1999,135 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li><strong>Swithces</strong>: Learn forwarding table using flooding, learning, MAC addresses.</li>
 </ul>
 <p><strong>A router has multiple IP addresses</strong>. There is one for every interface.</p>
+<h3 id="vlans">VLANS</h3>
+<ul>
+<li>Consider a CS user who moves office to ECE, but still wants to connect to the CS switch?</li>
+<li>Single broadcast domain.
+<ul>
+<li>All layer-2 broadcast traffic (ARP, DHCP, etc.) must cross entire LAN.</li>
+<li>Security / privacy, efficiency issue.</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>We want to achieve some sort of <strong>traffic isolation</strong>. Switch(es) supporting VLAN capabilities can be configured to define multiple <strong>virtual</strong> LANS over single physical LAN infrastructure.</p>
+</blockquote>
+<h4 id="port-based-vlan">Port-based VLAN</h4>
+<blockquote>
+<p>Switch ports grouped (by switch management software) that a <strong>single</strong> physical switch operates as <strong>multiple</strong> virtual switches.</p>
+</blockquote>
+<ul>
+<li><strong>Traffic Isolation</strong>: Frames to / from ports 1-8 can <em>only</em> reach ports 1-8. VLAN can also be based on MAC addresses of endpoints, rather than switch ports.</li>
+<li><strong>Dynamic Membership</strong>: Ports can be dynamically assigned among VLANs.</li>
+<li><strong>Forwarding between VLANs</strong>: Done via routing (just as with separate switches).
+<ul>
+<li>In practice, vendors sell combined switches plus routers.</li>
+</ul></li>
+<li><strong>Trunk Port</strong>: Carries frames between VLANs defined over multiple physical switches.
+<ul>
+<li>Frames forwarded within VLAN between switches can’t be vanilla 802.1 frames. They must carry VLAN ID info.</li>
+<li>802.1q protocol adds / removed additional header fields for frames forwarded between trunk ports.</li>
+</ul>
+<img src="https://i.imgur.com/hkyMOVj.png" /></li>
+</ul>
+<h2 id="link-virtualization-mpls">5.5 Link Virtualization MPLS</h2>
+<blockquote>
+<p><strong>Multiprotocol Label Switching</strong>.</p>
+</blockquote>
+<ul>
+<li>Initial goal is high-speed IP forwarding using fixed length label (instead of IP address).
+<ul>
+<li>Fast lookup using fixed length indentifier rather than longest prefix matching.</li>
+<li>Borrowing ideas from Virtual Circuit (VC) approach.</li>
+<li>But IP datagram still keeps IP address!</li>
+</ul></li>
+<li>We add in a MPLS header, which contains a 20 bit label.</li>
+</ul>
+<h3 id="mpls-capable-routers">MPLS Capable Routers</h3>
+<blockquote>
+<p>Label-switched router.</p>
+</blockquote>
+<ul>
+<li>Forward packets to outgoing interface based only on label value and does not check IP address.
+<ul>
+<li>MPLS forwarding table distinct from IP forwarding table.</li>
+</ul></li>
+<li><strong>Flexibility</strong>: MPLS forwrding decision can <em>differ</em> from those of IP.
+<ul>
+<li>Use of destination <em>and</em> source address to tour flows to same destination differently (traffic engineering).</li>
+<li>Re-route flows quickly if link fails using pre-computed backup paths (useful for VoIP).</li>
+</ul></li>
+</ul>
+<h4 id="mpls-signaling">MPLS Signaling</h4>
+<ul>
+<li>Modify OSPF (<em>Open Shortest Path First</em>), IS-IS link-state flooding protocols to carry info used by MPLS routing.
+<ul>
+<li>Link bandwidth, amount of “reserved” link bandwidth.</li>
+</ul></li>
+<li>Entry MPLS router uses RSVP-TE signalling protocl to set up MPLS forwarding at downstream routers.</li>
+</ul>
+<p><img src="https://i.imgur.com/Rey7ngq.png" /></p>
+<h2 id="data-center-networking">5.6 Data Center Networking</h2>
+<ul>
+<li>10s to 100s of thousands of hosts, often closely coupled, in close proximity.
+<ul>
+<li>e.g. Amazon, Google.</li>
+</ul></li>
+<li><strong>Challenges</strong>.
+<ul>
+<li>Multiple applications, each serving massive numbers of clients.</li>
+<li>Managing / balancing load, avoiding processing, networking, data bottlenecks.</li>
+</ul></li>
+<li><strong>Load Balancing</strong>: Application-layer routing.
+<ul>
+<li>Receives external client requests.</li>
+<li>Directs workload within data center.</li>
+<li>Returns result to external client (hiding data center internals from client).</li>
+<li>Firewall.</li>
+</ul></li>
+<li>Redundant connections must be used in order to reduce chances of faliure.
+<ul>
+<li>Expenses for maintaining data centers ~ millions per week.</li>
+</ul></li>
+</ul>
+<h2 id="web-request-example">5.7 Web Request Example</h2>
+<blockquote>
+<p>A student attaches a laptop to a campus network, requests / receives www.google.com.</p>
+</blockquote>
+<p><img src="https://i.imgur.com/OSgXP2Q.png" /></p>
+<ul>
+<li>Connecting laptop needs to get its own IP address, address of first-hop router, address of DNS server. <strong>DHCP</strong>.</li>
+<li>DHCP request <strong>encapsulated</strong> in <em>UDP</em>, encapsulated in <em>IP</em>, encapsulated in 802.3 Ethernet.
+<ul>
+<li>IP source (0.0.0.0), IP destination (255.255.255.255).</li>
+<li>Need the MAC address of the source (physically set by NIC manufacturer). Destination MAC address is broadcast address (FFFF…)</li>
+<li>Switch learns the &lt;MAC, Interface&gt; mapping for the new client.</li>
+</ul></li>
+<li>Ethernet frame <em>broadcast</em> on LAN, received at router running <em>DHCP</em> server.</li>
+<li>Ethernet <em>demuxed</em> to IP demuxed, UDP demuxed to DHCP.</li>
+<li>DHCP server formulates <strong>DHCP ACK</strong> containing client’s IP address, IP address of first-hop router for client, name &amp; IP address of DNS server.</li>
+<li>Encapsulation at DHCP server, frame forwarded (<em>switch learning</em>) through LAN, demultiplexing at client.</li>
+<li>DHCP client receives DHCP ACK reply.</li>
+</ul>
+<p>Client now has IP address, knows name and address of DNS server, and the IP address of its first-hop router.</p>
+<ul>
+<li>Before sending <em>HTTP</em> request, need the IP address of www.google.com. Communicate with <strong>DNS</strong>.</li>
+<li>We need the MAC address of the router, <strong>ARP</strong>. ARP query broadcasted to the router, ARP reply with the MAC address of the router.</li>
+<li>Client now knows MAC address of first hop router, so can now send frame containing DNS query.</li>
+</ul>
+<p><img src="https://i.imgur.com/hlwdNkU.png" /></p>
+<ul>
+<li>IP datagram containing DNS query forwarded via LAN switch from client to first-hop router.</li>
+<li>IP datagram forwarded from campus network into comcast network, router (tables created by <strong>RIP, OSPF, IS-IS and / or BGP</strong> routing protocols) to DNS server.</li>
+<li>Demuxed to DNS server.</li>
+<li>DNS server replies to client with IP address of www.google.com.</li>
+<li>To send a HTTP request, client first opens a <strong>TCP socket</strong> to web server.</li>
+<li>TCP <strong>SYN segment</strong> (3-way handshake) <em>inter-domain routed</em> to web server.</li>
+<li>Web server responds with <strong>TCP SYNACK</strong>.</li>
+<li>TCP connection established!</li>
+<li><strong>HTTP request</strong> sent into TCP socket.</li>
+<li>IP datagram containing HTTP request routed to google.com.</li>
+<li>Web server responds with <strong>HTTP reply</strong> containing web page.</li>
+<li>IP datagram containing HTTP reply routed back to client.</li>
+</ul>
 </body>
 </html>
