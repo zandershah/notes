@@ -710,8 +710,46 @@ So any edge subdivisions of $K_5$ and $K_{3,3}$ are non-planar.
 
 ## Colouring Planar Graphs
 
-**Theorem**: Every planar graph is 6-colourable.
-
 **Lemma**: Every planar graph has a vertex of degree at most 5.
 
 > Suppose, by way of contradiction, that every vertex has degree at least 6. By Handshaking Lemma, the number of edges is at least $3n$. But $G$ is planar, and has at most $3n-6$, contradiction.
+
+**Theorem**: Every planar graph is 6-colourable.
+
+> By induction on the number of vertices $n$.
+>
+> **Base Case**: When $n = 1$, $G$ is a single vertex, which is 6-colourable.
+>
+> **Induction Hypothesis**: Every planar graph with $n-1$ vertices is 6 colourable.
+>
+> **Induction Step**: Let $G$ be a planar graph on $n$ vertices. Let $v$ be a vertex of $G$ with degree at most $5$. Let $G^\prime$ be obtained from $G$ by removing $v$ and its incident edges. So $G^\prime$ is planar with $n-1$ vertices. By induction hypothesis, $G^\prime$ is 6-colourable. We keep the same colouring for $G$. The neighbours of $v$ use up to 5 different colours. Since we have 6 colours, there is one unused by the neighbours of $v$. We assign that colour to $v$ to obtain a 6-colouring of $G$.
+
+**Contraction**: Collapse vertices $uv$ along an edge $e$.
+
+- Contractions may result in multiple edges. However, this does not affect colouring, so we can remove them.
+
+**Observation**: If $G$ is planar, then $G \setminus e$ is planar.
+
+**Theorem**: Every planar graph is 5-colourable.
+
+> Strong induction on the number of vertices $n$.
+>
+> **Base Case**: Any planar graph with at most 5 vertices is 5-colourable.
+>
+> **Induction Hypothesis**: Any planar graph with at most $n-1$ vertices is 5-colourable.
+>
+> **Induction Step**: Let $G$ be planar with $n$ vertices. Let $v$ be a vertex in $G$ with degree at most 5. If $deg(v) \le 4$, then we can 5-colour the graph with $v$ and its incident edges removed, and assign $v$ an unused colour in its neighbours. If $deg(v) = 5$, then there exists two neighbours of $v$, say $x,y$ that are not adjacent, for otherwise the neighbours of $v$ form $K_5$, which is not planar. Let $H$ be the graph obtained from $G$ by contacting $vx$ and $vy$. Let $z$ be the contracted vertex. Since contraction preserves planarity, $H$ is planar, and $H$ has $n-2$ vertices. So $H$ is 5-colourable by induction. Keep this colouring for $G$, except $v,x,y$. We colour $x,y$ with the colour of $z$. This is possible since $x,y$ are not adjacent, and neighbours of $x,y$ in $G$ are neighbours of $z$ in $H$. Now neighbours of $v$ use at most 4 colours. Since we have 5 colours, there is one unused colour that we can assign to $v$. This gives a 5-colouring for $G$.
+
+**Theorem**: Every planar graph is 4-colourable.
+
+# Dual Graphs
+
+**Definition**: Let $G$ be a planar graph with an embedding. The *dual* $G^*$ of $G$ has one vertex $v_f$ corresponding to each face $f$ of the embedding, and for each edge in $G$ whose two sides are the faces $f_1$ and $f_2$, $G^*$ has a corresponding edges.
+
+- $G^*$ is planar.
+- $G^{**} = G$.
+- The number of faces in $G$ is the number of vertices in $G^*$.
+- The number of vertices in $G$ is the number of faces in $G^*$.
+- The number of edges is preserved.
+- Face degrees in $G$ become vertex degrees of $G^*$ and vertex degrees become face degrees.
+- The dual of a platoic graph is platonic.

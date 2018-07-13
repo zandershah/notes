@@ -612,10 +612,40 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <p><strong>Theorem</strong>: <span class="math inline">\(K_n\)</span> is n-colourable, but not (n-1)-colourable.</p>
 <p><strong>Theorem</strong>: A graph is 2-colourable if and only if it is bipartite.</p>
 <h2 id="colouring-planar-graphs">Colouring Planar Graphs</h2>
-<p><strong>Theorem</strong>: Every planar graph is 6-colourable.</p>
 <p><strong>Lemma</strong>: Every planar graph has a vertex of degree at most 5.</p>
 <blockquote>
 <p>Suppose, by way of contradiction, that every vertex has degree at least 6. By Handshaking Lemma, the number of edges is at least <span class="math inline">\(3n\)</span>. But <span class="math inline">\(G\)</span> is planar, and has at most <span class="math inline">\(3n-6\)</span>, contradiction.</p>
 </blockquote>
+<p><strong>Theorem</strong>: Every planar graph is 6-colourable.</p>
+<blockquote>
+<p>By induction on the number of vertices <span class="math inline">\(n\)</span>.</p>
+<p><strong>Base Case</strong>: When <span class="math inline">\(n = 1\)</span>, <span class="math inline">\(G\)</span> is a single vertex, which is 6-colourable.</p>
+<p><strong>Induction Hypothesis</strong>: Every planar graph with <span class="math inline">\(n-1\)</span> vertices is 6 colourable.</p>
+<p><strong>Induction Step</strong>: Let <span class="math inline">\(G\)</span> be a planar graph on <span class="math inline">\(n\)</span> vertices. Let <span class="math inline">\(v\)</span> be a vertex of <span class="math inline">\(G\)</span> with degree at most <span class="math inline">\(5\)</span>. Let <span class="math inline">\(G^\prime\)</span> be obtained from <span class="math inline">\(G\)</span> by removing <span class="math inline">\(v\)</span> and its incident edges. So <span class="math inline">\(G^\prime\)</span> is planar with <span class="math inline">\(n-1\)</span> vertices. By induction hypothesis, <span class="math inline">\(G^\prime\)</span> is 6-colourable. We keep the same colouring for <span class="math inline">\(G\)</span>. The neighbours of <span class="math inline">\(v\)</span> use up to 5 different colours. Since we have 6 colours, there is one unused by the neighbours of <span class="math inline">\(v\)</span>. We assign that colour to <span class="math inline">\(v\)</span> to obtain a 6-colouring of <span class="math inline">\(G\)</span>.</p>
+</blockquote>
+<p><strong>Contraction</strong>: Collapse vertices <span class="math inline">\(uv\)</span> along an edge <span class="math inline">\(e\)</span>.</p>
+<ul>
+<li>Contractions may result in multiple edges. However, this does not affect colouring, so we can remove them.</li>
+</ul>
+<p><strong>Observation</strong>: If <span class="math inline">\(G\)</span> is planar, then <span class="math inline">\(G \setminus e\)</span> is planar.</p>
+<p><strong>Theorem</strong>: Every planar graph is 5-colourable.</p>
+<blockquote>
+<p>Strong induction on the number of vertices <span class="math inline">\(n\)</span>.</p>
+<p><strong>Base Case</strong>: Any planar graph with at most 5 vertices is 5-colourable.</p>
+<p><strong>Induction Hypothesis</strong>: Any planar graph with at most <span class="math inline">\(n-1\)</span> vertices is 5-colourable.</p>
+<p><strong>Induction Step</strong>: Let <span class="math inline">\(G\)</span> be planar with <span class="math inline">\(n\)</span> vertices. Let <span class="math inline">\(v\)</span> be a vertex in <span class="math inline">\(G\)</span> with degree at most 5. If <span class="math inline">\(deg(v) \le 4\)</span>, then we can 5-colour the graph with <span class="math inline">\(v\)</span> and its incident edges removed, and assign <span class="math inline">\(v\)</span> an unused colour in its neighbours. If <span class="math inline">\(deg(v) = 5\)</span>, then there exists two neighbours of <span class="math inline">\(v\)</span>, say <span class="math inline">\(x,y\)</span> that are not adjacent, for otherwise the neighbours of <span class="math inline">\(v\)</span> form <span class="math inline">\(K_5\)</span>, which is not planar. Let <span class="math inline">\(H\)</span> be the graph obtained from <span class="math inline">\(G\)</span> by contacting <span class="math inline">\(vx\)</span> and <span class="math inline">\(vy\)</span>. Let <span class="math inline">\(z\)</span> be the contracted vertex. Since contraction preserves planarity, <span class="math inline">\(H\)</span> is planar, and <span class="math inline">\(H\)</span> has <span class="math inline">\(n-2\)</span> vertices. So <span class="math inline">\(H\)</span> is 5-colourable by induction. Keep this colouring for <span class="math inline">\(G\)</span>, except <span class="math inline">\(v,x,y\)</span>. We colour <span class="math inline">\(x,y\)</span> with the colour of <span class="math inline">\(z\)</span>. This is possible since <span class="math inline">\(x,y\)</span> are not adjacent, and neighbours of <span class="math inline">\(x,y\)</span> in <span class="math inline">\(G\)</span> are neighbours of <span class="math inline">\(z\)</span> in <span class="math inline">\(H\)</span>. Now neighbours of <span class="math inline">\(v\)</span> use at most 4 colours. Since we have 5 colours, there is one unused colour that we can assign to <span class="math inline">\(v\)</span>. This gives a 5-colouring for <span class="math inline">\(G\)</span>.</p>
+</blockquote>
+<p><strong>Theorem</strong>: Every planar graph is 4-colourable.</p>
+<h1 id="dual-graphs">Dual Graphs</h1>
+<p><strong>Definition</strong>: Let <span class="math inline">\(G\)</span> be a planar graph with an embedding. The <em>dual</em> <span class="math inline">\(G^*\)</span> of <span class="math inline">\(G\)</span> has one vertex <span class="math inline">\(v_f\)</span> corresponding to each face <span class="math inline">\(f\)</span> of the embedding, and for each edge in <span class="math inline">\(G\)</span> whose two sides are the faces <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_2\)</span>, <span class="math inline">\(G^*\)</span> has a corresponding edges.</p>
+<ul>
+<li><span class="math inline">\(G^*\)</span> is planar.</li>
+<li><span class="math inline">\(G^{**} = G\)</span>.</li>
+<li>The number of faces in <span class="math inline">\(G\)</span> is the number of vertices in <span class="math inline">\(G^*\)</span>.</li>
+<li>The number of vertices in <span class="math inline">\(G\)</span> is the number of faces in <span class="math inline">\(G^*\)</span>.</li>
+<li>The number of edges is preserved.</li>
+<li>Face degrees in <span class="math inline">\(G\)</span> become vertex degrees of <span class="math inline">\(G^*\)</span> and vertex degrees become face degrees.</li>
+<li>The dual of a platoic graph is platonic.</li>
+</ul>
 </body>
 </html>
