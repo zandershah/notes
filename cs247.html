@@ -1696,6 +1696,56 @@ rvalues are temporary objects.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb51-1" data-line-number="1">Student s;</a>
 <a class="sourceLine" id="cb51-2" data-line-number="2">Turtle *t = <span class="kw">reinterpret_cast</span>&lt;Turtle*&gt;(&amp;s);</a></code></pre></div></li>
 <li><p><strong>const_cast</strong> is for converting between const and non-const. It is the only c++ cast that can “cast away” constness.</p></li>
+<li><p><strong>dynamic_cast</strong> asks “is it safe to cast”.</p>
+<ul>
+<li>What does the pointer actually point to?</li>
+<li>Would be better to check if the pointer actually points at an object of the type you are trying to cast to.</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb52-1" data-line-number="1">Book *pb = ...;</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">Text *pt = <span class="kw">dynamic_cast</span>&lt;Text*&gt;(pb);</a></code></pre></div>
+<ul>
+<li>If pb actually points to a Text object, dynamic_cast&lt;Text*&gt; will return the pointer passed in.</li>
+<li>If pb does <strong>not</strong> point to a Text object, dynamic_cast&lt;Text*&gt; will return the nullptr.</li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="cf">if</span> (pt) cout &lt;&lt; pt-&gt;subject();</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="cf">else</span> cout &lt;&lt; <span class="st">&quot;Not a text.&quot;</span>;</a></code></pre></div>
+<ul>
+<li>These casts have been operating on raw pointer, but you should be using smart pointers.</li>
+<li>We must use the versions of these functions made for smart pointers which are defined in &lt;memory&gt;.</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb54-1" data-line-number="1">static_pointer_cast&lt;T&gt;();</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">const_pointer_cast&lt;T&gt;();</a>
+<a class="sourceLine" id="cb54-3" data-line-number="3">dynamic_pointer_cast&lt;T&gt;();</a></code></pre></div>
+<ul>
+<li>dynamic_cast can only be used on types that have at least one virtual method because it replies on runtime type information (RTTI) that only exists if you have virtual methods. We can use dynamic_cast on references and make decisions based on RTII but making decisions based on RTII is exactly against OOP principles.</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="dt">void</span> what(Book &amp;b) {</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">    Text &amp;rt = <span class="kw">dynamic_cast</span>&lt;Text&amp;&gt;(b);</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">    <span class="co">// If b does not refer to a Text object, we throw.</span></a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="dt">bool</span> HeroTeamIter::<span class="kw">operator</span>!=(<span class="at">const</span> Iterator &amp;other) {</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">    <span class="cf">try</span> {</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">        <span class="at">const</span> HeroTeamIter &amp;o = <span class="kw">dynamic_cast</span>&lt;<span class="at">const</span> HeroTeamIter&amp;&gt;(other);</a>
+<a class="sourceLine" id="cb56-4" data-line-number="4">        <span class="cf">return</span> !(ourField == o.ourField ...);</a>
+<a class="sourceLine" id="cb56-5" data-line-number="5">    } <span class="cf">catch</span> (...) {</a>
+<a class="sourceLine" id="cb56-6" data-line-number="6">        <span class="cf">return</span> <span class="kw">false</span>;</a>
+<a class="sourceLine" id="cb56-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb56-8" data-line-number="8">}</a></code></pre></div></li>
 </ol>
+<h1 id="virtual-methods-review">Virtual Methods Review</h1>
+<div class="sourceCode" id="cb57"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">class</span> vec {</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2">    <span class="dt">int</span> x, y;</a>
+<a class="sourceLine" id="cb57-3" data-line-number="3"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb57-4" data-line-number="4">    <span class="dt">int</span> something();</a>
+<a class="sourceLine" id="cb57-5" data-line-number="5">};</a>
+<a class="sourceLine" id="cb57-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb57-7" data-line-number="7"><span class="kw">class</span> vec2 {</a>
+<a class="sourceLine" id="cb57-8" data-line-number="8">    <span class="dt">int</span> x, y;</a>
+<a class="sourceLine" id="cb57-9" data-line-number="9"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb57-10" data-line-number="10">    <span class="kw">virtual</span> <span class="dt">int</span> something();</a>
+<a class="sourceLine" id="cb57-11" data-line-number="11">};</a>
+<a class="sourceLine" id="cb57-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb57-13" data-line-number="13">vec v1{<span class="dv">1</span>, <span class="dv">2</span>};</a>
+<a class="sourceLine" id="cb57-14" data-line-number="14">vec2 v2{<span class="dv">1</span>, <span class="dv">2</span>};</a></code></pre></div>
 </body>
 </html>
