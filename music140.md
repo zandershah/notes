@@ -881,6 +881,126 @@ After 1967, youth culture becomes more politically active.
 
 ## Jimi Hendrix
 
+- Technical virtuoso.
+- Control of high levels of distortion.
+- American, gets discovered in England.
+
+Example: "Voodoo Child (Slight Return)" (1967)
+
+- Blues influence.
+
+### Woodstock
+
+> August 1969.
+
+- Woodstock concert (not held in Woodstock).
+- Free, open concert. Held on a farm so it could be easily expanded.
+- Expected ~30k attendees, actual 350k~500k.
+
+### Altamont California
+
+> December 1969.
+
+- Ended terribly.
+- Held on a racetrack, not as easily expanded.
+- Hired biker gangs, paid with beer. Assaulted the crowd with lead filled pool cues and knives.
+- Used as an example against counter culture.
+
+April 1970, Paul McCartney leaves The Beatles.
+
+Kent State, Ohio. May 1970.
+
+- National Guard opens fire at students.
+
+September 1970, Jimi Hendrix dies.
+October 1970, Janice Joplin dies of drug overdose.
+July 1971, Jim Morrison (The Doors) dies.
+
+# 1970s
+
+- Faliure of counter culture begins a shift to a more cynical view of the world.
+
+Energy Crisis (1973-1974)
+
+- Yom Kippur War (October 1973).
+    - USA offends oil supplying countries and gets cut off.
+- The Energy Crisis marks the beginning of the first economic recession since the end of WWII.
+
+Watergate.
+
+- Facing criminal charges and impeachment, President Richard Nixon resigns (August 1974).
+
+Vietnam.
+
+- The fall of Siagon (April 30, 1975). North Vietnam attacks.
+- Live television.
+
+## Hard Rock / Heavy Metal
+
+Shift to the "Hippie Aesthetic".
+
+- Started by The Beatles' *Sgt. Peppers*.
+- Marks the shift from "Rock 'n' Roll" to "Rock".
+- Moving from ...
+    - Singles to albums.
+    - Dancing to listening.
+    - Entertainers to "serious" musicians.
+    - FM radio, AOR (Album Oriented Rock).
+- Sonic development from Psychedelic Blues.
+- To a great extent, it is a response to the faliure of counter culture.
+
+Distinctions between Hard Rock and Heavy Metal.
+
+- Hard Rock lyric content similar to Chuck Berry.
+- Heavy Metal focuses on losing control.
+
+Example: AC/DC (Hard Rock)
+
+- Australian, formed in 1973.
+- Album "Back In Black" (1980) has sold over 50 million copies, 2nd highest in history.
+- Strong blues influence, steady tempos, rock 'n' roll lyrics.
+
+Example: Metallica (Heavy Metal)
+
+- Los Angeles, formed in 1981.
+- Musically highly technical, frequent tempo chages, instrumental sections, classical influences, virtuostic soloing, heavy distortion, lyrics that express alienation and loss of control.
+
+Founding Bands.
+
+- Black Sabbath.
+- Deep Purple.
+- Led Zeppelin.
+
+### Black Sabbath
+
+- British.
+- "Doomy music".
+- Madness, futility of war.
+
+Example: "War Pigs" (1970, album *Heavy Metal*)
+
+> Leans on the Heavy Metal side.
+
+- Tempo changes.
+- Instrumental sections.
+- Lyrics that focus on alientation, futility.
+- But lower level of distortion in vocals.
+
+### Deep Purple
+
+- British.
+- Highly trained classical musician playing the electric organ.
+
+Example: "Highway Star" (1972, album *Machine Head*)
+
+- Virtuostic vocal performance during the introduction.
+- Use of electric organ.
+- Classical influences in musicianship approach to solos.
+
+### Led Zeppelin
+
+- Grew out of The Yardbirds (British Blues Revival).
+
 # Textbook Readings I
 
 ## Chart Positions
