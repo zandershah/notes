@@ -756,3 +756,57 @@ We say that $X, Y$ are uncorrelated if $Cov(X, Y) = 0$.
 **Remark**: If $X, Y$ are independent, then $X, Y$ are uncorrelated.
 
 **Remark**: $Cov(X, X) = Var(X)$.
+
+1. $\rho = corr(X, Y)$ has the same sign as $Cov(X, Y)$.
+2. $-1 \le \rho \le 1$.
+3. $|\rho| = 1 \Rightarrow X = aY + b$.
+4. $X, Y$ independent means that $corr(X, Y) = 0$.
+5. $corr(X, X) = \frac{Cov(X, X)}{SD(X)^2} = \frac{Var(X)}{Var(X)} = 1$.
+
+# Linear Combinations
+
+Suppose $X_1, ..., X_n$ are jointly distributed RVs with joint probability function $f(x_1, ..., x_n)$. A **linear combination** of the RVs is any random variable of the form $\sum_{i = 1}^n a_i X_i$. Where $a_i \in R$.
+
+$$E\left(\sum_{i = 1}^n a_i X_i\right) = \sum_{i = 1}^n a_iE(X_i)$$
+
+Example: Let $P_1, ..., P_7$ represent number of cans of pop that Harold drinks each day. If each random variable has mean $\mu = 6$, what is the expected number of cans consumed during those 7 days?
+
+> $$\begin{aligned}E[\overline{P}] &= E\left[\frac{1}{7}\sum_{i=1}^7 P_i\right] \\ &= \frac{1}{7}\sum_{i = 1}^7 6 \\ &= 6\end{aligned}$$
+
+Example: Suppose $X \sim N(1, 1)$, $Y \sim U(0, 1)$. Compute $E(2X - 4Y)$.
+
+> $E(2X - 4Y) = 0$.
+
+**Proposition**: Let $X, Y, U, V$ be random variables and $a, b, c, d \in \mathbb{R}$.
+
+$$Cov(aX + bY, cU + dV) = acCov(X, U) + adCov(X, V) + bcCov(Y, U) + bdCov(Y, V)$$
+
+**Proposition**: Let $X, Y$ be random variables and $a, b \in \mathbb{R}$.
+
+$$Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X, Y)$$
+
+In general,
+
+$$Var(\sum_{i = 1}^n a_iX_i) = \sum_{i = 1}^n a_i^2 Var(X_i) + 2\sum_{1 \le i < j \le n}a_ia_jCov(X_i, X_j)$$
+
+If $X, Y$ are independent, then $Var(aX  + bY) = a^2Var(X) + b^2Var(Y)$.
+
+**Proposition**: A linear function of normal is normal. Let $X \sim N(\mu, \sigma^2)$ and $Y = aX + b$, $a, b \in \mathbb{R}$.
+
+$$Y \sim N(a\mu + b, a^2 \sigma^2)$$
+
+Let $X_i \sim N(\mu_i, \sigma_i^2)$ **independently**.
+
+$$\sum_{i = 1}^n a_iX_i + b_i \sim N\left(\sum_{i = 1}^n a_i\mu_i + b_i, \sum_{i = 1}^n a_i^2\sigma_i^2\right)$$
+
+**Proposition**: Sample mean of normal is normal. If all $X_i \sim N(\mu, \sigma^2)$ **independently**.
+
+$$\sum_{i = 1}X_i \sim N(n\mu, n\sigma^2)$$
+
+$$\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i \sim N\left(\mu, \frac{\sigma^2}{n}\right)$$
+
+Example: Compute $Var(\sum_{i=1}^n X_i)$ and $Var(\overline{X})$.
+
+> $\begin{aligned}Var(\sum_{i = 1}^n X_i) &= \sum_{i = 1}Var(X_i) \\ &= n\sigma^2\end{aligned}$
+
+> $\begin{aligned}Var(\overline{X}) &= \frac{1}{n^2}Var(\sum_{i = 1}^n X_i) \\ &= \frac{\sigma}{n}\end{aligned}$

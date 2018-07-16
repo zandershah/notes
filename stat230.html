@@ -686,5 +686,44 @@ $$
 <p>We say that <span class="math inline">\(X, Y\)</span> are uncorrelated if <span class="math inline">\(Cov(X, Y) = 0\)</span>.</p>
 <p><strong>Remark</strong>: If <span class="math inline">\(X, Y\)</span> are independent, then <span class="math inline">\(X, Y\)</span> are uncorrelated.</p>
 <p><strong>Remark</strong>: <span class="math inline">\(Cov(X, X) = Var(X)\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(\rho = corr(X, Y)\)</span> has the same sign as <span class="math inline">\(Cov(X, Y)\)</span>.</li>
+<li><span class="math inline">\(-1 \le \rho \le 1\)</span>.</li>
+<li><span class="math inline">\(|\rho| = 1 \Rightarrow X = aY + b\)</span>.</li>
+<li><span class="math inline">\(X, Y\)</span> independent means that <span class="math inline">\(corr(X, Y) = 0\)</span>.</li>
+<li><span class="math inline">\(corr(X, X) = \frac{Cov(X, X)}{SD(X)^2} = \frac{Var(X)}{Var(X)} = 1\)</span>.</li>
+</ol>
+<h1 id="linear-combinations">Linear Combinations</h1>
+<p>Suppose <span class="math inline">\(X_1, ..., X_n\)</span> are jointly distributed RVs with joint probability function <span class="math inline">\(f(x_1, ..., x_n)\)</span>. A <strong>linear combination</strong> of the RVs is any random variable of the form <span class="math inline">\(\sum_{i = 1}^n a_i X_i\)</span>. Where <span class="math inline">\(a_i \in R\)</span>.</p>
+<p><span class="math display">\[E\left(\sum_{i = 1}^n a_i X_i\right) = \sum_{i = 1}^n a_iE(X_i)\]</span></p>
+<p>Example: Let <span class="math inline">\(P_1, ..., P_7\)</span> represent number of cans of pop that Harold drinks each day. If each random variable has mean <span class="math inline">\(\mu = 6\)</span>, what is the expected number of cans consumed during those 7 days?</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}E[\overline{P}] &amp;= E\left[\frac{1}{7}\sum_{i=1}^7 P_i\right] \\ &amp;= \frac{1}{7}\sum_{i = 1}^7 6 \\ &amp;= 6\end{aligned}\]</span></p>
+</blockquote>
+<p>Example: Suppose <span class="math inline">\(X \sim N(1, 1)\)</span>, <span class="math inline">\(Y \sim U(0, 1)\)</span>. Compute <span class="math inline">\(E(2X - 4Y)\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(E(2X - 4Y) = 0\)</span>.</p>
+</blockquote>
+<p><strong>Proposition</strong>: Let <span class="math inline">\(X, Y, U, V\)</span> be random variables and <span class="math inline">\(a, b, c, d \in \mathbb{R}\)</span>.</p>
+<p><span class="math display">\[Cov(aX + bY, cU + dV) = acCov(X, U) + adCov(X, V) + bcCov(Y, U) + bdCov(Y, V)\]</span></p>
+<p><strong>Proposition</strong>: Let <span class="math inline">\(X, Y\)</span> be random variables and <span class="math inline">\(a, b \in \mathbb{R}\)</span>.</p>
+<p><span class="math display">\[Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X, Y)\]</span></p>
+<p>In general,</p>
+<p><span class="math display">\[Var(\sum_{i = 1}^n a_iX_i) = \sum_{i = 1}^n a_i^2 Var(X_i) + 2\sum_{1 \le i &lt; j \le n}a_ia_jCov(X_i, X_j)\]</span></p>
+<p>If <span class="math inline">\(X, Y\)</span> are independent, then <span class="math inline">\(Var(aX + bY) = a^2Var(X) + b^2Var(Y)\)</span>.</p>
+<p><strong>Proposition</strong>: A linear function of normal is normal. Let <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> and <span class="math inline">\(Y = aX + b\)</span>, <span class="math inline">\(a, b \in \mathbb{R}\)</span>.</p>
+<p><span class="math display">\[Y \sim N(a\mu + b, a^2 \sigma^2)\]</span></p>
+<p>Let <span class="math inline">\(X_i \sim N(\mu_i, \sigma_i^2)\)</span> <strong>independently</strong>.</p>
+<p><span class="math display">\[\sum_{i = 1}^n a_iX_i + b_i \sim N\left(\sum_{i = 1}^n a_i\mu_i + b_i, \sum_{i = 1}^n a_i^2\sigma_i^2\right)\]</span></p>
+<p><strong>Proposition</strong>: Sample mean of normal is normal. If all <span class="math inline">\(X_i \sim N(\mu, \sigma^2)\)</span> <strong>independently</strong>.</p>
+<p><span class="math display">\[\sum_{i = 1}X_i \sim N(n\mu, n\sigma^2)\]</span></p>
+<p><span class="math display">\[\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i \sim N\left(\mu, \frac{\sigma^2}{n}\right)\]</span></p>
+<p>Example: Compute <span class="math inline">\(Var(\sum_{i=1}^n X_i)\)</span> and <span class="math inline">\(Var(\overline{X})\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(\begin{aligned}Var(\sum_{i = 1}^n X_i) &amp;= \sum_{i = 1}Var(X_i) \\ &amp;= n\sigma^2\end{aligned}\)</span></p>
+</blockquote>
+<blockquote>
+<p><span class="math inline">\(\begin{aligned}Var(\overline{X}) &amp;= \frac{1}{n^2}Var(\sum_{i = 1}^n X_i) \\ &amp;= \frac{\sigma}{n}\end{aligned}\)</span></p>
+</blockquote>
 </body>
 </html>
