@@ -1745,7 +1745,40 @@ rvalues are temporary objects.</p>
 <a class="sourceLine" id="cb57-10" data-line-number="10">    <span class="kw">virtual</span> <span class="dt">int</span> something();</a>
 <a class="sourceLine" id="cb57-11" data-line-number="11">};</a>
 <a class="sourceLine" id="cb57-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb57-13" data-line-number="13">vec v1{<span class="dv">1</span>, <span class="dv">2</span>};</a>
-<a class="sourceLine" id="cb57-14" data-line-number="14">vec2 v2{<span class="dv">1</span>, <span class="dv">2</span>};</a></code></pre></div>
+<a class="sourceLine" id="cb57-13" data-line-number="13"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb57-14" data-line-number="14">    vec v1;</a>
+<a class="sourceLine" id="cb57-15" data-line-number="15">    vec2 v2;</a>
+<a class="sourceLine" id="cb57-16" data-line-number="16">    cout &lt;&lt; <span class="kw">sizeof</span>(v1) &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; <span class="kw">sizeof</span>(v2);</a>
+<a class="sourceLine" id="cb57-17" data-line-number="17">    <span class="co">// 8 16.</span></a>
+<a class="sourceLine" id="cb57-18" data-line-number="18">}</a></code></pre></div>
+<p>First, 8 bytes is for the two ints <span class="math inline">\(x,y\)</span>. The extra 8 bytes in <span class="math inline">\(v2\)</span> are for a pointer.</p>
+<p>For each class that has virtual methods the compiler creates a table. It is a table of <strong>function pointers</strong>, they point to the implementations of the classes virtual methods. We call this the vtable.</p>
+<p>The compiler stores a pointer to the class’ vtable in all objects of that type (at the start). When you call a virtual method, the compiler follows that pointer to the vtable, jumps to the location pointed to be the function pointer in that table.</p>
+<h1 id="deadly-diamond-of-death">Deadly Diamond of Death</h1>
+<blockquote>
+<p>Class B, C inherit from A. Class D inherits from B, C.</p>
+</blockquote>
+<p>When D calls a function from A, overwritten in B and C, which function gets called? This can be solved with <strong>virtual inheritance</strong> in c++.</p>
+<h1 id="templates">Templates</h1>
+<ul>
+<li>Templates support sttaic polymorphism through duck-typing.</li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2">T m(<span class="at">const</span> T &amp;x, <span class="at">const</span> T &amp; y) {</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3">    <span class="cf">return</span> x &lt; y ? x : y;</a>
+<a class="sourceLine" id="cb58-4" data-line-number="4">}</a></code></pre></div>
+<p><strong>Note</strong>: No need to specify types when calling templated methods (when those types are deducible). Must always specify for classes.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2">    <span class="dt">int</span> x = <span class="dv">1</span>, y = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb59-3" data-line-number="3">    cout &lt;&lt; m(x, y); <span class="co">// Compiler deduces type.</span></a>
+<a class="sourceLine" id="cb59-4" data-line-number="4">    <span class="dt">short</span> s = <span class="dv">5</span>;</a>
+<a class="sourceLine" id="cb59-5" data-line-number="5">    cout &lt;&lt; m(s, <span class="dv">20</span>); <span class="co">// Cannot deduce type.</span></a>
+<a class="sourceLine" id="cb59-6" data-line-number="6">    cout &lt;&lt; m(s, x); <span class="co">// Cannot deduce type.</span></a>
+<a class="sourceLine" id="cb59-7" data-line-number="7">    cout &lt;&lt; m&lt;<span class="dt">short</span>&gt;(s, <span class="dv">20</span>); <span class="co">// Works. Compiler knows to use implicit conversion.</span></a>
+<a class="sourceLine" id="cb59-8" data-line-number="8">}</a></code></pre></div>
+<ul>
+<li>Templates are just blueprints for the compiler to create full functions / classes once parmeterized.</li>
+<li>Most common example of compilers being unable to deduce type is when return type is different than parameter types.</li>
+</ul>
 </body>
 </html>
