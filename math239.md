@@ -753,3 +753,37 @@ So any edge subdivisions of $K_5$ and $K_{3,3}$ are non-planar.
 - The number of edges is preserved.
 - Face degrees in $G$ become vertex degrees of $G^*$ and vertex degrees become face degrees.
 - The dual of a platoic graph is platonic.
+
+# Matching
+
+**Definition**: A **matching** is a set of edges where no two edges share a common vertex.
+
+**General Question**: What is the maximum size of a matching in a graph.
+
+**Definition**: A vertex incident with an edge in a matching is **saturated**. Otherwise it is **unsaturated**.
+
+A matching that saturates every vertex is a **perfect matching**.
+
+# Cover
+
+**Definition**: A **cover** of $G$ is a set of vertices such that each edge of $G$ is incident with at least one vertex in the set.
+
+**General Question**: What is the minimum size of a cover in a graph?
+
+Relation between a matching $M$ and a cover $C$ in $G$.
+
+> $C$ must use **at least** one vertex from each matching edge. So $|C| \ge |M|$.
+
+**Theorem**: If $M$ is any matching and $C$ is any cover of $G$, then $|C| \ge |M|$.
+
+> For each edge $uv$ in $M$, at least one of $u$ or $v$ is in $C$ since $C$ covers the edge. Also, different edges in $M$ use different vertices, so the vertices in $C$ from different matching edges are distinct. So $|C| \ge |M|$.
+
+**Corollary**: If $M$ is a matching and $C$ is a cover of $G$ where $M = C$, then $M$ is a maximum matching and $C$ is a minimum cover.
+
+> Let $M^\prime$ be any matching, then $|M^\prime| \le |C|$. By assumption, $|C| = |M|$, so $|M^\prime| \le |M|$. Since $M^\prime$ is arbitrary, $M$ must be a maximum matching.
+
+One way to prove that a matching is maximum is by providing a cover of the same size. There are examples where the maximum matching is strictly less than the minimum cover such as $K_3$.
+
+## Kőnig's Theorem
+
+In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.

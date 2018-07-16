@@ -647,5 +647,28 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <li>Face degrees in <span class="math inline">\(G\)</span> become vertex degrees of <span class="math inline">\(G^*\)</span> and vertex degrees become face degrees.</li>
 <li>The dual of a platoic graph is platonic.</li>
 </ul>
+<h1 id="matching">Matching</h1>
+<p><strong>Definition</strong>: A <strong>matching</strong> is a set of edges where no two edges share a common vertex.</p>
+<p><strong>General Question</strong>: What is the maximum size of a matching in a graph.</p>
+<p><strong>Definition</strong>: A vertex incident with an edge in a matching is <strong>saturated</strong>. Otherwise it is <strong>unsaturated</strong>.</p>
+<p>A matching that saturates every vertex is a <strong>perfect matching</strong>.</p>
+<h1 id="cover">Cover</h1>
+<p><strong>Definition</strong>: A <strong>cover</strong> of <span class="math inline">\(G\)</span> is a set of vertices such that each edge of <span class="math inline">\(G\)</span> is incident with at least one vertex in the set.</p>
+<p><strong>General Question</strong>: What is the minimum size of a cover in a graph?</p>
+<p>Relation between a matching <span class="math inline">\(M\)</span> and a cover <span class="math inline">\(C\)</span> in <span class="math inline">\(G\)</span>.</p>
+<blockquote>
+<p><span class="math inline">\(C\)</span> must use <strong>at least</strong> one vertex from each matching edge. So <span class="math inline">\(|C| \ge |M|\)</span>.</p>
+</blockquote>
+<p><strong>Theorem</strong>: If <span class="math inline">\(M\)</span> is any matching and <span class="math inline">\(C\)</span> is any cover of <span class="math inline">\(G\)</span>, then <span class="math inline">\(|C| \ge |M|\)</span>.</p>
+<blockquote>
+<p>For each edge <span class="math inline">\(uv\)</span> in <span class="math inline">\(M\)</span>, at least one of <span class="math inline">\(u\)</span> or <span class="math inline">\(v\)</span> is in <span class="math inline">\(C\)</span> since <span class="math inline">\(C\)</span> covers the edge. Also, different edges in <span class="math inline">\(M\)</span> use different vertices, so the vertices in <span class="math inline">\(C\)</span> from different matching edges are distinct. So <span class="math inline">\(|C| \ge |M|\)</span>.</p>
+</blockquote>
+<p><strong>Corollary</strong>: If <span class="math inline">\(M\)</span> is a matching and <span class="math inline">\(C\)</span> is a cover of <span class="math inline">\(G\)</span> where <span class="math inline">\(M = C\)</span>, then <span class="math inline">\(M\)</span> is a maximum matching and <span class="math inline">\(C\)</span> is a minimum cover.</p>
+<blockquote>
+<p>Let <span class="math inline">\(M^\prime\)</span> be any matching, then <span class="math inline">\(|M^\prime| \le |C|\)</span>. By assumption, <span class="math inline">\(|C| = |M|\)</span>, so <span class="math inline">\(|M^\prime| \le |M|\)</span>. Since <span class="math inline">\(M^\prime\)</span> is arbitrary, <span class="math inline">\(M\)</span> must be a maximum matching.</p>
+</blockquote>
+<p>One way to prove that a matching is maximum is by providing a cover of the same size. There are examples where the maximum matching is strictly less than the minimum cover such as <span class="math inline">\(K_3\)</span>.</p>
+<h2 id="kőnigs-theorem">Kőnig’s Theorem</h2>
+<p>In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.</p>
 </body>
 </html>
