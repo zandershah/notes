@@ -1256,5 +1256,43 @@ n! &amp;\le 2^{h + 1} \\
 </ul></li>
 </ul>
 <h2 id="huffman-encoding">Huffman Encoding</h2>
+<ul>
+<li>We can scan the sample text to get a sample frequency.</li>
+<li>When we build the trie, we want characters with higher frequency to be closer to the root.</li>
+</ul>
+<h3 id="huffmans-algorithm">Huffman’s Algorithm</h3>
+<ol type="1">
+<li>Determine frequency of every <span class="math inline">\(c \in \Sigma_S\)</span>.</li>
+<li>For each <span class="math inline">\(c \in \Sigma\)</span>, create a height-0 trie holding <span class="math inline">\(c\)</span>.</li>
+<li>Assign a “weight” to each trie which is the sum of all frequencies of all letters in the trie.</li>
+<li>Find two tries with the minimum weight.</li>
+<li>Merge these tries with a new interior node.</li>
+<li>Repeat steps 4, 5 until there is only 1 trie left. This is <span class="math inline">\(D\)</span>.</li>
+</ol>
+<blockquote>
+<p>We should store the tries in a heap in order to make this efficient.</p>
+</blockquote>
+<ul>
+<li><strong>Encoding Runtime</strong>: <span class="math inline">\(O(|\Sigma_S|\log|\Sigma_S| + |C|)\)</span>.</li>
+<li><strong>Decoding Runtime</strong>: <span class="math inline">\(O(|C|)\)</span>.</li>
+<li>The constructed trie is <strong>optimal</strong>in the sense that <span class="math inline">\(|C|\)</span> is shortest among all prefix-free character-encodings with <span class="math inline">\(\Sigma_C = \{0, 1\}\)</span>.</li>
+</ul>
+<h2 id="run-length-encoding">Run-Length Encoding</h2>
+<ul>
+<li>We use the first bit to specify the starting block parity.</li>
+<li>We follow with a block <span class="math inline">\(b\)</span> of 0s, where <span class="math inline">\(|b|\)</span> is one less than the number of bits requried to hold the next block.</li>
+<li>We then write the size of the block.</li>
+<li>An all-0 string of length <span class="math inline">\(n\)</span> would be compressed to <span class="math inline">\(2\lfloor \log(n) \rfloor + 2 \in o(n)\)</span> bits.
+<ul>
+<li>Usually, we are not that lucky. There is no compression until the run-length <span class="math inline">\(k \ge 6\)</span>.</li>
+<li><strong>Expansion</strong> when run-length <span class="math inline">\(k = 2,4\)</span>.</li>
+</ul></li>
+<li>Method can be adapted to larger alphabet sizes.</li>
+</ul>
+<h2 id="lempel-ziv-welch">Lempel-Ziv-Welch</h2>
+<blockquote>
+<p><strong>Observation</strong>: Certain <em>substrings</em> are much more frequent than others.</p>
+</blockquote>
+<p>We want to take advantage of such substrings <strong>without</strong> needing to know beforehand what they are.</p>
 </body>
 </html>
