@@ -1761,7 +1761,8 @@ rvalues are temporary objects.</p>
 <p>When D calls a function from A, overwritten in B and C, which function gets called? This can be solved with <strong>virtual inheritance</strong> in c++.</p>
 <h1 id="templates">Templates</h1>
 <ul>
-<li>Templates support sttaic polymorphism through duck-typing.</li>
+<li>Templates support static polymorphism through duck-typing.</li>
+<li>The most specialized version is taken.</li>
 </ul>
 <div class="sourceCode" id="cb58"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;</a>
 <a class="sourceLine" id="cb58-2" data-line-number="2">T m(<span class="at">const</span> T &amp;x, <span class="at">const</span> T &amp; y) {</a>
@@ -1780,5 +1781,55 @@ rvalues are temporary objects.</p>
 <li>Templates are just blueprints for the compiler to create full functions / classes once parmeterized.</li>
 <li>Most common example of compilers being unable to deduce type is when return type is different than parameter types.</li>
 </ul>
+<h2 id="variadic-templates">Variadic Templates</h2>
+<ul>
+<li>Take a variable amount of arguments.</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> T, <span class="kw">typename</span>... Ts&gt;</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="co">// &lt;First Argument, Parameter Pack&gt;</span></a>
+<a class="sourceLine" id="cb60-3" data-line-number="3"><span class="dt">void</span> print(<span class="at">const</span> T&amp; arg <span class="at">const</span> Ts&amp; ...args) {</a>
+<a class="sourceLine" id="cb60-4" data-line-number="4">    print(arg);</a>
+<a class="sourceLine" id="cb60-5" data-line-number="5">    print(args...);</a>
+<a class="sourceLine" id="cb60-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb60-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb60-8" data-line-number="8"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;</a>
+<a class="sourceLine" id="cb60-9" data-line-number="9"><span class="dt">void</span> print(<span class="at">const</span> T&amp; arg) {</a>
+<a class="sourceLine" id="cb60-10" data-line-number="10">    cout &lt;&lt; arg;</a>
+<a class="sourceLine" id="cb60-11" data-line-number="11">}</a></code></pre></div>
+<h2 id="class-templates">Class Templates</h2>
+<ul>
+<li>Header must include definitions of all functions.</li>
+</ul>
+<h1 id="stl">STL</h1>
+<ul>
+<li>Generic containers (vector, list, deque, set).</li>
+<li>Different kinds of Iterators.</li>
+<li>Algorithsm for working over ranges.</li>
+<li>Not part of the language, but it <strong>is</strong> defined by the standard, which means a conforming compiler must provide it.</li>
+</ul>
+<h2 id="containers">Containers</h2>
+<ul>
+<li>Don’t need to know about what’s inside of them.</li>
+<li>Require specific operations to exist on a per container basis.</li>
+<li>Mostly limited to construction / assignment operators, comparison.</li>
+<li>Define their own Iterators.</li>
+</ul>
+<h2 id="useful-algorithms">Useful Algorithms</h2>
+<ul>
+<li>Know nothing about the data structures they operate on.</li>
+<li>Have limited requirements on the elements in those data structure.</li>
+<li>Operate on ranges via <strong>Iterators</strong>.</li>
+</ul>
+<h2 id="design-principles">Design Principles</h2>
+<ul>
+<li>STL uses <strong>value semantics</strong> (copy constructor / assignment, move).</li>
+<li>Containers and algorithms highly efficient.</li>
+<li>No inheritance in STL, don’t inherit from containers, their methods are not virtual.</li>
+</ul>
+<h2 id="polymorphic-types-in-containers">Polymorphic Types in Containers</h2>
+<div class="sourceCode" id="cb61"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb61-1" data-line-number="1">vector&lt;Figure&gt; <span class="co">// No, Figure is ABC.</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">vector&lt;Figure&amp;&gt; <span class="co">// No, can&#39;t store references in arrays.</span></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3">vector&lt;Figure*&gt; <span class="co">// Yes.</span></a>
+<a class="sourceLine" id="cb61-4" data-line-number="4">vector&lt;unique_ptr&lt;Figure&gt;&gt; <span class="co">// Yes.</span></a></code></pre></div>
 </body>
 </html>
