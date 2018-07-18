@@ -670,5 +670,15 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <p>One way to prove that a matching is maximum is by providing a cover of the same size. There are examples where the maximum matching is strictly less than the minimum cover such as <span class="math inline">\(K_3\)</span>.</p>
 <h2 id="kőnigs-theorem">Kőnig’s Theorem</h2>
 <p>In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.</p>
+<h2 id="augmenting-paths">Augmenting Paths</h2>
+<p><strong>Definition</strong>: An <strong>alternating</strong> path with respect to a matching <span class="math inline">\(M\)</span> is a path where consecutive edges alternate between being in <span class="math inline">\(M\)</span> and not in <span class="math inline">\(M\)</span>.</p>
+<p><strong>Definition</strong>: An <strong>augmenting path</strong> is an alternating path that starts and ends with different unsaturated vertices.</p>
+<p>If we have an augmenting path, then we can enlarge our matching by switching edges in <span class="math inline">\(M\)</span> and not in <span class="math inline">\(M\)</span>.</p>
+<p><strong>Theorem</strong>: If there exists an augmenting path with respect to a matching <span class="math inline">\(M\)</span>, then <span class="math inline">\(M\)</span> is not a maximum matching.</p>
+<p>The converse is also true.</p>
+<h2 id="bipartite-matching-algorithm">Bipartite Matching Algorithm</h2>
+<p>Given bipartite graph, we will repeatedly find augmenting paths to enlarge a matching. When we can’t find one, we would have produced a matching and a cover of the same size.</p>
+<p>What does an augmenting path look like in a bipartite graph?</p>
+<p>Suppose wlog it starts in <span class="math inline">\(A\)</span>. Then it must end in <span class="math inline">\(B\)</span>.</p>
 </body>
 </html>

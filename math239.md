@@ -787,3 +787,23 @@ One way to prove that a matching is maximum is by providing a cover of the same 
 ## Kőnig's Theorem
 
 In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.
+
+## Augmenting Paths
+
+**Definition**: An **alternating** path with respect to a matching $M$ is a path where consecutive edges alternate between being in $M$ and not in $M$.
+
+**Definition**: An **augmenting path** is an alternating path that starts and ends with different unsaturated vertices.
+
+If we have an augmenting path, then we can enlarge our matching by switching edges in $M$ and not in $M$.
+
+**Theorem**: If there exists an augmenting path with respect to a matching $M$, then $M$ is not a maximum matching.
+
+The converse is also true.
+
+## Bipartite Matching Algorithm
+
+Given bipartite graph, we will repeatedly find augmenting paths to enlarge a matching. When we can't find one, we would have produced a matching and a cover of the same size.
+
+What does an augmenting path look like in a bipartite graph?
+
+Suppose wlog it starts in $A$. Then it must end in $B$.

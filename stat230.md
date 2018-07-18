@@ -810,3 +810,13 @@ Example: Compute $Var(\sum_{i=1}^n X_i)$ and $Var(\overline{X})$.
 > $\begin{aligned}Var(\sum_{i = 1}^n X_i) &= \sum_{i = 1}Var(X_i) \\ &= n\sigma^2\end{aligned}$
 
 > $\begin{aligned}Var(\overline{X}) &= \frac{1}{n^2}Var(\sum_{i = 1}^n X_i) \\ &= \frac{\sigma}{n}\end{aligned}$
+
+# Indicator Variables
+
+$$E[\mathbb{I}_A] = P(A)$$
+
+$$E[\mathbb{I}_A^2] = P(A)$$
+
+So,
+
+$$Var(\mathbb{I}_A) = P(A)(1 - P(A))$$
