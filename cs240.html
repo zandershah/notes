@@ -1294,5 +1294,121 @@ n! &amp;\le 2^{h + 1} \\
 <p><strong>Observation</strong>: Certain <em>substrings</em> are much more frequent than others.</p>
 </blockquote>
 <p>We want to take advantage of such substrings <strong>without</strong> needing to know beforehand what they are.</p>
+<ul>
+<li>Start with dictionary <span class="math inline">\(D_0\)</span> for <span class="math inline">\(|\Sigma_S|\)</span>.</li>
+<li>Every step adds to the dictionary a multi-character string, using codenumbers.</li>
+<li>We use fixed length codewords.</li>
+<li>Generally, the decoder is “one step behind” in creating the dictionary.</li>
+<li>A problem occurs when we <em>want to use a code that we are about to build</em>.</li>
+<li>But we are able to figure this out!
+<ul>
+<li>We know that the Encoder assigned <span class="math inline">\(s_{prev} + s[0]\)</span> to the code number <span class="math inline">\(k\)</span>.</li>
+<li>So <span class="math inline">\(s = s_{prev} + s_{prev}[0]\)</span>.</li>
+</ul></li>
+</ul>
+<h2 id="compression-summary">Compression Summary</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Huffman</strong></th>
+<th><strong>Run-Length Encoding</strong></th>
+<th><strong>Lempel-Ziv-Welch</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variable-length</td>
+<td>Variable-length</td>
+<td>Fixed-length</td>
+</tr>
+<tr class="even">
+<td>Single-character</td>
+<td>Multi-character</td>
+<td>Multi-character</td>
+</tr>
+<tr class="odd">
+<td>2-pass</td>
+<td>1-pass</td>
+<td>1-pass</td>
+</tr>
+<tr class="even">
+<td>60% compression on English text</td>
+<td>Bad on text</td>
+<td>45% compression on English text</td>
+</tr>
+<tr class="odd">
+<td>Optimal 01-prefix-code</td>
+<td>Good on long runs (e.g. pictures)</td>
+<td>Good on English text</td>
+</tr>
+<tr class="even">
+<td>Must send dictionary</td>
+<td>Can be worse than ASCII</td>
+<td>Can be worse than ASCII</td>
+</tr>
+<tr class="odd">
+<td>Rarely used directly</td>
+<td>Rarely used directly</td>
+<td>Frequently used</td>
+</tr>
+<tr class="even">
+<td>JPEG, MP3</td>
+<td>Fax machines, old picture-formats</td>
+<td>GIF, Unix compress</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bzip2">bzip2</h2>
+<ul>
+<li>To achieve even better compression, bzip2 uses <strong>text transform</strong>. We change teh input into a different text that is not necessarily shorter, but has other desirable qualities.</li>
+</ul>
+<p><img src="https://i.imgur.com/Gsta77h.png" /></p>
+<h3 id="mtf-transform">MTF Transform</h3>
+<ul>
+<li>After an element is accessed, we move it to the front of the dictionary.</li>
+</ul>
+<p>This takes advantage of <strong>locality</strong> in the data. If we see a character now, we might see it again soon.</p>
+<p><strong>Specifics</strong>: MTF is an <strong>adaptive</strong> text-transform algorithm.</p>
+<blockquote>
+<p>If the source alphabet is <span class="math inline">\(\Sigma_S\)</span> with size <span class="math inline">\(m\)</span>, then the coded alphabet will be <span class="math inline">\(\Sigma_C = \{0, ..., m - 1\}\)</span>.</p>
+</blockquote>
+<h3 id="burrows-wheeler-transform">Burrows-Wheeler Transform</h3>
+<ul>
+<li>Transforms the source text to a coded text with the same letters, just in a different order.</li>
+<li>Works well with <strong>MTF Transform</strong>.</li>
+<li><strong>Required</strong>: Source text <span class="math inline">\(S\)</span> ends with indicator character <span class="math inline">\(\$\)</span> that occurs nowhere else in <span class="math inline">\(S\)</span>.</li>
+<li>Encoding algorithm needs <em>all</em> of <span class="math inline">\(S\)</span>, so BWT is a block compression method.</li>
+<li>Decoding is more efficient than encoding. <em>Asymmetric</em> scheme.</li>
+</ul>
+<p><strong>Crucial Ingredient</strong>: A <em>cyclic shift</em> of a string <span class="math inline">\(X\)</span> of length <span class="math inline">\(n\)</span> is the concatenation of <span class="math inline">\(X[i + 1..n - 1]\)</span> and <span class="math inline">\(X[0..i]\)</span>, for <span class="math inline">\(0 \le i &lt; n\)</span>.</p>
+<ol type="1">
+<li>Write all cyclic shifts.</li>
+<li>Sort cyclic shifts.</li>
+<li>Extract last chaaracters from sorted shifts.</li>
+</ol>
+<h4 id="btw-decoding">BTW Decoding</h4>
+<p>Given <span class="math inline">\(C\)</span>, we can reconstruct the <strong>first</strong> and <strong>last</strong> column of the array of cyclic shifts by sorting.</p>
+<p><img src="https://i.imgur.com/jcbxIgX.png" /></p>
+<ol type="1">
+<li>Last Column: <span class="math inline">\(C\)</span>.</li>
+<li>First Column: <span class="math inline">\(C\)</span> sorted.</li>
+<li><strong>Disambiguate by row-index</strong>.</li>
+<li>Starting from <span class="math inline">\(\$\)</span>, recover <span class="math inline">\(S\)</span>.</li>
+</ol>
+<p><strong>Encoding Cost</strong>: <span class="math inline">\(O(n^2)\)</span> using MSD radix sort, often better.</p>
+<ul>
+<li>Encoding is theoretically possibly in <span class="math inline">\(O(n)\)</span> time.
+<ul>
+<li>Sorting cyclic shifts of <span class="math inline">\(S\)</span> is equivalent to sorting the suffixes of <span class="math inline">\(SS\)</span> that have length <span class="math inline">\(&gt; n\)</span>.</li>
+<li>This can be done by traversing the suffix tree of <span class="math inline">\(SS\)</span>.</li>
+</ul></li>
+</ul>
+<p><strong>Decoding Cost</strong>: <span class="math inline">\(O(n)\)</span>.</p>
+<p>Encoding and decoding both use <span class="math inline">\(O(n)\)</span> space.</p>
 </body>
 </html>
