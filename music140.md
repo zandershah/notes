@@ -1000,6 +1000,95 @@ Example: "Highway Star" (1972, album *Machine Head*)
 ### Led Zeppelin
 
 - Grew out of The Yardbirds (British Blues Revival).
+- Jimmy Page, virtuosic musicianship, master of recording studio.
+- Significant blues influence.
+- Strong acoustic, Celic influence.
+- Hippie aesthetic, did not do radio edits for Stairway to Heaven.
+
+Example: "Whole Lotta Love" (1969, album *Led Zeppelin II*)
+
+- Blues-riff based.
+- Sued by Willie Dixon of Chess Records ("You Need Love" 1962, performed by Muddy Waters).
+- Importance of control in studio.
+
+Center of experience is the Stadium concert.
+
+- No radio air play.
+- No video / music television.
+- Critical rejection in music press.
+
+> Concert is the only place to "connect" with the band.
+
+- Form of worship.
+- Rejection of the collective.
+- Adulation of technical mastery of an individual.
+- Presentation is similar to that of a corporation.
+    - Logos for brand recognition, image of the band.
+
+# Hip Hop
+
+- Folk culture.
+- South Bronx, New York City, 1970s.
+- Rap / Break Dancing / Graffiti Art.
+
+## Signifying / The Dozens
+
+- Oral word game.
+- Ritualized insulting.
+- African origin.
+
+## Jamacian Toasting
+
+- Yard dances, sound system men.
+- SSM become 1st Jamacian recording producers.
+- Producing for Yard Dances.
+- Same song on both sides, one without vocals.
+- SSM would vocally improvise over the "B" side.
+- Toasting.
+- Many move to England, United States (NYC, Bronx).
+
+## Kool Herc
+
+> 1973.
+
+- Two turntables to recompose.
+- Extends exciting moments of a song, "breaks".
+- "Cutting and mixing".
+- Toasting.
+
+## Grand Master Flash
+
+> 1976.
+
+- Develops Kool Herc's techniques.
+- "Quick mix".
+
+## Grand Master Meli Mel
+
+> 1976.
+
+- Toaster / rapper for Grand Master Flash.
+- Coins the phrase *MC*.
+- "Full length" raps.
+- Writes them down.
+
+## Grand Wizard Theodore
+
+> 1978.
+
+- Scratching.
+- Redefining technology of the turntable.
+    - Turns turntable from a technology of consumption to production.
+
+Example: "Rapper's Delight" (Sugar Hill Gang)
+
+- 1st recorded hit song.
+- Released 10/79, #4 RnB, #36 Pop.
+- Based on the song "Good Times" by Chic (6/79 #1 Pop and RnB).
+
+Example: "Walk This Way" (Run DMC / Aerosmith 1985)
+
+- Rap excluded from MTV until this song.
 
 # Textbook Readings I
 
