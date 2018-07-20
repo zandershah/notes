@@ -1828,6 +1828,67 @@ rvalues are temporary objects.</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb61-1" data-line-number="1">vector&lt;Figure&gt; <span class="co">// No, Figure is ABC.</span></a>
 <a class="sourceLine" id="cb61-2" data-line-number="2">vector&lt;Figure&amp;&gt; <span class="co">// No, can&#39;t store references in arrays.</span></a>
 <a class="sourceLine" id="cb61-3" data-line-number="3">vector&lt;Figure*&gt; <span class="co">// Yes.</span></a>
-<a class="sourceLine" id="cb61-4" data-line-number="4">vector&lt;unique_ptr&lt;Figure&gt;&gt; <span class="co">// Yes.</span></a></code></pre></div>
+<a class="sourceLine" id="cb61-4" data-line-number="4">vector&lt;unique_ptr&lt;Figure&gt;&gt; <span class="co">// Yes.</span></a>
+<a class="sourceLine" id="cb61-5" data-line-number="5">vector&lt;shared_ptr&lt;Figure&gt;&gt; <span class="co">// Yes.</span></a></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Container Type</th>
+<th>Details</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sequence</td>
+<td>Have strict ordering based on programmer’s placement.</td>
+<td>Vector, deque, list, array</td>
+</tr>
+<tr class="even">
+<td>Associative</td>
+<td>Elements are referenced by keys rather than indices. Strict ordering based on the comparator.</td>
+<td>Set, map, multiset, multimap</td>
+</tr>
+<tr class="odd">
+<td>Unordered Associative</td>
+<td>As above, but with no guarantee on ordering.</td>
+<td>Unordered_map, unordered_set, …</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sequence-containers">Sequence Containers</h3>
+<ul>
+<li>Vector &amp; deque allow random access through [] or at().
+<ul>
+<li>List only allows sequence access through Iterators.</li>
+</ul></li>
+<li>Deque allows both emplace_front &amp; emplace_back.</li>
+<li>List optimized for arbitrary insertion / deletion.</li>
+<li>Vector / deque are optimized for random access.</li>
+</ul>
+<h3 id="associative-containers">Associative Containers</h3>
+<ul>
+<li>Store your elements in order, requires either the elements stored inside are comparable or use a function object.</li>
+</ul>
+<h2 id="function-objects">Function Objects</h2>
+<ul>
+<li>Objects of a type that overloads the function call operator.</li>
+<li>Templates take types (or integral values), so we must use a type for our comparator.</li>
+</ul>
+<div class="sourceCode" id="cb62"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">class</span> X {</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">    <span class="dt">int</span> <span class="kw">operator</span>()(<span class="dt">int</span> x, <span class="dt">int</span> y) {</a>
+<a class="sourceLine" id="cb62-4" data-line-number="4">        <span class="cf">return</span> x - y + <span class="dv">5</span>;</a>
+<a class="sourceLine" id="cb62-5" data-line-number="5">    }</a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">};</a></code></pre></div>
+<ul>
+<li>Function objects can hold state.</li>
+<li>Any sort of reference to the contents of an STL container can become invalidated with certain operations.</li>
+</ul>
 </body>
 </html>
