@@ -820,3 +820,56 @@ $$E[\mathbb{I}_A^2] = P(A)$$
 So,
 
 $$Var(\mathbb{I}_A) = P(A)(1 - P(A))$$
+
+Example: $N$ letters to $N$ different people, there are $N$ envelopes. One letter is put in each envelope at random. Find the mean and variance of the number of letters placed in the right envelope.
+
+> Let $\mathbb{I}_i = \begin{cases}1, &\text{Letter is in the correct envelope}\\ 0, &\text{Otherwise}\end{cases}$
+>
+> This is an indicator RV. $P(\mathbb{I}_i) = \frac{1}{N}$. So $E[\mathbb{I}_i] = \frac{1}{N}$, $Var(\mathbb{I}_i) = \frac{1}{N}(1 - \frac{1}{N})$.
+>
+> Let $X = \sum_{i=1}^N \mathbb{I}_i$. Now we need $E[X]$ and $Var(X)$.
+>
+> $E[X] = \sum_{i=1}^NE[\mathbb{I}_i] = 1$.
+>
+> $$\begin{aligned}Var(X) &= Var(\sum_{i = 1}^n \mathbb{I}_i) \\ &= \sum_{i = 1}^N Var(\mathbb{I}_i) + \sum_{i \neq j} Cov(\mathbb{I}_i, \mathbb{I}_j) \\ &= (1 - \frac{1}{N}) + \sum_{i \neq j} (E[\mathbb{I}_i \mathbb{I}_j] - E[\mathbb{I}_i]E[\mathbb{I}_j]) \\ &= (1 - \frac{1}{N}) + \sum_{i \neq j} (P(\mathbb{I}_i = 1, \mathbb{I}_j = 1) - \frac{1}{N^2}) \\ &= (1 - \frac{1}{N}) + \sum_{i \neq j}(\frac{1}{N(N-1)} - \frac{1}{N^2}) \\ &= 1 \end{aligned}$$
+
+# Life is Normal
+
+**Proposition**: Law of **Large** Numbers. Let $X_i$ be independent and indentically distributed random variables with mean $\mu$. Then their sample mean converges to the true mean.
+
+$$\lim_{n \to \infty} \overline{X}_n = \mu$$
+
+**Theorem**: Central Limit Theorem. Suppose that $X_i$ are independent random variables, with a common distribution function $F$. Suppose further than $E(X_i) = \mu$ and $Var(X_i) = \sigma^2 < \infty$. Then for all $x \in \mathbb{R}$ as $n \to \infty$.
+
+$$P\left(\frac{\overline{X} - \mu}{\sigma / \sqrt n} \le x \right) \to \Sigma(x),$$
+
+In other words, if $n$ is large.
+
+$$\overline{X} \approx N(\mu, \frac{\sigma^2}{n}), \sum_{i = 1}^n X_i \approx N(n\mu, n\sigma^2)$$
+
+Example: Eating a box of chocolate. Each box has 20 cubes  of chocolate. The weight of each cube varies. Weight $W$ of each cube is a random variable with mean $\mu = 25$ and $\sigma = 0.1$. Find the probability that the box has at least 500 grams of chocolate in it, assuming the weight of each cube is independent.
+
+> $S_{20} = \sum_{i = 1}^{20} W_i$. By CLT, $S_{20} \approx N(20 \cdot 25, 20 \cdot 0.1^2)$.
+>
+> $$\begin{aligned}P(S_{20} \ge 500) &= P(Z_{20} \ge \frac{500 - 500}{\sqrt{0.2}}) \\ &= P(Z_{20} \ge 0)\end{aligned}$$
+
+Example: Jason rolls a six sided die 1000 times, and records the results. If the die is a fair die, estimate the probability that the sum of the die is less than 3400.
+
+> $E[X_i] = 3.5$, $Var(X_i) = 2.92$. By CLT, $S_{1000} = \sum_{X_i} \approx N(1000 \cdot 3.5, 1000 \cdot 2.92)$.
+>
+> $$\begin{aligned}P(S_{1000} < 3400) &= P(Z_{1000} < \frac{3400 - 3500}{\sqrt {2920}}) \\ &= 0.03216\end{aligned}$$
+
+**Theorem**: If $X_n \sim Binomial(n, p)$, then for large $n$.
+
+$$\frac{X_n - np}{\sqrt{np(1-p)}} \approx N(0,1)$$
+
+**Theorem**: If $X_\lambda \sim Poi(\lambda)$, then for large $lambda$.
+
+$$\frac{X_\lambda - \lambda}{\lambda} \approx N(0, 1)$$
+
+When approximating discrete random variables with normal distribution, then discrete distribution will never be truly "normal". In this case, we use **continuity correction**.
+
+$$\begin{aligned}
+P(S_n = s) &= P(s - 0.5 < S_n < s + 0.5) \\
+&\approx P\left(\frac{(s - 0.5) - \mu S_n}{SD(S_n)} < Z < \frac{(s + 0.5) - \mu S_n}{SD(S_n)}\right)
+\end{aligned}$$

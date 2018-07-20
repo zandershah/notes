@@ -730,5 +730,39 @@ $$
 <p><span class="math display">\[E[\mathbb{I}_A^2] = P(A)\]</span></p>
 <p>So,</p>
 <p><span class="math display">\[Var(\mathbb{I}_A) = P(A)(1 - P(A))\]</span></p>
+<p>Example: <span class="math inline">\(N\)</span> letters to <span class="math inline">\(N\)</span> different people, there are <span class="math inline">\(N\)</span> envelopes. One letter is put in each envelope at random. Find the mean and variance of the number of letters placed in the right envelope.</p>
+<blockquote>
+<p>Let <span class="math inline">\(\mathbb{I}_i = \begin{cases}1, &amp;\text{Letter is in the correct envelope}\\ 0, &amp;\text{Otherwise}\end{cases}\)</span></p>
+<p>This is an indicator RV. <span class="math inline">\(P(\mathbb{I}_i) = \frac{1}{N}\)</span>. So <span class="math inline">\(E[\mathbb{I}_i] = \frac{1}{N}\)</span>, <span class="math inline">\(Var(\mathbb{I}_i) = \frac{1}{N}(1 - \frac{1}{N})\)</span>.</p>
+<p>Let <span class="math inline">\(X = \sum_{i=1}^N \mathbb{I}_i\)</span>. Now we need <span class="math inline">\(E[X]\)</span> and <span class="math inline">\(Var(X)\)</span>.</p>
+<p><span class="math inline">\(E[X] = \sum_{i=1}^NE[\mathbb{I}_i] = 1\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}Var(X) &amp;= Var(\sum_{i = 1}^n \mathbb{I}_i) \\ &amp;= \sum_{i = 1}^N Var(\mathbb{I}_i) + \sum_{i \neq j} Cov(\mathbb{I}_i, \mathbb{I}_j) \\ &amp;= (1 - \frac{1}{N}) + \sum_{i \neq j} (E[\mathbb{I}_i \mathbb{I}_j] - E[\mathbb{I}_i]E[\mathbb{I}_j]) \\ &amp;= (1 - \frac{1}{N}) + \sum_{i \neq j} (P(\mathbb{I}_i = 1, \mathbb{I}_j = 1) - \frac{1}{N^2}) \\ &amp;= (1 - \frac{1}{N}) + \sum_{i \neq j}(\frac{1}{N(N-1)} - \frac{1}{N^2}) \\ &amp;= 1 \end{aligned}\]</span></p>
+</blockquote>
+<h1 id="life-is-normal">Life is Normal</h1>
+<p><strong>Proposition</strong>: Law of <strong>Large</strong> Numbers. Let <span class="math inline">\(X_i\)</span> be independent and indentically distributed random variables with mean <span class="math inline">\(\mu\)</span>. Then their sample mean converges to the true mean.</p>
+<p><span class="math display">\[\lim_{n \to \infty} \overline{X}_n = \mu\]</span></p>
+<p><strong>Theorem</strong>: Central Limit Theorem. Suppose that <span class="math inline">\(X_i\)</span> are independent random variables, with a common distribution function <span class="math inline">\(F\)</span>. Suppose further than <span class="math inline">\(E(X_i) = \mu\)</span> and <span class="math inline">\(Var(X_i) = \sigma^2 &lt; \infty\)</span>. Then for all <span class="math inline">\(x \in \mathbb{R}\)</span> as <span class="math inline">\(n \to \infty\)</span>.</p>
+<p><span class="math display">\[P\left(\frac{\overline{X} - \mu}{\sigma / \sqrt n} \le x \right) \to \Sigma(x),\]</span></p>
+<p>In other words, if <span class="math inline">\(n\)</span> is large.</p>
+<p><span class="math display">\[\overline{X} \approx N(\mu, \frac{\sigma^2}{n}), \sum_{i = 1}^n X_i \approx N(n\mu, n\sigma^2)\]</span></p>
+<p>Example: Eating a box of chocolate. Each box has 20 cubes of chocolate. The weight of each cube varies. Weight <span class="math inline">\(W\)</span> of each cube is a random variable with mean <span class="math inline">\(\mu = 25\)</span> and <span class="math inline">\(\sigma = 0.1\)</span>. Find the probability that the box has at least 500 grams of chocolate in it, assuming the weight of each cube is independent.</p>
+<blockquote>
+<p><span class="math inline">\(S_{20} = \sum_{i = 1}^{20} W_i\)</span>. By CLT, <span class="math inline">\(S_{20} \approx N(20 \cdot 25, 20 \cdot 0.1^2)\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}P(S_{20} \ge 500) &amp;= P(Z_{20} \ge \frac{500 - 500}{\sqrt{0.2}}) \\ &amp;= P(Z_{20} \ge 0)\end{aligned}\]</span></p>
+</blockquote>
+<p>Example: Jason rolls a six sided die 1000 times, and records the results. If the die is a fair die, estimate the probability that the sum of the die is less than 3400.</p>
+<blockquote>
+<p><span class="math inline">\(E[X_i] = 3.5\)</span>, <span class="math inline">\(Var(X_i) = 2.92\)</span>. By CLT, <span class="math inline">\(S_{1000} = \sum_{X_i} \approx N(1000 \cdot 3.5, 1000 \cdot 2.92)\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}P(S_{1000} &lt; 3400) &amp;= P(Z_{1000} &lt; \frac{3400 - 3500}{\sqrt {2920}}) \\ &amp;= 0.03216\end{aligned}\]</span></p>
+</blockquote>
+<p><strong>Theorem</strong>: If <span class="math inline">\(X_n \sim Binomial(n, p)\)</span>, then for large <span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[\frac{X_n - np}{\sqrt{np(1-p)}} \approx N(0,1)\]</span></p>
+<p><strong>Theorem</strong>: If <span class="math inline">\(X_\lambda \sim Poi(\lambda)\)</span>, then for large <span class="math inline">\(lambda\)</span>.</p>
+<p><span class="math display">\[\frac{X_\lambda - \lambda}{\lambda} \approx N(0, 1)\]</span></p>
+<p>When approximating discrete random variables with normal distribution, then discrete distribution will never be truly “normal”. In this case, we use <strong>continuity correction</strong>.</p>
+<p><span class="math display">\[\begin{aligned}
+P(S_n = s) &amp;= P(s - 0.5 &lt; S_n &lt; s + 0.5) \\
+&amp;\approx P\left(\frac{(s - 0.5) - \mu S_n}{SD(S_n)} &lt; Z &lt; \frac{(s + 0.5) - \mu S_n}{SD(S_n)}\right)
+\end{aligned}\]</span></p>
 </body>
 </html>
