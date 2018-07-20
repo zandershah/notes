@@ -784,10 +784,6 @@ Relation between a matching $M$ and a cover $C$ in $G$.
 
 One way to prove that a matching is maximum is by providing a cover of the same size. There are examples where the maximum matching is strictly less than the minimum cover such as $K_3$.
 
-## Kőnig's Theorem
-
-In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.
-
 ## Augmenting Paths
 
 **Definition**: An **alternating** path with respect to a matching $M$ is a path where consecutive edges alternate between being in $M$ and not in $M$.
@@ -807,3 +803,19 @@ Given bipartite graph, we will repeatedly find augmenting paths to enlarge a mat
 What does an augmenting path look like in a bipartite graph?
 
 Suppose wlog it starts in $A$. Then it must end in $B$.
+
+![](https://i.imgur.com/CWC85nu.jpg?1)
+
+## Kőnig's Theorem
+
+In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.
+
+> Let $G$ be a bipartite graph with bipartition $(A, B)$. Let $M$ be a maximum matching produced by the algorithm. Let $X_0, X, Y$ be the three sets produced at the end of the algorithm.
+>
+> First we see that there is no edge joining $X$ with $B \setminus Y$. Otherwise, we could extend an alternating path to reach the vertex in $B \setminus Y$, which is not possibly by the definition of $Y$. Then all edges have an endpoint in $Y$ or $A \setminus X$. So $Y \cup (A \setminus X)$ is a cover.
+>
+> Now every vertex in $Y$ is saturated, for otherwise we would have found an augmenting path and our matching would not be maximum. Also, vertices in $A \setminus X$ are saturated, since all unsaturated vertices in $A$ are in $X_0 \subseteq X$. No matching edges joins $Y$ with $A \setminus X$, for otherwise we could find an alternating path which reaches a vertex in $A \setminus X$ which is not possible. So the matching edges that saturate $Y$ and $A \setminus X$ are distinct. So $|Y \cup (A \setminus X)| = |M|$.
+
+**Corollary**: A bipartite graph $G$ with $m$ edges and maximum degree $d$ has a matching of size at least $\frac{m}{d}$.
+
+> Let $C$ be any cover of $G$. Each vertex in $C$ has degree at most $d$, so it covers at most $d$ edges. Since there are $m$ edges to cover, we need at least $\frac{m}{d}$ vertices to cover all of them. So $|C| \ge \frac{m}{d}$. So a minimum cover has size at least $\frac{m}{d}$. Since $G$ is bipartite, by Kőnig's Theorem, a maximum matching also has size at least $\frac{m}{d}$.

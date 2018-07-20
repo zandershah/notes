@@ -668,8 +668,6 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <p>Let <span class="math inline">\(M^\prime\)</span> be any matching, then <span class="math inline">\(|M^\prime| \le |C|\)</span>. By assumption, <span class="math inline">\(|C| = |M|\)</span>, so <span class="math inline">\(|M^\prime| \le |M|\)</span>. Since <span class="math inline">\(M^\prime\)</span> is arbitrary, <span class="math inline">\(M\)</span> must be a maximum matching.</p>
 </blockquote>
 <p>One way to prove that a matching is maximum is by providing a cover of the same size. There are examples where the maximum matching is strictly less than the minimum cover such as <span class="math inline">\(K_3\)</span>.</p>
-<h2 id="kőnigs-theorem">Kőnig’s Theorem</h2>
-<p>In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.</p>
 <h2 id="augmenting-paths">Augmenting Paths</h2>
 <p><strong>Definition</strong>: An <strong>alternating</strong> path with respect to a matching <span class="math inline">\(M\)</span> is a path where consecutive edges alternate between being in <span class="math inline">\(M\)</span> and not in <span class="math inline">\(M\)</span>.</p>
 <p><strong>Definition</strong>: An <strong>augmenting path</strong> is an alternating path that starts and ends with different unsaturated vertices.</p>
@@ -680,5 +678,17 @@ We have <span class="math inline">\(A = \frac{1}{\sqrt 5}\)</span>, <span class=
 <p>Given bipartite graph, we will repeatedly find augmenting paths to enlarge a matching. When we can’t find one, we would have produced a matching and a cover of the same size.</p>
 <p>What does an augmenting path look like in a bipartite graph?</p>
 <p>Suppose wlog it starts in <span class="math inline">\(A\)</span>. Then it must end in <span class="math inline">\(B\)</span>.</p>
+<p><img src="https://i.imgur.com/CWC85nu.jpg?1" /></p>
+<h2 id="kőnigs-theorem">Kőnig’s Theorem</h2>
+<p>In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.</p>
+<blockquote>
+<p>Let <span class="math inline">\(G\)</span> be a bipartite graph with bipartition <span class="math inline">\((A, B)\)</span>. Let <span class="math inline">\(M\)</span> be a maximum matching produced by the algorithm. Let <span class="math inline">\(X_0, X, Y\)</span> be the three sets produced at the end of the algorithm.</p>
+<p>First we see that there is no edge joining <span class="math inline">\(X\)</span> with <span class="math inline">\(B \setminus Y\)</span>. Otherwise, we could extend an alternating path to reach the vertex in <span class="math inline">\(B \setminus Y\)</span>, which is not possibly by the definition of <span class="math inline">\(Y\)</span>. Then all edges have an endpoint in <span class="math inline">\(Y\)</span> or <span class="math inline">\(A \setminus X\)</span>. So <span class="math inline">\(Y \cup (A \setminus X)\)</span> is a cover.</p>
+<p>Now every vertex in <span class="math inline">\(Y\)</span> is saturated, for otherwise we would have found an augmenting path and our matching would not be maximum. Also, vertices in <span class="math inline">\(A \setminus X\)</span> are saturated, since all unsaturated vertices in <span class="math inline">\(A\)</span> are in <span class="math inline">\(X_0 \subseteq X\)</span>. No matching edges joins <span class="math inline">\(Y\)</span> with <span class="math inline">\(A \setminus X\)</span>, for otherwise we could find an alternating path which reaches a vertex in <span class="math inline">\(A \setminus X\)</span> which is not possible. So the matching edges that saturate <span class="math inline">\(Y\)</span> and <span class="math inline">\(A \setminus X\)</span> are distinct. So <span class="math inline">\(|Y \cup (A \setminus X)| = |M|\)</span>.</p>
+</blockquote>
+<p><strong>Corollary</strong>: A bipartite graph <span class="math inline">\(G\)</span> with <span class="math inline">\(m\)</span> edges and maximum degree <span class="math inline">\(d\)</span> has a matching of size at least <span class="math inline">\(\frac{m}{d}\)</span>.</p>
+<blockquote>
+<p>Let <span class="math inline">\(C\)</span> be any cover of <span class="math inline">\(G\)</span>. Each vertex in <span class="math inline">\(C\)</span> has degree at most <span class="math inline">\(d\)</span>, so it covers at most <span class="math inline">\(d\)</span> edges. Since there are <span class="math inline">\(m\)</span> edges to cover, we need at least <span class="math inline">\(\frac{m}{d}\)</span> vertices to cover all of them. So <span class="math inline">\(|C| \ge \frac{m}{d}\)</span>. So a minimum cover has size at least <span class="math inline">\(\frac{m}{d}\)</span>. Since <span class="math inline">\(G\)</span> is bipartite, by Kőnig’s Theorem, a maximum matching also has size at least <span class="math inline">\(\frac{m}{d}\)</span>.</p>
+</blockquote>
 </body>
 </html>
