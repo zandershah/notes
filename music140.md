@@ -666,10 +666,56 @@ February 9th, 1964. Ed Sullivan Show, 70 million viewers. Tour lasts for two wee
 - Going to stadium sand concerts.
 - Brought back the core idea of the golden age of rock 'n' roll. To produce and write their own songs.
 
-**Mersey Beat**: Gerry and the Pacemakers, The Searchers, Thw Swinging Blue Jeans. Named after a river close to their hometown.
+**Mersey Beat**: Gerry and the Pacemakers, The Searchers, The Swinging Blue Jeans. Named after a river close to their hometown.
 
-======================
+**July 1965**. Their second film *Help*. Played as themselves.
 
+End of **1964**. The Beatles meet Bob Dylan.
+
+> "You music is great but your lyrics don't say anything".
+
+Example: "Yesterday" (album **Help**)
+
+- AABA form.
+- More complex harmonic and lyric structure.
+- String Quartet, have ideas and record down random thoughts.
+- One Beatle performing. McCartney.
+
+    1. The Beatles are experimenting with new things in song writing. Evolving and moving away from writing pop songs.
+    2. This is the point where they stop writing songs together and each develop their own style of music.
+
+August 1965 **"Help"**, December 1965 **"Rubber Soul"**, August 1966 **"Revolver"**.
+
+Example: "Tomorrow Never Knows" (album Revolves, composed by John Lennon).
+
+- No chord changes, based on a dance from Indian Tamboura.
+- Lyrics are based on the Tibetan Book of the Dead.
+- Vocal is "double-tracked" and is run through a "Leslie" speaker cabinet.
+    - Gives shimmer to the sound designed for organ.
+    - Try to use the second track to match the first to give a thicker and fuller sound.
+- Makes use of take "loops" (avant-garde) and backwards recording.
+- The growing influence of non-western culture, and the technology of the recording studio on the work of the Beatles.
+- This song would have been unplayable in concert in the 1960s.
+
+> Too tired of being the Beatles, too loud and can't hear song clearly. Lose interest in 1966.
+
+Religion in popular music. Teenagers are moving away from religion.
+
+- John is an athiest. Jokes about Jesus and religion.
+- "Beatles are bigger than Jesus now". Organizational religions have been moving to big business.
+- August, the United States protests against statement.
+- **August 29th**, Candlestick park in San Francisco.
+    - Retiring from public performance.
+- **June 1967**, "Sgt. Pepper's Lonely Hearts Club Band".
+    - Most important album in history.
+    - Changes the perception of album, album includes lyrics to the songs.
+
+Example: "A Day In The Life"
+
+- Actually assembled out of sections separately composed. Used transitions between the parts that John & Paul composed separately. Weird intense transition. Avant-garde classical music.
+- Post-modern approach to creating forms.
+- Avant-garde techniques with orchestra and piano.
+- Does not follow the rules.
 - Went beyond having a bunch of songs in an album, they were linked by a theme. Storied from their childhood.
 - The first **"concept"** album? Only about half of their songs were about the concept.
 - They wanted people to listen to the entire thing in order because the songs are seen as a part of a larger whole.
