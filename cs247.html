@@ -1888,7 +1888,76 @@ rvalues are temporary objects.</p>
 <a class="sourceLine" id="cb62-6" data-line-number="6">};</a></code></pre></div>
 <ul>
 <li>Function objects can hold state.</li>
-<li>Any sort of reference to the contents of an STL container can become invalidated with certain operations.</li>
 </ul>
+<h1 id="iterator-invalidation">Iterator Invalidation</h1>
+<blockquote>
+<p>Any sort of reference to the contents of an STL container can become invalidated with certain operations.</p>
+</blockquote>
+<div class="sourceCode" id="cb63"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb63-1" data-line-number="1">vector&lt;<span class="dt">int</span>&gt; v;</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; ++i) {</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">    v.emplace_back(i);</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb63-6" data-line-number="6"><span class="kw">auto</span> it = v.begin() + <span class="dv">5</span>;</a>
+<a class="sourceLine" id="cb63-7" data-line-number="7"><span class="dt">int</span> &amp;ref = v.at(<span class="dv">4</span>);</a>
+<a class="sourceLine" id="cb63-8" data-line-number="8"><span class="dt">int</span> *ptr = &amp;v.at(<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb63-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb63-10" data-line-number="10">cout &lt;&lt; *it &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; ref &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; *ptr &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb63-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb63-12" data-line-number="12"><span class="co">// v will have to resize.</span></a>
+<a class="sourceLine" id="cb63-13" data-line-number="13"><span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10000</span>; ++i) {</a>
+<a class="sourceLine" id="cb63-14" data-line-number="14">    v.emplace_back(i);</a>
+<a class="sourceLine" id="cb63-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb63-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb63-17" data-line-number="17"><span class="co">// Undefined behaviour.</span></a>
+<a class="sourceLine" id="cb63-18" data-line-number="18">cout &lt;&lt; *it &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; ref &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; *ptr &lt;&lt; endl;</a></code></pre></div>
+<h1 id="iterator-types">Iterator Types</h1>
+<h2 id="forward-iterator">Forward Iterator</h2>
+<h3 id="input-iterator">Input Iterator</h3>
+<div class="sourceCode" id="cb64"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">operator</span>++</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw">operator</span>!=</a>
+<a class="sourceLine" id="cb64-3" data-line-number="3"><span class="co">// On right-hand side of assignment or rvalue contents.</span></a>
+<a class="sourceLine" id="cb64-4" data-line-number="4"><span class="kw">operator</span>*</a></code></pre></div>
+<h3 id="output-iterator">Output Iterator</h3>
+<div class="sourceCode" id="cb65"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">operator</span>++</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">operator</span>!=</a>
+<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="co">// On left-hand side of statements.</span></a>
+<a class="sourceLine" id="cb65-4" data-line-number="4"><span class="kw">operator</span>*</a></code></pre></div>
+<h2 id="bidirectional-iterator">Bidirectional Iterator</h2>
+<div class="sourceCode" id="cb66"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">operator</span>--</a></code></pre></div>
+<h2 id="random-access-iterator">Random Access Iterator</h2>
+<div class="sourceCode" id="cb67"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">operator</span>+=</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="kw">operator</span>-=</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="kw">operator</span>+</a>
+<a class="sourceLine" id="cb67-4" data-line-number="4"><span class="kw">operator</span>-</a>
+<a class="sourceLine" id="cb67-5" data-line-number="5"><span class="kw">operator</span>[]</a>
+<a class="sourceLine" id="cb67-6" data-line-number="6"><span class="kw">operator</span>&lt;</a>
+<a class="sourceLine" id="cb67-7" data-line-number="7">...</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> InIter, <span class="kw">typename</span> T&gt;</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">InIter find(InIter first, InIter last, <span class="at">const</span> T &amp;val) {</a>
+<a class="sourceLine" id="cb68-3" data-line-number="3">    <span class="co">// Returns an InIter to the first occurance of val in the range [first, last), or last if val not found.</span></a>
+<a class="sourceLine" id="cb68-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> InIter, <span class="kw">typename</span> OutIter&gt;</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">OutIter copy(InIter first, InIter last, OutIter dest) {</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3">    <span class="co">// Copies items from [first, last) to the location starting at dest.</span></a>
+<a class="sourceLine" id="cb69-4" data-line-number="4">    <span class="co">// Container associated with dest must have enough space!</span></a>
+<a class="sourceLine" id="cb69-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> InIter, <span class="kw">typename</span> OutIter, <span class="kw">typename</span> Func&gt;</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">OutIter transform(InIter first, InIter last, OutIter result, Func f) {</a>
+<a class="sourceLine" id="cb70-3" data-line-number="3">    <span class="cf">while</span> (first != last) {</a>
+<a class="sourceLine" id="cb70-4" data-line-number="4">        *result = f(*first);</a>
+<a class="sourceLine" id="cb70-5" data-line-number="5">        ++first;</a>
+<a class="sourceLine" id="cb70-6" data-line-number="6">        ++result;</a>
+<a class="sourceLine" id="cb70-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb70-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb70-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb70-10" data-line-number="10"><span class="dt">int</span> add1(<span class="dt">int</span> n) {</a>
+<a class="sourceLine" id="cb70-11" data-line-number="11">    <span class="cf">return</span> n + <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb70-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb70-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb70-14" data-line-number="14">vector&lt;<span class="dt">int</span>&gt; v{<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>};</a>
+<a class="sourceLine" id="cb70-15" data-line-number="15">vector&lt;<span class="dt">int</span>&gt; w(v.size());</a>
+<a class="sourceLine" id="cb70-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb70-17" data-line-number="17">transform(v.begin(), v.end(), w.begin(), add1);</a></code></pre></div>
 </body>
 </html>
