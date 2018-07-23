@@ -819,3 +819,27 @@ In a bipartite graph, the size of a maximum matching is equal to the size of a m
 **Corollary**: A bipartite graph $G$ with $m$ edges and maximum degree $d$ has a matching of size at least $\frac{m}{d}$.
 
 > Let $C$ be any cover of $G$. Each vertex in $C$ has degree at most $d$, so it covers at most $d$ edges. Since there are $m$ edges to cover, we need at least $\frac{m}{d}$ vertices to cover all of them. So $|C| \ge \frac{m}{d}$. So a minimum cover has size at least $\frac{m}{d}$. Since $G$ is bipartite, by Kőnig's Theorem, a maximum matching also has size at least $\frac{m}{d}$.
+
+# Hall's Theorem
+
+Let $G$ be a bipartite graph with bipartition $(A, B)$. What are the necessary and sufficient conditions for the existence of a matching that saturates $A$?
+
+**Definition**: Let $D \subseteq V(G)$. Then the **neighbour set** of $N(D)$ of $D$ is is the set of all vertices in $G$ adjacent to at least one vertex in $D$.
+
+**Hall's Condition**: For any $S \subseteq A$, $|S| \le |N(S)|$.
+
+**Hall's Theorem**: Let $G$ be a bipartite graph with bipartition $(A, B)$. Then there is a matching that saturates every vertex in $A$ if and only if for all $D \subseteq A$, $|N(D)| \ge |D|$.
+
+> ($\Rightarrow$) Suppose $M$ is a matching that saturates $A$. For any $D \subseteq A$, the matching edges in $M$ with one endpoing in $D$ have the other endpoint in distinct vertices of $N(D)$. So $|N(D)| \ge |D|$.
+>
+> ($\Leftarrow$) Suppose $G$ does not have a matching that saturates $A$. Let $M$ be a maximum matching. Since $M$ does not saturate $A$, $|M| < |A|$. By Kőnig Theorem, there exists a cover $C$ where $|C| = |M|$. Since $C$ is a cover, there is no edge between $A \setminus C$ and $B \setminus C$. So the neighbour set of $N(A \setminus C) \subseteq C \cap B$.
+> $$\begin{aligned}|N(A \setminus C)| &\le |C \cap B| \\ &= |C| - |C \cap A| \\ &= |M| - |C \cap A| \\ &< |A| - |C \cap A| \\ &= |A \setminus C|\end{aligned}$$
+> So $A \setminus C$ violates Hall's Condition.
+
+**Corollary**: If $G$ is a k-regular bipartite graph with $k \ge 1$, then $G$ has a perfect matching.
+
+> Suppose $G$ has bipartition $(A, B)$. So $|A| = |B|$. Let $D \subseteq A$. Since each vertex has degree $k$, there are $k|D|$ edges incident with a vertex in $D$. Each such edge ends in $N(D)$. So $\sum_{v \in N(D)} deg(v) \ge k|D|$. So $k|N(D)| \ge k|D|$. Since $k \ge 1$, $|N(D)| \ge |D|$. By Hall's Theorem, there is a matching that saturates $A$. Since $|A| = |B|$, it must be a perfect matching.
+
+**Corollary**: The edges of a k-regular pipartite graph can be partitioned into $k$ perfect matchings.
+
+> Induction on $k$. Removing a perfect matching leaves a (k-1)-regular bipartite graph.
