@@ -761,8 +761,55 @@ $$
 <p><span class="math display">\[\frac{X_\lambda - \lambda}{\lambda} \approx N(0, 1)\]</span></p>
 <p>When approximating discrete random variables with normal distribution, then discrete distribution will never be truly “normal”. In this case, we use <strong>continuity correction</strong>.</p>
 <p><span class="math display">\[\begin{aligned}
-P(S_n = s) &amp;= P(s - 0.5 &lt; S_n &lt; s + 0.5) \\
-&amp;\approx P\left(\frac{(s - 0.5) - \mu S_n}{SD(S_n)} &lt; Z &lt; \frac{(s + 0.5) - \mu S_n}{SD(S_n)}\right)
+P(S_n = s) &amp;\approx P(s - 0.5 &lt; S_n &lt; s + 0.5) \\
+&amp;\approx P\left(\frac{(s - 0.5) - \mu_{S_n}}{SD(S_n)} &lt; Z &lt; \frac{(s + 0.5) - \mu_{S_n}}{SD(S_n)}\right)
 \end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}
+P(a \le X \le b) &amp;\approx P(a - 0.5 \le X \le b + 0.5) \\
+&amp;\approx P\left(\frac{(a - 0.5) - \mu_x}{SD(X)} \le Z \le \frac{(b + 0.5) - \mu_x}{SD(X)}\right)
+\end{aligned}\]</span></p>
+<p>Example: <span class="math inline">\(X \sim Poi(\lambda)\)</span>. Use normal approximation to estimate <span class="math inline">\(P(X = \lambda)\)</span> and <span class="math inline">\(P(X &gt; \lambda)\)</span>. Compare this approximation with the true value when <span class="math inline">\(\lambda = 9\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}P(X = \lambda) &amp;\approx P(\lambda - 0.5 \le X \le \lambda + 0.5) \\ &amp;\approx P\left(\frac{(\lambda - 0.5) - \lambda}{\sqrt \lambda} \le Z \le \frac{(\lambda + 0.5) - \lambda}{\sqrt \lambda}\right) \\ &amp;= P\left(\frac{-0.5}{\sqrt \lambda} \le Z \le \frac{0.5}{\sqrt \lambda}\right)\end{aligned}\]</span></p>
+</blockquote>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}P(X &gt; x) &amp;\approx P(X \ge \lambda - 0.5) \\ &amp;\approx P\left(Z \ge \frac{(\lambda - 0.5) - \lambda}{\sqrt \lambda}\right) \\ &amp;=1 - P\left(Z &lt; \frac{-0.5}{\sqrt \lambda}\right)\end{aligned}\]</span></p>
+</blockquote>
+<p>Example: Suppose <span class="math inline">\(X_1, .., X_50\)</span> are independent Geometric random variablces with parameter 0.5. Estimate the probability that <span class="math inline">\(\overline{X}_50 &gt; 6.5\)</span>.</p>
+<blockquote>
+<p>We want <span class="math inline">\(P(\overline{X}_{50} &gt; 6.55)\)</span>. We need <span class="math inline">\(E[\overline{X}_{50}]\)</span> and <span class="math inline">\(SD(\overline{X}_{50})\)</span>.</p>
+<p><span class="math inline">\(\begin{aligned}E[\overline{X}_{50}] &amp;= \frac{1}{50}\sum_{i = 1}^{50} E[X_i] \\ &amp;= \frac{1}{50} \sum_{i=1}^{50} 1 \\ &amp;= 1\end{aligned}\)</span></p>
+<p><span class="math inline">\(\begin{aligned}Var(\overline{X}_{50}) &amp;= \left(\frac{1}{50}\right)^2 \sum_{i = 1}^{50} Var(X_i) \\ &amp;= \left(\frac{1}{50}\right)^2 \sum_{i = 1}^{50} 2 \\ &amp;= \frac{1}{25} \end{aligned}\)</span></p>
+<p><span class="math inline">\(\begin{aligned} P(\overline{X}_{50} &gt; 6.5) &amp;\approx P(\overline{X}_{50} &gt; 6) \\ &amp;\approx P\left(Z &gt; \frac{(6 - 1)}{\sqrt \frac{1}{25}}\right) \\ &amp;= 1 - P(Z &lt; 25) \\ &amp;\approx 0 \end{aligned}\)</span></p>
+</blockquote>
+<p><strong>Rules of Thumb</strong>.</p>
+<ol type="1">
+<li>If the number of observations exceeds 30, then CLT provides a reasonable approximation.</li>
+<li>If the distribution of observations is “close” to being unimodal and “close” to being continuous, then CLT can be reasonable for even smaller values of <span class="math inline">\(n\)</span>.</li>
+<li>If the distribution is highly screwed or very discrete, then a large value of <span class="math inline">\(n\)</span> might be necessary.</li>
+<li>When approximating a <strong>continuous</strong> distribution with normal, we do not use continuity correction.</li>
+</ol>
+<h1 id="moment-generating-function">Moment Generating Function</h1>
+<p><strong>Definition</strong>: The <strong>moment generating function</strong> or MGF of a random variable <span class="math inline">\(X\)</span> is given by.</p>
+<p><span class="math display">\[M_X(t) = E[e^{tX}], t \in \mathbb{R}\]</span></p>
+<p>In particular, if <span class="math inline">\(X\)</span> is discrete with probability function <span class="math inline">\(f(x)\)</span>, then.</p>
+<p><span class="math display">\[M_X(t) = \sum_{x \in X(S)} e^{tx} f(x), t \in \mathbb{R}\]</span></p>
+<p><strong>Properties</strong>.</p>
+<ol type="1">
+<li><span class="math display">\[M_x(t) = \sum_{j = 0}^\infty \frac{t^j E[X^j]}{j!}\]</span></li>
+<li><p>So long as <span class="math inline">\(M_x(t)\)</span> is defined in a neighbourhood of <span class="math inline">\(t = 0\)</span>.</p>
+<p><span class="math display">\[\frac{d}{d_t^k}M_x(0) = E[X^k]\]</span></p></li>
+</ol>
+<p>The significance of MGF is that, under certain conditions, it can show equivalence of two distributions.</p>
+<p><strong>Proposition</strong>: Continuity theorem. If <span class="math inline">\(X, Y\)</span> have MFGs <span class="math inline">\(M_X(t), M_Y(t)\)</span> defined in neighbourhoods of the origin, and satisfying <span class="math inline">\(M_X(t) = M_Y(t)\)</span> for all <span class="math inline">\(t\)</span> where they are defined.</p>
+<p><span class="math display">\[X \stackrel{D}{=} Y\]</span></p>
+<p>This means that the MGF uniquely characterises a distribution.</p>
+<p>Example: Let <span class="math inline">\(X \sim Poi(\lambda)\)</span>. Derive the MGF of <span class="math inline">\(X\)</span>, and use it to show that <span class="math inline">\(E[X] = \lambda = Var(X)\)</span>.</p>
+<blockquote>
+<p><span class="math display">\[\begin{aligned}M_X(t) &amp;= E[e^{tx}] \\ &amp;= \sum_{x = 0}^\infty e^{tx} P(X = x) \\ &amp;= \sum_{x = 0}^\infty e^{tx} \frac{e^{-\lambda}\lambda^x}{x!} \\ &amp;= e^{\lambda(e^t - 1)}, \forall t \in \mathbb{R} \end{aligned}\]</span></p>
+<p><span class="math inline">\(\begin{aligned}E[X] &amp;= M_X^\prime (t) |_{t = 0} \\ &amp;= e^{\lambda(e^t - 1)}\lambda e^t |_{t = 0} \\ &amp;= \lambda\end{aligned}\)</span></p>
+<p><span class="math inline">\(\begin{aligned}E[X^2] &amp;= M_X^{\prime \prime}(t) |_{t = 0} \\ &amp;= (e^{\lambda(e^t - 1)}(\lambda e^{t})^2 + e^{\lambda(e^t - 1)}\lambda e^t) |_{t = 0} \\ &amp;= \lambda ^2 + \lambda\end{aligned}\)</span></p>
+<p><span class="math inline">\(Var(X) = (\lambda^2 + \lambda) - \lambda^2 = \lambda\)</span></p>
+</blockquote>
 </body>
 </html>

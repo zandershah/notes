@@ -870,6 +870,69 @@ $$\frac{X_\lambda - \lambda}{\lambda} \approx N(0, 1)$$
 When approximating discrete random variables with normal distribution, then discrete distribution will never be truly "normal". In this case, we use **continuity correction**.
 
 $$\begin{aligned}
-P(S_n = s) &= P(s - 0.5 < S_n < s + 0.5) \\
-&\approx P\left(\frac{(s - 0.5) - \mu S_n}{SD(S_n)} < Z < \frac{(s + 0.5) - \mu S_n}{SD(S_n)}\right)
+P(S_n = s) &\approx P(s - 0.5 < S_n < s + 0.5) \\
+&\approx P\left(\frac{(s - 0.5) - \mu_{S_n}}{SD(S_n)} < Z < \frac{(s + 0.5) - \mu_{S_n}}{SD(S_n)}\right)
 \end{aligned}$$
+
+$$\begin{aligned}
+P(a \le X \le b) &\approx P(a - 0.5 \le X \le b + 0.5) \\
+&\approx P\left(\frac{(a - 0.5) - \mu_x}{SD(X)} \le Z \le \frac{(b + 0.5) - \mu_x}{SD(X)}\right)
+\end{aligned}$$
+
+Example: $X \sim Poi(\lambda)$. Use normal approximation to estimate $P(X = \lambda)$ and $P(X > \lambda)$. Compare this approximation with the true value when $\lambda = 9$.
+
+> $$\begin{aligned}P(X = \lambda) &\approx P(\lambda - 0.5 \le X \le \lambda + 0.5) \\ &\approx P\left(\frac{(\lambda - 0.5) - \lambda}{\sqrt \lambda} \le Z \le \frac{(\lambda + 0.5) - \lambda}{\sqrt \lambda}\right) \\ &= P\left(\frac{-0.5}{\sqrt \lambda} \le Z \le \frac{0.5}{\sqrt \lambda}\right)\end{aligned}$$
+
+> $$\begin{aligned}P(X > x) &\approx P(X \ge \lambda - 0.5) \\ &\approx P\left(Z \ge \frac{(\lambda - 0.5) - \lambda}{\sqrt \lambda}\right) \\ &=1 - P\left(Z < \frac{-0.5}{\sqrt \lambda}\right)\end{aligned}$$
+
+Example: Suppose $X_1, .., X_50$ are independent Geometric random variablces with parameter 0.5. Estimate the probability that $\overline{X}_50 > 6.5$.
+
+> We want $P(\overline{X}_{50} > 6.55)$. We need $E[\overline{X}_{50}]$ and $SD(\overline{X}_{50})$.
+>
+> $\begin{aligned}E[\overline{X}_{50}] &= \frac{1}{50}\sum_{i = 1}^{50} E[X_i] \\ &= \frac{1}{50} \sum_{i=1}^{50} 1 \\ &= 1\end{aligned}$
+>
+> $\begin{aligned}Var(\overline{X}_{50}) &= \left(\frac{1}{50}\right)^2 \sum_{i = 1}^{50} Var(X_i) \\ &= \left(\frac{1}{50}\right)^2 \sum_{i = 1}^{50} 2 \\ &= \frac{1}{25} \end{aligned}$
+>
+> $\begin{aligned} P(\overline{X}_{50} > 6.5) &\approx P(\overline{X}_{50} > 6) \\ &\approx P\left(Z > \frac{(6 - 1)}{\sqrt \frac{1}{25}}\right) \\ &= 1 - P(Z < 25) \\ &\approx 0 \end{aligned}$
+
+**Rules of Thumb**.
+
+1. If the number of observations exceeds 30, then CLT provides a reasonable approximation.
+2. If the distribution of observations is "close" to being unimodal and "close" to being continuous, then CLT can be reasonable for even smaller values of $n$.
+3. If the distribution is highly screwed or very discrete, then a large value of $n$ might be necessary.
+4. When approximating a **continuous** distribution with normal, we do not use continuity correction.
+
+# Moment Generating Function
+
+**Definition**: The **moment generating function** or MGF of a random variable $X$ is given by.
+
+$$M_X(t) = E[e^{tX}], t \in \mathbb{R}$$
+
+In particular, if $X$ is discrete with probability function $f(x)$, then.
+
+$$M_X(t) = \sum_{x \in X(S)} e^{tx} f(x), t \in \mathbb{R}$$
+
+**Properties**.
+
+1. $$M_x(t) = \sum_{j = 0}^\infty \frac{t^j E[X^j]}{j!}$$
+2. So long as $M_x(t)$ is defined in a neighbourhood of $t = 0$.
+
+    $$\frac{d}{d_t^k}M_x(0) = E[X^k]$$
+
+The significance of MGF is that, under certain conditions, it can show equivalence of two distributions.
+
+**Proposition**: Continuity theorem. If $X, Y$ have MFGs $M_X(t), M_Y(t)$ defined in neighbourhoods of the origin, and satisfying $M_X(t) = M_Y(t)$ for all $t$ where they are defined.
+
+$$X \stackrel{D}{=} Y$$
+
+This means that the MGF uniquely characterises a distribution.
+
+Example: Let $X \sim Poi(\lambda)$. Derive the MGF of $X$, and use it to show that $E[X] = \lambda = Var(X)$.
+
+> $$\begin{aligned}M_X(t) &= E[e^{tx}] \\ &= \sum_{x = 0}^\infty e^{tx} P(X = x) \\ &= \sum_{x = 0}^\infty e^{tx} \frac{e^{-\lambda}\lambda^x}{x!} \\ &= e^{\lambda(e^t - 1)}, \forall t \in \mathbb{R} \end{aligned}$$
+>
+> $\begin{aligned}E[X] &= M_X^\prime (t) |_{t = 0} \\ &= e^{\lambda(e^t - 1)}\lambda e^t |_{t = 0} \\ &= \lambda\end{aligned}$
+>
+> $\begin{aligned}E[X^2] &= M_X^{\prime \prime}(t) |_{t = 0} \\ &= (e^{\lambda(e^t - 1)}(\lambda e^{t})^2 + e^{\lambda(e^t - 1)}\lambda e^t) |_{t = 0} \\ &= \lambda ^2 + \lambda\end{aligned}$
+>
+> $Var(X) = (\lambda^2 + \lambda) - \lambda^2 = \lambda$
