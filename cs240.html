@@ -1365,6 +1365,24 @@ n! &amp;\le 2^{h + 1} \\
 <ul>
 <li>To achieve even better compression, bzip2 uses <strong>text transform</strong>. We change teh input into a different text that is not necessarily shorter, but has other desirable qualities.</li>
 </ul>
+<ol type="1">
+<li><p>Burrows-Wheeler Transform.</p>
+<ul>
+<li>If <span class="math inline">\(T_0\)</span> has repeated longer substrings, then <span class="math inline">\(T_1\)</span> has runs of characters.</li>
+</ul></li>
+<li><p>MTF Transform.</p>
+<ul>
+<li>If <span class="math inline">\(T_1\)</span> has long runs of characters, <span class="math inline">\(T_2\)</span> has long runs of zeros.</li>
+</ul></li>
+<li><p>Modified RLE.</p>
+<ul>
+<li>If <span class="math inline">\(T_2\)</span> has long runs of zeros, then <span class="math inline">\(T_3\)</span> has chars <span class="math inline">\(0^\prime\)</span> or <span class="math inline">\(1^\prime\)</span> very frequently.</li>
+</ul></li>
+<li><p>Huffman Encoding.</p>
+<ul>
+<li>Compresses well since input-chars un-evenly distributed.</li>
+</ul></li>
+</ol>
 <p><img src="https://i.imgur.com/Gsta77h.png" /></p>
 <h3 id="mtf-transform">MTF Transform</h3>
 <ul>
