@@ -975,8 +975,8 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul></li>
 </ul>
 <p>Example: Average Throughput = 10 Gbps, 100ms RTT, 1500 byte segment = 3/4 W/RTT bytes/sec Solve for W, Number of segments is W / 1500</p>
-<p>Throughput in terms of segment loss probability L = 1.22 * MSS / (RTT * sqrt(L)) MSS -&gt; Maxium Segment Size.</p>
-<p>To achieve a 10gbps throughput, we need a lost rate of L = 2*10^-{10} which is a very small loss rate.</p>
+<p>Throughput in terms of segment loss probability <span class="math inline">\(L = \frac{1.22 \cdot MSS}{RTT \sqrt L}\)</span>, MSS -&gt; Maxium Segment Size.</p>
+<p>To achieve a 10gbps throughput, we need a lost rate of <span class="math inline">\(L = 2\cdot10^{-10}\)</span> which is a very small loss rate.</p>
 <p>We need a new version of TCP for high-speed. It is hard to implement TCP because there are hardware that implement and are hard to change.</p>
 <h3 id="tcp-fairness">TCP Fairness</h3>
 <blockquote>
@@ -1087,7 +1087,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul></li>
 <li>Three types of switching fabrics (memory, bus, crossbar).</li>
 </ul>
-<h3 id="switching-vis-memory">Switching vis Memory</h3>
+<h3 id="switching-via-memory">Switching via Memory</h3>
 <blockquote>
 <p>First generation routers.</p>
 </blockquote>
@@ -1106,7 +1106,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>32 Gbps bus, Cisco 5600, sufficient speed for access and enterprise routers.</li>
 </ul>
 <p>We can still only send one packet on the bus at a time.</p>
-<h3 id="switching-vis-interconnection-network">Switching vis Interconnection Network</h3>
+<h3 id="switching-via-interconnection-network">Switching via Interconnection Network</h3>
 <ul>
 <li>Overcome bus bandwidth limitations.</li>
 <li>Banyan networks, crossbar, or other interconnected nets initially developed to connect processors in multiprocessor.</li>
@@ -1126,7 +1126,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul></li>
 <li><p>Recent recommentation says that with <span class="math inline">\(N\)</span> flows, buffering should be equal to <span class="math inline">\(\frac{RTT \cdot C}{\sqrt N}\)</span>.</p></li>
 <li><p><strong>Head-of-the-Line (<em>HOL</em>) Blocking</strong>: Queued datagram at the front of the queeu prevents others in the queue from moving forward.</p>
-<p>[](https://i.imgur.com/NqVg2Pf.png</p></li>
+<p><img src="https://i.imgur.com/NqVg2Pf.png" /></p></li>
 </ul>
 <h2 id="ip-internet-protocol">4.4 IP: Internet Protocol</h2>
 <p>In the network layer, we have routing protocols, IP protocol, and ICMP protocol (<em>error reporting and router signalling</em>).</p>
@@ -1211,9 +1211,14 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Range of addresses is not needed from ISP.</li>
 <li>Local network addresses can be changed without notifying the outside world.</li>
 <li>ISP can be changed without changing addresses of devices in local network.</li>
-<li>Devices inside local netwrok are not explicitly addressable which is a security plus.</li>
+<li>Devices inside local network are not explicitly addressable which is a security plus.</li>
 </ul>
-<p><strong>Implementation</strong>: a NAT router must. - <strong>Outgoing datagrams: replace</strong> (source IP address, port number) of every outgoing datagram to (NAT IP address, new port number). - <strong>Remember (<em>in NAT translation table</em>)</strong> every (source IP address, port number) to (NAT IP address, new port number) translation pair. - <strong>Incoming datagrams: replace</strong> (NAT IP address, new port number) in destination fields of every incoming datagram with corresponding (source IP address, port number) sorted in NAT table.</p>
+<p><strong>Implementation</strong>: a NAT router must.</p>
+<ul>
+<li><strong>Outgoing datagrams: replace</strong> (source IP address, port number) of every outgoing datagram to (NAT IP address, new port number).</li>
+<li><strong>Remember (<em>in NAT translation table</em>)</strong> every (source IP address, port number) to (NAT IP address, new port number) translation pair.</li>
+<li><strong>Incoming datagrams: replace</strong> (NAT IP address, new port number) in destination fields of every incoming datagram with corresponding (source IP address, port number) sorted in NAT table.</li>
+</ul>
 <p>NAT has a 16-bit port number field which allows for 60000 simultaneous connections with a single LAN-side address!</p>
 <p>NAT is <strong>controversial</strong>.</p>
 <ul>
@@ -1225,6 +1230,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Address shortage should instead be solved by IPv6.</li>
 </ul>
 <h3 id="nat-traversal-problem">NAT Traversal Problem</h3>
+<p><img src="https://i.imgur.com/725Ax3e.png" /></p>
 <ul>
 <li>Client wants to connect to server with address <span class="math inline">\(X\)</span>.
 <ul>
