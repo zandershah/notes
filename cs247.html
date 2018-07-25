@@ -1959,5 +1959,19 @@ rvalues are temporary objects.</p>
 <a class="sourceLine" id="cb70-15" data-line-number="15">vector&lt;<span class="dt">int</span>&gt; w(v.size());</a>
 <a class="sourceLine" id="cb70-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb70-17" data-line-number="17">transform(v.begin(), v.end(), w.begin(), add1);</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> RandomIt&gt;</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="dt">void</span> sort(RandomIt first, RandomIt last) {</a>
+<a class="sourceLine" id="cb71-3" data-line-number="3">    <span class="co">// Sorts the elements in range [first, last).</span></a>
+<a class="sourceLine" id="cb71-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb71-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb71-6" data-line-number="6"><span class="kw">template</span>&lt;<span class="kw">typename</span> RandomIt, <span class="kw">typename</span> Comp&gt;</a>
+<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="dt">void</span> sort(RandomIt first, RandomIt last, Comp comp) {</a>
+<a class="sourceLine" id="cb71-8" data-line-number="8">    <span class="co">// Sorts container [first, last) using comp.</span></a>
+<a class="sourceLine" id="cb71-9" data-line-number="9">}</a></code></pre></div>
+<h1 id="currying">Currying</h1>
+<p>Partially calling a function and getting a function back with parameters substituted.</p>
+<ul>
+<li>c++ supports currying through std::bind.</li>
+</ul>
 </body>
 </html>
