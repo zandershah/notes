@@ -1317,3 +1317,195 @@ One could broadcast to larger ranges by using a high power transmitter or by lin
     - "Tell Laura I Love Her" 1960, Ray Peterson
 - Songs about death coincided with the end of the Brill Building control of popular mainstream music.
 - Many of the songwriter-producer teams went off to form their own labels.
+
+# Textbook Readings III
+
+## James Brown, On The Way To Funk
+
+- James Brown started career as stand-in for Little Richard.
+- Born in South Carolina, raised in Southern Georgia.
+- Early hits were doo-wop, but began to develop the soul style.
+- Brown's aggressive singing and rythmic groove created to support were focal points of music, in contrast to the lyrical, harmony focused pop music.
+- By early 1960s, well known in R&B, athletic dancing, famous closing routine.
+- Wrote, produced most of his hits, and managed business after the death of King Records' Syd Nathan and his manager Ben Bart in 1968.
+
+### Black Pride and Birth of Funk
+
+- After assassination of MLK, James Brown and his music were more valued in black community for his racial pride.
+- Not like the Motown and Atlantic artists who appealed to white audiences.
+
+## Drugs and the Quest for Higher Conciousness
+
+- Psychedelic movement was concerned with exploring new ways of experiencing the world.
+- Youn adults felt the cultural values were too focused on being "normal".
+- Influenced by civil rights movement and public resistance to Vietnam War.
+    - Suspicious of institutions such as government, school, churchest, business.
+- Led by author Ken Kesey and ex-Harvard professor Timothy Leary.
+
+> Leary's advice, **Turn on, tune in, and drop out**.
+
+### Journey to the East
+
+- Until summer of 1967, counterculture mainly in large cities such as NYC, SF, and college campuses.
+    - Grew out of folk revival.
+- Hit song 1966, "Eight Miles High".
+- Drug use advocated by Timothy Learly 1964 *The Psychedelic Experience*.
+    - Guide to acid based on ancient Tibetan Book of the Dead.
+- Beatles became students of transcendental meditation with Maharishi Mahesh Yogi.
+
+### Psychedelic Approaches to Music
+
+1. Music to enhance drug trip.
+
+    - Grateful Dead and Pink Floyd.
+
+2. Music is the trip.
+
+    - Takes listener on an aural journey. The Doors and the Beatles.
+
+## It Takes a Village to Raise a Ruckus
+
+> Concerts, News, Psychedelic Shop, FM Radio.
+
+- Psychedelic shop opened in Haight-Ashbury district to meet countercultural needs.
+- FM dial had been available for some years, mostly used for public-service programming.
+    - Univeristy lectures, classical music concerts, foreign-language shows.
+- Tom Donahue found struggling FM station to play counterculture music.
+- More FM rock stations popped up across the country after summer 1967.
+
+## Good Trip, Bad Trip
+
+**Woodstock**. Farmland in Bethel, New York. August 15-17, 1969.
+
+- Drew at least 400,000 hippies.
+
+**Altamont**. Livermore, California. December 6, 1969.
+
+- Employed Hells Angels to provide security.
+- Waited until nightfall for Rolling Stones to begin their portion, concertgoers had nothing to do.
+- Alamont viewed as the event that marked the end of the hippie era.
+
+## The Fracturing of the American Radio Audience
+
+> **AM versus FM**.
+
+- Distinction between single-oriented AM pop and album-oriented FM rock.
+    - Young listeners tended towards AM, older siblings listened to FM.
+
+## The Hippie Aesthetic
+
+> **Psychedelic Legacies**.
+
+- After *Sgt. Pepper's Lonely Hearts Club Band*, many artists were fixated on creating albums.
+- Expanded rock's stylistic range by incorporating elements of classical, electronic, and jazz.
+- "Hippie aesthetic", aesthetic of ambition.
+
+# Black Pop, Reggae, Rise of Disco
+
+## Black Pop 1970s
+
+### Sly and the Family Stone**
+
+- Inspired a generation of funk and pop.
+    - Temptations, Jackson 5.
+- "Dance to the Music". #8 Pop.
+- Sly Stone born in Texas, moves to SF.
+    - Disk jockey and recording producer.
+
+### Tower of Power
+
+- Oakland-based band. Multicultural.
+- Hard-driving funk, high caliber of horn section. Often performed on other artists' records.
+
+### Motown in 1970s
+
+- Music recorded as direct response to Family Stone's style.
+- Mostly run from LA, Berry Gordy left Detroit to southern California.
+- Jackson 5. Series of #1 hits on Pop and R&B.
+
+#### Stevie and Marvin
+
+- Two artists who were given freedom to work outside of traditional system.
+- Marvin Gaye produced one of the first concept albums.
+    - Confronted problems of black urban life, environmentalism, military.
+- Stevie Wonder given complte artistic control and produced series of albums that cohered similar to AOR.
+    - Wrote, produced, and played many of the instruments on his albums.
+    - Leading force of dance music and balladry.
+    - Synthesizer, studio techniques indebted to rock.
+
+### Gamble and Huff
+
+> Philadelphia Sound.
+
+- Kenny Gamble and Leon Huff, indepdenent producers.
+- CBS saw market potential from Atlantic, Motown, Stax, provided money for Gamble and Huff to establish their own label but disribute through CBS network.
+- Blended lyric vocals, rythmn, with string arrangements.
+
+### Blaxploitation
+
+- Major studios find money to be made in movies that cast strong main characters in tough urban situations.
+
+### Reggae
+
+- **New Orleans and New York**.
+- 1970s, Jamacian music reggae enters USA and Britain.
+- Roots in American rock and R&B.
+- 1960s, Ska, replaced by Rock Steady in 1966-1968.
+    - Reggae developed out of this second style.
+- **Bob Marley**.
+- Influenced UK musicians who would later end up in punk and new wave bands.
+
+### Disco
+
+> **New Dance Craze**.
+
+- Late 1970s, popularity began 1977.
+- Blend direct dance beat with catchy pop hook.
+- Emerged out of 1977 film *Saturday Night Fever*, starring John Travolta.
+- Popularity of disco allowed for a return of authority of **producers**.
+    - Made according to Brill Building / Motown models.
+- Origins in the gay community.
+
+**Disco hatred** among rock fans. Direct confrontation to the hippie aesthetic. 
+
+- Not about listening to the music, but dancing to it.
+- Not about the specific artists, but the beat in general.
+- Early instance of *"rockism"*. Belief that some forms of popular music are less important because of a perceived lack of authenticity.
+
+## Punk
+
+- Spearheaded by the Sex Pistols. Fall 1977.
+    - Followed by Buzzcocks, the Clash.
+- American record labels toned down aggressive style, created "New Wave".
+
+### American Punk Roots
+
+- Between 1967-1975, most of rock was psychedelic or mainstream.
+- **Velvet Underground**. Associated with Andy Warhol.
+    - **Lou Reed**, creative writing, professional songwriter. **John Cale**, avant-garde composition, performance ensemble.
+
+#### New York Punk
+
+- November 1973, poet **Patti Smith** and guitarist **Lenny Kaye**.
+- Covered "Hey Joe" (made famous by Jimi Hendrix).
+- CBGB became home of NY punk scene.
+- The Ramones. Stripped-down, high-energy style of rock. Focused on short, simple songs played fast.
+- Aesthetic conneced to DIY mantra.
+    - Punks took on all aspects, production, recording, distribution, album art, concert promotion.
+
+### UK Punk Roots
+
+> 1974-1977.
+
+- Unlike USA, rise of punk in UK linked to specific socioeconomic circumstances.
+- Britain mid-1970s recession.
+- Youth struggled to find jobs, no opportunity for advancement.
+- Despair to anger, punk became music to represent angry spirit.
+- Sex Pistols, related to New York Dolls.
+- Surrounded by scandals, dropped by many different labels (but still paid).
+
+Based on the widespread popularity of the Sex Pistols, punk bands sprin up all over England.
+
+- **The Clash** uses the same strategy as Rolling Stones, become opposites of Sex Pistols. Incorporatae American R&B, reggae, and ska.
+- **The Buzzcocks** adopt a pop-influenced approach.
+- Groups were successful in British market during the last 1970s, but none had American success except for the Clash in 1980.

@@ -739,7 +739,7 @@ $$Cov(X, Y) = E[(X - E[X])(Y - E[Y])]$$
 
 Shortcut formula.
 
-$$Cov(X, Y) = E[X]E[Y] - E[XY]$$
+$$Cov(X, Y) = E[XY] - E[X]E[Y]$$
 
 **Theorem**: If $X,Y$ are independent, then $Cov(X, Y) = 0$. The converse is **false** with counter example $X \sim N(0,1)$, $Y \sim X^2 - 1$.
 
