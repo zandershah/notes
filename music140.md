@@ -1509,3 +1509,31 @@ Based on the widespread popularity of the Sex Pistols, punk bands sprin up all o
 - **The Clash** uses the same strategy as Rolling Stones, become opposites of Sex Pistols. Incorporatae American R&B, reggae, and ska.
 - **The Buzzcocks** adopt a pop-influenced approach.
 - Groups were successful in British market during the last 1970s, but none had American success except for the Clash in 1980.
+
+## Emergence of Rap
+
+- Graffiti artists widepread mid 1970s, city building and subway lines.
+- First break dancers were black and Hispanic teens.
+- Innovative response to urban decay and probelms of the present.
+- Adapting a practice from Jamaican DJs, hip-hop DJs would carry their own sound systems and employ an MC 
+- Kool Herc (First to use an MC: Coke La  Rock) and Grandmaster Flash were early MCs. Develop into rapper.
+- Early hip-hop DJs claim credit for techinical innovations, develops modern rap.
+- Use a pair of turntables to transit from songs seamlessly, along with a mixing board or cross-faders to control volumes.
+- “Break spinning”, repeats a short phrase by spinning one record backwards while the other is playing.
+- “Punch phrasing”, feature short bursts from one record while the other is holding down the beat.
+- The instrumental accompaniment of rap music began to feature “breaks” from disco or Latin-music, incite greater excitement and began a technique of creating new music out of recorded “samples”.
+- “Scratching”, rotated back and forwards really fast and repetitively to create a distinctive rhythm.
+- Afrika Bambaataa founded Zulu Nation in early 1970s, gang-like organization incorporated obscure / unlikely tracks such as the Mohawks’ “Champ” and Kraftwerk’s “Trans-FEurope Express” into his mixes.
+- In 1979, Sugar Hill Records releases “Rapper’s Delight”, first hip-hop single , #4 on R&B .
+    - Sugar Hill label owns Joe and Sylvia Robinson originally has another label All Platinum with hits “Love is Strange” 1957 and “Pillow Talk” 1973. Developed into the most important rap label of the early 1980s. Signed Grandmaster Flash and the Furious Five’s “The Message.
+- Russell Simmons and Rick Rubin, Def Jam Records in 1980s. Released music by the decade’s leading rappers (LL Cool J, the Beastie Boys, and Public Enemy).
+    - Simmons’ management company handles many famous and top acts in rap (Run DMC, Kurtis Blow, and DJ Jazzy Jeff and the Fresh Prince).
+    - Basic texture of beats of an electronic drum machine + highlights scratching + occasional sample / punch phrase, defined a new style of mainstream hip hop in mid-1980s.
+    - LL Cool J: “I cant live without My Radio” 1985. Made reference to the growing practice of youth broadcasting music in large portable “Boomboxes”; “I Need Love” 1987, first rap ballad.
+    - The Beastie Boys: A popular group of white rappers, originally in the hardcore punk scene, transitioned into hip-hop scene. first mainstream single “Fight for your Right” #7 Pop.
+- Passage were recorded digitally and looped with far more precision than turntables, end of 1980s, digital sampling was widespread.
+- Ice-T (born in New Jersey and moved to Los Angeles as a child), NWA, Boogie Down Production, Public Enemy, one of the most important representative of West Coast rap, urban life addressed by black musicians in a more graphic and angry manner. “Gangsta rap”, begin engaging in social and political criticism, black power movement.
+- Queen Latifah, an important female voice in hip-hop with her 1989 debut “All Hail the Queen” .
+- Rap drew a lot of social and legal criticism, not “music”, vulgar and violent lyrics.
+    - In 1980s, tension led to conflict between rock and rap.
+    - Both still develops commercially, have devoted followings in MTV.
