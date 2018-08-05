@@ -139,8 +139,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Accessors (<em>getters</em>)</strong>: Methods that return the value of a member field.<br />
 <strong>Mutators (<em>setters</em>)</strong> :Methods that allow for the setting of member fields.</p>
 <p>These restrict the usage of member fields to only those we give access to through the public interface. They also allow usage of member fields only under our ADT’s terms / supervision.</p>
-<h3 id="common-naming-convention">Common Naming Convention</h3>
-<p>s - attribute, getAttribute(), setAttribute(). - attribute_, attribute(), attributeIs().</p>
+<h3 id="common-naming-conventions">Common Naming Conventions</h3>
+<ul>
+<li>attribute, getAttribute(), setAttribute().</li>
+<li>attribute_, attribute(), attributeIs().</li>
+</ul>
 <h2 id="should-it-be-a-member">Should it be a member?</h2>
 <blockquote>
 <p>Only if it has to be.</p>
@@ -489,7 +492,14 @@ rvalues are temporary objects.</p>
 <p>Defines what the unit requires, in the way of services of assumptions for it to work correctly.</p>
 </blockquote>
 <h3 id="cs-247-interface-specification">CS 247 Interface Specification</h3>
-<p><strong>Precondition</strong>: Constraints that must hold <strong>before</strong> the function is called. <strong>Postconditions</strong>: COnstraints that hold <strong>after</strong> the function is called. <strong>Modifies</strong>: The objects / variables this function may modify. <strong>Throws</strong>: Exceptions your function may throw, and conditions under which they are thrown. <strong>Ensures</strong>: Guaranteed side effects on modified objects. <strong>Returns</strong>: Describes return value.</p>
+<ul>
+<li><strong>Precondition</strong>: Constraints that must hold <strong>before</strong> the function is called.</li>
+<li><strong>Postconditions</strong>: Constraints that hold <strong>after</strong> the function is called.</li>
+<li><strong>Modifies</strong>: The objects / variables this function may modify.</li>
+<li><strong>Throws</strong>: Exceptions your function may throw, and conditions under which they are thrown.</li>
+<li><strong>Ensures</strong>: Guaranteed side effects on modified objects.</li>
+<li><strong>Returns</strong>: Describes return value.</li>
+</ul>
 <div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">// sumVector.h</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="dt">int</span> sumVector(<span class="at">const</span> <span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; &amp; vect);</a>
@@ -538,9 +548,9 @@ rvalues are temporary objects.</p>
 <p>Spec <span class="math inline">\(A\)</span> is stronger than <span class="math inline">\(B\)</span> (<span class="math inline">\(A \ge B\)</span>) if and only if.</p>
 <blockquote>
 <ol type="1">
-<li><span class="math inline">\(A\)</span>’s preconditions are equal to or stronger than <span class="math inline">\(B\)</span>’s.
+<li><span class="math inline">\(B\)</span>’s preconditions are equal to or stronger than <span class="math inline">\(A\)</span>’s.
 <ul>
-<li>Requires <span class="math inline">\(A\)</span> <span class="math inline">\(\ge\)</span> Requires <span class="math inline">\(B\)</span>.</li>
+<li>Requires <span class="math inline">\(A\)</span> <span class="math inline">\(\le\)</span> Requires <span class="math inline">\(B\)</span>.</li>
 </ul></li>
 <li><span class="math inline">\(A\)</span>’s postconditions are stronger or equal to <span class="math inline">\(B\)</span>’s.
 <ul>
