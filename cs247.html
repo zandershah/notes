@@ -1802,7 +1802,7 @@ rvalues are temporary objects.</p>
 <li>The most specialized version is taken.</li>
 </ul>
 <div class="sourceCode" id="cb60"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">T m(<span class="at">const</span> T &amp;x, <span class="at">const</span> T &amp; y) {</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">T m(<span class="at">const</span> T &amp;x, <span class="at">const</span> T &amp;y) {</a>
 <a class="sourceLine" id="cb60-3" data-line-number="3">    <span class="cf">return</span> x &lt; y ? x : y;</a>
 <a class="sourceLine" id="cb60-4" data-line-number="4">}</a></code></pre></div>
 <p><strong>Note</strong>: No need to specify types when calling templated methods (when those types are deducible). Must always specify for classes.</p>
@@ -1841,7 +1841,7 @@ rvalues are temporary objects.</p>
 <ul>
 <li>Generic containers (vector, list, deque, set).</li>
 <li>Different kinds of Iterators.</li>
-<li>Algorithsm for working over ranges.</li>
+<li>Algorithms for working over ranges.</li>
 <li>Not part of the language, but it <strong>is</strong> defined by the standard, which means a conforming compiler must provide it.</li>
 </ul>
 <h2 id="containers">Containers</h2>
