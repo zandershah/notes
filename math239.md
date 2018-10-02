@@ -804,8 +804,6 @@ What does an augmenting path look like in a bipartite graph?
 
 Suppose wlog it starts in $A$. Then it must end in $B$.
 
-![](https://i.imgur.com/CWC85nu.jpg?1)
-
 ## Kőnig's Theorem
 
 In a bipartite graph, the size of a maximum matching is equal to the size of a minimum cover.

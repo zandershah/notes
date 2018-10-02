@@ -999,7 +999,6 @@ rvalues are temporary objects.</p>
 <li>Public inheritance.</li>
 </ul>
 <p>Modelled in UML as a hollow triangle pointing to the base class.</p>
-<p><img src="https://i.imgur.com/Zm2Kwcj.jpg?1" /></p>
 <h2 id="uml-object-model">UML Object Model</h2>
 <ul>
 <li>An object model models a runtime instance of class model.
@@ -1008,13 +1007,11 @@ rvalues are temporary objects.</p>
 <li>Every link is an instantiation of a specific association.</li>
 </ul></li>
 </ul>
-<p><img src="https://i.imgur.com/ypbv44Q.jpg?1" /></p>
 <h2 id="uml-sequence-diagram">UML Sequence Diagram</h2>
 <ul>
 <li>Graphical model of communication events between objets as exhibited in one execution.</li>
 <li>Boxes are the execution patterns.</li>
 </ul>
-<p><img src="https://i.imgur.com/q2TAAbt.jpg?1" /></p>
 <h1 id="design-patterns">Design Patterns</h1>
 <ul>
 <li>If you have a problem <span class="math inline">\(p\)</span> which is a common problem or simliar to a common problem, then <strong>maybe</strong> design pattern <span class="math inline">\(D\)</span> is a good solution.</li>
@@ -1032,9 +1029,6 @@ rvalues are temporary objects.</p>
 <p>Example: Publisher is spreadsheet cells and observers are our generated graphs.</p>
 <ul>
 <li>There can be many different kinds of observers, and the subject should not need to know details about them.</li>
-</ul>
-<p><img src="https://i.imgur.com/Mr3Seyk.jpg?1" /></p>
-<ul>
 <li>The abstract class subject contains all the code common to all subjects, the abstract class observer defines an interface common to all observers for subject to use.</li>
 </ul>
 <ol type="1">
@@ -1102,7 +1096,6 @@ rvalues are temporary objects.</p>
 <h2 id="decorator-pattern">Decorator Pattern</h2>
 <p>Suppose you want to enhance an object (e.g. adding functionality or features).</p>
 <p>Example: Windowing System. We start with a basic window, and then add a toolbar, scrollbar, and a menu. We want the user to be able to choose these at runtime.</p>
-<p><img src="https://i.imgur.com/0tFP1IZ.jpg?1" /></p>
 <ul>
 <li>Every Decorator is a component, and every Decorator has a component.</li>
 <li>Example, a window with a scrollbar <strong>is</strong> a window, but it also has a pointer to the underlying plain window.
@@ -1304,7 +1297,6 @@ rvalues are temporary objects.</p>
 <p>We want to vary an algorithm (<em>strategy</em>) at runtime.</p>
 </blockquote>
 <p>We encapsulate the algorithm itself. We define an algorithm as a component object of our class that uses. We will have an ABC for algorithm and use inheritance to specialize.</p>
-<p><img src="https://i.imgur.com/wxPLhKQ.jpg?1" /></p>
 <ul>
 <li>Goal is allowed to switch strategies at runtime. Simply swap strategy pointers.</li>
 <li>Similar to Factory Method.</li>
@@ -1396,7 +1388,6 @@ rvalues are temporary objects.</p>
 </ul></li>
 <li>We want a unified interface for our client code to work with the Hero groups or just an individual Hero.</li>
 </ul>
-<p><img src="https://i.imgur.com/PwG1XIS.jpg?1" /></p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co">// From SE Dropbox Paper notes.</span></a>
 <a class="sourceLine" id="cb45-2" data-line-number="2">HeroicTeam t{...};</a>
 <a class="sourceLine" id="cb45-3" data-line-number="3"></a>
