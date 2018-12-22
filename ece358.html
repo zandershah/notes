@@ -12,9 +12,14 @@
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="pandoc.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body);
-  });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -41,19 +46,19 @@
 </blockquote>
 <p><strong>Wireless LANs</strong>: Within building (100ft), 802.11 b/g (WiFi), 11 / 54 Mbps transmission rate.</p>
 <p><strong>Wide-Area Wireless Access</strong>: Provided by telco (cellular) operator. 1-10 Mbps transmission rate.</p>
-<p>Hosts break application message into smaller chunks known as <strong>packets</strong>, of length <span class="math inline">\(L\)</span> bits. Packets are transmitted across the network at a transmission rate <span class="math inline">\(T\)</span>. The transmission delay is then <span class="math inline">\(\frac{L}{R}\)</span>.</p>
+<p>Hosts break application message into smaller chunks known as <strong>packets</strong>, of length <span class="math inline">L</span> bits. Packets are transmitted across the network at a transmission rate <span class="math inline">T</span>. The transmission delay is then <span class="math inline">\frac{L}{R}</span>.</p>
 <h3 id="physical-media">1.3 Physical Media</h3>
 <ul>
-<li><strong>Bit</strong>: propogates between transmitter / receiver pairs.</li>
+<li><strong>Bit</strong>: propagates between transmitter / receiver pairs.</li>
 <li><strong>Physical Link</strong>: What lies between the transmitter and receiver.</li>
-<li><strong>Guided Media</strong>: Signals propogate in solid media (copper, fiber, coax).
+<li><strong>Guided Media</strong>: Signals propagate in solid media (copper, fiber, coax).
 <ul>
 <li><strong>Coaxial Cable</strong>: Two concentric copper conductors. Bidirectional. Broadband (multiple channels on cable).</li>
 <li><strong>Fiber Optic Cable</strong>: Glass fiber carrying light pulses, each pulse is a bit. High speed point-to-point transmission. Low error rate because repeaters are spaced far apart, and they are immune to electromagnetic noise.</li>
 </ul></li>
-<li><strong>Unguided Media</strong>: Signals propogate freely (radio).
+<li><strong>Unguided Media</strong>: Signals propagate freely (radio).
 <ul>
-<li><strong>Radio</strong>: Signal carried in electromagnetic spectrum. Propogatoin environment effects (reflection, obstruction, interference).</li>
+<li><strong>Radio</strong>: Signal carried in electromagnetic spectrum. Propagation environment effects (reflection, obstruction, interference).</li>
 </ul></li>
 <li><strong>Twisted Pair (<em>TP</em>)</strong>: Two insulated copper wires.</li>
 </ul>
@@ -65,13 +70,13 @@
 <p>Hosts break application-layer messages into <strong>packets</strong>. Packets are forwarded from one router to the next, across links on a path from source to destination.</p>
 <ul>
 <li><strong>Store and forward</strong>: Entire packet must arrive at router before it can be transmitted to the next link.</li>
-<li><strong>End-end delay</strong>: <span class="math inline">\(\frac{2L}{R}\)</span> assuming zero propogation delay.</li>
-<li><strong>Queuing and Loss</strong>: If the arrival rate to the link exceeds the transmission rate of the link, packets can be droppped if memory (buffer) fills up.</li>
+<li><strong>End-end delay</strong>: <span class="math inline">\frac{2L}{R}</span> assuming zero propagation delay.</li>
+<li><strong>Queuing and Loss</strong>: If the arrival rate to the link exceeds the transmission rate of the link, packets can be dropped if memory (buffer) fills up.</li>
 </ul>
 <p>The two key network core functions are <strong>routing</strong> and <strong>forwarding</strong>.</p>
 <h4 id="circuit-switching">Circuit Switching</h4>
 <ul>
-<li>Instead of breaking up packets into smaller messages, divide the end-end resources and assign to “calls” between soruce and destination.</li>
+<li>Instead of breaking up packets into smaller messages, divide the end-end resources and assign to “calls” between source and destination.</li>
 <li>Circuit segment is idle if it is not used in a call.</li>
 <li>Dedicated resources allow for circuit-link (guaranteed) performance.</li>
 <li>Commonly used in traditional telephone networks.</li>
@@ -92,16 +97,16 @@
 <ol type="1">
 <li><strong>Nodal Processing</strong>: Checking bit errors, determining the output link. Usually &lt; 1ms.</li>
 <li><strong>Queueing Delay</strong>: Time waiting at output link for transmission. Depends on the level of congestion at the router.</li>
-<li><strong>Transmission Delay</strong>: <span class="math inline">\(\frac{L}{R}\)</span>, where <span class="math inline">\(L\)</span> is teh packet length and <span class="math inline">\(R\)</span> is the link bandwidth.</li>
-<li><strong>Propogation Delay</strong>: <span class="math inline">\(\frac{d}{s}\)</span> where <span class="math inline">\(d\)</span> is the length of the physical link and <span class="math inline">\(s\)</span> is the propogation speed in the medium.</li>
+<li><strong>Transmission Delay</strong>: <span class="math inline">\frac{L}{R}</span>, where <span class="math inline">L</span> is the packet length and <span class="math inline">R</span> is the link bandwidth.</li>
+<li><strong>Propagation Delay</strong>: <span class="math inline">\frac{d}{s}</span> where <span class="math inline">d</span> is the length of the physical link and <span class="math inline">s</span> is the propagation speed in the medium.</li>
 </ol>
-<p><strong>Throughput</strong>: Rate at which bits are transfered between the sender and receiver.</p>
+<p><strong>Throughput</strong>: Rate at which bits are transferred between the sender and receiver.</p>
 <h2 id="internet-protocol-stack">Internet protocol stack</h2>
 <p><strong>Application</strong>: Running the network applications that you want (HTTP, FTP, SMTP). Implemented using software only.<br />
 <strong>Transport</strong>: Responsible for communication of processes between layers (TCP, UDP). Mainly implemented using software.<br />
 <strong>Network</strong>: Responsible for routing from source to destination. Implemented using software and hardware.<br />
-<strong>Link</strong>: Transfering to data between physically connected (adjacent) hubs (e.g. Computer -&gt; Router, Router -&gt; Router …). Hardware.<br />
-<strong>Physical</strong>: How you are transfering physical bits on the wire. Not covered in this course.</p>
+<strong>Link</strong>: Transferring to data between physically connected (adjacent) hubs (e.g. Computer -&gt; Router, Router -&gt; Router …). Hardware.<br />
+<strong>Physical</strong>: How you are transferring physical bits on the wire. Not covered in this course.</p>
 <blockquote>
 <p>Before the internet, there were two extra section that were planned.</p>
 </blockquote>
@@ -118,7 +123,7 @@
 </blockquote>
 <p>When passing data through, you need to pop the stack (<strong>decapsulation</strong>) and then replace (<strong>encapsulation</strong>).</p>
 <h2 id="network-security">Network Security</h2>
-<p>Internet was not desigend with security in mind. How can bad guys attack and how can we defend? How can we design architechtures that are immune to attacks.</p>
+<p>Internet was not designed with security in mind. How can bad guys attack and how can we defend? How can we design architectures that are immune to attacks.</p>
 <p>In real life: Hackers hack your system and then you fix the error and catch up.</p>
 <p><strong>Malware</strong> any harmful software.</p>
 <blockquote>
@@ -136,14 +141,14 @@
 <h1 id="application-layer">2: Application Layer</h1>
 <h2 id="principles-of-network-applications">2.1: Principles of network applications</h2>
 <h3 id="creating-a-network-app">Creating a network app</h3>
-<p>Only write to run on end systems (not on the internal network). Does not matter if they are servers or clients. We also only care about what we want to do on the application layer and then push to the transport layer which will take care of transmitting the data. This allows for fast developement.</p>
+<p>Only write to run on end systems (not on the internal network). Does not matter if they are servers or clients. We also only care about what we want to do on the application layer and then push to the transport layer which will take care of transmitting the data. This allows for fast development.</p>
 <p><strong>Client-Server</strong>: Server is always on with a static IP. Client will communicate with servers (intermittent). Client IP addresses will be dynamic.</p>
-<p><strong>P2P</strong>: Arbitrary end systems directly communicate. Peers request service from other peers and provice service in return (<em>self scalability</em>). There is more complex management because there is no central network that controls all uses. Security is also a big issue.</p>
+<p><strong>P2P</strong>: Arbitrary end systems directly communicate. Peers request service from other peers and provide service in return (<em>self scalability</em>). There is more complex management because there is no central network that controls all uses. Security is also a big issue.</p>
 <h3 id="process-communication">Process Communication</h3>
 <p><strong>Process</strong>: program running within a host.</p>
 <ul>
 <li>Within same host, two process communication using <em>inter-process communication</em> defined by the OS.</li>
-<li>Processes in different hosts communicate by exchaning messages.</li>
+<li>Processes in different hosts communicate by exchanging messages.</li>
 </ul>
 <p><strong>Client process</strong>: Process that initiates communication.</p>
 <p><strong>Server process</strong>: Process that waits to be contacted.</p>
@@ -151,7 +156,7 @@
 <blockquote>
 <p>Process sends / recieves messages to / from it’s <strong>socket</strong>.</p>
 </blockquote>
-<p><strong>Socket</strong>: The gate between the application layer and the transport layer. Sockets are similar to doors. Sending process shoves message out of door and relies on the other side of the door to deliver message to the socket at the recieving process.</p>
+<p><strong>Socket</strong>: The gate between the application layer and the transport layer. Sockets are similar to doors. Sending process shoves message out of door and relies on the other side of the door to deliver message to the socket at the receiving process.</p>
 <p>Example: Chrome tabs. How do we know which tab to put data? There is an identifier for each socket to route the data to the correct tab (You will always talk to port 80 of a server for HTTP requests but you will use a random port).</p>
 <p><strong>Sockets</strong> consists of two parts (for now).</p>
 <ol type="1">
@@ -174,7 +179,7 @@
 <ol type="1">
 <li><strong>Data Integrity</strong>. Some applications require 100% data transfer whereas other applications (e.g. audio) can tolerate some loss.</li>
 <li><strong>Timing</strong>. Time sensitive applications (e.g. Internet telephone, interactive games) require low delay to be <em>effective</em>.</li>
-<li><strong>Throughput</strong> (How fast the data can be transfered). Some applications require a minimum amount to be <em>effective</em>.</li>
+<li><strong>Throughput</strong> (How fast the data can be transferred). Some applications require a minimum amount to be <em>effective</em>.</li>
 <li><strong>Security</strong>. Encryption.</li>
 </ol>
 <table>
@@ -238,15 +243,15 @@
 <ol type="1">
 <li><strong>TCP</strong> (<em>Transport Control Protocol</em>)
 <ul>
-<li><strong>Reliable transport</strong> between sending and recieving process. Everything will get there without errors and in order.</li>
-<li><strong>Flow control</strong>: Sender won’t overwhelm reciever.</li>
+<li><strong>Reliable transport</strong> between sending and receiving process. Everything will get there without errors and in order.</li>
+<li><strong>Flow control</strong>: Sender won’t overwhelm receiver.</li>
 <li><strong>Congestion control</strong>: Throttle sender when network is overloaded.</li>
 <li><strong>Does not provide</strong>: Timing, minimum throughput guarantee, security.</li>
 <li><strong>Connection-oriented</strong>: Setup required between client and server processes.</li>
 </ul></li>
 <li><strong>UDP</strong> (<em>User Datagram Protocol</em>)
 <ul>
-<li><strong>Unreliable data transfer</strong>: No data integrity or reliability between sending and recieving process.</li>
+<li><strong>Unreliable data transfer</strong>: No data integrity or reliability between sending and receiving process.</li>
 <li><strong>Does not provide</strong>: Reliability, flow control, congestion control, timing, throughput guarantee, security, or connection setup.</li>
 </ul></li>
 </ol>
@@ -298,7 +303,7 @@
 </table>
 <h3 id="securing-tcp">Securing TCP</h3>
 <p><strong>TCP</strong> and <strong>UDP</strong> have no encryption. Plaintext passwords send into sockets.</p>
-<p>If you want security, you can use <strong>SSL</strong> (<em>secury socket layer</em>) which provices encryption for <strong>TCP</strong> connection. <strong>SSL</strong> is used at the application layer (need to use a <strong>SSL</strong> library such as OpenSSL).</p>
+<p>If you want security, you can use <strong>SSL</strong> (<em>secury socket layer</em>) which provides encryption for <strong>TCP</strong> connection. <strong>SSL</strong> is used at the application layer (need to use a <strong>SSL</strong> library such as OpenSSL).</p>
 <h2 id="web-and-http">2.2: Web and HTTP</h2>
 <blockquote>
 <p>A <em>web page</em> consists of <em>objects</em>. (HTML, JPEG, Java applet, auto file, …).</p>
@@ -329,7 +334,7 @@
 <li><strong>Persistent HTTP</strong>
 <ul>
 <li>Multiple objects sent over a single TCP connection.</li>
-<li>Avoid eccessive overhead when requesting multiple objects.</li>
+<li>Avoid excessive overhead when requesting multiple objects.</li>
 </ul></li>
 </ol>
 <h3 id="response-time">Response Time</h3>
@@ -338,7 +343,7 @@
 <ul>
 <li>One RTT to initiate TCP</li>
 <li>One RTT for HTTP request and first few bytes of HTTP response in return.</li>
-<li>File transmition time (<em>transmission delay</em>).</li>
+<li>File transmission time (<em>transmission delay</em>).</li>
 </ul>
 <blockquote>
 <p>Non-Persistent HTTP Response Time = 2RTT + transmission time.<br />
@@ -383,7 +388,7 @@ Persistent HTTP Response Time = RTT + n(RTT + transmission time).</p>
 </blockquote>
 <ol type="1">
 <li>Cookie header line in HTTP <em>response</em> from server.</li>
-<li>Cookie hedaer line in next HTTP <em>request</em> from client.</li>
+<li>Cookie header line in next HTTP <em>request</em> from client.</li>
 <li>Cookie file kept client-side.</li>
 <li>Back-end database for server.</li>
 </ol>
@@ -394,25 +399,25 @@ Persistent HTTP Response Time = RTT + n(RTT + transmission time).</p>
 </blockquote>
 <p>All requests are sent through a proxy server instead which caches requests and responses. If the request is already cached, it does not have to travel all the way to the original server.</p>
 <ul>
-<li>Typically the cache is insalled by ISP.</li>
+<li>Typically the cache is installed by ISP.</li>
 </ul>
 <p>Example:</p>
 <blockquote>
-<p>Average object size: <span class="math inline">\(100\ K bits\)</span>.<br />
-Average request rate: <span class="math inline">\(15\ /\ sec\)</span>.<br />
-RTT from insitutional router to original server: <span class="math inline">\(2\ sec\)</span><br />
-Access link rate: <span class="math inline">\(1.54\ Mbps\)</span></p>
-<p>We then have LAN utilization: <span class="math inline">\(\frac{1.5\ Mbps}{1\ Gbps} = 0.15\%\)</span><br />
-Access link utilization: <span class="math inline">\(\frac{1.5\ Mbps}{1.54\ Mbps} = 97.4\%\)</span><br />
+<p>Average object size: <span class="math inline">100\ K bits</span>.<br />
+Average request rate: <span class="math inline">15\ /\ sec</span>.<br />
+RTT from institutional router to original server: <span class="math inline">2\ sec</span><br />
+Access link rate: <span class="math inline">1.54\ Mbps</span></p>
+<p>We then have LAN utilization: <span class="math inline">\frac{1.5\ Mbps}{1\ Gbps} = 0.15\%</span><br />
+Access link utilization: <span class="math inline">\frac{1.5\ Mbps}{1.54\ Mbps} = 97.4\%</span><br />
 Total Delay = Internet Delay + Access Delay + LAN Delay<br />
-Access Delay: <span class="math inline">\(\frac{100\ K}{(1 - 0.974)1.54\ Mbps}\)</span>. (New users can only use whatever is left of the access link).<br />
-LAN Delay: <span class="math inline">\(\frac{100\ K}{(1 - 0.0015)1\ Gbps}\)</span><br />
-Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
+Access Delay: <span class="math inline">\frac{100\ K}{(1 - 0.974)1.54\ Mbps}</span>. (New users can only use whatever is left of the access link).<br />
+LAN Delay: <span class="math inline">\frac{100\ K}{(1 - 0.0015)1\ Gbps}</span><br />
+Total Delay <span class="math inline">= 2 + 2.5 + 0.0001</span></p>
 </blockquote>
 <p>Solutions:</p>
 <ol type="1">
-<li><p>Get a faster access link. If the access link rate was increased to <span class="math inline">\(154\ Mbps\)</span>, the access link delay drops to <span class="math inline">\(0.0007\)</span> so the total delay is only <span class="math inline">\(2\)</span> sec.</p></li>
-<li><p>Caching. If the cache hit rate was 0.4, 40% of requests are satisfied at the cache. The data rate to browsers over the access link is <span class="math inline">\(0.6 \cdot 1.50\ Mbps = 0.9\ Mbps\)</span>. Utilization becomes <span class="math inline">\(0.58\)</span>. Total Delay <span class="math inline">\(= 0.6 \cdot\)</span>(delay from original servers) + <span class="math inline">\(0.4 \cdot\)</span>(delay when satisfied by the cache) <span class="math inline">\(= 0.6(2.15) = 1.29\ sec\)</span>.</p></li>
+<li><p>Get a faster access link. If the access link rate was increased to <span class="math inline">154\ Mbps</span>, the access link delay drops to <span class="math inline">0.0007</span> so the total delay is only <span class="math inline">2</span> sec.</p></li>
+<li><p>Caching. If the cache hit rate was 0.4, 40% of requests are satisfied at the cache. The data rate to browsers over the access link is <span class="math inline">0.6 \cdot 1.50\ Mbps = 0.9\ Mbps</span>. Utilization becomes <span class="math inline">0.58</span>. Total Delay <span class="math inline">= 0.6 \cdot</span>(delay from original servers) + <span class="math inline">0.4 \cdot</span>(delay when satisfied by the cache) <span class="math inline">= 0.6(2.15) = 1.29\ sec</span>.</p></li>
 </ol>
 <p><strong>Conditional GET</strong> - If the cache has an up-to-date version, don’t send the object. - The web server sends a conditional get with the <em>If-modified-since</em>. - Response code <strong>304 Not Modified</strong> if the cached version is fine. - Response code <strong>200 OK</strong> will send the updated data.</p>
 <h2 id="dns">2.3: DNS</h2>
@@ -442,7 +447,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <p>Not scalable.</p>
 </blockquote>
 <ul>
-<li>Single point of faliure.</li>
+<li>Single point of failure.</li>
 <li>Traffic volume.</li>
 <li>Distant centralized database.</li>
 <li>Maintenance.</li>
@@ -467,9 +472,9 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>Network Solutions maintains servers for .com TLD</li>
 <li>Educause for .edu TLD</li>
 </ul>
-<h3 id="authorative-dns-servers">Authorative DNS Servers</h3>
+<h3 id="authoritative-dns-servers">Authoritative DNS Servers</h3>
 <ul>
-<li>Organization’s own DNS server(s), providing authorative hostname to IP mappings for organization.</li>
+<li>Organization’s own DNS server(s), providing authoritative hostname to IP mappings for organization.</li>
 </ul>
 <h3 id="local-dns-name-server">Local DNS Name Server</h3>
 <ul>
@@ -530,7 +535,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>Query or reply.</li>
 <li>Recursion desired.</li>
 <li>Recursion available.</li>
-<li>Reply is authorative.</li>
+<li>Reply is authoritative.</li>
 </ul></li>
 <li><strong>Questions</strong>: Name, type fields for a query.</li>
 <li><strong>Answers</strong>: RRs in response to a query.</li>
@@ -544,7 +549,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>Bombard root servers with traffic.
 <ul>
 <li>Not successful to date.</li>
-<li>Traffic filtering (not all traffic provited to root servers).</li>
+<li>Traffic filtering (not all traffic provided to root servers).</li>
 <li>Local DNS servers cache IPs of TLD servers, allow the root server to be bypassed.</li>
 </ul></li>
 <li>Bombard TLD servers.
@@ -570,17 +575,17 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <ul>
 <li>The victim is busy processing all of the responses.</li>
 </ul></li>
-<li>Requires ampliciation (difficult to launch because you need to query many servers at the same time).</li>
+<li>Requires amplification (difficult to launch because you need to query many servers at the same time).</li>
 </ul></li>
 </ol>
 <h1 id="transport-layer">3: Transport Layer</h1>
 <h2 id="transport-layer-services">3.1: Transport-Layer Services</h2>
 <ul>
-<li>Provices <strong>logical communication</strong> between a process on the source to a process on the reciever.</li>
+<li>Provides <strong>logical communication</strong> between a process on the source to a process on the receiver.</li>
 <li>Transport protocols run in end systems.
 <ul>
 <li>Source side: breaks app messages into <em>segments</em>, passes into network layer.</li>
-<li>Recieving side: Reassembles segments into <em>messages</em>, passes to the application layer.</li>
+<li>Receiving side: Reassembles segments into <em>messages</em>, passes to the application layer.</li>
 </ul></li>
 <li>More than one transport protocol available to apps.
 <ul>
@@ -604,7 +609,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>Reliable, in-order delivery (TCP).
 <ul>
 <li>Congestion control (about the network itself).</li>
-<li>Flow control (sender will not overflow the reciever).</li>
+<li>Flow control (sender will not overflow the receiver).</li>
 <li>Connection setup.</li>
 </ul></li>
 <li>Unreliable, unordered delivery (UDP).
@@ -615,10 +620,10 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 </ul>
 <h2 id="multiplexing-demultiplexing">3.2: Multiplexing / Demultiplexing</h2>
 <p><strong>Multiplexing at sender</strong>: Handle data from multiple sockets, add transport header (later used for demultiplexing).</p>
-<p><strong>Demultiplexing at reciever</strong>: Use header info to deliver recieved segments to the correct socket.</p>
+<p><strong>Demultiplexing at receiver</strong>: Use header info to deliver received segments to the correct socket.</p>
 <h3 id="how-demultiplexing-works">How Demultiplexing Works</h3>
 <ul>
-<li>Host recieves IP datagrams.
+<li>Host receives IP datagrams.
 <ul>
 <li>Datagram has a source IP address, destination IP address.</li>
 <li>Datagram carries one transport-layer segment.</li>
@@ -629,7 +634,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <h3 id="connectionless-demultiplexing">Connectionless Demultiplexing</h3>
 <ul>
 <li>When creating a datagram to send into UDP socket, we must specify the destination IP address and port number.</li>
-<li>When a host recieves a UDP segment, it checks the destination port number and directs the segment to the proper socket.</li>
+<li>When a host receives a UDP segment, it checks the destination port number and directs the segment to the proper socket.</li>
 <li>If IP datagram shave the same destination port but different source IP addresses or source port, numbers will be directed to the <strong>same socket</strong> at the destination.</li>
 </ul>
 <h3 id="connection-oriented-demux">Connection-oriented Demux</h3>
@@ -647,7 +652,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <ul>
 <li>“No frills”, “bare bones” Internet transport protocol.</li>
 <li>“Best effort” service, UDP segments may be lost or delivered out-of-order to app.</li>
-<li><strong>Connectionless</strong> meaning that there is no handshaking between UDP sender and reciever. Each UDP segment is handled independently of others.</li>
+<li><strong>Connectionless</strong> meaning that there is no handshaking between UDP sender and receiver. Each UDP segment is handled independently of others.</li>
 <li>UDP is used in streaming multimedia apps, DNS, SNPM (Simple Network Management Protocol).</li>
 <li>Reliable transfer over UDP can be achieved by adding reliability at the application layer such as application-specific error recovery.</li>
 </ul>
@@ -656,30 +661,30 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <blockquote>
 <p>We want to detect “errors” (e.g. flipped bits) in transmitted segmet.</p>
 </blockquote>
-<p>The sender treats the segment’s contents as a sequence of 16-bit integers. The checksum is the addition (one’s complement sum) of segment contents. The reciever then computes their own checksum and compares. (When adding numbers, a carryout from the msb gets re-added to the result).</p>
+<p>The sender treats the segment’s contents as a sequence of 16-bit integers. The checksum is the addition (one’s complement sum) of segment contents. The receiver then computes their own checksum and compares. (When adding numbers, a carryout from the msb gets re-added to the result).</p>
 <h2 id="principles-of-reliable-data-transfer">3.4 Principles of Reliable Data Transfer</h2>
 <ul>
 <li>When we have a reliable channel, we do not have to worry about reliable data transfer.</li>
 <li>Characteristics of unreliable channels will determine the complexity of reliable data transfer protocol (rdt).</li>
 </ul>
-<p>rdt_send() is called from the application layer whenever we have data to send which passes udt_send() to transfer the packet over the unreliable channel to reciever. It is recieved by rdt_rcv() which gets passed to the protocol on the transport layer. After some processing, it is passed to the upper application layer through deliver_data().</p>
+<p>rdt_send() is called from the application layer whenever we have data to send which passes udt_send() to transfer the packet over the unreliable channel to receiver. It is received by rdt_rcv() which gets passed to the protocol on the transport layer. After some processing, it is passed to the upper application layer through deliver_data().</p>
 <h3 id="rdt-1.0-reliable-transfer-over-a-reliable-channel.">RDT 1.0: Reliable transfer over a reliable channel.</h3>
 <blockquote>
 <p>Underlying channel is perfectly reliable. There are no bit errors and no loss of packets.</p>
 </blockquote>
-<p>We have separate Finite State Machines (FSMs) for sender, reciever. The sender sends data into the underlying channel and the reciever reads data from the underlying channel.</p>
+<p>We have separate Finite State Machines (FSMs) for sender, receiver. The sender sends data into the underlying channel and the receiver reads data from the underlying channel.</p>
 <h3 id="rdt-2.0-channel-with-bit-errors">RDT 2.0: Channel with Bit Errors</h3>
 <blockquote>
 <p>Underlying channel may flip bits in packet which is detected by the checksum.</p>
 </blockquote>
 <ul>
-<li><strong>ACKs</strong> (<em>acknowledgements</em>): The reciever explicity tells sender that the packet was recieved ok.</li>
-<li><strong>NAKs</strong> (<em>negative acknowledgements</em>): The reciever explicity tells sender that the packet has errors.
+<li><strong>ACKs</strong> (<em>acknowledgements</em>): The receiver explicitly tells sender that the packet was received ok.</li>
+<li><strong>NAKs</strong> (<em>negative acknowledgements</em>): The receiver explicitly tells sender that the packet has errors.
 <ul>
 <li>Sender retransmits packet on receipt of NAK.</li>
 </ul></li>
 <li>The sender needs to add a checksum to the data and will wait for ACK or NAK.</li>
-<li>There is a <strong>fatal flaw</strong> because if ACK / NAK is corrupted, the sender does not know what happened at the reciever.</li>
+<li>There is a <strong>fatal flaw</strong> because if ACK / NAK is corrupted, the sender does not know what happened at the receiver.</li>
 </ul>
 <h4 id="rdt-2.1">RDT 2.1</h4>
 <ul>
@@ -687,7 +692,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <ul>
 <li>We only need 2 sequence numbers (0, 1) so that we can distinguish between consecutive messages.</li>
 </ul></li>
-<li>The reciever discards duplicate packets.</li>
+<li>The receiver discards duplicate packets.</li>
 </ul>
 <blockquote>
 <p><strong>Stop and Wait</strong> protocol: sender sends 1 packet and then waits for receiver response.</p>
@@ -695,7 +700,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <h4 id="rdt-2.2-nak-free">RDT 2.2: NAK-free</h4>
 <ul>
 <li>We can have less state transitions if we only use ACKs.</li>
-<li>The reciever can send a packet number as well.</li>
+<li>The receiver can send a packet number as well.</li>
 <li>Duplicate ACK at sender results in the same action as NAK: <em>retransmit the current packet</em>.</li>
 </ul>
 <h3 id="rdt-3.0-channels-with-errors-and-loss">RDT 3.0: Channels with Errors <em>and</em> Loss</h3>
@@ -712,12 +717,12 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>If packet of ACK is delayed (not lost), the retransmission would be a duplicate, but we already handle this with sequence numbers.</li>
 <li>This approach works but the performance is bad.
 <ul>
-<li>Example: 1 Gbps link, 15 ms propogation delay, 8000 bit packet.</li>
+<li>Example: 1 Gbps link, 15 ms propagation delay, 8000 bit packet.</li>
 </ul>
 <blockquote>
-<p><span class="math inline">\(D_{trans} = \frac{L}{R} = \frac{8000\ bits}{10^9\ bits/sec} = 8\ \mu s\)</span>.<br />
-<span class="math inline">\(U_{sender}\)</span>: <strong>utilization</strong>, the fraction of the time the sender is busy sending.<br />
-<span class="math inline">\(U_{sender} = \frac{L/R}{RTT + L/R} = \frac{0.008}{30.008} = 0.00027\)</span>.</p>
+<p><span class="math inline">D_{trans} = \frac{L}{R} = \frac{8000\ bits}{10^9\ bits/sec} = 8\ \mu s</span>.<br />
+<span class="math inline">U_{sender}</span>: <strong>utilization</strong>, the fraction of the time the sender is busy sending.<br />
+<span class="math inline">U_{sender} = \frac{L/R}{RTT + L/R} = \frac{0.008}{30.008} = 0.00027</span>.</p>
 </blockquote>
 <ul>
 <li>Throughput is just the utilization multiplied by the link rate.</li>
@@ -726,7 +731,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 </ul>
 <h2 id="pipelined-protocols">Pipelined Protocols</h2>
 <blockquote>
-<p>Sender allows multiple, “in-flight”, packets. - The range of sequence numbers must be increased. - There is buffering at the sender and / or reciever.</p>
+<p>Sender allows multiple, “in-flight”, packets. - The range of sequence numbers must be increased. - There is buffering at the sender and / or receiver.</p>
 </blockquote>
 <h3 id="go-back-n">Go-Back-N</h3>
 <ul>
@@ -744,17 +749,17 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <h4 id="sender">Sender</h4>
 <ul>
 <li><strong>Data from above</strong>: If next available sequence number in window, send packet.</li>
-<li><strong>Timeout(<span class="math inline">\(n\)</span>)</strong>: Resent packet <span class="math inline">\(n\)</span>, restart timer.</li>
-<li><strong>ACK(<span class="math inline">\(n\)</span>)</strong> (<span class="math inline">\(n \in [send\_base, send\_base + N - 1]\)</span>): Mark packet <span class="math inline">\(n\)</span> as received, if <span class="math inline">\(n\)</span> is the smallest unACKed packet, advace the window base to the next unACKed sequecne number.</li>
+<li><strong>Timeout(<span class="math inline">n</span>)</strong>: Resent packet <span class="math inline">n</span>, restart timer.</li>
+<li><strong>ACK(<span class="math inline">n</span>)</strong> (<span class="math inline">n \in [send\_base, send\_base + N - 1]</span>): Mark packet <span class="math inline">n</span> as received, if <span class="math inline">n</span> is the smallest unACKed packet, advance the window base to the next unACKed sequence number.</li>
 </ul>
 <h4 id="receiver">Receiver</h4>
 <ul>
-<li><strong>Packet <span class="math inline">\(n \in [rcv\_base, rcv\_base + N - 1]\)</span></strong>: Send ACK(<span class="math inline">\(n\)</span>). If <span class="math inline">\(n\)</span> is out of order we need to buffer. If <span class="math inline">\(n\)</span> is in order, we can deliver until the next not received packet.</li>
-<li><strong>Packet <span class="math inline">\(n \in [rcn\_base - N, rcv\_base - 1]\)</span></strong>: ACK(<span class="math inline">\(n\)</span>) (We need to acknowledge duplicate packets to move the sender’s window).</li>
+<li><strong>Packet <span class="math inline">n \in [rcv\_base, rcv\_base + N - 1]</span></strong>: Send ACK(<span class="math inline">n</span>). If <span class="math inline">n</span> is out of order we need to buffer. If <span class="math inline">n</span> is in order, we can deliver until the next not received packet.</li>
+<li><strong>Packet <span class="math inline">n \in [rcn\_base - N, rcv\_base - 1]</span></strong>: ACK(<span class="math inline">n</span>) (We need to acknowledge duplicate packets to move the sender’s window).</li>
 </ul>
 <p><strong>Selective Repeat: Dilemma</strong>: While sliding windows, we may accidentally accept old data as new. The problem is that the receiver knows nothing about the sender. We can <em>fix</em> this by setting the window size to be equal to less than half of the sequence number space.</p>
-<h3 id="performace-of-sliding-window">Performace of Sliding Window</h3>
-<p><strong>No Errors</strong>: <span class="math inline">\(\rho = \min(1, \frac{W\frac{L}{C}}{t_T})\)</span>.</p>
+<h3 id="performance-of-sliding-window">Performance of Sliding Window</h3>
+<p><strong>No Errors</strong>: <span class="math inline">\rho = \min(1, \frac{W\frac{L}{C}}{t_T})</span>.</p>
 <h2 id="automatic-repeat-request-arq-protocols">Automatic Repeat Request (<em>ARQ</em>) Protocols</h2>
 <blockquote>
 <p>Applied at the transport and link layers.</p>
@@ -766,7 +771,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 </ol>
 <h2 id="connection-oriented-transport-tcp">3.5 Connection-Oriented Transport: TCP</h2>
 <ul>
-<li><strong>Connection-Oriented</strong>: Handshaking (exchanging control mesages), initializes sender and receiver state before data exchange.</li>
+<li><strong>Connection-Oriented</strong>: Handshaking (exchanging control messages), initializes sender and receiver state before data exchange.</li>
 <li><strong>Point-To-Point</strong>: One sender, one receiver.</li>
 <li><strong>Reliable, In-Order <em>Byte</em> Steam</strong>: No “message boundaries”, byte by byte.</li>
 <li><strong>Full Duplex Data</strong>: Bidirectional. MSS: Maximum Segment Size.</li>
@@ -780,20 +785,20 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>Acknowledgement number (for the bytes).</li>
 <li>Header length, not used (URG: urgent data, ACK: ACK # valid, PSH: push data now, RST, SYS, FIN: connection establishment).</li>
 <li>Receive window for the number of bytes the receiver is willing to accept.</li>
-<li>16 bits for checksum, Urg data pointer for the last byte of urgent data (16 bits).</li>
+<li>16 bits for checksum, URG data pointer for the last byte of urgent data (16 bits).</li>
 <li>Options (variable length).</li>
 <li>Application data (variable length).</li>
 </ul>
 <p>Default header length is 20 bytes compared to UDP 8 bytes.</p>
-<p>Acknowledgements include the sequence number of the next byte expected from the other side (cumulative ACK). The TCP spec doesn’t say how to handle out-of-order segments, it is up to the implementor. There are two choices, discard or buffer. Buffering is used in practice.</p>
+<p>Acknowledgements include the sequence number of the next byte expected from the other side (cumulative ACK). The TCP spec doesn’t say how to handle out-of-order segments, it is up to the implementer. There are two choices, discard or buffer. Buffering is used in practice.</p>
 <h3 id="tcp-round-trip-time-timeout">TCP Round Trip Time, Timeout</h3>
 <blockquote>
 <p>How to set TCP timeout value?</p>
 </blockquote>
 <p>It should be longer than the RTT, but the RTT varies. If it is too short, we will have unnecessary retransmissions. If it is too long, we will have slow reactions to segment loss.</p>
-<p>We estimate RTT by sampling from segment transmissions. <span class="math inline">\(SampleRTT\)</span> is the measured time from segment transmission to ACK receipt (ignoring retransmissions). We use an exponential weighted moving average, <span class="math inline">\(EstimatedRTT = (1 - \alpha)\cdot EstimatedRTT + \alpha \cdot SampleRTT\)</span>. The typical value is <span class="math inline">\(\alpha = 0.125\)</span>.</p>
-<p>Is this estimation enough? We want to add a <em>safety margin</em> so that a large variation in <span class="math inline">\(EstimateRTT\)</span> results in a larger safety margin. We use 4 standard deviations. <span class="math inline">\(DevRTT = (1 - \beta)\cdot DevRTT + \beta \cdot |SampleRTT - EstimatedRTT|\)</span>. The typical value is <span class="math inline">\(\beta = 0.25\)</span>.</p>
-<p>The timeout interval is then <span class="math inline">\(TimeoutInterval = EstimatedRTT + 4 \cdot DevRTT\)</span>.</p>
+<p>We estimate RTT by sampling from segment transmissions. <span class="math inline">SampleRTT</span> is the measured time from segment transmission to ACK receipt (ignoring retransmissions). We use an exponential weighted moving average, <span class="math inline">EstimatedRTT = (1 - \alpha)\cdot EstimatedRTT + \alpha \cdot SampleRTT</span>. The typical value is <span class="math inline">\alpha = 0.125</span>.</p>
+<p>Is this estimation enough? We want to add a <em>safety margin</em> so that a large variation in <span class="math inline">EstimateRTT</span> results in a larger safety margin. We use 4 standard deviations. <span class="math inline">DevRTT = (1 - \beta)\cdot DevRTT + \beta \cdot |SampleRTT - EstimatedRTT|</span>. The typical value is <span class="math inline">\beta = 0.25</span>.</p>
+<p>The timeout interval is then <span class="math inline">TimeoutInterval = EstimatedRTT + 4 \cdot DevRTT</span>.</p>
 <h3 id="tcp-reliable-data-transfer">TCP Reliable Data Transfer</h3>
 <p>TCP Created a RDT service on top of IP’s unreliable service. It uses pipelined segments, cumulative ACKs, and single retransmission timer (similar to Go-Back-N). Retransmission are triggered by timeouts or duplicate ACKs.</p>
 <p>Let’s initially consider a simplified TCP sender with no duplicate ACKs and ignoring flow / congestion control.</p>
@@ -802,7 +807,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <p>Three major events in sender.</p>
 </blockquote>
 <ol type="1">
-<li>Data recieved from application layer.
+<li>Data received from application layer.
 <ul>
 <li>Create segment with sequence number.</li>
 <li>Sequence number is byte-stream number of the first data byte in the segment.</li>
@@ -813,7 +818,7 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>Retransmit segment that caused timeout.</li>
 <li>Restart timer.</li>
 </ul></li>
-<li>ACK recieved.
+<li>ACK received.
 <ul>
 <li>If ACK acknowledges previously unACKed segments, we update and then start timer if there are still unACKed segments.</li>
 </ul></li>
@@ -877,16 +882,16 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <li>Different from flow control.</li>
 <li>Manifests as lost packets (buffer overflow at routers) and long delays (queueing in router buffers).</li>
 </ul>
-<h3 id="causes-costs-of-conegestion">Causes / Costs of Conegestion</h3>
+<h3 id="causes-costs-of-congestion">Causes / Costs of Congestion</h3>
 <ol type="1">
-<li>Infinite buffer, 2 senders and 2 receivers use the same link with an output link capacity of <span class="math inline">\(R\)</span>.
+<li>Infinite buffer, 2 senders and 2 receivers use the same link with an output link capacity of <span class="math inline">R</span>.
 <ul>
-<li>Maximum per-connection throughput: <span class="math inline">\(\frac{R}{2}\)</span>.</li>
-<li>Large delay as the arrival rate <span class="math inline">\(\lambda_{in}\)</span> approaches <span class="math inline">\(\frac{R}{2}\)</span>.</li>
+<li>Maximum per-connection throughput: <span class="math inline">\frac{R}{2}</span>.</li>
+<li>Large delay as the arrival rate <span class="math inline">\lambda_{in}</span> approaches <span class="math inline">\frac{R}{2}</span>.</li>
 </ul></li>
 <li>Finite buffer. Input and output rates are the same.
 <ul>
-<li>Transport-layer input includes <em>retransmissions</em>: <span class="math inline">\(\lambda_{in}^\prime \ge \lambda_{in}\)</span> (<em>offered load</em>).</li>
+<li>Transport-layer input includes <em>retransmissions</em>: <span class="math inline">\lambda_{in}^\prime \ge \lambda_{in}</span> (<em>offered load</em>).</li>
 </ul></li>
 <li>Multiple routers.
 <ul>
@@ -927,11 +932,11 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 </ul></li>
 <li>Recall that the sender limits transmission.
 <ul>
-<li><span class="math inline">\(LastByteSent - LastByteAcked \le \min(cwn, cwnd)\)</span>.</li>
+<li><span class="math inline">LastByteSent - LastByteAcked \le \min(cwn, cwnd)</span>.</li>
 </ul></li>
 <li>TCP sending rate is roughly sending <strong>cwnd</strong> bytes, then waiting an RTT for ACKs.
 <ul>
-<li><span class="math inline">\(\frac{cwnd}{RTT}\)</span> bytes / sec.</li>
+<li><span class="math inline">\frac{cwnd}{RTT}</span> bytes / sec.</li>
 </ul></li>
 </ul>
 <h3 id="tcp-slow-start">TCP Slow Start</h3>
@@ -959,30 +964,30 @@ Total Delay <span class="math inline">\(= 2 + 2.5 + 0.0001\)</span></p>
 <h3 id="switching-from-slow-start-to-ca-congestion-avoidance">Switching from Slow Start to CA (<em>Congestion Avoidance</em>)</h3>
 <blockquote>
 <p>When should the exponential increase switch to linear?<br />
-When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</span> of its value before timeout.</p>
+When <strong>cwnd</strong> gets to <span class="math inline">\frac{1}{2}</span> of its value before timeout.</p>
 </blockquote>
-<p>Implemented with a variable <strong>ssthresh</strong>. On a loss event, <strong>ssthresh</strong> is set to <span class="math inline">\(\frac{1}{2}\)</span> of <strong>cwnd</strong> before loss event.</p>
+<p>Implemented with a variable <strong>ssthresh</strong>. On a loss event, <strong>ssthresh</strong> is set to <span class="math inline">\frac{1}{2}</span> of <strong>cwnd</strong> before loss event.</p>
 <h3 id="tcp-throughput">TCP Throughput</h3>
 <ul>
 <li>Average TCP throughput as a function of window size, RTT?
 <ul>
 <li>Ignore slow start, assume we always have data to send.</li>
 </ul></li>
-<li>Throughput fluctuates between the max of <span class="math inline">\(\frac{W}{RTT}\)</span> (<em>congestion</em>) and <span class="math inline">\(\frac{W}{2RTT}\)</span> (<em>after congesion, drop rate</em>).
+<li>Throughput fluctuates between the max of <span class="math inline">\frac{W}{RTT}</span> (<em>congestion</em>) and <span class="math inline">\frac{W}{2RTT}</span> (<em>after congesion, drop rate</em>).
 <ul>
-<li>Average window size is <span class="math inline">\(\frac{3W}{4}\)</span>.</li>
-<li>Average throughput is <span class="math inline">\(\frac{3W}{4RTT}\)</span> bytes / sec.</li>
+<li>Average window size is <span class="math inline">\frac{3W}{4}</span>.</li>
+<li>Average throughput is <span class="math inline">\frac{3W}{4RTT}</span> bytes / sec.</li>
 </ul></li>
 </ul>
 <p>Example: Average Throughput = 10 Gbps, 100ms RTT, 1500 byte segment = 3/4 W/RTT bytes/sec Solve for W, Number of segments is W / 1500</p>
-<p>Throughput in terms of segment loss probability <span class="math inline">\(L = \frac{1.22 \cdot MSS}{RTT \sqrt L}\)</span>, MSS -&gt; Maxium Segment Size.</p>
-<p>To achieve a 10gbps throughput, we need a lost rate of <span class="math inline">\(L = 2\cdot10^{-10}\)</span> which is a very small loss rate.</p>
+<p>Throughput in terms of segment loss probability <span class="math inline">L = \frac{1.22 \cdot MSS}{RTT \sqrt L}</span>, MSS -&gt; Maximum Segment Size.</p>
+<p>To achieve a 10gbps throughput, we need a lost rate of <span class="math inline">L = 2\cdot10^{-10}</span> which is a very small loss rate.</p>
 <p>We need a new version of TCP for high-speed. It is hard to implement TCP because there are hardware that implement and are hard to change.</p>
 <h3 id="tcp-fairness">TCP Fairness</h3>
 <blockquote>
-<p><strong>Fairness goal</strong>: If <span class="math inline">\(K\)</span> TCP sessions share the same bottleneck link of bandwidth <span class="math inline">\(R\)</span>, each should have average rate of <span class="math inline">\(\frac{R}{K}\)</span>.</p>
+<p><strong>Fairness goal</strong>: If <span class="math inline">K</span> TCP sessions share the same bottleneck link of bandwidth <span class="math inline">R</span>, each should have average rate of <span class="math inline">\frac{R}{K}</span>.</p>
 </blockquote>
-<p>Two competing sessions will have additive increase which gives slope of 1, as throughput increases. Multiplicative decrease decreases throughput proportinally.</p>
+<p>Two competing sessions will have additive increase which gives slope of 1, as throughput increases. Multiplicative decrease decreases throughput proportionally.</p>
 <p><img src="https://i.imgur.com/Ec9MFxB.png" /></p>
 <p>Multimedia apps often do not use TCP because they do not want the rate throttled by congestion control. They send audio / video at constant rate, tolerate packet loss.</p>
 <p>This is fair over each connection, but you can cheat the system by having multiple TCP connections.</p>
@@ -995,10 +1000,10 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <h2 id="two-key-functions">Two Key Functions</h2>
 <ol type="1">
 <li><strong>Forwarding</strong>: Move packets from router’s input to appropriate router output.</li>
-<li><strong>Routing</strong>: Determing route taken by packets from source to destination.</li>
+<li><strong>Routing</strong>: Determining route taken by packets from source to destination.</li>
 </ol>
-<p>Some network architechtures require connection setup. Before datagrams flow, two end hosts <em>and</em> intervening routers establish virtual connection.</p>
-<p><strong>Recall</strong>: Network layer connection service is between two hosts (may also invole intervening routers in case of VCs). Transport layer connection service is between two processes.</p>
+<p>Some network architectures require connection setup. Before datagrams flow, two end hosts <em>and</em> intervening routers establish virtual connection.</p>
+<p><strong>Recall</strong>: Network layer connection service is between two hosts (may also involve intervening routers in case of VCs). Transport layer connection service is between two processes.</p>
 <h2 id="network-service-model">Network Service Model</h2>
 <ul>
 <li><strong>Individual datagrams</strong>: Guaranteed delivery with less than 40ms delay.</li>
@@ -1030,7 +1035,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </blockquote>
 <ul>
 <li>No call setup at network layer.</li>
-<li>Routers have no state, they do not know what connection each datagram belonds to.</li>
+<li>Routers have no state, they do not know what connection each datagram belongs to.</li>
 <li>Packets are forwarding using only destination host address.</li>
 </ul>
 <h3 id="datagram-forwarding-table">Datagram Forwarding Table</h3>
@@ -1044,7 +1049,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <h2 id="datagram-or-vc-network">Datagram or VC Network?</h2>
 <h3 id="datagram-internet">Datagram (Internet)</h3>
 <ul>
-<li>Data exchange among computers. &quot;Elastic service, no string timing requiremets.</li>
+<li>Data exchange among computers. &quot;Elastic service, no string timing requirements.</li>
 <li>Many different link types with different characteristics.</li>
 <li>End systems are smart so we push complexity.</li>
 </ul>
@@ -1081,9 +1086,9 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <h3 id="switching-fabrics">Switching Fabrics</h3>
 <ul>
-<li>Switching rate: rate at which packets can be transfered from inputs to outputs.
+<li>Switching rate: rate at which packets can be transferred from inputs to outputs.
 <ul>
-<li><span class="math inline">\(N\)</span> inputs, switching rate <span class="math inline">\(N\)</span> times line rate is desirable to avoid buffering.</li>
+<li><span class="math inline">N</span> inputs, switching rate <span class="math inline">N</span> times line rate is desirable to avoid buffering.</li>
 </ul></li>
 <li>Three types of switching fabrics (memory, bus, crossbar).</li>
 </ul>
@@ -1120,12 +1125,12 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <h3 id="how-much-buffering">How Much Buffering?</h3>
 <ul>
-<li>RFC 3439 rule of thumb is that the average buffering should be equal to “typical” RTT multiplied by the link capacity <span class="math inline">\(C\)</span>.
+<li>RFC 3439 rule of thumb is that the average buffering should be equal to “typical” RTT multiplied by the link capacity <span class="math inline">C</span>.
 <ul>
 <li>This is the absolute maximum amount of packets you can receive.</li>
 </ul></li>
-<li><p>Recent recommentation says that with <span class="math inline">\(N\)</span> flows, buffering should be equal to <span class="math inline">\(\frac{RTT \cdot C}{\sqrt N}\)</span>.</p></li>
-<li><p><strong>Head-of-the-Line (<em>HOL</em>) Blocking</strong>: Queued datagram at the front of the queeu prevents others in the queue from moving forward.</p>
+<li><p>Recent recommendation says that with <span class="math inline">N</span> flows, buffering should be equal to <span class="math inline">\frac{RTT \cdot C}{\sqrt N}</span>.</p></li>
+<li><p><strong>Head-of-the-Line (<em>HOL</em>) Blocking</strong>: Queued datagram at the front of the queue prevents others in the queue from moving forward.</p>
 <p><img src="https://i.imgur.com/NqVg2Pf.png" /></p></li>
 </ul>
 <h2 id="ip-internet-protocol">4.4 IP: Internet Protocol</h2>
@@ -1141,12 +1146,12 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Large IP Datagram is divided within the network and <em>reassembled</em> only at the final destination.</li>
 <li>IP header bits are used to identify and order related fragments.
 <ul>
-<li>Every fragement belonging to a datagram will have the same 16-bit id. Offset is measured in chunks of 8 bytes.</li>
+<li>Every fragment belonging to a datagram will have the same 16-bit id. Offset is measured in chunks of 8 bytes.</li>
 </ul></li>
 </ul>
 <h3 id="ipv4-addressing">IPV4 Addressing</h3>
 <ul>
-<li><strong>IP Address</strong>: 32-bit identifier for host, router interface. <span class="math inline">\((X.X.X.X)\)</span>, <span class="math inline">\(X \in [0, 256)\)</span>.</li>
+<li><strong>IP Address</strong>: 32-bit identifier for host, router interface. <span class="math inline">(X.X.X.X)</span>, <span class="math inline">X \in [0, 256)</span>.</li>
 <li><strong>Interface</strong>: Connection between host / router and physical link.
 <ul>
 <li>Routers typically have multiple interfaces.</li>
@@ -1162,12 +1167,12 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul></li>
 <li>Devices that have the same subnet part can physically reach each other <strong>without</strong> the need for a router.</li>
 <li>To determine the subnets, detach each interface from its host or router and find the disjoint networks.</li>
-<li>Subnets used to be classified into <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span> where the subnet has <span class="math inline">\(8\)</span>, <span class="math inline">\(16\)</span>, and <span class="math inline">\(24\)</span> bits respectively.</li>
+<li>Subnets used to be classified into <span class="math inline">A</span>, <span class="math inline">B</span>, and <span class="math inline">C</span> where the subnet has <span class="math inline">8</span>, <span class="math inline">16</span>, and <span class="math inline">24</span> bits respectively.</li>
 </ul>
 <h3 id="cidr-classless-interdomain-routing">CIDR (<strong>C</strong>lassless <strong>I</strong>nter<strong>D</strong>omain <strong>R</strong>outing)</h3>
 <ul>
 <li>Subnet portion of an address has an arbitrary length.</li>
-<li>Address format is <span class="math inline">\(a.b.c.d/x\)</span>, where <span class="math inline">\(x\)</span> is the number of bits in the subnet portion of address.</li>
+<li>Address format is <span class="math inline">a.b.c.d/x</span>, where <span class="math inline">x</span> is the number of bits in the subnet portion of address.</li>
 <li>In every subnet, we need to <strong>reserve</strong> two special IP addresses, when the host part is all 0s or all 1s.
 <ul>
 <li><strong>All 0s</strong>, identifier, acts as a wildcard for clients who do not have an IP address yet.</li>
@@ -1232,7 +1237,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <h3 id="nat-traversal-problem">NAT Traversal Problem</h3>
 <p><img src="https://i.imgur.com/725Ax3e.png" /></p>
 <ul>
-<li>Client wants to connect to server with address <span class="math inline">\(X\)</span>.
+<li>Client wants to connect to server with address <span class="math inline">X</span>.
 <ul>
 <li>Server address local to LAN.</li>
 <li>Only one externally visible NATed address.</li>
@@ -1264,11 +1269,11 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>Source sends a series of UDP segments to dest.
 <ul>
-<li>First set has <span class="math inline">\(TTL = 1\)</span></li>
-<li>Second set has <span class="math inline">\(TTL = 2\)</span>, etc.</li>
+<li>First set has <span class="math inline">TTL = 1</span></li>
+<li>Second set has <span class="math inline">TTL = 2</span>, etc.</li>
 <li>Unlikely port number is used.</li>
 </ul></li>
-<li>When the <span class="math inline">\(n\)</span>th set of datagrams arrives to the <span class="math inline">\(n\)</span>th router.
+<li>When the <span class="math inline">n</span>th set of datagrams arrives to the <span class="math inline">n</span>th router.
 <ul>
 <li>Router discards datagrams and sends source ICMP messages (type 11, code 0).</li>
 <li>ICMP messages include name of router and IP address.</li>
@@ -1294,7 +1299,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>128-bit addressing, enough for every grain of sand to have an IP address.</li>
 </ul></li>
-<li>No fragementation allowed.</li>
+<li>No fragmentation allowed.</li>
 </ul>
 <p><img src="https://i.imgur.com/YcQtRpt.png" /></p>
 <ul>
@@ -1315,7 +1320,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <h4 id="transition-from-ipv4-to-ipv6">Transition from IPv4 to IPv6</h4>
 <ul>
 <li>Not all routers can be upgraded simultaneously. How will networks operate with mixed IPv4 and IPv6 routers?</li>
-<li><strong>Tunelling</strong>: IPv6 datagram carried as <em>payload</em> in IPv4 datagram among IPv4 routers.</li>
+<li><strong>Tunnelling</strong>: IPv6 datagram carried as <em>payload</em> in IPv4 datagram among IPv4 routers.</li>
 </ul>
 <p><img src="https://i.imgur.com/s3r53n7.png" /></p>
 <h4 id="ipv6-adoption">IPv6 Adoption</h4>
@@ -1337,16 +1342,16 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <p><strong>Static</strong>: Routes change slowly over time.</p>
 <p><strong>Dynamic</strong>: Periodic updates in response to link cost changes.</p>
 <h3 id="link-state-routing-algorithm">Link-State Routing Algorithm</h3>
-<p><strong>Dijkstra’s algorithm</strong> is used to compute least cost paths from one node (<em>source</em>) to all other nodes. Tracing predeccesor nodes gives a <strong>forwarding table</strong> for that node.</p>
+<p><strong>Dijkstra’s algorithm</strong> is used to compute least cost paths from one node (<em>source</em>) to all other nodes. Tracing predecessor nodes gives a <strong>forwarding table</strong> for that node.</p>
 <p><img src="https://i.imgur.com/qsSMBN0.png" /></p>
 <h4 id="link-state-problems">Link-State Problems</h4>
 <p><strong>Oscillations</strong> are possible, when the support link cost is equal to the amount of carried traffic.</p>
 <h3 id="distance-vector-routing-algorithm">Distance Vector Routing Algorithm</h3>
-<p><strong>Bellman-Ford equation</strong> is used to compute least cost paths at each node. The node <span class="math inline">\(v\)</span> that achieves the minimum cost for <span class="math inline">\(y\)</span> is the next-hop in the <strong>forwarding table</strong>.</p>
-<p><span class="math display">\[ d_x(y) = \min_v\{c(x, v) + d_v(y)\}\]</span></p>
-<p>Each node <span class="math inline">\(x\)</span> knows the cost to each neighbour <span class="math inline">\(v\)</span> and maintains its neighbours distance vectors. For each neighbour <span class="math inline">\(v\)</span>, <span class="math inline">\(x\)</span> maintains <span class="math inline">\(\mathbf{D}_v = [D_v(y), y \in N]\)</span>. <span class="math inline">\(x\)</span> also maintains a distance vector for itself.</p>
-<p>From time-to-time, each node sends its own distance vector estimate to its neighbours. When <span class="math inline">\(x\)</span> receives a new distance vector estimate from a neighbour, it updates its own distance vector using the Bellman-Ford equation. Under minor, natural conditions, the estimate <span class="math inline">\(D_x(y)\)</span> will <strong>converge to the actual least cost <span class="math inline">\(d_x(y)\)</span></strong>.</p>
-<p><span class="math display">\[D_x(y) = \min_v\{c(x, y) + D_v(y)\}, \text{ for each node } y \in N\]</span></p>
+<p><strong>Bellman-Ford equation</strong> is used to compute least cost paths at each node. The node <span class="math inline">v</span> that achieves the minimum cost for <span class="math inline">y</span> is the next-hop in the <strong>forwarding table</strong>.</p>
+<p><span class="math display"> d_x(y) = \min_v\{c(x, v) + d_v(y)\}</span></p>
+<p>Each node <span class="math inline">x</span> knows the cost to each neighbour <span class="math inline">v</span> and maintains its neighbours distance vectors. For each neighbour <span class="math inline">v</span>, <span class="math inline">x</span> maintains <span class="math inline">\mathbf{D}_v = [D_v(y), y \in N]</span>. <span class="math inline">x</span> also maintains a distance vector for itself.</p>
+<p>From time-to-time, each node sends its own distance vector estimate to its neighbours. When <span class="math inline">x</span> receives a new distance vector estimate from a neighbour, it updates its own distance vector using the Bellman-Ford equation. Under minor, natural conditions, the estimate <span class="math inline">D_x(y)</span> will <strong>converge to the actual least cost <span class="math inline">d_x(y)</span></strong>.</p>
+<p><span class="math display">D_x(y) = \min_v\{c(x, y) + D_v(y)\}, \text{ for each node } y \in N</span></p>
 <ol type="1">
 <li><strong>Iterative, Asynchronous</strong>: Local iterations are caused by.
 <ul>
@@ -1359,23 +1364,23 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <h4 id="distance-vector-problems">Distance Vector Problems</h4>
 <p>When <strong>link cost</strong> changes, the node needs to update routing information, and recalculate the distance vector. If the distance vector changes, it must notify neighbours.</p>
 <p><strong>Bad news travels slow</strong>. There can be a routing loop between two nodes if a cost update reverses the minimum cost path. In order to broadcast the distance vector to its neighbours, nodes will keep passing information back to each other and updating distance vectors. <strong>Counting to infinity problem</strong>.</p>
-<p>We used <strong>poisoned reverse</strong> in order to solve the problem of routing loops. If <span class="math inline">\(Z\)</span> routes through <span class="math inline">\(Y\)</span> to get to <span class="math inline">\(X\)</span>, <span class="math inline">\(Z\)</span> tells <span class="math inline">\(Y\)</span> that <span class="math inline">\(D_y(x) = \infty\)</span>. This does not completely solve the problem, we need to poison every node from source to destination.</p>
+<p>We used <strong>poisoned reverse</strong> in order to solve the problem of routing loops. If <span class="math inline">Z</span> routes through <span class="math inline">Y</span> to get to <span class="math inline">X</span>, <span class="math inline">Z</span> tells <span class="math inline">Y</span> that <span class="math inline">D_y(x) = \infty</span>. This does not completely solve the problem, we need to poison every node from source to destination.</p>
 <h3 id="link-state-vs.distance-vector">Link-State vs. Distance Vector</h3>
 <ul>
 <li><strong>Message Complexity</strong>.
 <ul>
-<li><strong>LS</strong>: with <span class="math inline">\(n\)</span> nodes, <span class="math inline">\(E\)</span> links, <span class="math inline">\(O(nE)\)</span> messages sent.</li>
+<li><strong>LS</strong>: with <span class="math inline">n</span> nodes, <span class="math inline">E</span> links, <span class="math inline">O(nE)</span> messages sent.</li>
 <li><strong>DV</strong>: Exchange between neighbours only.</li>
 </ul></li>
 <li><strong>Speed of Convergence</strong>.
 <ul>
-<li><strong>LS</strong>: <span class="math inline">\(O(n^2)\)</span> algorithm which requires <span class="math inline">\(O(nE)\)</span> messages. There may be oscillations.</li>
+<li><strong>LS</strong>: <span class="math inline">O(n^2)</span> algorithm which requires <span class="math inline">O(nE)</span> messages. There may be oscillations.</li>
 <li><strong>DV</strong>: Convergence time varies. There may be routing loops and count-to-infinity problems.</li>
 </ul></li>
 <li><strong>Robustness</strong> (router <em>malfunction</em>).
 <ul>
 <li><strong>LS</strong>: Nodes can advertise incorrect <em>link</em> costs. Each node only computes its <em>own</em> table.</li>
-<li><strong>DV</strong>: Nodes can only advertise incorrect <em>path</em> costs. Each node’s table is used by others, so errors will propogate through the network.</li>
+<li><strong>DV</strong>: Nodes can only advertise incorrect <em>path</em> costs. Each node’s table is used by others, so errors will propagate through the network.</li>
 </ul></li>
 </ul>
 <h3 id="heirarchical-routing">Heirarchical Routing</h3>
@@ -1402,7 +1407,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <p>Example: Multiple ASes.</p>
 <ul>
-<li>Now suppose AS1 learns from the inter-AS protocol that subnet <span class="math inline">\(x\)</span> is reachable from both AS2 <strong>and</strong> AS3.</li>
+<li>Now suppose AS1 learns from the inter-AS protocol that subnet <span class="math inline">x</span> is reachable from both AS2 <strong>and</strong> AS3.</li>
 <li>To configure the forwarding table, router 1d must determine which gateway it should forward packets to.
 <ul>
 <li>This is also the job of inter-AS routing protocol.</li>
@@ -1421,13 +1426,13 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <h4 id="rip-routing-information-protocol">RIP (<em>Routing Information Protocol</em>)</h4>
 <ul>
-<li>Distance vector algorithm except the distance is measured by the number of hops (edge cost of 1), with a maximumum of 15 hops.</li>
-<li>DVs are exchanged every 30s in response messages (<strong>advertistements</strong>).
+<li>Distance vector algorithm except the distance is measured by the number of hops (edge cost of 1), with a maximum of 15 hops.</li>
+<li>DVs are exchanged every 30s in response messages (<strong>advertisements</strong>).
 <ul>
 <li>Up to 25 destination <strong>subnets</strong> in each advertisement.</li>
 </ul></li>
 </ul>
-<p>If no advertistement is heard after 180s, the neighbour / link is declared dead.</p>
+<p>If no advertisement is heard after 180s, the neighbour / link is declared dead.</p>
 <ul>
 <li>Routes via neighbour are invalidated.</li>
 <li>New advertisements send to neighbours.
@@ -1442,7 +1447,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <p>RIP routing tables are managed by <strong>application-level</strong> process called route-d (daemon).</p>
 <ul>
 <li>Routers need more than the bottom 3 layers to run RIP.</li>
-<li>Advertistements are sent in UDP packets, periodically repeated.</li>
+<li>Advertisements are sent in UDP packets, periodically repeated.</li>
 </ul>
 <h4 id="ospf-open-shortest-path-first">OSPF (<em>Open Shortest Path First</em>)</h4>
 <ul>
@@ -1453,7 +1458,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Topology map at each node.</li>
 <li>Route computation using Dijkstra’s algorithm.</li>
 </ul></li>
-<li>OSPF advertistement carries one entry per neighbours.</li>
+<li>OSPF advertisement carries one entry per neighbours.</li>
 <li>Advertisements are flooded to the <strong>entire</strong> AS.
 <ul>
 <li>Carried in OSPF messages directly over IP rather than TCP or UDP.</li>
@@ -1472,7 +1477,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Link-state advertisements only done in areas.</li>
 <li>Each node has detailed area topology, only knows direction to networks in other areas.</li>
 </ul></li>
-<li><strong>Area border routers</strong>: <em>“Summarize”</em> distances to nets in own area, and avertise to other area border routers.</li>
+<li><strong>Area border routers</strong>: <em>“Summarize”</em> distances to nets in own area, and advertise to other area border routers.</li>
 <li><strong>Backbone routers</strong>: Run OSPF limited to backbone.</li>
 <li><strong>Boundary routers</strong>: Connect to others AS’s.</li>
 </ul>
@@ -1482,8 +1487,8 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </blockquote>
 <ul>
 <li><strong>eBGP</strong> (<em>external</em>): Obtains subnet reachability from neighbouring ASs.</li>
-<li><strong>iBGP</strong> (<em>internal</em>): Propogate reachability information to all AS-internal routers.</li>
-<li>Determines <em>good</em> routes to other networks based on reachabaility information and policy.</li>
+<li><strong>iBGP</strong> (<em>internal</em>): Propagate reachability information to all AS-internal routers.</li>
+<li>Determines <em>good</em> routes to other networks based on reachability information and policy.</li>
 </ul>
 <h4 id="bgp-messages">BGP Messages</h4>
 <ul>
@@ -1496,7 +1501,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <h4 id="path-attributes-and-bgp-routers">Path Attributes and BGP Routers</h4>
 <ul>
 <li>Advertised prefix includes BGP attributes.</li>
-<li><strong>AS-PATH</strong>: Contains ASs through which prexix advertisement has passed.</li>
+<li><strong>AS-PATH</strong>: Contains ASs through which prefix advertisement has passed.</li>
 <li><strong>NEXT-HOP</strong>: Indicates specific internal-AS router to next-hop AS.</li>
 <li>Gateway router receiving route advertisement uses <strong>import policy</strong> to accept / decline.</li>
 </ul>
@@ -1515,7 +1520,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <h3 id="why-intra-as-and-inter-as-routing">Why Intra-AS <strong>and</strong> Inter-AS Routing?</h3>
 <ul>
-<li><strong>Policy</strong>: Inter admins wants to control how traffic is routed, intra is a singel admin, so no policy decisions are needed.</li>
+<li><strong>Policy</strong>: Inter admins wants to control how traffic is routed, intra is a single admin, so no policy decisions are needed.</li>
 <li><strong>Scale</strong>: Hierarchical routing saves table slides, reduced update traffic.</li>
 <li><strong>Performance</strong>: Intra will focus on performance, but inter may be dominated by policy.</li>
 </ul>
@@ -1537,8 +1542,8 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ol>
 <h2 id="broadcast-routing">4.7 Broadcast Routing</h2>
 <ul>
-<li>A simple approach is to transmit <span class="math inline">\(N\)</span> copies to the <span class="math inline">\(N\)</span> destinations using unicast routing. <strong>N-way-unicast</strong>.</li>
-<li><strong>Uncontrolled flodding</strong>: When a node receives a broadcast, it sends a copy to all neighbours (except the one who send the packet).
+<li>A simple approach is to transmit <span class="math inline">N</span> copies to the <span class="math inline">N</span> destinations using unicast routing. <strong>N-way-unicast</strong>.</li>
+<li><strong>Uncontrolled flooding</strong>: When a node receives a broadcast, it sends a copy to all neighbours (except the one who send the packet).
 <ul>
 <li><strong>Cycles</strong>: Endless cycling of one clockwise, one counterclockwise.</li>
 <li><strong>Broadcast Storm</strong>: When a node is connected to more than two other nodes, it will create and forward multiple copies of the broadcast packet, endless multiplication of broadcast packets.</li>
@@ -1562,7 +1567,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </blockquote>
 <ul>
 <li>Host and routers: <strong>nodes</strong>.</li>
-<li>Commucation channels that connect adjacent nodes across communication path: <strong>links</strong>.
+<li>Communication channels that connect adjacent nodes across communication path: <strong>links</strong>.
 <ul>
 <li>Wired, wireless, LANs.</li>
 </ul></li>
@@ -1582,7 +1587,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Seldom used on low bit-error link such as fiber.</li>
 <li>Wireless links have higher error rates.</li>
 </ul></li>
-<li><strong>Flow Controll</strong>.
+<li><strong>Flow Control</strong>.
 <ul>
 <li>Pacing between adjacent sending and receiving nodes.</li>
 </ul></li>
@@ -1597,7 +1602,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul></li>
 <li><strong>Half-Duplex and Full-Duplex</strong>.
 <ul>
-<li>With half dupliex, nodes at both ends of the link can transmit, but not at the same time.</li>
+<li>With half duplex, nodes at both ends of the link can transmit, but not at the same time.</li>
 </ul></li>
 </ul>
 <h2 id="where-is-link-layer">Where is Link Layer?</h2>
@@ -1608,7 +1613,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Ethernet card, 802.11 card. Ethernet chipset.</li>
 <li>Implements link, physical layer.</li>
 </ul></li>
-<li>Attaches into host’s system busses.</li>
+<li>Attaches into host’s system buses.</li>
 <li>Combination of hardware, software, firmware.</li>
 </ul>
 <h2 id="error-detection-and-correction">5.2 Error Detection and Correction</h2>
@@ -1626,26 +1631,26 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <p>Detect and correct single bit errors.</p>
 </blockquote>
 <ul>
-<li><strong>Single bit parity</strong>: store the parity of the <span class="math inline">\(d\)</span> data bits.</li>
-<li><strong>Two-dimensional bit parity</strong>. Store the parity of rows and columns for the <span class="math inline">\(d\)</span> data bits (group into words of <span class="math inline">\(j\)</span> bits). Find where errors should lie by analyzing single bit parity errors across all rows and columns.</li>
+<li><strong>Single bit parity</strong>: store the parity of the <span class="math inline">d</span> data bits.</li>
+<li><strong>Two-dimensional bit parity</strong>. Store the parity of rows and columns for the <span class="math inline">d</span> data bits (group into words of <span class="math inline">j</span> bits). Find where errors should lie by analyzing single bit parity errors across all rows and columns.</li>
 </ul>
 <h3 id="internet-checksum-review">Internet Checksum (<em>Review</em>)</h3>
-<h3 id="cylic-redundancy-check">Cylic Redundancy Check</h3>
+<h3 id="cyclic-redundancy-check">Cyclic Redundancy Check</h3>
 <ul>
 <li>More powerful error-detection coding.</li>
-<li>View data bits, <span class="math inline">\(D\)</span>, as a binary number.</li>
-<li>Choose <span class="math inline">\(r+1\)</span> bit pattern (generator), <span class="math inline">\(G\)</span>.</li>
-<li>Goal: choose <span class="math inline">\(r\)</span> CRC bits, <span class="math inline">\(R\)</span>, such that …
+<li>View data bits, <span class="math inline">D</span>, as a binary number.</li>
+<li>Choose <span class="math inline">r+1</span> bit pattern (generator), <span class="math inline">G</span>.</li>
+<li>Goal: choose <span class="math inline">r</span> CRC bits, <span class="math inline">R</span>, such that …
 <ul>
-<li>&lt;D, R&gt; exactly divisible by <span class="math inline">\(G \mod 2\)</span>.</li>
-<li>Receiver knows <span class="math inline">\(G\)</span>, divides &lt;D, R&gt; by <span class="math inline">\(G\)</span>. If non-zero remainder, error detected!</li>
-<li>Can detect all burst errors less than <span class="math inline">\(r+1\)</span> bits.</li>
+<li>&lt;D, R&gt; exactly divisible by <span class="math inline">G \mod 2</span>.</li>
+<li>Receiver knows <span class="math inline">G</span>, divides &lt;D, R&gt; by <span class="math inline">G</span>. If non-zero remainder, error detected!</li>
+<li>Can detect all burst errors less than <span class="math inline">r+1</span> bits.</li>
 </ul></li>
 <li>Widely used in practice.</li>
 </ul>
-<p>Example: <span class="math inline">\(D = 101110\)</span>, <span class="math inline">\(G = 1001\)</span>.</p>
+<p>Example: <span class="math inline">D = 101110</span>, <span class="math inline">G = 1001</span>.</p>
 <blockquote>
-<p><span class="math inline">\(|G| = 4 = r + 1\)</span>. Shift <span class="math inline">\(D\)</span> left by <span class="math inline">\(r\)</span>, <span class="math inline">\(101110000\)</span>.</p>
+<p><span class="math inline">|G| = 4 = r + 1</span>. Shift <span class="math inline">D</span> left by <span class="math inline">r</span>, <span class="math inline">101110000</span>.</p>
 <p><img src="https://i.imgur.com/9FGGvhB.png" /></p>
 </blockquote>
 <h2 id="multiple-access-protocols">5.3 Multiple Access Protocols</h2>
@@ -1655,9 +1660,9 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>PPP for dial-up access.</li>
 <li>Link between Ethernet switch, host.</li>
 </ul></li>
-<li><strong>Boardcast</strong>.
+<li><strong>Broadcast</strong>.
 <ul>
-<li>Old-fashined Ethernet.</li>
+<li>Old-fashioned Ethernet.</li>
 <li>Upstream HFC.</li>
 <li>802.11 wireless LAN.</li>
 </ul></li>
@@ -1672,11 +1677,11 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <h3 id="ideal-protocol">Ideal Protocol</h3>
 <blockquote>
-<p>Given a broadcast channel rate <span class="math inline">\(R\)</span> bps.</p>
+<p>Given a broadcast channel rate <span class="math inline">R</span> bps.</p>
 </blockquote>
 <ol type="1">
-<li>When one node wants to transmit, it can send at rate <span class="math inline">\(R\)</span>.</li>
-<li>WHen <span class="math inline">\(M\)</span> nodes want to transmit, each can send at average rate <span class="math inline">\(\frac{R}{M}\)</span>.</li>
+<li>When one node wants to transmit, it can send at rate <span class="math inline">R</span>.</li>
+<li>When <span class="math inline">M</span> nodes want to transmit, each can send at average rate <span class="math inline">\frac{R}{M}</span>.</li>
 <li><p>Fully decentralized.</p>
 <ul>
 <li>No special node to coordinate transmissions.</li>
@@ -1686,7 +1691,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ol>
 <h3 id="mac-protocol-taxonomy">MAC Protocol Taxonomy</h3>
 <blockquote>
-<p>Three broad classses.</p>
+<p>Three broad classes.</p>
 </blockquote>
 <ol type="1">
 <li><strong>Channel Partitioning</strong>.</li>
@@ -1715,7 +1720,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ol>
 <h3 id="random-access-protocols">Random Access Protocols</h3>
 <ul>
-<li>When node has a packet to send, it transmits at full channel data rate <span class="math inline">\(R\)</span>.</li>
+<li>When node has a packet to send, it transmits at full channel data rate <span class="math inline">R</span>.</li>
 <li><strong>Random Access MAC Protocol</strong> specifies how to detect collisions and how to record from collisions.</li>
 <li>Slotted ALOHA, ALOHA, CSMA, CSMA/CD, CSMA/CA.</li>
 </ul>
@@ -1735,7 +1740,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>When a node obtains a fresh frame, transmit in next slot.</li>
 <li>If there is no collision, we send new frame in next slot.</li>
-<li>If there is a collision, we retransmit frame in each subsequent slot with probability <span class="math inline">\(p\)</span> until success.
+<li>If there is a collision, we retransmit frame in each subsequent slot with probability <span class="math inline">p</span> until success.
 <ul>
 <li>Each one picks a different probability.</li>
 </ul></li>
@@ -1755,10 +1760,10 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <p>The <strong>efficiency</strong> is the long-run fraction of successful slots.</p>
 <ul>
-<li>Probability that a given node has success in a slot is <span class="math inline">\(p(1-p)^{N-1}\)</span>.</li>
-<li>Probability that <em>any</em> node has a success is <span class="math inline">\(Np(1-p)^{N-1}\)</span>.</li>
-<li><strong>Max efficiency</strong> is <span class="math inline">\(p^&amp;\)</span> which maximizes <span class="math inline">\(Np(1-p)^{N-1}\)</span>.</li>
-<li>As <span class="math inline">\(N \to \infty\)</span>, the max efficiency is <span class="math inline">\(\frac{1}{e} = 0.37\)</span>.</li>
+<li>Probability that a given node has success in a slot is <span class="math inline">p(1-p)^{N-1}</span>.</li>
+<li>Probability that <em>any</em> node has a success is <span class="math inline">Np(1-p)^{N-1}</span>.</li>
+<li><strong>Max efficiency</strong> is <span class="math inline">p^&amp;</span> which maximizes <span class="math inline">Np(1-p)^{N-1}</span>.</li>
+<li>As <span class="math inline">N \to \infty</span>, the max efficiency is <span class="math inline">\frac{1}{e} = 0.37</span>.</li>
 </ul>
 <h4 id="pure-unslotted-aloha.">Pure (Unslotted) ALOHA.</h4>
 <blockquote>
@@ -1766,8 +1771,8 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </blockquote>
 <ul>
 <li>When a frame first arrives, we immediately transmit.</li>
-<li>Collision probability increases, frame sent at <span class="math inline">\(t_0\)</span> collides with any other frames sent in <span class="math inline">\([t_0 - 1, t_0 + 1]\)</span>.</li>
-<li>Calculating the efficiency will lead to <span class="math inline">\(\frac{1}{2e}\)</span>, which is <strong>worse</strong> than slotted ALOHA.</li>
+<li>Collision probability increases, frame sent at <span class="math inline">t_0</span> collides with any other frames sent in <span class="math inline">[t_0 - 1, t_0 + 1]</span>.</li>
+<li>Calculating the efficiency will lead to <span class="math inline">\frac{1}{2e}</span>, which is <strong>worse</strong> than slotted ALOHA.</li>
 </ul>
 <h4 id="csma-carrier-sense-multiple-access">CSMA (Carrier Sense Multiple Access)</h4>
 <blockquote>
@@ -1776,16 +1781,16 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>If channel sensed idle, transmit the entire frame.</li>
 <li>If channel sensed busy, defer transmission.</li>
-<li><strong>Collisions <em>can</em> still occur</strong>, mainly due to propogation delays.
+<li><strong>Collisions <em>can</em> still occur</strong>, mainly due to propagation delays.
 <ul>
 <li>Entire packet transmission time wasted.</li>
-<li>Distance and propogation delay play a role in determining collision probability.</li>
+<li>Distance and propagation delay play a role in determining collision probability.</li>
 </ul></li>
 </ul>
 <h4 id="csmacd-collision-detection">CSMA/CD (Collision Detection)</h4>
 <ul>
 <li>Colliding transmissions are aborted, reducing channel wastage.</li>
-<li>Easy in wired LANs, measure signal strengths, compare transitted, received signals.</li>
+<li>Easy in wired LANs, measure signal strengths, compare transmitted, received signals.</li>
 <li>Difficult in wireless LANs, received signal strength overwhelmed by local transmission strength.</li>
 </ul>
 <ol type="1">
@@ -1795,7 +1800,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>If NIC detects another transmission, abort and send a jam signal.</li>
 <li><p>After aborting NIC enters <strong>binary (<em>exponential</em>) backoff</strong>.</p>
 <ul>
-<li>Maintain a counter for collisions, after the <span class="math inline">\(m\)</span>th collision, pick a <span class="math inline">\(K\)</span> randomly from ${0, 1, …, 2^{m} - 1} $. NIC waits for <span class="math inline">\(K \cdot 512\)</span> bit times, then returns to step 2. Counter is reset upon successful transmission.</li>
+<li>Maintain a counter for collisions, after the <span class="math inline">m</span>th collision, pick a <span class="math inline">K</span> randomly from ${0, 1, …, 2^{m} - 1} $. NIC waits for <span class="math inline">K \cdot 512</span> bit times, then returns to step 2. Counter is reset upon successful transmission.</li>
 <li>Longer backoff interval with more collisions.</li>
 </ul></li>
 </ol>
@@ -1804,12 +1809,12 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Jamming signal length is 48 bits.</li>
 <li>The maximum amount of collisions is set to 10. Any more will generate an error.</li>
 </ul>
-<p>Assume that <span class="math inline">\(T_{prop}\)</span> is the maximum propogation delay between 2 nodes in LAN, and <span class="math inline">\(t_{trans}\)</span> is the time to transmit a max-size frame.</p>
-<p><span class="math display">\[\text{efficiency} = \frac{1}{1 + 5\frac{t_{prop}}{t_{trans}}}\]</span></p>
+<p>Assume that <span class="math inline">T_{prop}</span> is the maximum propagation delay between 2 nodes in LAN, and <span class="math inline">t_{trans}</span> is the time to transmit a max-size frame.</p>
+<p><span class="math display">\text{efficiency} = \frac{1}{1 + 5\frac{t_{prop}}{t_{trans}}}</span></p>
 <ul>
-<li><p><strong>Efficiency</strong> <span class="math inline">\(\to 1\)</span> as <span class="math inline">\(t_{prop} \to 0\)</span> or <span class="math inline">\(t_{trans} \to \infty\)</span>.</p>
+<li><p><strong>Efficiency</strong> <span class="math inline">\to 1</span> as <span class="math inline">t_{prop} \to 0</span> or <span class="math inline">t_{trans} \to \infty</span>.</p>
 <blockquote>
-<p>Do <strong>not</strong> need to memorize effiency formulas, just which is better and why).</p>
+<p>Do <strong>not</strong> need to memorize efficiency formulas, just which is better and why).</p>
 </blockquote></li>
 <li><p>Better performance than ALOHA, simple, cheap, decentralized!</p></li>
 </ul>
@@ -1823,13 +1828,13 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>Master node <em>invites</em> slave nodes to transmit in turn by polling.</li>
 <li>Typically used with <em>dumb</em> slave devices.</li>
 <li>No collisions and no empty slots.</li>
-<li>Concerns with polling overhead, latency, and single point of faliure.</li>
+<li>Concerns with polling overhead, latency, and single point of failure.</li>
 </ul></li>
 <li><strong>Token Passing</strong>.
 <ul>
 <li>Control <strong>token</strong> passed from one node to next sequentially.</li>
 <li>Token message.</li>
-<li>Concerns with token overhead, latency, and single point of faliure (token).</li>
+<li>Concerns with token overhead, latency, and single point of failure (token).</li>
 </ul></li>
 </ol>
 <h3 id="cable-access-network">Cable Access Network</h3>
@@ -1848,7 +1853,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>TDM upstream, some slots assigned, some have contention.
 <ul>
 <li>Downstream MAP frame assigns upstream slots.</li>
-<li>Request for upstream slots (and data) transitted random access (binary backoff) in selected slots.</li>
+<li>Request for upstream slots (and data) transmitted random access (binary backoff) in selected slots.</li>
 </ul></li>
 <li>Visualized as FDM split up into time slots similar to TDM.</li>
 </ul></li>
@@ -1880,20 +1885,20 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li>IP to MAC address mappings for some LAN nodes.</li>
 <li>TTL time after which address mapping will be forgotten (typically 20 min).</li>
 </ul>
-<p>Consideer <span class="math inline">\(A\)</span> wants to send a datagram to <span class="math inline">\(B\)</span> but <span class="math inline">\(B\)</span>’s MAC address is not in <span class="math inline">\(A\)</span>’s ARP table.</p>
+<p>Consider <span class="math inline">A</span> wants to send a datagram to <span class="math inline">B</span> but <span class="math inline">B</span>’s MAC address is not in <span class="math inline">A</span>’s ARP table.</p>
 <ul>
-<li><span class="math inline">\(A\)</span> <strong>broadcasts</strong> ARP query packet, containing <span class="math inline">\(B\)</span>’s IP address.
+<li><span class="math inline">A</span> <strong>broadcasts</strong> ARP query packet, containing <span class="math inline">B</span>’s IP address.
 <ul>
 <li>Destination MAC address set to FF-FF-FF-FF.</li>
 <li>All nodes on LAN receive ARP query.</li>
 </ul></li>
-<li><span class="math inline">\(B\)</span> receives ARP packet, replies to <span class="math inline">\(A\)</span> with its MAC addres (unicast to <span class="math inline">\(A\)</span>’s MAC address).</li>
-<li><span class="math inline">\(A\)</span> caches IP to MAC address pair in its ARP table until the information becomes old.</li>
+<li><span class="math inline">B</span> receives ARP packet, replies to <span class="math inline">A</span> with its MAC address (unicast to <span class="math inline">A</span>’s MAC address).</li>
+<li><span class="math inline">A</span> caches IP to MAC address pair in its ARP table until the information becomes old.</li>
 <li>ARP is <strong>“plug-and-play”</strong>. Nodes create their ARP tables <em>without intervention from network administrator</em>.</li>
 </ul>
-<p>Example: Sending a datagram from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> via <span class="math inline">\(R\)</span>. Assume that <span class="math inline">\(A\)</span> knows <span class="math inline">\(B\)</span>’s IP address, IP address of first hop router <span class="math inline">\(R\)</span> (DHCP), and <span class="math inline">\(R\)</span>’s MAC address (ARP).</p>
+<p>Example: Sending a datagram from <span class="math inline">A</span> to <span class="math inline">B</span> via <span class="math inline">R</span>. Assume that <span class="math inline">A</span> knows <span class="math inline">B</span>’s IP address, IP address of first hop router <span class="math inline">R</span> (DHCP), and <span class="math inline">R</span>’s MAC address (ARP).</p>
 <blockquote>
-<p><img src="https://i.imgur.com/i7E8K6A.png" /> - A creates IP datagram with IP source <span class="math inline">\(A\)</span>, destination <span class="math inline">\(B\)</span>. - A creates link-layer frame with <span class="math inline">\(R\)</span>’s MAC address at destination, frame contains <span class="math inline">\(A\)</span>-to-<span class="math inline">\(B\)</span> IP datagram. - Frame sent from <span class="math inline">\(A\)</span> to <span class="math inline">\(R\)</span>, upon arrival, datagram is removed and passed up to IP. - <span class="math inline">\(R\)</span> forwards datagram with IP source <span class="math inline">\(A\)</span>, destination <span class="math inline">\(B\)</span>. - <span class="math inline">\(R\)</span> creates link-layer frame with <span class="math inline">\(B\)</span>’s MAC address as destination, frame contains <span class="math inline">\(A\)</span>-to-<span class="math inline">\(B\)</span> IP datagram.</p>
+<p><img src="https://i.imgur.com/i7E8K6A.png" /> - A creates IP datagram with IP source <span class="math inline">A</span>, destination <span class="math inline">B</span>. - A creates link-layer frame with <span class="math inline">R</span>’s MAC address at destination, frame contains <span class="math inline">A</span>-to-<span class="math inline">B</span> IP datagram. - Frame sent from <span class="math inline">A</span> to <span class="math inline">R</span>, upon arrival, datagram is removed and passed up to IP. - <span class="math inline">R</span> forwards datagram with IP source <span class="math inline">A</span>, destination <span class="math inline">B</span>. - <span class="math inline">R</span> creates link-layer frame with <span class="math inline">B</span>’s MAC address as destination, frame contains <span class="math inline">A</span>-to-<span class="math inline">B</span> IP datagram.</p>
 </blockquote>
 <h3 id="ethernet">Ethernet</h3>
 <blockquote>
@@ -1905,13 +1910,13 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <h4 id="physical-topology">Physical Topology</h4>
 <ul>
-<li><strong>Bus</strong>, popular through the mid 90s. All nodes are in the same collision comain.</li>
-<li><strong>Star</strong>, prevails today. Active <strong>switch</strong> is in the center, and each “spoke” runs a seaprate Ethernet protocol (nodes do not collide with each other).</li>
+<li><strong>Bus</strong>, popular through the mid 90s. All nodes are in the same collision domain.</li>
+<li><strong>Star</strong>, prevails today. Active <strong>switch</strong> is in the center, and each “spoke” runs a separate Ethernet protocol (nodes do not collide with each other).</li>
 </ul>
 <h4 id="frame-structure">Frame Structure</h4>
 <p>Sending adapter encapsulates IP datagram (or other network layer protocol packet) in <strong>Ethernet frame</strong>.</p>
 <ul>
-<li><strong>Preamble</strong>. 7 bytes with pattern <span class="math inline">\(10101010\)</span> followed by one byte with pattern <span class="math inline">\(10101011\)</span> (wake up bytes). Used to synchronize receiver to the clock of the sender.</li>
+<li><strong>Preamble</strong>. 7 bytes with pattern <span class="math inline">10101010</span> followed by one byte with pattern <span class="math inline">10101011</span> (wake up bytes). Used to synchronize receiver to the clock of the sender.</li>
 <li><strong>Addresses</strong>, 6 byte source, destination MAC addresses.</li>
 <li><strong>Type</strong>, indicates higher layer protocol (mostly IP).</li>
 <li><strong>CYC</strong>, cyclic redundancy check at receiver.</li>
@@ -1931,7 +1936,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <p>Implement the bottom two levels.</p>
 </blockquote>
 <ul>
-<li><strong>Link-layer device, takesn an <em>active</em> role</strong>.
+<li><strong>Link-layer device, takes an <em>active</em> role</strong>.
 <ul>
 <li>Store, <strong>forward</strong>, Ethernet frames.</li>
 <li>Examine incoming frame’s MAC address, <strong>selectively</strong> forward frame to one-or-more outgoing links when frame is to be forwarded on segment, uses CSMA/CD to access segment.</li>
@@ -1939,7 +1944,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li><strong>Transparent</strong>. Hosts are unaware of the presence of switches.</li>
 <li><strong>Plug-and-play, self-learning</strong>. Switches to not have to be configured.</li>
 </ul>
-<p>Swithes allow for <em>multiple</em> simulatenous transmissions.</p>
+<p>Switches allow for <em>multiple</em> simultaneous transmissions.</p>
 <p><img src="https://i.imgur.com/jyYDbBE.png" /></p>
 <ul>
 <li>Hosts have dedicated, direct connection to switch.</li>
@@ -1948,11 +1953,11 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>Each link is in its own collision domain.</li>
 </ul></li>
-<li><strong>Switching</strong> can transmit <span class="math inline">\(A\)</span>-to-<span class="math inline">\(A^\prime\)</span> and <span class="math inline">\(B\)</span>-to-<span class="math inline">\(B^\prime\)</span> simultaneously, without collisions.</li>
+<li><strong>Switching</strong> can transmit <span class="math inline">A</span>-to-<span class="math inline">A^\prime</span> and <span class="math inline">B</span>-to-<span class="math inline">B^\prime</span> simultaneously, without collisions.</li>
 </ul>
 <h4 id="switch-forwarding-table">Switch Forwarding Table</h4>
 <blockquote>
-<p>How does the switch know <span class="math inline">\(A^\prime\)</span> is reachable via interface 4, etc.</p>
+<p>How does the switch know <span class="math inline">A^\prime</span> is reachable via interface 4, etc.</p>
 </blockquote>
 <ul>
 <li>Each switch has a <strong>switch table</strong>, similar to routing table but for MAC address.
@@ -1978,10 +1983,10 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 </ul>
 <h4 id="interconnecting-switches">Interconnecting Switches</h4>
 <blockquote>
-<p>Switches can be connected in order to create a heirarchy.</p>
+<p>Switches can be connected in order to create a hierarchy.</p>
 </blockquote>
 <ul>
-<li>Very similar to other heirarchies that we have studied.</li>
+<li>Very similar to other hierarchies that we have studied.</li>
 <li>Self learning (flooding) is still used, exactly the same as in the single-switch case.</li>
 </ul>
 <p><img src="https://i.imgur.com/dfYdiql.png" /></p>
@@ -1993,7 +1998,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <li><strong>Advantages</strong>: Hierarchical addressing, traffic isolation. We can send information within subnets without worrying about information leaking to the outside.</li>
 <li><strong>Disadvantages</strong>: Large processing time, needs IP configuration.</li>
 </ul></li>
-<li><strong>Swithces</strong>: Link-layer devices.
+<li><strong>Switches</strong>: Link-layer devices.
 <ul>
 <li><strong>Advantages</strong>: Fast plug-and-play.</li>
 <li><strong>Disadvantages</strong>: Broadcast storm if loops exist, large ARP table for large network.</li>
@@ -2002,7 +2007,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <p>Both have <strong>forwarding tables</strong>.</p>
 <ul>
 <li><strong>Routers</strong>: Compute tables using routing algorithms, IP addresses.</li>
-<li><strong>Swithces</strong>: Learn forwarding table using flooding, learning, MAC addresses.</li>
+<li><strong>Switches</strong>: Learn forwarding table using flooding, learning, MAC addresses.</li>
 </ul>
 <p><strong>A router has multiple IP addresses</strong>. There is one for every interface.</p>
 <h3 id="vlans">VLANS</h3>
@@ -2042,7 +2047,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>Initial goal is high-speed IP forwarding using fixed length label (instead of IP address).
 <ul>
-<li>Fast lookup using fixed length indentifier rather than longest prefix matching.</li>
+<li>Fast lookup using fixed length identifier rather than longest prefix matching.</li>
 <li>Borrowing ideas from Virtual Circuit (VC) approach.</li>
 <li>But IP datagram still keeps IP address!</li>
 </ul></li>
@@ -2057,7 +2062,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>MPLS forwarding table distinct from IP forwarding table.</li>
 </ul></li>
-<li><strong>Flexibility</strong>: MPLS forwrding decision can <em>differ</em> from those of IP.
+<li><strong>Flexibility</strong>: MPLS forwarding decision can <em>differ</em> from those of IP.
 <ul>
 <li>Use of destination <em>and</em> source address to tour flows to same destination differently (traffic engineering).</li>
 <li>Re-route flows quickly if link fails using pre-computed backup paths (useful for VoIP).</li>
@@ -2069,7 +2074,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\(\frac{1}{2}\)</sp
 <ul>
 <li>Link bandwidth, amount of “reserved” link bandwidth.</li>
 </ul></li>
-<li>Entry MPLS router uses RSVP-TE signalling protocl to set up MPLS forwarding at downstream routers.</li>
+<li>Entry MPLS router uses RSVP-TE signalling protocol to set up MPLS forwarding at downstream routers.</li>
 </ul>
 <p><img src="https://i.imgur.com/Rey7ngq.png" /></p>
 <h2 id="data-center-networking">5.6 Data Center Networking</h2>

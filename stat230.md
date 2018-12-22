@@ -254,9 +254,9 @@ One way to view poisson is to consider the limiting case of binomial, where you 
 
 ## Poisson Process
 
-1. **Independence**: the number of occurences in non-overlapping intervals are independent.
+1. **Independence**: the number of occurrences in non-overlapping intervals are independent.
 
-2. **Individuality**: for sufficiently short periods of time, $\Delta t$, the probability of two or more events occuring in the interval approaches zero.
+2. **Individuality**: for sufficiently short periods of time, $\Delta t$, the probability of two or more events occurring in the interval approaches zero.
 
 $$\lim_{\Delta t \to 0} \frac{P(\text{2 of more events in } (t, t + \Delta t))}{\Delta t} = 0$$
 
@@ -275,15 +275,15 @@ Example: Website hits for a given website occur according to a Poisson process w
 
 Consider one unit of time, so that the process follows $Poi(\lambda)$.
 
-We chop up the interval into $n$ equally-sized pieces. If we chop it up finely enough, then by individuallity, the probability of two or more events occuring goes to 0.
+We chop up the interval into $n$ equally-sized pieces. If we chop it up finely enough, then by individuality, the probability of two or more events occurring goes to 0.
 
-This means that, over a small enough size, we approximately have either 0 or 1 event occuring with $P(event) = p$ for every piece.
+This means that, over a small enough size, we approximately have either 0 or 1 event occurring with $P(event) = p$ for every piece.
 
 Moreover, the event probability $p$ is proportional to the length of the interval by homogeneity. This means that as $n \to \infty$, $p \to 0$.
 
 Finally, by independence, each $n$ pieces are independent, so we have $Bin(n, p)$, where $n$ is very large and $p$ is very small.
 
-We expect to see $np$ events, recall that rate $\lambda$ is the rate of occurance over 1 unit of time. So $\lambda = np$, and as $n \to \infty$, $p \to 0$, in $Bin(n, p)$, we approach $Poi(np)$.
+We expect to see $np$ events, recall that rate $\lambda$ is the rate of occurrence over 1 unit of time. So $\lambda = np$, and as $n \to \infty$, $p \to 0$, in $Bin(n, p)$, we approach $Poi(np)$.
 
 Example: A bit error occurs got a given data transmission method independently in out of of every 1000 bits transferred. Suppose a 64 bit message is sent using the transmission system.
 
@@ -341,7 +341,7 @@ Example: A lottery is conducted in which 7 numbers are drawn without replacement
 
 > If you win the lottery, the return is 4999999. If you did not win, the return is -1. Let $R$ denote the return amount. $E(R) = (-1)P(\overline{w}) + (4999999)P(w) < 0$.
 
-## "Law of the Unconscious Statistiation"
+## "Law of the Unconscious Statistician"
 
 If $g: \mathbb{R} \to \mathbb{R}$, then for a random variable $X$ with probability function $f(x)$, the expected value of $g(x)$ is given be $\sum_{x \in S(X)}g(x)f(x)$.
 
@@ -359,7 +359,7 @@ If $g(x)$ is a linear function $g(x) = ax + b$, then for a random variable $X$, 
 
 Note: It is **not true** in general that $g(E[X]) = E[g(X)]$.
 
-An extention of linearity is, $E[af(X) + bg(X)] = aE[f(X)] + bE[g(X)]$.
+An extension of linearity is, $E[af(X) + bg(X)] = aE[f(X)] + bE[g(X)]$.
 
 ## Expectation of Binomial
 
@@ -558,7 +558,7 @@ If we have a function $g$ which has an inverse over the range of $X$, then we ha
 2. Use the CDF of $X$ to find the CDF of $Y$. If you want the pdf, take derivatives.
 3. Find the range of $Y$.
 
-Example: Let $X$ be a continous random variable with the following pdf and cdf.
+Example: Let $X$ be a continuous random variable with the following pdf and cdf.
 
 $$f(x) = \begin{cases}\frac{1}{4}, &0 < x \le 4\\ 0, &\text{otherwise}\end{cases}$$
 
@@ -580,7 +580,7 @@ Example: Let $X \sim U(a, b). Show that $E[X] = \frac{a+b}{2}$ and the $V(X) = \
 
 ## Exponential Distribution
 
-We say that $X$ has an exponential distribution with paramter $\lambda$ ($X \sim \exp(\lambda)$) with $f(x)$.
+We say that $X$ has an exponential distribution with parameter $\lambda$ ($X \sim \exp(\lambda)$) with $f(x)$.
 
 $$f(x) = \begin{cases}\lambda e^{-\lambda x}, &x > 0 \\ 0, &x \le 0\end{cases}$$
 
@@ -588,7 +588,7 @@ Consider the CDF of $X$.
 
 $$\begin{aligned}
 F(x) &= P(X \le x) \\
-&= 1 - P(\text{no occurances between }(0, x)) \\
+&= 1 - P(\text{no occurrences between }(0, x)) \\
 &= 1 - e^{-\lambda x} \\
 \end{aligned}$$
 
@@ -596,11 +596,11 @@ We can then the derivative to obtain the pdf.
 
 $$f(x) = \frac{d}{dx}F(x) = \lambda e^{-\lambda x}$$
 
-We can use a $\theta$ parameterization of exponetial distribution (where $\lambda = \frac{1}{\theta})$ where $\theta$ can represent the expected waiting time.
+We can use a $\theta$ parameterization of exponential distribution (where $\lambda = \frac{1}{\theta})$ where $\theta$ can represent the expected waiting time.
 
 $$f(x) = \frac{1}{\theta}e^{-\frac{x}{\theta}}$$
 
-**Theorem**: If $X$ is the time to the first event of Poisson process with paramter $\lambda$, then $X \sim \exp(\frac{1}{\lambda})$.
+**Theorem**: If $X$ is the time to the first event of Poisson process with parameter $\lambda$, then $X \sim \exp(\frac{1}{\lambda})$.
 
 Example: Let $X \sim \exp(\theta)$. Find $E[X]$.
 
@@ -624,7 +624,7 @@ $$\Gamma(\alpha) = \int_0^\infty y^{\alpha-1}e^{-y}dy,\ \alpha > 0$$
 > $$\begin{aligned}E[X^2] &= \int_0^\infty x^2 \frac{1}{\theta} e^{-\frac{x}{\theta}}dx \\ &= \int_0^\infty x \frac{x}{\theta} e^{-\frac{x}{\theta}} dx \\ &= \int_0^\infty \theta y^2 e^{-y} \\ &= \theta^2 \int_0^\infty y^{3-1} e^{-y} \\ &= \theta^2 \Gamma(3) \\ &= \theta^2 2! \\ &= 2\theta^2 \end{aligned}$$
 > $Var(X) = E[X^2] - E[X]^2 = \theta^2$.
 
-Example: Busses arrive according to Poisson process with an average of 3 busses per hour.
+Example: Buses arrive according to Poisson process with an average of 3 buses per hour.
 
 > Let $T$ be the waiting time for the first bus. $T \sim \exp(\theta = \frac{1}{3})$.
 
@@ -659,7 +659,7 @@ Example:
     > $$\begin{aligned}P(-c \le Z \le c) &= P(Z \le c) - P(Z \le -c) \\ &= 2P(Z \le c) - 1 \\ &= 0.95\end{aligned}$$
     > So $c = 1.96$.
 
-An interesting empirical rule about normal distributino is the **68-95-99.7** rule, which states the probability of $P(\mu - \alpha \sigma \le X \le \mu + \alpha \sigma)$, for $\alpha \in \{1, 2, 3\}$ respectively.
+An interesting empirical rule about normal distribution is the **68-95-99.7** rule, which states the probability of $P(\mu - \alpha \sigma \le X \le \mu + \alpha \sigma)$, for $\alpha \in \{1, 2, 3\}$ respectively.
 
 # Inverse Transform Method
 
@@ -684,7 +684,7 @@ Example: Two fair six sided die are rolled. Let $X$ denote the outcome of the fi
 1. $f(x, y) \ge 0$.
 2. $\sum_{x, y}f(x, y) = 1$.
 
-Example: Suppose a fair coin is tossed 3 times. Define the random variables $X$ as the number of heads, and $Y$ as whether a head occured on the first toss. Find the joint probability function for $(X, Y)$.
+Example: Suppose a fair coin is tossed 3 times. Define the random variables $X$ as the number of heads, and $Y$ as whether a head occurred on the first toss. Find the joint probability function for $(X, Y)$.
 
 ## Marginal Probability Function
 
@@ -835,7 +835,7 @@ Example: $N$ letters to $N$ different people, there are $N$ envelopes. One lette
 
 # Life is Normal
 
-**Proposition**: Law of **Large** Numbers. Let $X_i$ be independent and indentically distributed random variables with mean $\mu$. Then their sample mean converges to the true mean.
+**Proposition**: Law of **Large** Numbers. Let $X_i$ be independent and identically distributed random variables with mean $\mu$. Then their sample mean converges to the true mean.
 
 $$\lim_{n \to \infty} \overline{X}_n = \mu$$
 
@@ -885,7 +885,7 @@ Example: $X \sim Poi(\lambda)$. Use normal approximation to estimate $P(X = \lam
 
 > $$\begin{aligned}P(X > x) &\approx P(X \ge \lambda - 0.5) \\ &\approx P\left(Z \ge \frac{(\lambda - 0.5) - \lambda}{\sqrt \lambda}\right) \\ &=1 - P\left(Z < \frac{-0.5}{\sqrt \lambda}\right)\end{aligned}$$
 
-Example: Suppose $X_1, .., X_50$ are independent Geometric random variablces with parameter 0.5. Estimate the probability that $\overline{X}_50 > 6.5$.
+Example: Suppose $X_1, .., X_50$ are independent Geometric random variables with parameter 0.5. Estimate the probability that $\overline{X}_50 > 6.5$.
 
 > We want $P(\overline{X}_{50} > 6.55)$. We need $E[\overline{X}_{50}]$ and $SD(\overline{X}_{50})$.
 >

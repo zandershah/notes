@@ -5,7 +5,7 @@ MATH239
 
 ## Sets We Count 
 
-1. **Catesian Products**, $A \times B = \{(a, b) | a \in A, b \in B\}$, $A^k = \{(a_1, ..., a_k)|a_i \in A\}$.
+1. **Cartesian Products**, $A \times B = \{(a, b) | a \in A, b \in B\}$, $A^k = \{(a_1, ..., a_k)|a_i \in A\}$.
 2. **Disjoint Union**, $S = S_1 \cup S_2$, $S_1 \cap S_2 = \emptyset$, then $|S| = |S_1| + |S_2|$.
 
 **Binomial Coeff**: How many subsets of $\{1, ..., n\}$ have size $k$? ${n \choose k} = \frac{n!}{(n-k)!k!}$
@@ -25,7 +25,7 @@ Example: $2^n = \sum_{k = 0}^n {n \choose k}$
 Example: ${n \choose k} = {n - 1 \choose k} + {n - 1 \choose k - 1}$
 
 > Let $S$ be the set of all subsets of $\{1, ..., n\} of size $k$. So $|S| = {n \choose k}$. Let $S_1$ be subsets that include the element $n$, let $S_2$ be the subsets that do not include the element $n$.   
-> Each subset of $S_1$ consists of $\{n\}$ unin with $k - 1$ elements of $\{1, ..., n - 1\}$ so $|S_1| = {n - 1 \choose k - 1}$.    
+> Each subset of $S_1$ consists of $\{n\}$ union with $k - 1$ elements of $\{1, ..., n - 1\}$ so $|S_1| = {n - 1 \choose k - 1}$.    
 > Each subset of $S_2$ consists of $k$ elements of $\{1, ..., n\}$, so $|S_2| = {n - 1 \choose k}$. 
 > Since $S = S_1 \cup S_2$ is a disjoint union, $|S| = |S_1| + |S_2|$. The result follows.
 
@@ -56,7 +56,7 @@ Example: "How many subsets of $\{1, 2, 3\}$ have size $k$?". Define $S$ as the s
 
 Define the weight $w$ of an element $A$ to be $w(A) = |A|$. How many elements in $S$ have weight $k$?
 
-$\Phi_S(x) = 1 + 3x + 3x^2 + x^3$. The coeffient of $x^k$ in the generating series is the answer.
+$\Phi_S(x) = 1 + 3x + 3x^2 + x^3$. The coefficient of $x^k$ in the generating series is the answer.
 
 **Generating Series**: Given set $S$ where $\rho \in S$ is given a non-negative integer weight $w(\rho)$, the **generating series** of $S$ with respect to $w$ is $\Phi_S(x) = \sum_{\rho \in S} x^{w(\rho)}$. If $a_k$ is the number of elements in $S$ of weight $k$, then $\Phi_S(x) = \sum_{k \ge 0}a_k x^k$. The *coefficients* store the answers to our counting problems.
 
@@ -209,7 +209,7 @@ The general question given is how many binary strings of length $n$ have certain
 3. Find the generating series of $S$ with respect to $w$.
 4. Answer is $[x^n]\Phi_S(x)$.
 
-## Operations on Sets of Stringso
+## Operations on Sets of Strings
 
 1. Concatenation of two strings $A, B$. $AB = \{ab | a \in A, b \in B\}$.
 2. Star. $A^* = \cup_{k \ge 0} A^k$, $A^0 = \{\epsilon\}$, $\{0, 1\}^*$ is the set of all binary strings.
@@ -260,7 +260,7 @@ Example: Sets that do not have 1010 as a substring
 >       - ($\supseteq$): A string in $S$ is either empty, or we can take off the rightmost bit and obtain another string in $S$. $S \subseteq \{\epsilon\} \cup S\{0, 1\}$. For a string in $T$, removing the rightmost bit destroys the only copy of 1010 in the string. So $T \subseteq S\{0\}$. So $S \cup T \subseteq \{\epsilon\} \cup S\{0, 1\}$.
 >
 > 2. $S\{1010\} = T \cup T\{10\}$.
->       - ($\subseteq$): Let $\sigma \in S$. Then $\sigma 1010$ has at least 1 copy of 1010 at the right end. If that is the only copy then $\sigma \{1010\} \in T$. A second copy can exist if $\sigma$ envds with 10, so $\sigma 1010$ ends with 101010. Then this is in $T\{10\}$.
+>       - ($\subseteq$): Let $\sigma \in S$. Then $\sigma 1010$ has at least 1 copy of 1010 at the right end. If that is the only copy then $\sigma \{1010\} \in T$. A second copy can exist if $\sigma$ ends with 10, so $\sigma 1010$ ends with 101010. Then this is in $T\{10\}$.
 >       - ($\supseteq$): Any string in $T$ ends with 1010. Removing this destroys all copies of 1010 in the string, so it is in $S\{1010\}$.
 >
 > We can solve for $\Phi_S(x)$ using the two equations, and obtain $\Phi_S(x) = \frac{1+x^2}{1-2x+x^2-2x^3+x^4}$.
@@ -289,7 +289,7 @@ So $[x^n]\frac{p_i(x)}{(1-r_i x)^{e_i}} = Q_i(n)r_i^n$, where $Q_i(n)$ is a poly
 
 **Characteristic Polynomial**: If $g(x) = (1-r_1x)^e_i ... (1-r_kx)^{e_k}$, then its characteristic polynomial is $g^*(x) = (x-r_1)^{e_i} ... (x-r_x)^{e_k}$. Then $r_1, ..., r_k$ are the roots of the characteristic polynomial with multiplicities $e_1, ..., e_k$.
 
-Example: $\{a_n\}$ satisties $a_0 = 1, a_5 = 5$ and $a_n - 5a_{n - 1} + 6a_{n-2} = 0$ for $n \ge 2$.
+Example: $\{a_n\}$ satisfies $a_0 = 1, a_5 = 5$ and $a_n - 5a_{n - 1} + 6a_{n-2} = 0$ for $n \ge 2$.
 
 > First find $A(x) = \sum_{n \ge 0}x^n$ as a rational expression.   
 > For each $n \ge 2$ multiply its recurrence by $x^n$.
@@ -305,7 +305,7 @@ Example: $\{a_n\}$ satisties $a_0 = 1, a_5 = 5$ and $a_n - 5a_{n - 1} + 6a_{n-2}
 
 We see that there is a shortcut from the recurrence to the characteristic polynomial. If $\{a_n\}$ satisfies the recurrence $a_n + c_1a_{n - 1} + ... + c_ka_{n - k} = 0$, then its corresponding characteristic polynomial is $x^k + c_1x^{k-1} + ... + c_k$. $A(x) = \sum a_nx^n$ has the form $A(x) = \frac{...}{1 + c_1x + ... + c_kx^k}$.
 
-Example: $\{a_n\}$ satisties $a_0 = 1, a_1, = 2, a_2 = 1$ where $a_n - 3a_{n-1} + 3a_{n-2} - a_{n-3} = 0$ for $n \ge 3$.
+Example: $\{a_n\}$ satisfies $a_0 = 1, a_1, = 2, a_2 = 1$ where $a_n - 3a_{n-1} + 3a_{n-2} - a_{n-3} = 0$ for $n \ge 3$.
 
 > The characteristic polynomial is $x^3 - 3x^2 + 3x - 1 = (x-1)^3$. The root is $x=1$ with multiplicity 3. We have $a_n = An^2 + Bn + C$ for some constants $A, B, C$.  
 > For $a_0$: $1 = C$.    
@@ -340,7 +340,7 @@ A graph $G$ is a pair $(V(G), E(G))$ where $V(G)$ is a set of objects called ver
 
 **Notes**:
 
-1. $e=uv$ appreviates $ = \{u, v\}$.
+1. $e=uv$ abbreviates $ = \{u, v\}$.
 2. $uv = vu$, edges are unordered.
 3. For most of this course, our graphs are "simple". There are no loops or multiple edges.
 4. Graphs are considered to be finite.
@@ -363,7 +363,7 @@ $\sum_{v \in V(G)} deg(v)$ is always even.
 
 **Definition**: Two graphs $G_1$, $G_2$ are **isomorphic** if there exists a bijection $f: V(G_1) \to V(G_2)$ such that $uv \in E(G_1)$ if and only if $f(u)f(v) \in E(G_2)$ (edge adjacency is preserved). Such a function is an **isomorphism**.
 
-Assume $|E(G_1)| \neq |E(G_2)|$, then there cannot possibly be a bijection between $V(G_1)$ and $V(G_2)$. Similarily, we can look at the degree of certain vertices.
+Assume $|E(G_1)| \neq |E(G_2)|$, then there cannot possibly be a bijection between $V(G_1)$ and $V(G_2)$. Similarly, we can look at the degree of certain vertices.
 
 To prove that two graphs are isomorphic, find an isomorphism. To prove that two graphs are not isomorphic, find an adjacency structure that exists in one but not the other.
 
@@ -374,7 +374,7 @@ To prove that two graphs are isomorphic, find an isomorphism. To prove that two 
 
     > By handshaking lemma, $2|E(G)| = \sum_{v \in V(G)}deg(v) = \sum_{v \in V(G)}k = nk$.
     
-3. G is **bipartite** if there exists a parition $(A, B)$ of $V(G)$ such that every edge in $G$ joins one vertex in $A$ with one vertex in $B$.
+3. G is **bipartite** if there exists a partition $(A, B)$ of $V(G)$ such that every edge in $G$ joins one vertex in $A$ with one vertex in $B$.
 
     - Cycles with an odd number of vertices are not bipartite.
 
@@ -463,11 +463,11 @@ Example: Let $G_n$ be the graph with all binary strings of length $n$ as vertice
 
 > An **Eulerian Circuit** is a closed walk that uses every edge of the graph exactly once.
 
-## Properies of Eulerian Circuits
+## Properties of Eulerian Circuits
 
 Suppose $G$ has an Eulerian circuit.
 
-Which graphs have Eulerian ciruits?
+Which graphs have Eulerian circuits?
 
 **Theorem**: Let $G$ be a connected graph. Then $G$ has an Eulerian circuit if and only if every vertex of $G$ has even degree.
 
@@ -515,7 +515,7 @@ Which graphs have Eulerian ciruits?
 
 **Theorem**: A tree with at least 2 vertices has at least 2 leaves.
 
-> Let $v_0, v_1, ..., v_k$ be a longest path in a tree $T$. Since $T$ has at least 2 vertices, this path has at least one edge. Consider $v_0$. Now $v_0$ has a neigbour $v_1$, but $v_0$ cannot have a neighbour outside the path, for otherwise we obtain a longer path. Also, $v_0$ can not have another neighbour $v_i$ in the path, since $v_0, ..., v_i, v_0$ would be a cycle. So $v_0$ has degree 1, so it is a leaf. Similarily, $v_k$ is a leaf. So $T$ has at least 2 leaves.
+> Let $v_0, v_1, ..., v_k$ be a longest path in a tree $T$. Since $T$ has at least 2 vertices, this path has at least one edge. Consider $v_0$. Now $v_0$ has a neighbour $v_1$, but $v_0$ cannot have a neighbour outside the path, for otherwise we obtain a longer path. Also, $v_0$ can not have another neighbour $v_i$ in the path, since $v_0, ..., v_i, v_0$ would be a cycle. So $v_0$ has degree 1, so it is a leaf. Similarly, $v_k$ is a leaf. So $T$ has at least 2 leaves.
 
 **Theorem**: Every tree with $n$ vertices has $n-1$ edges.
 
@@ -533,7 +533,7 @@ Which graphs have Eulerian ciruits?
 
 **Theorem**: In a tree $T$, there is a unique u,v-path for any $u,v \in T$.
 
-> Suppose there are two u,v-paths, $P_1$, $P_2$. There is an edge $e$ in one path, say $P_1$, but not in the other. Consider $T - e$. Suppose $x$ is closer to $u$ than $y$ in $P_1$. Then, the $xu$ path in $P_1$ followed by the $uv$ path $P_2$ followed by the $vy$ path in $P_1$ is an x,y-walk in $T-e$. So $x,y$ are in the same component of $T-e$, constradicting the fact that $e$ is a bridge. So there is a unique u,v-path in $T$.
+> Suppose there are two u,v-paths, $P_1$, $P_2$. There is an edge $e$ in one path, say $P_1$, but not in the other. Consider $T - e$. Suppose $x$ is closer to $u$ than $y$ in $P_1$. Then, the $xu$ path in $P_1$ followed by the $uv$ path $P_2$ followed by the $vy$ path in $P_1$ is an x,y-walk in $T-e$. So $x,y$ are in the same component of $T-e$, contradicting the fact that $e$ is a bridge. So there is a unique u,v-path in $T$.
 
 **Theorem**: A tree is bipartite.
 
@@ -700,7 +700,7 @@ So any edge subdivisions of $K_5$ and $K_{3,3}$ are non-planar.
 
 # Colouring
 
-**Definition**: A **k-colouring** in $G$ is an assigment of a colour to each vertex of $G$ using at most $k$ colours, such that adjacent vertices receive different colours. A graph that has a k-colouring is called **k-colourable**.
+**Definition**: A **k-colouring** in $G$ is an assignment of a colour to each vertex of $G$ using at most $k$ colours, such that adjacent vertices receive different colours. A graph that has a k-colouring is called **k-colourable**.
 
 **General Question**: What is the **minimum** number of colours we need to colour a graph?
 
@@ -752,7 +752,7 @@ So any edge subdivisions of $K_5$ and $K_{3,3}$ are non-planar.
 - The number of vertices in $G$ is the number of faces in $G^*$.
 - The number of edges is preserved.
 - Face degrees in $G$ become vertex degrees of $G^*$ and vertex degrees become face degrees.
-- The dual of a platoic graph is platonic.
+- The dual of a platonic graph is platonic.
 
 # Matching
 
@@ -828,7 +828,7 @@ Let $G$ be a bipartite graph with bipartition $(A, B)$. What are the necessary a
 
 **Hall's Theorem**: Let $G$ be a bipartite graph with bipartition $(A, B)$. Then there is a matching that saturates every vertex in $A$ if and only if for all $D \subseteq A$, $|N(D)| \ge |D|$.
 
-> ($\Rightarrow$) Suppose $M$ is a matching that saturates $A$. For any $D \subseteq A$, the matching edges in $M$ with one endpoing in $D$ have the other endpoint in distinct vertices of $N(D)$. So $|N(D)| \ge |D|$.
+> ($\Rightarrow$) Suppose $M$ is a matching that saturates $A$. For any $D \subseteq A$, the matching edges in $M$ with one endpoint in $D$ have the other endpoint in distinct vertices of $N(D)$. So $|N(D)| \ge |D|$.
 >
 > ($\Leftarrow$) Suppose $G$ does not have a matching that saturates $A$. Let $M$ be a maximum matching. Since $M$ does not saturate $A$, $|M| < |A|$. By Kőnig Theorem, there exists a cover $C$ where $|C| = |M|$. Since $C$ is a cover, there is no edge between $A \setminus C$ and $B \setminus C$. So the neighbour set of $N(A \setminus C) \subseteq C \cap B$.
 > $$\begin{aligned}|N(A \setminus C)| &\le |C \cap B| \\ &= |C| - |C \cap A| \\ &= |M| - |C \cap A| \\ &< |A| - |C \cap A| \\ &= |A \setminus C|\end{aligned}$$
@@ -838,6 +838,6 @@ Let $G$ be a bipartite graph with bipartition $(A, B)$. What are the necessary a
 
 > Suppose $G$ has bipartition $(A, B)$. So $|A| = |B|$. Let $D \subseteq A$. Since each vertex has degree $k$, there are $k|D|$ edges incident with a vertex in $D$. Each such edge ends in $N(D)$. So $\sum_{v \in N(D)} deg(v) \ge k|D|$. So $k|N(D)| \ge k|D|$. Since $k \ge 1$, $|N(D)| \ge |D|$. By Hall's Theorem, there is a matching that saturates $A$. Since $|A| = |B|$, it must be a perfect matching.
 
-**Corollary**: The edges of a k-regular pipartite graph can be partitioned into $k$ perfect matchings.
+**Corollary**: The edges of a k-regular bipartite graph can be partitioned into $k$ perfect matchings.
 
 > Induction on $k$. Removing a perfect matching leaves a (k-1)-regular bipartite graph.

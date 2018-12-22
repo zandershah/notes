@@ -23,11 +23,11 @@ Example of Big Band Music: 1944 "Sentimental Journey" (Brown / Homer / Green)
 - Since 1950s, there is an emphasis on vocals but this was not always the case.
 - Smooth and vocalized voice, you can hear the words clearly; control and calm
 - Band leaders are "the stars". Benny Goodman, Count Basie, Duke Ellington, Tommy Dorsey.
-- Music industry divided into 3 categores:
+- Music industry divided into 3 categories:
     1. Pop: White, middle class, urban / northern US (where the money is).
     2. Race (Blues): Black, regardless of class or location.
     3. Hillbilly (Country): Lower / working class, primarily white / southern US.
-        - Origins in poor, rural part of southern US but is migrating to urban areas (particularily in the south).
+        - Origins in poor, rural part of southern US but is migrating to urban areas (particularly in the south).
 
 Example of Race Music: "Good Rockin' Tonight" (Roy Brown 1947)
 
@@ -42,7 +42,7 @@ Example of Hillbilly Music: "Blue Moon of Kentucky" (Bill Monroe 1946, recorded/
 - Different instruments: guitar, fiddle, mandelin.
 - Controlled but forward nasal sound.
 
-The **products** of the music insdustry at this time are sheet music and recordings. Sheet music dominates recordings until the late 1920s. By the end of WWII, recording industry has come to dominate.
+The **products** of the music industry at this time are sheet music and recordings. Sheet music dominates recordings until the late 1920s. By the end of WWII, recording industry has come to dominate.
 
 ## Why a Music Industry? Development of American Music Industry
 
@@ -52,11 +52,11 @@ The **products** of the music insdustry at this time are sheet music and recordi
 
 We need copyright law - intellectual property.
 
-- 1790s-1830s, Ammendments to the copyright laws to cover sheet music.
-- The Victorial Ballad: (Queen Victoria).
+- 1790s-1830s, Amendments to the copyright laws to cover sheet music.
+- The Victorian Ballad: (Queen Victoria).
     - appearance and social mobility is everything
 
-Industrial Revolusion made it so that there was now a middle class. The new middle class wanted to show off their money. Ways to do this are to buy luxury items (piano) and have daughters pursue "leisure" activities and women in the family does not have to work.
+Industrial Revolution made it so that there was now a middle class. The new middle class wanted to show off their money. Ways to do this are to buy luxury items (piano) and have daughters pursue "leisure" activities and women in the family does not have to work.
 
 - The rise of middle class to have *Parlour Songs* written specifically for middle class
 
@@ -89,7 +89,7 @@ There cannot be a hit song if everyone lives in rural areas because it is too ha
 
 Now everyone knows you can get rich from the music industry, most of them go to New York City in a place known as Tin Pan Alley (Manhattan), the centre of professional music making.
 
-> One story is that everyones piano was overlapping each other and it sounded like people were banging on tin pans
+> One story is that everyone's piano was overlapping each other and it sounded like people were banging on tin pans
 
 - At it's peak in the 1920s, 1930s, 21000 publishers, 36000 composers.
 - Develops an efficient way of creating music, **divisions of labour** (composer, lyricist, publisher, publicity, performers). Allows for quality control and efficiency.
@@ -183,7 +183,7 @@ Example: "Sweet Home Chicago" (Robert Johnson November 1936)
 - 1877, Edison invents the phonograph (granophone).
     - Wax, not reusable, had business intentions / political but not music.
 - 1895-1912, transition from wax cylinder to disks.
-- 1925, industry standard set to 78 rpm, It was a balance betwen quality and playback time.
+- 1925, industry standard set to 78 rpm, It was a balance between quality and playback time.
 - One of the biggest hurdles was to convince people to buy records.
 - In 1925, recording industry starts to rise to prominence.
 
@@ -198,7 +198,7 @@ Example: "Sweet Home Chicago" (Robert Johnson November 1936)
 
 > 1920, recording industry almost dies.
 
-- Jan 1922, 28 sations. Dec 1922, 570 stations.
+- Jan 1922, 28 stations. Dec 1922, 570 stations.
 - Controlled by only a few "Networks" (CBS, NBC, Mutual).
     - NBC was the first (1928).
     - Networks would buy up local networks and hook them up with telephone lines.
@@ -264,7 +264,7 @@ Examples: Nat King Cole "Too Young" (1951, Lippman / Dee), Patti Page "How Much 
 
 Baby boomers are experiencing extended adolescence. They invent the teenager. Teenagers get to stay in school, have part time jobs, and spend the money from their part time jobs. A generation gap appears between the culture of parents and their children.
 
-- Transitor radio: portable and small.
+- Transistor radio: portable and small.
 
 ## Race Music
 
@@ -289,7 +289,7 @@ Example: Ray Charles (1930-2004) "I've Got A Woman" (1954)
 Example: Muddy Waters (1913 - 1983) "Hoochie Coochie Man" (1954, Wille Dixon)
 
 - Born in Mississippi. Played guitar and harmonica. Emulated Robert Johnson.
-- Moves to chicago in the early 1940s, switches to electric guitar in 1945.
+- Moves to Chicago in the early 1940s, switches to electric guitar in 1945.
 - 1944, records for Aristocrat Records (Chess Records).
 - Verse Chorus structure (modified 12-bar blues).
     - **Chorus**: Same music, same words, may include title of song, may feature a higher level of intensity.
@@ -303,7 +303,7 @@ Mid 1950s, WWII has changed everything. USA was able to build massive industry a
 - Extended adolescence (baby boomers).
 - Rhythm and Blues become crossover hits (black appeal chart to pop chart).
 
-## Cover Verions: 1954 - 1956
+## Cover Versions: 1954 - 1956
 
 > "White" versions of "black" songs.
 

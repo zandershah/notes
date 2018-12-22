@@ -12,9 +12,14 @@
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="pandoc.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body);
-  });</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -45,13 +50,13 @@
 <li>Since 1950s, there is an emphasis on vocals but this was not always the case.</li>
 <li>Smooth and vocalized voice, you can hear the words clearly; control and calm</li>
 <li>Band leaders are “the stars”. Benny Goodman, Count Basie, Duke Ellington, Tommy Dorsey.</li>
-<li>Music industry divided into 3 categores:
+<li>Music industry divided into 3 categories:
 <ol type="1">
 <li>Pop: White, middle class, urban / northern US (where the money is).</li>
 <li>Race (Blues): Black, regardless of class or location.</li>
 <li>Hillbilly (Country): Lower / working class, primarily white / southern US.
 <ul>
-<li>Origins in poor, rural part of southern US but is migrating to urban areas (particularily in the south).</li>
+<li>Origins in poor, rural part of southern US but is migrating to urban areas (particularly in the south).</li>
 </ul></li>
 </ol></li>
 </ul>
@@ -68,7 +73,7 @@
 <li>Different instruments: guitar, fiddle, mandelin.</li>
 <li>Controlled but forward nasal sound.</li>
 </ul>
-<p>The <strong>products</strong> of the music insdustry at this time are sheet music and recordings. Sheet music dominates recordings until the late 1920s. By the end of WWII, recording industry has come to dominate.</p>
+<p>The <strong>products</strong> of the music industry at this time are sheet music and recordings. Sheet music dominates recordings until the late 1920s. By the end of WWII, recording industry has come to dominate.</p>
 <h2 id="why-a-music-industry-development-of-american-music-industry">Why a Music Industry? Development of American Music Industry</h2>
 <ul>
 <li>1600s, you could steal pamphlets and make copies yourself to sell because there was no intellectual property.</li>
@@ -77,13 +82,13 @@
 </ul>
 <p>We need copyright law - intellectual property.</p>
 <ul>
-<li>1790s-1830s, Ammendments to the copyright laws to cover sheet music.</li>
-<li>The Victorial Ballad: (Queen Victoria).
+<li>1790s-1830s, Amendments to the copyright laws to cover sheet music.</li>
+<li>The Victorian Ballad: (Queen Victoria).
 <ul>
 <li>appearance and social mobility is everything</li>
 </ul></li>
 </ul>
-<p>Industrial Revolusion made it so that there was now a middle class. The new middle class wanted to show off their money. Ways to do this are to buy luxury items (piano) and have daughters pursue “leisure” activities and women in the family does not have to work.</p>
+<p>Industrial Revolution made it so that there was now a middle class. The new middle class wanted to show off their money. Ways to do this are to buy luxury items (piano) and have daughters pursue “leisure” activities and women in the family does not have to work.</p>
 <ul>
 <li>The rise of middle class to have <em>Parlour Songs</em> written specifically for middle class</li>
 </ul>
@@ -110,10 +115,10 @@
 <blockquote>
 <p>Rural to urban shift.</p>
 </blockquote>
-<p>There cannot be a hit song if everyone lives in rural areas because it is too hard to spread the song. In the US, many people are migrating to the urban areas at this point in time (by the 1890s, over <span class="math inline">\(\frac{1}{3}\)</span> lives in cities).</p>
+<p>There cannot be a hit song if everyone lives in rural areas because it is too hard to spread the song. In the US, many people are migrating to the urban areas at this point in time (by the 1890s, over <span class="math inline">\frac{1}{3}</span> lives in cities).</p>
 <p>Now everyone knows you can get rich from the music industry, most of them go to New York City in a place known as Tin Pan Alley (Manhattan), the centre of professional music making.</p>
 <blockquote>
-<p>One story is that everyones piano was overlapping each other and it sounded like people were banging on tin pans</p>
+<p>One story is that everyone’s piano was overlapping each other and it sounded like people were banging on tin pans</p>
 </blockquote>
 <ul>
 <li>At it’s peak in the 1920s, 1930s, 21000 publishers, 36000 composers.</li>
@@ -224,7 +229,7 @@
 <li>Wax, not reusable, had business intentions / political but not music.</li>
 </ul></li>
 <li>1895-1912, transition from wax cylinder to disks.</li>
-<li>1925, industry standard set to 78 rpm, It was a balance betwen quality and playback time.</li>
+<li>1925, industry standard set to 78 rpm, It was a balance between quality and playback time.</li>
 <li>One of the biggest hurdles was to convince people to buy records.</li>
 <li>In 1925, recording industry starts to rise to prominence.</li>
 </ul>
@@ -242,7 +247,7 @@
 <p>1920, recording industry almost dies.</p>
 </blockquote>
 <ul>
-<li>Jan 1922, 28 sations. Dec 1922, 570 stations.</li>
+<li>Jan 1922, 28 stations. Dec 1922, 570 stations.</li>
 <li>Controlled by only a few “Networks” (CBS, NBC, Mutual).
 <ul>
 <li>NBC was the first (1928).</li>
@@ -305,7 +310,7 @@
 <h3 id="baby-boomers">Baby Boomers</h3>
 <p>Baby boomers are experiencing extended adolescence. They invent the teenager. Teenagers get to stay in school, have part time jobs, and spend the money from their part time jobs. A generation gap appears between the culture of parents and their children.</p>
 <ul>
-<li>Transitor radio: portable and small.</li>
+<li>Transistor radio: portable and small.</li>
 </ul>
 <h2 id="race-music">Race Music</h2>
 <h3 id="jump-blues">Jump Blues</h3>
@@ -325,7 +330,7 @@
 <p>Example: Muddy Waters (1913 - 1983) “Hoochie Coochie Man” (1954, Wille Dixon)</p>
 <ul>
 <li>Born in Mississippi. Played guitar and harmonica. Emulated Robert Johnson.</li>
-<li>Moves to chicago in the early 1940s, switches to electric guitar in 1945.</li>
+<li>Moves to Chicago in the early 1940s, switches to electric guitar in 1945.</li>
 <li>1944, records for Aristocrat Records (Chess Records).</li>
 <li>Verse Chorus structure (modified 12-bar blues).
 <ul>
@@ -341,7 +346,7 @@
 <li>Extended adolescence (baby boomers).</li>
 <li>Rhythm and Blues become crossover hits (black appeal chart to pop chart).</li>
 </ul>
-<h2 id="cover-verions-1954---1956">Cover Verions: 1954 - 1956</h2>
+<h2 id="cover-versions-1954---1956">Cover Versions: 1954 - 1956</h2>
 <blockquote>
 <p>“White” versions of “black” songs.</p>
 </blockquote>
@@ -677,7 +682,7 @@
 <ul>
 <li>“Ask not what your country can do for you, but what you can do for your country.”</li>
 </ul></li>
-<li>August 1963, Washington, Martin Luther King Jr. “I Have a Dream”.</li>
+<li>August 1963, Washington, Martin Luther King Jr. “I Have a Dream”.</li>
 <li>November 1963, Kennedy assassinated.</li>
 <li>Beatles arrive, very funny, very talented, not American.</li>
 </ul>
