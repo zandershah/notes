@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>co487</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="co-487">CO 487</h1>
+<h2 id="fundamental-goals-of-cryptography">Fundamental Goals of Cryptography</h2>
+<ul>
+<li><strong>Confidentiality</strong>: Keeping data secret from all not authorized.</li>
+<li><strong>Data Integrity</strong>: Ensure data has not been altered by unauthorized means.</li>
+<li><strong>Data Origin Authentication</strong>: Corroborating the source of data.</li>
+<li><strong>Non-Repudiation</strong>: Prevents entity from denying previous commitments or actions.</li>
+</ul>
+<p><strong>Symmetric-key cryptography</strong>: The <strong>client</strong> and <strong>server</strong> share some <strong>secret</strong> information <span class="math inline">k</span>, called a <strong>key</strong>.</p>
+<p><strong>Public-key cryptography</strong>: Share an <strong>authenticated</strong> (but not secret) information.</p>
+<h3 id="ssl-protocol">SSL Protocol</h3>
+<ol type="1">
+<li>Server transmits <strong>certificate</strong> to client.
+<ul>
+<li>Contains server’s identifying information, with <strong>RSA</strong> public key and signature of <strong>certifying authority</strong>.</li>
+<li>Certifying authority is trusted.</li>
+</ul></li>
+<li>Client <strong>verifies</strong> signature to verify <strong>authenticity</strong>.</li>
+<li>Client selects random key <span class="math inline">k</span> and <strong>encrypts</strong> with server’s RSA public key, transmits ciphertext to server.</li>
+<li>Server <strong>decrpyts</strong> ciphertext.</li>
+</ol>
+<p>Is SSL <strong>really</strong> secure?</p>
+<p>There are many potential security vulnerabilities.</p>
+<ol type="1">
+<li>Crypto is weak (e.g. AES, HMAC, RSA).</li>
+<li><strong>Quantum attacks</strong> on underlying cryptography.</li>
+<li>Weak random number generation.</li>
+<li>Fraudulent certificates.
+<ul>
+<li>Mistakes due to human error.</li>
+</ul></li>
+<li>Software bugs (both inadvertent and malicious).</li>
+<li><strong>Phishing</strong> attacks.</li>
+<li>SSL only protects data during transit, does not protect data when it is collected at the server.</li>
+</ol>
+<p>Crypto might be strong, but <strong>information security</strong> is more difficult (<strong>cybersecurity</strong>).</p>
+<ul>
+<li>Cryptography providers some mathematical tools to assist, but it is a <strong>small</strong> part of the entire solution.</li>
+</ul>
+</body>
+</html>
