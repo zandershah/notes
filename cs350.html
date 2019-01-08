@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>cs350</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="cs-350">CS 350</h1>
+<p>An OS is a system that manages resources, creates execution environments, loads programs, and provides common services and utilities.</p>
+<ul>
+<li>Started as simple I/O libraries, batch processors.</li>
+</ul>
+<h2 id="three-views-of-an-os">Three Views of an OS</h2>
+<ol type="1">
+<li><strong>Application View</strong>: What services does it provide?</li>
+<li><strong>System View</strong>: What problem does it solve?</li>
+<li><strong>Implementation View</strong>: How is it built?</li>
+</ol>
+<h3 id="application-view">Application View</h3>
+<p>Provides an execution environment for running programs.</p>
+<ul>
+<li>Provides program with processor time and memory space that it needs.</li>
+<li>Provides interfaces through which program can use networks, storage, I/O devices, other system hardware components. We want to abstract hardware from application programs.</li>
+<li>Isolates running programs from another and prevents undesirable interactions.</li>
+</ul>
+<h3 id="system-view">System View</h3>
+<ul>
+<li>Manages hardware resources of a computer system including processors, memory, disks, network interfaces, I/O devices, etc.</li>
+<li>Allocates resources among running programs.</li>
+<li>Controls the sharing of resources among programs.</li>
+</ul>
+<p>The OS itself also uses resources.</p>
+<h3 id="implementation-view">Implementation View</h3>
+<ul>
+<li>Concurrency arises naturally in an OS when it supports concurrent applications, because it must interact directly with the hardware.</li>
+<li>Hardware interactions impose timing constraints.</li>
+</ul>
+<p><strong>Kernel</strong>: Part of OS that responds to system calls, interrupts, and exceptions.</p>
+<p><strong>Operating System</strong>: OS as a while includes the kernel, and may include other related programs to provide services for applications.</p>
+<ul>
+<li>Utility programs.</li>
+<li>Command interpreters.</li>
+<li>Programming libraries.</li>
+</ul>
+<p>The <strong>execution environment</strong> provides by the OS includes a variety of <strong>abstractions</strong>.</p>
+<ul>
+<li><strong>Files and file systems</strong>. Secondary storage.</li>
+<li><strong>Address spaces</strong>. Primary memory (RAM).</li>
+<li><strong>Processes, threads</strong>. Program execution.</li>
+<li><strong>Sockets, pipes</strong>. Network or other message channels.</li>
+</ul>
+<h1 id="threads-and-concurrency">Threads and Concurrency</h1>
+<blockquote>
+<p>Better utilization of the CPU.</p>
+</blockquote>
+<p>What is a tread? It is a sequence of instructions.</p>
+<ul>
+<li>A normal <strong>sequential program</strong> consists of a single thread of execution.</li>
+<li>Threads provide a way for programmers to express <strong>concurrency</strong> in a program.</li>
+<li>In threaded concurrent programs, there are multiple threads of execution, all occuring at the same time.</li>
+</ul>
+</body>
+</html>
