@@ -32,5 +32,14 @@
 <p>Assume we want to compute <span class="math inline">e^{-5.5}</span>. Using the Taylor expansion, we know that <span class="math inline">e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + ...</span>. We cannot include infinite terms, so we need to make an approximation. This will lead to a result of 0.0026363.</p>
 <p>However, if we use <span class="math inline">e^{-x} = \frac{1}{1 + x + \frac{x^2}{2!} + ...}</span>, we will get a result of 0.0040865 which is much closer to the true value.</p>
 <p>Let us consider the number 12.25. This is equal to <span class="math inline">1\cdot 10 + 2\cdot 10^0 + 2\cdot 10^{-1} + 5\cdot10^{-5}</span>. We can generalize this as <span class="math inline">d_k \in \{0, 1, ..., 9\}</span> with <span class="math inline">d_0d_1...d_{j-1}.d_jd_{j+1}...d_{j+i-1}</span>and is represented as <span class="math inline">d_0\cdot 10^{j-1} + d_1\cdot 10^{j-2} + ... + d_{j+i-1} \cdot 10^{-i}</span>. Computers only understand bits, so <span class="math inline">d_k \in \{0, 1\}</span>. So instead we have <span class="math inline">(\sum_{k=0}^{j+i-1}d_k\cdot 2^{-k})\cdot 2^{j-1}</span>. We have some limitations because <span class="math inline">j, i</span> cannot be arbitrarily large.</p>
+<p>We need to truncate, we decide an upper bound on the exponent and the number of significant digits we can represent.</p>
+<h3 id="what-numbers-can-we-represent">What numbers can we represent?</h3>
+<p>Example: <span class="math inline">\beta = 2, m = 3</span>. <span class="math inline">d_k \in \{0, 1\}, 0 \le j \le 3</span>.</p>
+<p><span class="math display">\overline{x} = \left(\sum_{k=0}^2 d_k 2^{-k}\right)\cdot 2^{j-1}</span></p>
+<p>Assume <span class="math inline">d_0 &gt; 0</span>, so <span class="math inline">d_0 = 1</span> (normalized floating point convention). We can simplify the above expression.</p>
+<p><span class="math display">\overline{x} = 2^{j-1} + \left(\sum_{k=1}^2 d_k 2^{-k}\right)\cdot 2^{j-1}</span></p>
+<p>We minimize <span class="math inline">\overline{x}</span> with <span class="math inline">j=0, d_k = 0</span>. We maximize with <span class="math inline">j=3, d_k = 1</span>.</p>
+<p>In general, given <span class="math inline">\beta, m, j_{max}, j_{min}</span>, the minimum is <span class="math inline">\beta^{j_{min} - 1}</span> and the maximum is <span class="math inline">(\beta - \beta^{1 - m}) \cdot \beta^{j_{max}}</span>. So all numbers are in the range of <span class="math inline">[\beta^{j_{min} - 1}, (\beta - \beta^{1 - m})\cdot \beta^{j_{max}}]</span>.</p>
+<p>The minimum significant is 1, and the maximum significant is <span class="math inline">\beta</span>.</p>
 </body>
 </html>

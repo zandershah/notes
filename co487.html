@@ -64,5 +64,119 @@
 <ul>
 <li>Cryptography providers some mathematical tools to assist, but it is a <strong>small</strong> part of the entire solution.</li>
 </ul>
+<h2 id="symmetric-key-encryption-scheme">Symmetric-key Encryption Scheme</h2>
+<ul>
+<li><span class="math inline">M</span>, plaintext space.</li>
+<li><span class="math inline">C</span>, ciphertext space.</li>
+<li><span class="math inline">K</span>, key space.</li>
+<li>A family of encryption functions <span class="math inline">E_k: M \to C, \forall k \in K</span>.</li>
+<li>A family of decryption functions <span class="math inline">D_k: C \to M, \forall k \in K</span>.</li>
+</ul>
+<blockquote>
+<p>Such that <span class="math inline">D_k(E_k(m)) = m</span>.</p>
+</blockquote>
+<ol type="1">
+<li>Alice and Bob agree on a <strong>secret</strong> key over a <strong>secure channel</strong>.</li>
+<li>Alice computes <span class="math inline">c = E_k(m)</span> and sends over the <strong>unsecure channel</strong>.</li>
+<li>Bob retrieves plaintex by computing <span class="math inline">m = D_k(c)</span>.</li>
+</ol>
+<p>Why not always use the secure channel? It is commonly slow, inconvenient.</p>
+<h3 id="what-does-security-mean-for-a-skes">What does security mean for a SKES?</h3>
+<ol type="1">
+<li>What is the adversary’s goal?</li>
+<li>What are the computational powers?</li>
+<li>How does the adversary interact with the two communicating parties?</li>
+</ol>
+<p><strong>Security model</strong>: Defines the computational abilities of the adversary, and how she interacts.</p>
+<p><strong>Basic assumption</strong>: Adversary knows everything about the SKES, only missing the key <span class="math inline">k</span>.</p>
+<h3 id="adversarys-interaction">Adversary’s Interaction</h3>
+<ol type="1">
+<li>Passive Attacks.
+<ul>
+<li><strong>Ciphertext-only attack</strong>. The attacker knows some ciphertext.</li>
+<li><strong>Known-plaintext attack</strong>. Knows some plaintext and corresponding ciphertext.</li>
+</ul></li>
+<li>Active Attacks.
+<ul>
+<li><strong>Chosen-plaintext attack</strong>. Adversary chooses plaintext and obtains corresponding ciphertext.</li>
+</ul></li>
+</ol>
+<p>Attacks which are not considered in this course.</p>
+<ul>
+<li><strong>Clandestine attacks</strong>. Bribery, blackmail.</li>
+<li><strong>Side-channel attacks</strong>. Monitor encryption and decryption equipment. Timing attacks, power analysis, electromagnetic radiation analysis.</li>
+</ul>
+<h3 id="computational-power-of-adversary">Computational Power of Adversary</h3>
+<ul>
+<li><strong>Information-theoretic security</strong>: Eve has infinite computational resources.</li>
+<li><strong>Complexity-theoretic security</strong>: Eve is a <em>polynomial-time Turing machine</em>.</li>
+<li><strong>Computational security</strong>: Eve has a specific computational bound.</li>
+</ul>
+<h3 id="adversarys-goal">Adversary’s Goal</h3>
+<ol type="1">
+<li>Recover the secret key.</li>
+<li>Systematically recover plaintext from secret text. May not necessarily need the secret key.</li>
+<li>Learn <strong>some</strong> partial information about the plaintext from the ciphertext.</li>
+</ol>
+<blockquote>
+<p>We want to guard against the <strong>strongest</strong> attacker going for the <strong>weakest</strong> goal.</p>
+</blockquote>
+<ul>
+<li>If the attacker can achieve 1 or 2, the SKES is said to be <strong>totally insecure</strong>.</li>
+<li>If attacker cannot learn anything, it is said to be <strong>semantically secure</strong>.</li>
+</ul>
+<p>A SKES is said to be <strong>secure</strong> if it is semantically secure against a chosen-plaintext attack by a computational bounded adversary.</p>
+<p>To <strong>break</strong> a SKES, the attacker needs to do the following.</p>
+<ol type="1">
+<li>Given a challenge ciphertext <span class="math inline">c</span>.</li>
+<li>Select plaintexts and obtain corresponding ciphertexts.</li>
+<li>After a feasible amount of computation, obtain information about plaintext <span class="math inline">m</span> corresponding to the challenge ciphertext <span class="math inline">c</span>.</li>
+</ol>
+<h2 id="work-factor">Work Factor</h2>
+<ul>
+<li><span class="math inline">2^{40}</span> operations <strong>very easy</strong>.</li>
+<li><span class="math inline">2^{56}</span> operations <strong>easy</strong>.</li>
+<li><span class="math inline">2^{64}</span> operations <strong>feasible</strong>.</li>
+<li><span class="math inline">2^{80}</span> operations <strong>barely feasible</strong>.</li>
+<li><span class="math inline">2^{128}</span> operations <strong>infeasible</strong>.</li>
+</ul>
+<blockquote>
+<p>The Bitcoin network is presently performing hash operations at the rate of <span class="math inline">2^{65}</span> per second, <span class="math inline">2^{90}</span> per year.</p>
+</blockquote>
+<blockquote>
+<p>The <strong>Laundeur limit</strong> from thermodynamics proposes that exhaustively trying <span class="math inline">2^{128}</span> symmetric keys would require more power for a year than the world produces.</p>
+</blockquote>
+<h2 id="security-level">Security Level</h2>
+<p>A cryptographic scheme is said to have a <strong>security level</strong> of <span class="math inline">l</span> bits if the fastest known attack on the scheme takes approximately <span class="math inline">2^l</span> operations. As of 2019, a security level of <strong>128 bits</strong> is desirable in practice.</p>
+<h2 id="polyalphabtic-ciphers">Polyalphabtic Ciphers</h2>
+<blockquote>
+<p><strong>Basic Idea</strong>. Use several permutations, plaintext encrypted to one of several possible cipher letters.</p>
+</blockquote>
+<p>Example: <strong>Vigenere Cipher</strong>.</p>
+<ul>
+<li><strong>Security key</strong> is an English word having no repeated letters.</li>
+<li>Totally insecure against a chosen-plaintext attack, you can send single letters at a time.</li>
+</ul>
+<h3 id="the-one-time-pad">The One-Time Pad</h3>
+<ul>
+<li>Key is a <strong>random</strong> string of letters as long as the plaintext.</li>
+<li>Add the key character to the plaintext character modulo 26.</li>
+</ul>
+<p>If the key is shorter than the ciphertext, the key <strong>should not</strong> be re-used.</p>
+<ul>
+<li>If <span class="math inline">c_1 = m_1 + k</span> and <span class="math inline">c_2 = m_2 + k</span> then <span class="math inline">c_1 - c_2 = m_1 - m_2</span>.</li>
+<li><p>So <span class="math inline">c_1 - c_2</span> depends only on the plaintext and hence can leak information about the plaintext.</p></li>
+<li><strong>Perfect secrecy</strong>. One-time pad is semantically secure against ciphertext-only attacks by an adversary with infinite computational resources.</li>
+<li>Formally proven using concepts from information theory.</li>
+<li><p>It is not useful unless the key is at least as long as the plaintext, so we should use a <strong>stream cipher</strong>.</p></li>
+</ul>
+<h2 id="stream-ciphers">Stream Ciphers</h2>
+<p>Use a <strong>pseudorandom</strong> generator PRBG (Pseudo-Random Bit Generator).</p>
+<ul>
+<li>The <strong>seed</strong> is the <strong>secret key</strong> shared between communicating parties.</li>
+<li>Security depends on the quality of the PRBG.</li>
+<li>The keystream should be indistinguishable from a random sequence (<strong>indistinguishability requirement</strong>).</li>
+<li>If an adversary knows a portion of the ciphertext and corresponding plaintext, they can easily find the corresponding portion of the keystream. Thus, given portions of the keystream, it should be infeasible to learn any information about the rest of the keystream (<strong>unpredictability requirement</strong>).</li>
+</ul>
 </body>
 </html>

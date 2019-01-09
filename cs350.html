@@ -71,5 +71,20 @@
 <li>Threads provide a way for programmers to express <strong>concurrency</strong> in a program.</li>
 <li>In threaded concurrent programs, there are multiple threads of execution, all occuring at the same time.</li>
 </ul>
+<p>OS/161 Thread Interface.</p>
+<pre><code>kern/include/thread.h
+
+int thread_fork(
+    const char* name,
+    struct proc* proc,
+    void (*func)(void*, unsigned long),
+    void* data1,
+    unsigned long data2);
+
+// Terminate the calling thread.
+void thread_exit(void);
+
+// Voluntarily yield execution.
+void thread_yield(void);</code></pre>
 </body>
 </html>
