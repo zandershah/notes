@@ -1,4 +1,4 @@
-MD_FILES=$(wildcard *.md)
+MD_FILES=$(wildcard *.md */*.md)
 HTML_FILES=$(MD_FILES:.md=.html)
 
 all: $(HTML_FILES)

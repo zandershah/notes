@@ -40,6 +40,12 @@
 <p><span class="math display">\overline{x} = 2^{j-1} + \left(\sum_{k=1}^2 d_k 2^{-k}\right)\cdot 2^{j-1}</span></p>
 <p>We minimize <span class="math inline">\overline{x}</span> with <span class="math inline">j=0, d_k = 0</span>. We maximize with <span class="math inline">j=3, d_k = 1</span>.</p>
 <p>In general, given <span class="math inline">\beta, m, j_{max}, j_{min}</span>, the minimum is <span class="math inline">\beta^{j_{min} - 1}</span> and the maximum is <span class="math inline">(\beta - \beta^{1 - m}) \cdot \beta^{j_{max}}</span>. So all numbers are in the range of <span class="math inline">[\beta^{j_{min} - 1}, (\beta - \beta^{1 - m})\cdot \beta^{j_{max}}]</span>.</p>
-<p>The minimum significant is 1, and the maximum significant is <span class="math inline">\beta</span>.</p>
+<p>The minimum significant is 1, and the maximum significant is <span class="math inline">\beta</span>. Fixing <span class="math inline">j</span>, then <span class="math inline">\Delta = \beta^{j-m}</span>.</p>
+<p>The number of floating point numbers within the interval are <span class="math inline">\frac{\beta^j - \beta^{j-1}}{\Delta} = (\beta - 1) \beta^{m-1}</span>. So the error is bounded by <span class="math inline">|f(x) - x) \le \frac{1}{2} \beta^{-(m-1)}\beta^{j-1}</span>, with relative error <span class="math inline">\frac{|f(x) - x|}{|x|} \le \frac{1}{2}\beta^{-(m-1)}</span>.</p>
+<h3 id="errors">Errors</h3>
+<p>We can have error when the arithmetic operation results in a number with <span class="math inline">m^\prime &gt; m</span>.</p>
+<p>Example: <span class="math inline">\overline{x} = 1.235, \overline{y} = 1.234</span>. <span class="math inline">\overline{x} - \overline{y} = 1.509\mathbf{1}</span>.</p>
+<p>Example: <span class="math inline">I_n = \int_{0}^1 \frac{x^n}{x+\alpha}dx</span></p>
+<p><span class="math display">I_0 = \int_0^1 \frac{1}{x+\alpha}dx = \log(1+\alpha) - \log(\alpha) = \log(\frac{1 + \alpha}{\alpha})</span> We can compute recursively, <span class="math inline">I_n = \frac{1}{n} - \alpha I_{n-1}</span>.</p>
 </body>
 </html>

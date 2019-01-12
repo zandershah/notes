@@ -178,5 +178,73 @@
 <li>The keystream should be indistinguishable from a random sequence (<strong>indistinguishability requirement</strong>).</li>
 <li>If an adversary knows a portion of the ciphertext and corresponding plaintext, they can easily find the corresponding portion of the keystream. Thus, given portions of the keystream, it should be infeasible to learn any information about the rest of the keystream (<strong>unpredictability requirement</strong>).</li>
 </ul>
+<h3 id="rc4-stream-cipher">RC4 Stream Cipher</h3>
+<ul>
+<li>Very simple, fast, variable key lengths. No catastrophic weaknesses have been found.</li>
+<li>Two components, <strong>key scheduling algorithm</strong>, <strong>keystream generator</strong>.</li>
+</ul>
+<h4 id="rc4-key-scheduling-algorithm">RC4 Key Scheduling Algorithm</h4>
+<blockquote>
+<p><span class="math inline">K[i], \overline{K}[i], S[i]</span> are bytes.</p>
+</blockquote>
+<p><strong>Input</strong>: Secret key <span class="math inline">K[0], K[1], ..., K[d-1]</span>.</p>
+<p><strong>Output</strong>: 256-long array: <span class="math inline">S[0], S[1], ..., S[255]</span>.</p>
+<pre><code>for i in range(256):
+    S[i] = i
+    K2[i] = K[i % d]
+j = 0
+for i in range(256):
+    j = (K2[i] + S[i] + j) % 256
+    S[i], S[j] = S[j], S[i] </code></pre>
+<p><strong>Idea</strong>: <span class="math inline">S</span> is a “random-looking” permutation of <span class="math inline">\{0, 1, ..., 255\}</span> which is generated from the secret key.</p>
+<h4 id="rc4-keystream-generator">RC4 Keystream Generator</h4>
+<p><strong>INput</strong>: 256-long byte array <span class="math inline">S[0], S[1], ..., S[255]</span>.</p>
+<p><strong>Output</strong>: Keystream.</p>
+<pre><code>i = 0, j = 0
+while keystream_bytes_are_required:
+    i = (i + 1) % 256
+    j = (S[i] + j) % 256
+    S[i], S[j] = S[j], S[i]
+    t = (S[i] + S[j]) % 256
+    output(t)</code></pre>
+<p><strong>Encryption</strong>: Keystream bytes are xored with the plaintext bytes.</p>
+<p>Fluhrer-Mantin-Shamir attack exploits known biases in the first few bytes of the keystream. Defeated by discarding the first few bytes.</p>
+<p>Because of several new weaknesses, RC4 is no longer used in applications such as SSL. Instead, use AES-CTR.</p>
+<h2 id="wireless-security">Wireless Security</h2>
+<blockquote>
+<p>More attack opportunities, no physical access. Attackers can be at a distance and leave no physical evidence of attack.</p>
+</blockquote>
+<ul>
+<li>IEEE 802.11 standard includes protocol called <strong>Wired Equivalent Privacy</strong>.
+<ul>
+<li>WEP’s goal is (only) to protect link-level data during wireless transmission between mobile stations and access points.</li>
+</ul></li>
+</ul>
+<ol type="1">
+<li><strong>Confidentiality</strong>: Prevent against casual eavesdropping.
+<ul>
+<li>RC4 used for encryption.</li>
+</ul></li>
+<li><strong>Data Integrity</strong>: Prevent tampering with transmitted messages.
+<ul>
+<li>Checksum.</li>
+</ul></li>
+<li><strong>Access Control</strong>: Protect access to a wireless network infrastructure.
+<ul>
+<li>Discard all packets that are not properly encrypted.</li>
+</ul></li>
+</ol>
+<p>Mobile stations share a key <span class="math inline">k</span> with access points. Messages are divided into <strong>packets</strong> of some fixed length. WEP uses a <strong>per-packet 24-bit initialization vector (IV)</strong> <span class="math inline">v</span> to process each packet. <span class="math inline">v</span> is prepended to the key to generate the keystream.</p>
+<p><strong>Question</strong>: Are confidentiality, data integrity, and access control achieved?</p>
+<p>Since there are only <span class="math inline">2^{24}</span> choices for IV, collisions are guaranteed after enough time. If they are selected randomly, then one can expect a collision after <span class="math inline">2^{12}</span> packets. This allows attackers to obtain multiple messages with the same <span class="math inline">v</span>, so they can obtain <span class="math inline">m_1 \oplus m_2</span>.</p>
+<p>It is also easy to make controlled changes to encrypted packets without invalidating the checksum.</p>
+<ul>
+<li>Suppose <span class="math inline">(v, c)</span> is an encrypted packet.</li>
+<li>Let <span class="math inline">c = RC4(v || k) \oplus (m||S)</span>, where <span class="math inline">k, m, S</span> are unknown.</li>
+<li>Let <span class="math inline">m^\prime = m \oplus \Delta</span> where <span class="math inline">\Delta</span> is a bit string where 1s correspond to bits of <span class="math inline">m</span> an attacker wishes to change.</li>
+<li><span class="math inline">c^\prime = c \oplus (\Delta || CRC(\Delta))</span>. Then <span class="math inline">(v, c^\prime)</span> is a valid encrypted packet.</li>
+</ul>
+<p>Knowledge of one plaintext <span class="math inline">m</span> corresponding to <span class="math inline">(v, c)</span> allows an attacker to compute a valid encrypted packet for any plaintext with the same keystream.</p>
+<h2 id="block-ciphers">Block Ciphers</h2>
 </body>
 </html>
