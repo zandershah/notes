@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>co250</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="co-250">CO 250</h1>
+<h1 id="formulations">Formulations</h1>
+<p>Given a set <span class="math inline">A \subseteq \mathbb{R}^n</span> and a function <span class="math inline">f: A \to \mathbb{R}</span>, our goal is to find <span class="math inline">x \in A</span> that minimizes or maximizes <span class="math inline">f</span>.</p>
+<ol type="1">
+<li><strong>Linear Programming (LP)</strong>. <span class="math inline">A</span> is given by <em>linear</em> constraints, and <span class="math inline">f</span> is a <em>linear</em> function.</li>
+<li><strong>Integer Programming (IP)</strong>. We want to maximize or minimize over the <em>integer</em> points in <span class="math inline">A</span>.</li>
+<li><strong>Nonlinear Programming (NLP)</strong>. <span class="math inline">A</span> is given by <em>non-linear</em> constraints, and <span class="math inline">f</span> is a <em>non-linear</em> function.</li>
+</ol>
+<h2 id="typical-workflow">Typical Workflow</h2>
+<ol type="1">
+<li>English language description of <strong>practical problem</strong>.</li>
+<li>Develop <strong>mathematical model</strong>.</li>
+<li>Feed model and data into a <strong>solver</strong>.</li>
+</ol>
+<h2 id="constrained-optimization">Constrained Optimization</h2>
+<p>We consider optimization problems of the form <span class="math inline">\min\{f(x): g_i(x)\le b_i, 1 \le i \le m, x \in \mathbb{R}^n\}</span> where <span class="math inline">n, m \in \mathbb{N}</span>, <span class="math inline">b_i \in \mathbb{R}</span>, and <span class="math inline">f, g_i</span> are functions with form <span class="math inline">\mathbb{R}^n \to \mathbb{R}</span>.</p>
+<blockquote>
+<p>Problems are <strong>very hard</strong> to solve in general, so we focus on special cases. We consider <strong>affine</strong> functions.</p>
+</blockquote>
+<h2 id="affine-functions">Affine Functions</h2>
+<blockquote>
+<p><span class="math inline">f: \mathbb{R}^n \to \mathbb{R}</span> is <strong>affine</strong> if <span class="math inline">f(x) = a^Tx + \beta</span> for <span class="math inline">a \in \mathbb{R}^n, \beta \in \mathbb{R}</span>. It is <strong>linear</strong> if <span class="math inline">\beta = 0</span>.</p>
+</blockquote>
+<blockquote>
+<p>An optimization problem <span class="math inline">\min\{f(x): g_i(x) \le b_i, \forall 1 \le i \le m, x \in \mathbb{R}^n\}</span> is called a <strong>linear program</strong> if <span class="math inline">f</span> is <strong>affine</strong> and <span class="math inline">g_i</span> is <strong>finite</strong> number of <strong>linear</strong> functions.</p>
+</blockquote>
+<ul>
+<li>Cannot have <strong>strict</strong> inequalities.</li>
+</ul>
+<h2 id="multiperiod-models">Multiperiod Models</h2>
+<p>In practice, we make a <strong>series</strong> of decisions that influence each other. An example of this is <strong>multiperiod models</strong>.</p>
+<ul>
+<li>Time split into <strong>periods</strong>.</li>
+<li>Make a <strong>decision</strong> in each period.</li>
+<li>All decisions affect the final outcome.</li>
+</ul>
+<h2 id="ip-models">IP Models</h2>
+<p>Fractional solutions are often not desirable. We can force solutions to take only integer values by formulating it was an <strong>integer program</strong>.</p>
+<ul>
+<li>Integer programs are <strong>difficult</strong> to solve.</li>
+</ul>
+<p>In order to express binary decisions, we introduce a new variable <span class="math inline">y</span>, such that <span class="math inline">y = 0</span> implies the first decision, and <span class="math inline">y = 1</span> implies the second.</p>
+<p>Example: <span class="math inline">x_1 + x_2 \ge 5</span> <strong>or</strong> <span class="math inline">x_3 + x_4 \ge 5</span>.</p>
+<blockquote>
+<ol type="1">
+<li><span class="math inline">x_1 + x_2 \ge 5y</span>.</li>
+<li><span class="math inline">x_3 + x_4 \ge 5(1-y)</span>.</li>
+<li><span class="math inline">0 \le y \le 1</span>.</li>
+<li><span class="math inline">y \in \mathbb{Z}</span>.</li>
+</ol>
+</blockquote>
+<p>We can solve similar situations by using a set of binary variables which sum to a specific value.</p>
+</body>
+</html>
