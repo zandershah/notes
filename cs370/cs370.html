@@ -41,11 +41,23 @@
 <p>We minimize <span class="math inline">\overline{x}</span> with <span class="math inline">j=0, d_k = 0</span>. We maximize with <span class="math inline">j=3, d_k = 1</span>.</p>
 <p>In general, given <span class="math inline">\beta, m, j_{max}, j_{min}</span>, the minimum is <span class="math inline">\beta^{j_{min} - 1}</span> and the maximum is <span class="math inline">(\beta - \beta^{1 - m}) \cdot \beta^{j_{max}}</span>. So all numbers are in the range of <span class="math inline">[\beta^{j_{min} - 1}, (\beta - \beta^{1 - m})\cdot \beta^{j_{max}}]</span>.</p>
 <p>The minimum significant is 1, and the maximum significant is <span class="math inline">\beta</span>. Fixing <span class="math inline">j</span>, then <span class="math inline">\Delta = \beta^{j-m}</span>.</p>
-<p>The number of floating point numbers within the interval are <span class="math inline">\frac{\beta^j - \beta^{j-1}}{\Delta} = (\beta - 1) \beta^{m-1}</span>. So the error is bounded by <span class="math inline">|f(x) - x) \le \frac{1}{2} \beta^{-(m-1)}\beta^{j-1}</span>, with relative error <span class="math inline">\frac{|f(x) - x|}{|x|} \le \frac{1}{2}\beta^{-(m-1)}</span>.</p>
+<p>The number of floating point numbers within the interval are <span class="math inline">\frac{\beta^j - \beta^{j-1}}{\Delta} = (\beta - 1) \beta^{m-1}</span>. So the error is bounded by <span class="math inline">|f(x) - x| \le \frac{1}{2} \beta^{-(m-1)}\beta^{j-1}</span>, with relative error <span class="math inline">\frac{|f(x) - x|}{|x|} \le \frac{1}{2}\beta^{-(m-1)}</span>.</p>
 <h3 id="errors">Errors</h3>
 <p>We can have error when the arithmetic operation results in a number with <span class="math inline">m^\prime &gt; m</span>.</p>
 <p>Example: <span class="math inline">\overline{x} = 1.235, \overline{y} = 1.234</span>. <span class="math inline">\overline{x} - \overline{y} = 1.509\mathbf{1}</span>.</p>
 <p>Example: <span class="math inline">I_n = \int_{0}^1 \frac{x^n}{x+\alpha}dx</span></p>
 <p><span class="math display">I_0 = \int_0^1 \frac{1}{x+\alpha}dx = \log(1+\alpha) - \log(\alpha) = \log(\frac{1 + \alpha}{\alpha})</span> We can compute recursively, <span class="math inline">I_n = \frac{1}{n} - \alpha I_{n-1}</span>.</p>
+<h1 id="polynomial-interpolation">Polynomial Interpolation</h1>
+<p>Given <span class="math inline">n</span> points <span class="math inline">(x_i, y_i)</span> where <span class="math inline">x_i</span> are distinct. Find a polynomial <span class="math inline">p(x)</span> of degree at most <span class="math inline">n-1</span> such that <span class="math inline">p(x_i) = y_i</span>.</p>
+<p>We want <span class="math inline">p(x) = c_1 + c_2x + ... + c_nx^{n-1}</span>. To find <span class="math inline">p(x)</span>, we set up <span class="math inline">n</span> linear equations in <span class="math inline">n</span> unknowns.</p>
+<ol type="1">
+<li>Does the interpolating polynoials always exist?</li>
+<li>Are interpolating polynomials <strong>unique</strong>?</li>
+</ol>
+<p>We can either show that <span class="math inline">y_i = 0 \Rightarrow c_i = 0</span>. Or that we can <strong>always</strong> find an answer. Or that <span class="math inline">\det V = \Pi_{i&lt;j}(x_i - x_j) \neq 0</span> when <span class="math inline">x_i</span> distinct.</p>
+<p>We can <strong>always</strong> construct an interpolating polynomial as follows. <span class="math inline">p(x) = \sum_{i=1}^n y_i L_i(x)</span>. Where each <span class="math inline">L_i(x)</span> is a polynomial of degree at most <span class="math inline">n-1</span> which also satisfies <span class="math inline">L_i(x_i) = 1, L_i(x_j) = 0, \forall i \neq j</span>.</p>
+<blockquote>
+<p><span class="math display">L_i(x) = \frac{(x - x_1)(x - x_2)...(x - x_{i-1})(x - x_{i+1})...(x_n)}{(x_i - x_1)(x_i - x_2)...(x_i - x_{i-1})(x_i - x_{i+1})...(x_i - x_n)}</span></p>
+</blockquote>
 </body>
 </html>
