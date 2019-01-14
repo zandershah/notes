@@ -12,6 +12,14 @@
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -72,9 +80,10 @@
 <li>In threaded concurrent programs, there are multiple threads of execution, all occuring at the same time.</li>
 </ul>
 <p>OS/161 Thread Interface.</p>
-<pre><code>kern/include/thread.h
-
-int thread_fork(
+<blockquote>
+<p>kern/include/thread.h</p>
+</blockquote>
+<pre><code>int thread_fork(
     const char* name,
     struct proc* proc,
     void (*func)(void*, unsigned long),
@@ -86,5 +95,93 @@ void thread_exit(void);
 
 // Voluntarily yield execution.
 void thread_yield(void);</code></pre>
+<h2 id="implementing-concurrent-threads">Implementing Concurrent Threads</h2>
+<blockquote>
+<p>What options exist?</p>
+</blockquote>
+<ol type="1">
+<li>Hardware support. <span class="math inline">P</span> processors, <span class="math inline">C</span> cores, <span class="math inline">M</span> multithreading per core. <span class="math inline">PCM</span> threads can execute <strong>simultaneously</strong>.</li>
+<li>Timesharing. Multiple threads take turns on the same hardware, rapidly switching between threads.</li>
+<li>Hardware support <strong>and</strong> timesharing. <span class="math inline">PCM</span> threads running simultaneously with timesharing.</li>
+</ol>
+<h3 id="context-switching">Context Switching</h3>
+<blockquote>
+<p>Various Stack Frames <span class="math inline">\to</span> <strong>thread_yield</strong> <span class="math inline">\to</span> <strong>thread_switch</strong> <span class="math inline">\to</span> <strong>switchframe</strong>.</p>
+</blockquote>
+<blockquote>
+<p>kern/arch/mips/thread/switch.S</p>
+</blockquote>
+<pre><code>switchframe_switch:
+    /* a0: switchframe pointer of old thread. */
+    /* a1: switchframe pointer of new thread. */
+
+    /* Allocate space for 10 registers. */
+    addi sp, sp, -40
+    /* Return address. */
+    sw ra, 36(sp)
+    /* Globals pointer. */
+    sw gp, 32(sp)
+    sw s8, 28(sp)
+    sw s6, 24(sp)
+    sw s5, 20(sp)
+    sw s4, 16(sp)
+    sw s3, 12(sp)
+    sw s2, 8(sp)
+    sw s1, 4(sp)
+    sw s0, 0(sp)
+
+    /* Store old stack pointer in old thread. */
+    sw sp, 0(a0)</code></pre>
+<blockquote>
+<p>Loading data from the new stack pointer is similar. Uses <strong>nop</strong> operation in order to ensure loads have completed before usage.</p>
+</blockquote>
+<h4 id="context-switch-causes">Context Switch Causes</h4>
+<ol type="1">
+<li>Running thread calls <strong>thread_yield</strong>. Voluntarily allows other threads to run.</li>
+<li>Running thread calls <strong>thread_exit</strong>. Running thread is terminated.</li>
+<li>Running thread blocks, with call to <strong>wchan_sleep</strong>.</li>
+<li>Running thread is <em>preempted</em>. Involuntarily stops running.</li>
+</ol>
+<h4 id="thread-states">Thread States</h4>
+<ol type="1">
+<li><strong>Running</strong>. Currently executing.</li>
+<li><strong>Ready</strong>. Ready to execute.</li>
+<li><strong>Blocked</strong>. Waiting for something, not ready to execute.</li>
+</ol>
+<h3 id="timesharing-and-preemption">Timesharing and Preemption</h3>
+<ul>
+<li><strong>Timesharing</strong>. Concurrency achieved by rapidly switching between theads.
+<ul>
+<li>How rapidly? <strong>Scheduling quantum</strong>.</li>
+<li>Must have an <strong>upper bound</strong> on how long a thread can run before it must yield the CPU.</li>
+</ul></li>
+<li>How do you stop a running thread that never yields, blocks, or exits?
+<ul>
+<li><strong>Preemption</strong> forces a running thread to stop running.</li>
+<li>Thread library must have a means of “getting control”.</li>
+<li>Normally accomplished using <strong>interrupts</strong>.
+<ul>
+<li>Thread library places a procedure called an <em>interrupt handler</em>.</li>
+</ul>
+<ol type="1">
+<li>Creates a <em>trap frame</em> to record thread context at the time of the interrupt.</li>
+<li>Determines which device caused interrupt, device-specific processing.</li>
+<li>Restores saved thread context from trap frame and resumes execution of the thread.</li>
+</ol></li>
+</ul></li>
+</ul>
+<h3 id="preemptive-scheduling">Preemptive Scheduling</h3>
+<ul>
+<li>Preemptive scheduler uses the <strong>scheduling quantum</strong> to impose a time limit on running threads.</li>
+<li>Periodic timer interrupts allow running time to be tracked.</li>
+<li>If thread run too long, timer interrupt handler preempts the thread by calling <strong>thread_yield</strong>.</li>
+<li>Preempted thread changes state from running to ready, and is placed on the <em>ready queue</em>.</li>
+<li>Scheduled quantum is reset each time a thread gets to run, no concept of leftover time.</li>
+</ul>
+<blockquote>
+<p>OS/161 threads use <em>preemptive round-robin scheduling</em>.</p>
+</blockquote>
+<p>Every time an interrupt is called, a <strong>trap frame</strong> is the first. Then the interrupt handler stack frame is called, followed by the normal context switching procedures.</p>
+<p>When returning from the <strong>trap_frame</strong>, the original state is restored.</p>
 </body>
 </html>
