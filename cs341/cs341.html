@@ -12,6 +12,14 @@
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -19,6 +27,32 @@
 <body>
 <h1 id="cs-341">CS 341</h1>
 <p>An <strong>algorithm</strong> is a well-defined procedure to solve a computational problem.</p>
-<h2 id="sorting">Sorting</h2>
+<h2 id="review-of-asymptotic-notation">Review of Asymptotic Notation</h2>
+<p><span class="math inline">T(n) \in O(f(n))</span> if and only if <span class="math inline">\exists</span> two positive constants <span class="math inline">c, n_0</span> such that <span class="math inline">\forall n \ge n_0</span>, <span class="math inline">T(n) \le c\cdot f(n)</span>.</p>
+<p>Example: <span class="math inline">T(n) = \sum_{i=0}^k a_i n^i \in O(n^k)</span>, <span class="math inline">a_k &gt; 0</span>.</p>
+<blockquote>
+<p><span class="math display">\begin{aligned}T(n) &amp;\le \sum_{i=0}^k|a_i|n^i \\ &amp;= n^k\sum_{i=0}^k|a_i|\end{aligned}</span> So for <span class="math inline">c = \sum_{i=0}^k|a_i|, n_0 = 1</span>, <span class="math inline">T(n) \in O(n^k)</span>.</p>
+</blockquote>
+<p><span class="math inline">T(n) \in \Omega(f(n))</span> if and only if <span class="math inline">\exists c, n_0 &gt; 0</span> such that <span class="math inline">\forall n \ge n_0, T(n) \ge c\cdot f(n)</span>.</p>
+<p>Example: <span class="math inline">T(n) = \sum_{i=0}^k a_i n^i \in \Omega(n^k)</span>.</p>
+<blockquote>
+<p>Let us guess <span class="math inline">c = \frac{a_k}{2}</span>. <span class="math display">\begin{aligned}\sum_{i=0}^ka_in^i &amp;\ge \frac{a_k}{2}n^k \\ n &amp;\ge \sum_{i=0}^{k-1} \frac{-2a_in^i}{a_k n^{k-1}}\end{aligned}</span> The problem is that the sum is not a constant so it cannot be <span class="math inline">n_0</span>. <span class="math display">n = \sum_{i=0}^k\left|\frac{2a_i}{a_k}\right|</span></p>
+</blockquote>
+<p><span class="math inline">T(n) \in \Theta(f(n))</span> if and only if <span class="math inline">T(n) \in O(f(n))</span> and <span class="math inline">T(n) \in \Omega(f(n))</span>.</p>
+<p><span class="math inline">T(n) \in o(f(n))</span> if and only if <span class="math inline">\forall c &gt; 0, \exists n_0</span> such that <span class="math inline">\forall n \ge n_0 T(n) \le c \cdot f(n)</span>.</p>
+<p><span class="math inline">T(n) \in \omega(f(n))</span> if and only if <span class="math inline">\forall c &gt; 0, \exists n_0</span> such that <span class="math inline">\forall n \ge n_0, T(n) \ge c\cdot f(n)</span>.</p>
+<h3 id="limits">Limits</h3>
+<p><span class="math inline">T(n) \in o(f(n))</span> iff <span class="math inline">\lim_{n\to \infty}\frac{T(n)}{f(n)} = 0</span>.</p>
+<p><span class="math inline">T(n) \in \omega(f(n))</span> iff <span class="math inline">\lim_{n\to \infty}\frac{T(n)}{f(n)} = \infty</span>.</p>
+<p><span class="math inline">T(n) \in \Theta(f(n))</span> iff <span class="math inline">\lim_{n\to\infty}\frac{T(n)}{f(n)} = c &gt; 0</span>.</p>
+<h2 id="important-summations">Important Summations</h2>
+<ol type="1">
+<li><span class="math inline">\sum_{i=1}^n i = \frac{n}{n-1}{2} \in \Theta(n^2)</span>.</li>
+<li><span class="math inline">\sum_{i=1}^n i^2 = \frac{n}{n+1}{2n + 1}{6} \in \Theta(n^3)</span>.</li>
+<li><span class="math inline">\sum_{i=1}^ni^d \in \Theta(n^{d + 1})</span>.</li>
+<li><span class="math inline">\sum_{i=1}^nc^i = \frac{c^{k-1} -1}{c-1} \in \begin{cases}\Theta(c^k), c &gt; 1\\ \Theta(1), c &lt; 1\\ \Theta(k), c = 1\end{cases}</span></li>
+<li><span class="math inline">\sum_{i=1}^n \frac{1}{i} \in \Theta(\log n)</span>.</li>
+<li><span class="math inline">\log(n!) = n\log n - \Theta(n)</span>, by Stirling’s formula.</li>
+</ol>
 </body>
 </html>
