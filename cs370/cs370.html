@@ -54,10 +54,13 @@
 <li>Does the interpolating polynoials always exist?</li>
 <li>Are interpolating polynomials <strong>unique</strong>?</li>
 </ol>
-<p>We can either show that <span class="math inline">y_i = 0 \Rightarrow c_i = 0</span>. Or that we can <strong>always</strong> find an answer. Or that <span class="math inline">\det V = \Pi_{i&lt;j}(x_i - x_j) \neq 0</span> when <span class="math inline">x_i</span> distinct.</p>
+<p>We can either show that <span class="math inline">y_i = 0 \Rightarrow c_i = 0</span> <em>or</em> that we can <strong>always</strong> find an answer <em>or</em> that <span class="math inline">\det V = \Pi_{i&lt;j}(x_i - x_j) \neq 0</span> when <span class="math inline">x_i</span> distinct.</p>
+<h2 id="lagrange-form-of-interpolating-polynomial">Lagrange Form of Interpolating Polynomial</h2>
 <p>We can <strong>always</strong> construct an interpolating polynomial as follows. <span class="math inline">p(x) = \sum_{i=1}^n y_i L_i(x)</span>. Where each <span class="math inline">L_i(x)</span> is a polynomial of degree at most <span class="math inline">n-1</span> which also satisfies <span class="math inline">L_i(x_i) = 1, L_i(x_j) = 0, \forall i \neq j</span>.</p>
 <blockquote>
 <p><span class="math display">L_i(x) = \frac{(x - x_1)(x - x_2)...(x - x_{i-1})(x - x_{i+1})...(x_n)}{(x_i - x_1)(x_i - x_2)...(x_i - x_{i-1})(x_i - x_{i+1})...(x_i - x_n)}</span></p>
 </blockquote>
+<h2 id="hermite-interpolation">Hermite Interpolation</h2>
+<p>Given <span class="math inline">n</span> points <span class="math inline">(x_i, y_i)</span> with dervative values <span class="math inline">s_i</span>, we attempt to find <span class="math inline">S(x)</span> of degree <span class="math inline">n+1</span> satisfying <span class="math inline">S(x_i) = y_i, S(x_i)^\prime = s_i</span>.</p>
 </body>
 </html>
