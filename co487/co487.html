@@ -314,11 +314,52 @@ while keystream_bytes_are_required:
 </ul>
 <p>Component function <span class="math inline">f: \{0, 1\}^{64} \to \{0, 1\}^{64}</span> is complicated.</p>
 <ul>
+<li>Divide input into bytes, then into nibbles.</li>
+<li>Left bytes are passed into a fixed function.
+<ul>
+<li>Swaps bits based on <span class="math inline">k</span>.</li>
+<li>Each bit tells you whether to swap bits between nibbles.</li>
+</ul></li>
+<li>Permute bits in a known way.</li>
+<li>Performed 16 times consecutively.</li>
+</ul>
+<blockquote>
+<p>Complicated, but is it secure?</p>
+</blockquote>
+<ul>
 <li>An adversary can easily determine the secret key after obtaining the ciphertexts for about 32000 carefully-chosen plaintexts.</li>
 <li>The attack shows that NDS is (totally) <strong>insecure</strong>.
 <ul>
 <li>Demonstrates the importance of using different subkeys in the rounds of a Feistel cipher.</li>
 </ul></li>
 </ul>
+<h4 id="chosen-plaintext-attack-on-nds">Chosen-Plaintext Attack on NDS</h4>
+<blockquote>
+<p><strong>Given</strong> an encryption oracle with respect to Alice’s secret key, we want to <strong>find</strong> <span class="math inline">k</span>.</p>
+</blockquote>
+<p><strong>Observation</strong>: Let <span class="math inline">T</span> denote one round of encryption. Let <span class="math inline">F</span> represent the full encryption function.</p>
+<p><span class="math display">T((m_{i-1}, m_i)) = (m_i, m_{i-1}\oplus f(m_i))</span> <span class="math display">F((m_0, m_1)) = (m_16, m_17)</span></p>
+<p>So <span class="math inline">F = T^{16}</span>. So <span class="math inline">T(F(m)) = T(T^{16}(m)) = T^{16}(m)T(m) = F(T(m))</span>. <strong><span class="math inline">\mathbf{F, T}</span> commute</strong>.</p>
+<ol type="1">
+<li>We select <span class="math inline">r \in \{0, 1\}^8</span>. We determine <span class="math inline">k(r)</span> as follows. Select <span class="math inline">u = (m_0, m_1)</span> such that.
+<ul>
+<li>The first bit of every byte in <span class="math inline">m_1</span> is <span class="math inline">r</span>.
+<ul>
+<li>Ensures that the input to <span class="math inline">k</span> is <span class="math inline">r</span> for the first round of encryption.</li>
+</ul></li>
+<li><span class="math inline">S_0(n_1^\prime) \neq S_1(n_2^\prime)</span> for each <span class="math inline">1 \le j \le 8</span>.
+<ul>
+<li>Allows us to detect whether the nibbles were instructed to swap.</li>
+</ul></li>
+</ul></li>
+<li>Obtain <span class="math inline">F(u) = (a, b)</span> from Alice.</li>
+</ol>
+<p>Then <span class="math inline">T(F(u)) = T((a, b)) = (b, ?)</span>. Since <span class="math inline">F, T</span> commute, we have <span class="math inline">F(T(u)) = (b, ?)</span>.</p>
+<p>Let’s make a guess for <span class="math inline">k(r) = t \in \{0, 1\}^8</span>. We apply one round of encryption to <span class="math inline">u</span> assuming that <span class="math inline">k(r) = t</span>. Call the result <span class="math inline">T_t(u)</span>. Obtain the encryption of <span class="math inline">T_t(u)</span> from Alice, <span class="math inline">F(T_t(u)) = (c, d)</span>.</p>
+<p>Now, if indeed <span class="math inline">k(r) = t</span>, then <span class="math inline">T_t(u) = T(u)</span>, so <span class="math inline">F(T_t(u)) = F(T(u))</span>. So <span class="math inline">b = c</span>. On the other hand, if <span class="math inline">k(r) \neq t</span>, then we claim <span class="math inline">T_t(u) \neq T(u)</span> by the second constraint on the input.</p>
+<blockquote>
+<p>Assuming now that <span class="math inline">F</span> behaves like a random permutation (<em>heuristic assumption</em>). Then we can assume that <span class="math inline">F(T_t(u))</span> is a random bit string of length 128. In particular, the probability that <span class="math inline">c = b</span> is roughly <span class="math inline">\frac{1}{2^{64}}</span> which is negligible. So if <span class="math inline">b \neq c</span> then <span class="math inline">k(r) \neq t</span>.</p>
+</blockquote>
+<p><strong>Expected Chosen-Plaintexts</strong>: <span class="math inline">256(1 + 128) \approx 32000</span>.</p>
 </body>
 </html>
