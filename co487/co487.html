@@ -206,7 +206,7 @@ while keystream_bytes_are_required:
     j = (S[i] + j) % 256
     S[i], S[j] = S[j], S[i]
     t = (S[i] + S[j]) % 256
-    output(t)</code></pre>
+    output(S[t])</code></pre>
 <p><strong>Encryption</strong>: Keystream bytes are xored with the plaintext bytes.</p>
 <p>Fluhrer-Mantin-Shamir attack exploits known biases in the first few bytes of the keystream. Defeated by discarding the first few bytes.</p>
 <p>Because of several new weaknesses, RC4 is no longer used in applications such as SSL. Instead, use AES-CTR.</p>

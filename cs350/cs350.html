@@ -183,5 +183,14 @@ void thread_yield(void);</code></pre>
 </blockquote>
 <p>Every time an interrupt is called, a <strong>trap frame</strong> is the first. Then the interrupt handler stack frame is called, followed by the normal context switching procedures.</p>
 <p>When returning from the <strong>trap_frame</strong>, the original state is restored.</p>
+<h2 id="locks-mutex">Locks (Mutex)</h2>
+<p>Before entering a critical section, acquire a lock. Upon leaving, release the lock.</p>
+<p>Implemented in hardware because we need an atomic <strong>test-and-set</strong>.</p>
+<pre><code>Acquire(bool* lock) {
+    while (Xchg(true, lock) == true);
+}
+Release(bool* lock) {
+    *lock = false;
+}</code></pre>
 </body>
 </html>
