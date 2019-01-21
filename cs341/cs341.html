@@ -54,5 +54,32 @@
 <li><span class="math inline">\sum_{i=1}^n \frac{1}{i} \in \Theta(\log n)</span>.</li>
 <li><span class="math inline">\log(n!) = n\log n - \Theta(n)</span>, by Stirling’s formula.</li>
 </ol>
+<h1 id="reductions">Reductions</h1>
+<blockquote>
+<p>Solving a computational problem <span class="math inline">C_1</span> by using an algorithm that solves a problem <span class="math inline">C_2</span>.</p>
+</blockquote>
+<p>An equation or an inequality that describes a function <span class="math inline">T(n)</span> in terms of <span class="math inline">T</span>’s value on inputs smaller than <span class="math inline">n</span> and a base case.</p>
+<p>Example: MergeSort.</p>
+<blockquote>
+<p><span class="math inline">T(n) \le 2T(\frac{n}{2}) + 7n</span>, <span class="math inline">T(2) = 2</span>.</p>
+</blockquote>
+<h2 id="solving-reccurences">Solving Reccurences</h2>
+<ol type="1">
+<li>Proof by induction.</li>
+<li>Recursion tree method.</li>
+<li>Master theorem.
+<ul>
+<li>If the input is of the form <span class="math inline">T(n) \le aT(\frac{n}{b}) + f(n)</span>.</li>
+</ul></li>
+</ol>
+<h3 id="induction">Induction</h3>
+<p>Exampe: Median-of-Medians.</p>
+<p><span class="math display">T(n) \le T(\frac{n}{5}) + T(\frac{7n}{10}) + n, T(1) = 1</span></p>
+<blockquote>
+<p><strong>Claim</strong>: <span class="math inline">T(n) \le 10n</span>.</p>
+<p><strong>Base Case</strong>: <span class="math inline">T(1) = 1 &lt; 10</span>.</p>
+<p><strong>Induction Hypothesis</strong>: <span class="math inline">\forall k &lt; n, T(k) \le 10k</span>.</p>
+<p><span class="math display">\begin{aligned}T(n) &amp;\le \frac{10n}{5} + \frac{70n}{10} + n\\ &amp;= 2n + 7n + n\\ &amp;= 10\end{aligned}</span></p>
+</blockquote>
 </body>
 </html>

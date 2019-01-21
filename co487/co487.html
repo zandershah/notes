@@ -361,5 +361,39 @@ while keystream_bytes_are_required:
 <p>Assuming now that <span class="math inline">F</span> behaves like a random permutation (<em>heuristic assumption</em>). Then we can assume that <span class="math inline">F(T_t(u))</span> is a random bit string of length 128. In particular, the probability that <span class="math inline">c = b</span> is roughly <span class="math inline">\frac{1}{2^{64}}</span> which is negligible. So if <span class="math inline">b \neq c</span> then <span class="math inline">k(r) \neq t</span>.</p>
 </blockquote>
 <p><strong>Expected Chosen-Plaintexts</strong>: <span class="math inline">256(1 + 128) \approx 32000</span>.</p>
+<h3 id="des">DES</h3>
+<p><strong>Component function</strong> <span class="math inline">f_i: \{0, 1\}^{32} \to \{0, 1\}^{32}</span>.</p>
+<ul>
+<li>Weaknesses are small key length and small block length.</li>
+</ul>
+<p><strong>Question</strong>: How can one construct a more secure block cipher from DES?</p>
+<p><strong>Multiple Encryption</strong>. Re-encrypt the ciphertext one or more times using independent keys. Hope that this increases effective key length.</p>
+<h4 id="double-encryption">Double Encryption</h4>
+<p><span class="math inline">k = (k_1, k_2) \in_R\{0, 1\}^{56}</span>.</p>
+<p><strong>Encryption</strong>. <span class="math inline">c = E_{k_2}(E_{k_1}(m))</span>.</p>
+<p>Double-DES key length is <span class="math inline">l=112</span>, so exhaustive key search is infeasible.</p>
+<p><span class="math inline">E^{-1}_{k_2}(c) = E_{k_1}(m)</span> which leads to a <strong>meet-in-the-middle</strong> attack.</p>
+<h3 id="block-cipher-modes-of-operation">Block Cipher Modes of Operation</h3>
+<blockquote>
+<p>How should we encrypt blocks?</p>
+</blockquote>
+<ul>
+<li><strong>ECB</strong>. The drawback of encrypting one block at a time is that identical plaintext results in identical ciphertexts.
+<ul>
+<li>Not semantically secure against chosen-plaintext attacks.</li>
+</ul></li>
+<li><strong>CBC</strong>. We compute <span class="math inline">c_i = E_k(m_i \oplus c_{i-1})</span>. Identical plaintext with different IVs result in different ciphertexts.</li>
+</ul>
+<h2 id="aes">AES</h2>
+<blockquote>
+<p>Widely used today.</p>
+</blockquote>
+<p>Requirements.</p>
+<ul>
+<li>Key lengths <span class="math inline">128, 192, 256</span>.</li>
+<li>Block length <span class="math inline">128</span> bits.</li>
+<li>Efficient on both hardware and software platform.</li>
+<li>Available on worldwide, non-exclusive, royalty-free.</li>
+</ul>
 </body>
 </html>

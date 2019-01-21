@@ -60,7 +60,55 @@
 <blockquote>
 <p><span class="math display">L_i(x) = \frac{(x - x_1)(x - x_2)...(x - x_{i-1})(x - x_{i+1})...(x_n)}{(x_i - x_1)(x_i - x_2)...(x_i - x_{i-1})(x_i - x_{i+1})...(x_i - x_n)}</span></p>
 </blockquote>
+<h2 id="a1-hint-aside">A1 Hint Aside</h2>
+<p><span class="math inline">I_0, I_1, ..., I_n = \frac{1}{n} - \alpha I_{n-1}</span>.</p>
+<blockquote>
+<p>If our starting point is incorrect, we want to look at the errors in every step. How does the error grow? We have a recurrence for the error.</p>
+</blockquote>
+<ul>
+<li>In the assignment, <span class="math inline">p_0</span> is correct, but we cannot store <span class="math inline">\frac{1}{3}</span> properly.</li>
+</ul>
 <h2 id="hermite-interpolation">Hermite Interpolation</h2>
 <p>Given <span class="math inline">n</span> points <span class="math inline">(x_i, y_i)</span> with dervative values <span class="math inline">s_i</span>, we attempt to find <span class="math inline">S(x)</span> of degree <span class="math inline">n+1</span> satisfying <span class="math inline">S(x_i) = y_i, S(x_i)^\prime = s_i</span>.</p>
+<h1 id="cubic-splines">Cubic Splines</h1>
+<blockquote>
+<p>Polynomial interpolation does not tend give answers which keep the shape of the given points, it flows between them. We want a function which <strong>looks good</strong>.</p>
+</blockquote>
+<p>We want a function <span class="math inline">S(x)</span> which satisfies the following conditions.</p>
+<ol type="1">
+<li>In each interval, <span class="math inline">S(x)</span> is a cubic polynomial.</li>
+<li><span class="math inline">S(x)</span> interpolates the points, <span class="math inline">S(x_i) = y_i</span>.</li>
+<li><span class="math inline">S^\prime(x), S^{\prime\prime}(x)</span> exists and is continuous <span class="math inline">[x_1, x_n]</span>.</li>
+<li>Two additional <em>boundary conditions</em>.</li>
+</ol>
+<p><span class="math display">S(x) = \begin{cases}
+S_1(x),\ &amp;x_1 \le x \le x_2\\
+S_2(x),\ &amp;x_2 \le x \le x_2 \\
+... \\
+S_{n-1}(x),\ &amp;x_{n-1} \le x \le x_n\\
+\end{cases}</span></p>
+<p>Where <span class="math inline">s_i, s_i^\prime</span> are unknowns, well-defined.</p>
+<p>How many unknowns? <span class="math inline">4(n-1)</span>. How many conditions? <span class="math inline">2(n-1)</span> interpolation, <span class="math inline">2(n-2)</span> derivatives, 2 boundary conditions.</p>
+<h2 id="boundary-conditions">Boundary Conditions</h2>
+<h3 id="natural-boundaries">Natural Boundaries</h3>
+<p><span class="math inline">S^{\prime\prime}(x_1) = S^{\prime\prime}(x_n) = 0</span>.</p>
+<h3 id="clamped">Clamped</h3>
+<p><span class="math inline">S^{\prime}(x_1) = s_1, S^{\prime}(x_n) = s_n</span>, where <span class="math inline">s_1, s_n</span> are constants.</p>
+<h3 id="periodic">Periodic</h3>
+<p><span class="math inline">S^\prime(x_1) = S^\prime(x_n), S^{\prime\prime}(x_1) = S^{\prime\prime}(x_n)</span>.</p>
+<h3 id="not-a-knot">Not-a-knot</h3>
+<p><span class="math inline">S^{\prime\prime\prime}</span> is continuous at <span class="math inline">x_2</span> and <span class="math inline">x_{n-1}</span>.</p>
+<h2 id="computing-cubic-splines-fast">Computing Cubic Splines Fast</h2>
+<blockquote>
+<p>We dont want to sovle a system of <span class="math inline">4(n-1)</span> unknowns.</p>
+</blockquote>
+<ol type="1">
+<li>Treat the derivatives <span class="math inline">s_i</span> are the <span class="math inline">n</span> points as unknowns.</li>
+<li>Each <span class="math inline">s_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x - x_i)^3</span>.
+<ul>
+<li>Satisfies <span class="math inline">s_i(x_i) = y_i, s_i(x_{i+1}) = y_{i+1}, s^\prime(x_i) = s_i, s_i^\prime(x_{i+1}) = s_{i+1}</span>.</li>
+<li>We have a cubic spline as long as <span class="math inline">s_{i-1}^{\prime\prime}(x_i) = s_i^{\prime\prime}(x_i), i \in \{2, 3, ..., n-1\}</span> and the two boundary conditions are met.</li>
+</ul></li>
+</ol>
 </body>
 </html>

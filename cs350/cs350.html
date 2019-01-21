@@ -192,5 +192,54 @@ void thread_yield(void);</code></pre>
 Release(bool* lock) {
     *lock = false;
 }</code></pre>
+<blockquote>
+<p><strong>printf</strong> forces the execution of threads to be a certain way, and can hide race conditions in your code!</p>
+</blockquote>
+<h3 id="arm">ARM</h3>
+<pre><code>ARMTestAndSet(addr, value) {
+    // Load value.
+    tmp = LDREX addr
+    // Store new value.
+    result = STREX value, addr
+    if (result == SUCCEED) return tmp
+    return TRUE
+}
+
+Acquire(bool *lock) {
+    while(ARMTestAndSet(lock, true) == true) {};
+}</code></pre>
+<h3 id="spinlocks-in-os161">Spinlocks in OS/161</h3>
+<ul>
+<li><p>“Spins” repeatedly until the lock is available.</p>
+<p>struct spinlock { volatile spinlock_data_t lk_lock; struct cpu* lk_holder; };</p>
+<p>void spinlock_init(struct spinlock* lk); void spinlock_acquire(struct spinlock* lk); void spinlock_release(struct spinlock* lk);</p></li>
+</ul>
+<blockquote>
+<p><em>spinlock_acquire</em> calls <em>spinlock_data_testandset</em> in a loop until the lock is acquired. It <strong>turns off interrupts</strong> on the cpu.</p>
+</blockquote>
+<p>Spinlocks are not efficient, if we want large chunks of code protected, we should use a <strong>lock</strong> (<strong>mutex</strong>). The difference is that spinlocks spin, locks <strong>block</strong>.</p>
+<h3 id="thread-blocking">Thread Blocking</h3>
+<ul>
+<li>When a thread blocks, it stops running.
+<ul>
+<li>Context switch from blocking thread to a new thread.</li>
+<li>Waits.</li>
+</ul></li>
+<li>Eventually, a blocked thread is signaled and awakened by another thread.</li>
+</ul>
+<h3 id="wait-channels-in-os161">Wait Channels in OS/161</h3>
+<blockquote>
+<p>Wait channels are used to implement thread blocking.</p>
+</blockquote>
+<pre><code>void wchan_sleep(struct wchan* wc);
+void wchan_wakeall(struct wchan* wc);
+void wchan_wakeone(struct wchan* wc);
+void wchan_lock(struct wchan* wc);</code></pre>
+<ul>
+<li>Blocks calling thread on wait channel wc.</li>
+<li>Unblocks all threads sleeping on wait channel.</li>
+<li>Unblock one thread sleeping on wait channel.</li>
+<li>Prevent operations on wait channel.</li>
+</ul>
 </body>
 </html>
