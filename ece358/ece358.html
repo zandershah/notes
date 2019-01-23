@@ -354,15 +354,8 @@ Persistent HTTP Response Time = RTT + n(RTT + transmission time).</p>
 <h3 id="http-request">HTTP Request</h3>
 <p><img src="https://i.imgur.com/loyZ7qQ.png" /></p>
 <ul>
-<li><p>Request Line (method URL version).</p>
-<blockquote>
-<p>GET /index.html HTTP/1.1</p>
-</blockquote></li>
-<li><p>Header Lines (header_field_name value).</p>
-<blockquote>
-<p>Host: www-net.cs.umass.edu User-Agent: Firefox/3.6.10 Keep-Alive: 115 Connection: keep-alive(requesting <em>persistent</em>)<br />
-(carriage return, line feed at start of line indicates end of header lines)</p>
-</blockquote></li>
+<li>Request Line (method URL version).</li>
+<li>Header Lines (header_field_name value).</li>
 </ul>
 <h3 id="http1.0">HTTP/1.0</h3>
 <ul>
@@ -1762,7 +1755,7 @@ When <strong>cwnd</strong> gets to <span class="math inline">\frac{1}{2}</span> 
 <ul>
 <li>Probability that a given node has success in a slot is <span class="math inline">p(1-p)^{N-1}</span>.</li>
 <li>Probability that <em>any</em> node has a success is <span class="math inline">Np(1-p)^{N-1}</span>.</li>
-<li><strong>Max efficiency</strong> is <span class="math inline">p^&amp;</span> which maximizes <span class="math inline">Np(1-p)^{N-1}</span>.</li>
+<li><strong>Max efficiency</strong> is <span class="math inline">p^*</span> which maximizes <span class="math inline">Np(1-p)^{N-1}</span>.</li>
 <li>As <span class="math inline">N \to \infty</span>, the max efficiency is <span class="math inline">\frac{1}{e} = 0.37</span>.</li>
 </ul>
 <h4 id="pure-unslotted-aloha.">Pure (Unslotted) ALOHA.</h4>

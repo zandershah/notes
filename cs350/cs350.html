@@ -241,5 +241,49 @@ void wchan_lock(struct wchan* wc);</code></pre>
 <li>Unblock one thread sleeping on wait channel.</li>
 <li>Prevent operations on wait channel.</li>
 </ul>
+<h2 id="semaphores">Semaphores</h2>
+<ul>
+<li>A semaphore is an object with an interger value, supporting two operations.</li>
+</ul>
+<ol type="1">
+<li><strong>P</strong>: If the semaphore value is greater than 0, decrement. Otherwise wait until we can.</li>
+<li><strong>V</strong>: Increment the value of the semaphore.</li>
+</ol>
+<blockquote>
+<p><strong>P</strong> and <strong>V</strong> are <strong>atomic</strong>.</p>
+</blockquote>
+<ul>
+<li><strong>Binary semaphore</strong>. Single resource, behaves like a lock but does not keep track of ownership.</li>
+<li><strong>Counting semaphore</strong>. Arbitrary number of resources.</li>
+</ul>
+<p>Example.</p>
+<pre><code>volatile int total = 0;
+struct semaphore *total_sem;
+total_sem = sem_create(&quot;total_mutex&quot;, 1);
+
+void add() {
+    int i;
+    for (i = 0; i &lt; N; ++i) {
+        P(sem);
+            total++;
+        V(sem);
+    }
+}</code></pre>
+<h2 id="condition-variables">Condition Variables</h2>
+<ul>
+<li>Condition variable is intended to work together with a lock. Only available from <strong>within the critical section that is protected by the lock</strong>.
+<ul>
+<li><strong>wait</strong>. Causes calling thread to block, releases the lock associated with condition variable. Reaquires lock once thread is unblocked.
+<ul>
+<li>Release lock and put me to sleep.</li>
+<li>Acquire lock and return.</li>
+<li><strong>Note</strong>. Implementation of <strong>cv_wait</strong> will be asked on examinations.</li>
+<li><strong>MESA Style Rough Steps</strong>. lock wchan, release lock, sleep, acquire luck</li>
+<li><strong>Note</strong>. Reccomended to use CV on traffic question.</li>
+</ul></li>
+<li><strong>signal</strong>. If threads are blocked on signaled condition variable, one of the threads are unblocked.</li>
+<li><strong>broadcast</strong>. Like signal, but unblocks all threads blocked on that variable.</li>
+</ul></li>
+</ul>
 </body>
 </html>

@@ -395,5 +395,36 @@ while keystream_bytes_are_required:
 <li>Efficient on both hardware and software platform.</li>
 <li>Available on worldwide, non-exclusive, royalty-free.</li>
 </ul>
+<h1 id="hash-functions">Hash Functions</h1>
+<blockquote>
+<p>Takes in a message of arbitrary length and outputs fixed length. <span class="math inline">H</span> is fixed and public.</p>
+</blockquote>
+<ul>
+<li>Mapping <span class="math inline">H</span> such that <span class="math inline">H: \{0, 1\}^{\le L} \to \{0, 1\}^n</span>.</li>
+<li><span class="math inline">H</span> is efficiently computed.</li>
+</ul>
+<ol type="1">
+<li><strong>Preimage Resistance</strong>.
+<ul>
+<li>Given a hash value, it is computationally infeasible to find <strong>any</strong> <span class="math inline">x \in \{0, 1\}^{\le L}</span> such that <span class="math inline">H(x) = y</span>.</li>
+<li><span class="math inline">x</span> is called a <strong>preimage</strong> of <span class="math inline">y</span>.</li>
+</ul></li>
+<li><strong>2nd Preimage Resistance</strong>.</li>
+<li><strong>Collision Resistance</strong>.
+<ul>
+<li>Computationally infeasible to find two distinct inputs <span class="math inline">x, x^\prime \in \{0, 1\}^{\le L}</span> such that <span class="math inline">H(x) = H(x^\prime)</span>.</li>
+</ul></li>
+</ol>
+<h2 id="proof-of-work-in-blockchains">Proof-of-Work in Blockchains</h2>
+<blockquote>
+<p>Decentralized storage system.</p>
+</blockquote>
+<ol type="1">
+<li>Readable by everyone.</li>
+<li>Writeable by everyone.</li>
+<li>Unchangeable by anyone.</li>
+</ol>
+<h3 id="mining">Mining</h3>
+<p><strong>Given</strong> <span class="math inline">D_1, D_2, ..., D_t</span>, find a 256-bit string <span class="math inline">s</span> such that <span class="math inline">\text{SHA256}(D_1, D_2, ..., D_t, s)</span> begins with 74 zeros. So selecting arbitrary <span class="math inline">s</span> is expected <span class="math inline">2^{74}</span>. Then <span class="math inline">s</span> is the proof of work.</p>
 </body>
 </html>

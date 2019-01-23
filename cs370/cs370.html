@@ -104,11 +104,65 @@ S_{n-1}(x),\ &amp;x_{n-1} \le x \le x_n\\
 </blockquote>
 <ol type="1">
 <li>Treat the derivatives <span class="math inline">s_i</span> are the <span class="math inline">n</span> points as unknowns.</li>
-<li>Each <span class="math inline">s_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x - x_i)^3</span>.
+<li>Each <span class="math inline">S_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x - x_i)^3</span>.
 <ul>
-<li>Satisfies <span class="math inline">s_i(x_i) = y_i, s_i(x_{i+1}) = y_{i+1}, s^\prime(x_i) = s_i, s_i^\prime(x_{i+1}) = s_{i+1}</span>.</li>
-<li>We have a cubic spline as long as <span class="math inline">s_{i-1}^{\prime\prime}(x_i) = s_i^{\prime\prime}(x_i), i \in \{2, 3, ..., n-1\}</span> and the two boundary conditions are met.</li>
+<li>Satisfies <span class="math inline">S_i(x_i) = y_i, S_i(x_{i+1}) = y_{i+1}, S^\prime(x_i) = s_i, S_i^\prime(x_{i+1}) = s_{i+1}</span>.</li>
+<li>We have a cubic spline as long as <span class="math inline">S_{i-1}^{\prime\prime}(x_i) = S_i^{\prime\prime}(x_i), i \in \{2, 3, ..., n-1\}</span> and the two boundary conditions are met.</li>
 </ul></li>
 </ol>
+<p>We know that in general.</p>
+<ol type="1">
+<li><span class="math inline">a_i = y_i</span>.</li>
+<li><span class="math inline">b_i = s_i</span>.</li>
+<li><span class="math inline">c_i = \frac{3y_i^\prime - 2s_i - s_{i+1}}{\Delta x_i}</span>.</li>
+<li><span class="math inline">d_i = \frac{s_i + s_{i+1} - 2y_i^\prime}{\Delta x_i^2}</span>.</li>
+</ol>
+<blockquote>
+<p>For <strong>natural</strong> splines.</p>
+</blockquote>
+<ol type="1">
+<li><p>Determined by first boundary condition.</p>
+<blockquote>
+<p><span class="math inline">S^{\prime\prime} = 0 \Rightarrow 2c_1 = 0</span>. So then <span class="math inline">2s_1 + s_2 = 3y_1^\prime</span>.</p>
+</blockquote></li>
+<li><p>Determined by second boundary condition.</p>
+<blockquote>
+<p><span class="math inline">S^{\prime\prime} = 0 \Rightarrow S_{n-1}^{\prime\prime} = 0</span>. So <span class="math inline">2c_{n-1} + 6d_{n-1}(x_n - x_{n-1}) = 0</span>. <span class="math display">\begin{aligned}\frac{3y_{n-1}^\prime - 2s_{n-1} - s_n}{\Delta x_{n-1}} + \frac{3(s_{n-1} + s_n - 2y_{n-1}^\prime)}{\Delta x_{n-1}^2} \Delta x_{n-1} &amp;= 0 \\ s_{n-1} + 2s_n &amp;= 3y_{n-1}^\prime\end{aligned}</span></p>
+</blockquote></li>
+<li><p>Based on the interior points.</p>
+<blockquote>
+<p><span class="math display">\begin{aligned}
+S^{\prime\prime}_{i-1}(x_i) &amp;= S^{\prime\prime}_i(x_i) \\
+2c_{i-1}+6d_{i-1}(x_i - x_{i+1}) &amp;= 2c_i - 6d_i(x_i - x_i) \\
+c_{i-1} + 3d_{i-1}\Delta x_{i-1} &amp;= c_i \\
+\frac{3y_{i-1}^\prime - 2s_{i-1} - s_i}{\Delta x_{i-1}} + \frac{3(s_{i-1} + s_i - 2y_{i-1}^\prime)}{\Delta x_{i-1}^2}\Delta x_{i-1} &amp;= \frac{3y_{i}^\prime - 2s_i - 2s_{i+1}}{\Delta x_i} \\
+\Delta x_i S_{i-1} + 2(\Delta x_{i-1} - \Delta x_i)S_i + \Delta x_{i-1} S_{i+1} &amp;= 3y_i^\prime \Delta x_{i-1} + 3y_{i-1}^\prime \Delta x_i \\
+\end{aligned}</span></p>
+</blockquote></li>
+</ol>
+<p><span class="math display">\begin{bmatrix}
+2 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; ... &amp; 0 &amp; 0 &amp; 0 \\
+\star &amp; \star &amp; \star &amp; 0 &amp; 0 &amp; ... &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; \star &amp; \star &amp; \star &amp; 0 &amp; ... &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; \star &amp; \star &amp; \star &amp; ... &amp; 0 &amp; 0 &amp; 0\\
+  &amp;   &amp;   &amp;   &amp;   &amp; ... &amp;  &amp;  &amp;  \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; ... &amp; \star &amp; \star &amp; \star \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; ... &amp; 0 &amp; 1 &amp; 2\\
+\end{bmatrix}\begin{bmatrix}
+s_1 \\ s_2 \\ s_3 \\ s_4 \\ \ \\ ... \\ s_n \end{bmatrix} = \begin{bmatrix}
+3y_1^\prime \\\ \\\ \\\\ \\\  \\ 3y_n^\prime
+\end{bmatrix}</span></p>
+<p><strong>Example</strong>: <span class="math inline">(1, 1), (2, 2), (3, 1), (4, 0), (5, 3), (6, 3)</span>.</p>
+<blockquote>
+<p><span class="math inline">\Delta x_{i} = 1</span>. <span class="math inline">y_1^\prime = 1, y_2^\prime = -1, y_3^\prime = -1, y_4^\prime = 3, y_5^\prime = 0</span>.</p>
+<p><span class="math display">\left[\begin{array}{cccccc|c}
+2 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 3\\
+1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; -6\\
+0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 6\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 9\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; 0\\
+\end{array}\right]</span></p>
+</blockquote>
 </body>
 </html>

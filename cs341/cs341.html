@@ -81,5 +81,25 @@
 <p><strong>Induction Hypothesis</strong>: <span class="math inline">\forall k &lt; n, T(k) \le 10k</span>.</p>
 <p><span class="math display">\begin{aligned}T(n) &amp;\le \frac{10n}{5} + \frac{70n}{10} + n\\ &amp;= 2n + 7n + n\\ &amp;= 10\end{aligned}</span></p>
 </blockquote>
+<h3 id="master-theorem">Master Theorem</h3>
+<p>We observed using the recursion tree method, that there are three possibilities in the overall runtime analysis.</p>
+<ol type="1">
+<li>Work at each level stays the same.</li>
+<li>Work increases per level and work at the leaves dominate.</li>
+<li>Work keeps decreasing per level and the work at the root dominates.</li>
+</ol>
+<p>Assume all subproblems are of equal size.</p>
+<p><span class="math inline">T(n) \le aT(\frac{n}{b}) + O(n^d), T(1) \le 1</span>, where <span class="math inline">a</span> is the number of recursive calls, <span class="math inline">b</span> is the input size shrinkage order, and <span class="math inline">d</span> is the exponent in the work done at the combine step.</p>
+<p><span class="math display">T(n) \in \begin{cases}
+O(n^d \log(n)),\ &amp;a = b^d \\
+O(a^{\log_b(n)}n^{\log_b(a)}),\ &amp;a &gt; b^d \\
+O(n^d),\ &amp;a &lt; b^d \\
+\end{cases}</span></p>
+<p><strong>Proof</strong>. Assume for simplicity that <span class="math inline">n</span> is a power of <span class="math inline">b</span>. We have <span class="math inline">\log_b(n)</span> levels, with <span class="math inline">a^{\log_b(n)}</span> leaves. The total work done at each level <span class="math inline">j</span> is <span class="math inline">a^j(\frac{n}{b})^d</span> so the total work is.</p>
+<p><span class="math display">\begin{aligned}\sum_{j=0}^{\log_b(n)}a^j\frac{n^d}{b^{jd}} &amp;= cn^d\sum_{j=0}^{\log_b(n)} \left(\frac{a}{b^d}\right)^j\end{aligned}</span></p>
+<p>We can obtain the runtimes by checking the convergence of the above sum.</p>
+<h2 id="d-maxima">2D Maxima</h2>
+<p><strong>Input</strong>: Set <span class="math inline">P</span> of <span class="math inline">n</span> 2D points.</p>
+<p><strong>Output</strong>: All maximal points. <span class="math inline">p</span> is maximal if there is no such <span class="math inline">p^\prime</span> that dominates <span class="math inline">p</span> (<span class="math inline">p^\prime.x &gt; p.x \cap p^\prime.y &gt; p.y)</span>.</p>
 </body>
 </html>
