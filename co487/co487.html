@@ -415,6 +415,28 @@ while keystream_bytes_are_required:
 <li>Computationally infeasible to find two distinct inputs <span class="math inline">x, x^\prime \in \{0, 1\}^{\le L}</span> such that <span class="math inline">H(x) = H(x^\prime)</span>.</li>
 </ul></li>
 </ol>
+<p>To show that a hash property is violated, you need to design <strong>efficient</strong> algorithms for.</p>
+<ol type="1">
+<li><strong>PR</strong>.
+<ul>
+<li>Given <span class="math inline">y \in_R \{0, 1\}^n</span>, find <span class="math inline">x \in \{0, 1\}^*, H(x) = y</span>.</li>
+</ul></li>
+<li><strong>2PR</strong>.
+<ul>
+<li>Given <span class="math inline">x \in \{0, 1\}^*</span>, find <span class="math inline">x^\prime \in \{0, 1\}^*, x \neq x^\prime, H(x^\prime) = H(x)</span>.</li>
+</ul></li>
+<li><strong>CR</strong>.
+<ul>
+<li>Find <span class="math inline">x, x^\prime \in \{0, 1\}^*, x \neq x^\prime, H(x) = H(x^\prime)</span>.</li>
+<li>CR <span class="math inline">\Rightarrow</span> 2PR.</li>
+</ul></li>
+</ol>
+<h2 id="relationships-between-properties">Relationships Between Properties</h2>
+<ul>
+<li>CR <span class="math inline">\Rightarrow</span> 2PR.</li>
+<li>2PR <span class="math inline">\not\Rightarrow</span> CR.</li>
+<li>CR <span class="math inline">\not\Rightarrow</span> PR. In general. CR <span class="math inline">\Rightarrow</span> PR for reasonable hash functions.</li>
+</ul>
 <h2 id="proof-of-work-in-blockchains">Proof-of-Work in Blockchains</h2>
 <blockquote>
 <p>Decentralized storage system.</p>

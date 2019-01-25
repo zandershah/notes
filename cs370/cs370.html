@@ -164,5 +164,27 @@ s_1 \\ s_2 \\ s_3 \\ s_4 \\ \ \\ ... \\ s_n \end{bmatrix} = \begin{bmatrix}
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; 0\\
 \end{array}\right]</span></p>
 </blockquote>
+<h1 id="parametric-curves">Parametric Curves</h1>
+<p>Given <span class="math inline">(x_i, y_i)</span> as points on a curve, we want to find <span class="math inline">(x(t), y(t))</span>, <span class="math inline">t_1 \le t \le t_n</span>.</p>
+<ol type="1">
+<li>Spline interpolate <span class="math inline">(i, x_i)</span> to get <span class="math inline">x(t)</span>, then spline interpolate <span class="math inline">(i, y_i)</span> to get <span class="math inline">y(t)</span>. The curve is <span class="math inline">(x(t), y(t))</span>.
+<ul>
+<li>The problem with this approach is that it does not consider the distance between points.</li>
+</ul></li>
+<li><span class="math inline">t</span> changes according to the <strong>distance between points</strong>.
+<ul>
+<li><span class="math inline">t_1 = 0, t_i = t_{i-1} + \sqrt{(x_i - x_{i-1})^2 + (y_i - y_{i-1})^2}</span>.</li>
+</ul></li>
+</ol>
+<h2 id="a1-hint-aside-1">A1 Hint Aside</h2>
+<h3 id="question-6">Question 6</h3>
+<ol type="1">
+<li>Create a set of <span class="math inline">(x, y)</span> points for a given curve. Likely more than one curve.</li>
+<li>For each set of points representing a curve, create your arc length parameter <span class="math inline">t</span>.</li>
+<li>Create a spline function in MATLAB for <span class="math inline">x</span> using <span class="math inline">(t_i, x_i)</span>. <strong>X = csape(t, x, conditions)</strong>. An example of <em>conditions</em> is ‘periodic’.</li>
+<li>Create a spline function in MATLAB for <span class="math inline">y</span> using <span class="math inline">(t_i, y_i)</span>. <strong>Y = csape(t, y, conditions)</strong>.</li>
+<li><strong>xpoints = ppval(X, tpoints)</strong>, <strong>ypoints = ppval(Y, tpoints)</strong>.</li>
+<li><strong>plot(xpoints, ypoints)</strong>.</li>
+</ol>
 </body>
 </html>
