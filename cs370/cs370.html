@@ -136,7 +136,7 @@ S^{\prime\prime}_{i-1}(x_i) &amp;= S^{\prime\prime}_i(x_i) \\
 2c_{i-1}+6d_{i-1}(x_i - x_{i+1}) &amp;= 2c_i - 6d_i(x_i - x_i) \\
 c_{i-1} + 3d_{i-1}\Delta x_{i-1} &amp;= c_i \\
 \frac{3y_{i-1}^\prime - 2s_{i-1} - s_i}{\Delta x_{i-1}} + \frac{3(s_{i-1} + s_i - 2y_{i-1}^\prime)}{\Delta x_{i-1}^2}\Delta x_{i-1} &amp;= \frac{3y_{i}^\prime - 2s_i - 2s_{i+1}}{\Delta x_i} \\
-\Delta x_i S_{i-1} + 2(\Delta x_{i-1} - \Delta x_i)S_i + \Delta x_{i-1} S_{i+1} &amp;= 3y_i^\prime \Delta x_{i-1} + 3y_{i-1}^\prime \Delta x_i \\
+\Delta x_i S_{i-1} + 2(\Delta x_{i-1} + \Delta x_i)S_i + \Delta x_{i-1} S_{i+1} &amp;= 3y_i^\prime \Delta x_{i-1} + 3y_{i-1}^\prime \Delta x_i \\
 \end{aligned}</span></p>
 </blockquote></li>
 </ol>
@@ -185,6 +185,21 @@ s_1 \\ s_2 \\ s_3 \\ s_4 \\ \ \\ ... \\ s_n \end{bmatrix} = \begin{bmatrix}
 <li>Create a spline function in MATLAB for <span class="math inline">y</span> using <span class="math inline">(t_i, y_i)</span>. <strong>Y = csape(t, y, conditions)</strong>.</li>
 <li><strong>xpoints = ppval(X, tpoints)</strong>, <strong>ypoints = ppval(Y, tpoints)</strong>.</li>
 <li><strong>plot(xpoints, ypoints)</strong>.</li>
+</ol>
+<h1 id="initial-value-problems-or-ordinary-differential-equations">Initial Value Problems or Ordinary Differential Equations</h1>
+<ul>
+<li>Many methods to solve.</li>
+<li>Questions about how accurate is a given method. Mathematically or numerically.</li>
+</ul>
+<p>Examples.</p>
+<ol type="1">
+<li><span class="math inline">\frac{dy}{dt} = ky(t), y(0) = y_0</span>.</li>
+<li><span class="math inline">y^\prime(y) = -ty(t)</span>.</li>
+<li><span class="math inline">x^\prime(t) = x(t)(a - \alpha y(t))</span>. <span class="math inline">y^\prime(t) = y(t)(-b + \beta x(t))</span>.
+<ul>
+<li><span class="math inline">Y(t) = [x(t), y(t)]</span>, <span class="math inline">Y(t_0) = [x_0, y_0]</span>.</li>
+<li><span class="math inline">Y^\prime(t) = [x^\prime(t), y^\prime(t)] = [ax(t) - \alpha x(t)y(t), -by(t) + \beta x(t)y(t)]</span>.</li>
+</ul></li>
 </ol>
 </body>
 </html>
