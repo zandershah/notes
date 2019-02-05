@@ -285,5 +285,103 @@ void add() {
 <li><strong>broadcast</strong>. Like signal, but unblocks all threads blocked on that variable.</li>
 </ul></li>
 </ul>
+<h1 id="a1-hint-aside">A1 Hint Aside</h1>
+<ol type="1">
+<li>Implement locks.</li>
+<li>Implement condition variables.</li>
+<li>Traffic simulation.
+<ul>
+<li>Improve flow of cars through the intersecation, currently only implements one car at a time.</li>
+<li>Modify synchonization with locks, CVs, semaphores.
+<ul>
+<li>Semaphores are not recommended. CVs are.</li>
+</ul></li>
+</ul></li>
+</ol>
+<ul>
+<li>You <strong>don’t</strong> need an individual lock for each CV.</li>
+<li>You are not going to own the lock as you go through the intersection.</li>
+<li>Need to check safely whether the car can enter the intersection and safely remove once they are out of the intersection.
+<ul>
+<li>Lock is used to protect the modification of the intersection, not for actually going through.</li>
+</ul></li>
+<li>Recommended number of CVs is <strong>4</strong>.</li>
+</ul>
+<p>Multiple ways to to keep track of where cars are in the intersection.</p>
+<ul>
+<li>OS/161 provides an array, queue, and a few other data structure libraries. Documentation can be found in the test directory.
+<ul>
+<li>Possible to do with simply counters.</li>
+</ul></li>
+<li>Can’t use wait channels directly.</li>
+<li>Don’t modify traffic.c</li>
+</ul>
+<blockquote>
+<p><strong>sy2, uw1, sy3</strong> are the tests to run.</p>
+</blockquote>
+<ul>
+<li>Initialize your lock variables for CV.</li>
+</ul>
+<h2 id="volatile-and-race-conditions">Volatile and Race Conditions</h2>
+<ul>
+<li>Race conditions are mostly your fault, but they can also come from the <strong>compiler</strong> and <strong>CPU</strong>.
+<ul>
+<li>Optimizations.</li>
+<li><strong>Memory models</strong> describe how threads access to memory in shared regions behave. Tells compiler and CPU which optimizations can be performed.
+<ul>
+<li>OS/161 does not have this.</li>
+<li>CPU also has memory model which re-orders loads and stores. There are assembly level barriers to prevent race conditions at each level.</li>
+</ul></li>
+<li>Register optimizations.</li>
+</ul></li>
+<li>Keyword <strong>volatile</strong> disables the optimizations forcing a value to be loaded and stored to memory with each use. Prevents compiler from re-ordering loads and stores for that variable.</li>
+</ul>
+<h2 id="deadlocks">Deadlocks</h2>
+<pre><code>lock lock_a, lock_b
+
+int FuncA() {
+    lock_acquire(lock_a);
+    lock_acquire(lock_b);
+    ...
+    lock_release(lock_a);
+    lock_relase(lock_b);
+}
+
+int FuncB() {
+    lock_acquire(lock_b);
+    lock_acquire(lock_a);
+    ...
+    lock_relase(lock_b);
+    lock_release(lock_a);
+}</code></pre>
+<ul>
+<li>Multiple threads are asleep waiting for each other. <strong>Deadlock</strong>.</li>
+</ul>
+<ol type="1">
+<li><strong>No Hold and Wait</strong>. Prevent a thread from requesting resources if it currently has resources allocated to it. Either get them all at once, or have none.</li>
+<li><strong>Resource Ordering</strong>. Order the resource types and require each thread acquire resources in increasing type order.</li>
+</ol>
+<p>Example.</p>
+<pre><code>lock A, B
+
+try_acquire() {
+    spin_acquire(lk-&gt;spin);
+    if (lk-&gt;held) {
+        release(lk-&gt;spin);
+        return false;
+    }
+    lk-&gt;held = true;
+    lk-&gt;owner = me;
+    release(lk-&gt;spin);
+    return true;
+}
+
+FuncA() {
+    acquire(A)
+    while(!try_acquire(B)) {
+        release(A);
+        acquire(A);
+    }
+}</code></pre>
 </body>
 </html>

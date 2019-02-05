@@ -201,5 +201,13 @@ s_1 \\ s_2 \\ s_3 \\ s_4 \\ \ \\ ... \\ s_n \end{bmatrix} = \begin{bmatrix}
 <li><span class="math inline">Y^\prime(t) = [x^\prime(t), y^\prime(t)] = [ax(t) - \alpha x(t)y(t), -by(t) + \beta x(t)y(t)]</span>.</li>
 </ul></li>
 </ol>
+<p>Solving means to numerically solve. We want <span class="math inline">t_i, y_i</span> such that <span class="math inline">y_k \approx y(t_k)</span>.</p>
+<p>Three methods are provided.</p>
+<ol type="1">
+<li>Forward Euler.</li>
+<li>Modified or Improved Euler.</li>
+<li>Trapezoid Rule.</li>
+</ol>
+<p>In each we will assume we are given a time increment <span class="math inline">h = \Delta t</span> and all time increments will be constant <span class="math inline">t_k = t_k + k \cdot h</span>.</p>
 </body>
 </html>
