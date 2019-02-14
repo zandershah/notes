@@ -1,4 +1,4 @@
-CS 350 Help Session
+CS 370 Help Session
 =
 
 > Question and answer format.
