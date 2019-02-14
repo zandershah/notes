@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>cs350_help</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="cs-350-help-session">CS 350 Help Session</h1>
+<blockquote>
+<p>Question and answer format.</p>
+</blockquote>
+<ol type="1">
+<li>Page 77, Question 5.
+<ul>
+<li>Did not cover in class.</li>
+</ul></li>
+<li>A2, Question 1. Difference between standard form and dynamics function.
+<ul>
+<li>Same thing.</li>
+</ul></li>
+<li>Page 40, Question 1a.
+<ul>
+<li>Set up <span class="math inline">p(x) = a + bx + cx^2 + dx^3</span> and the four givens.</li>
+<li><span class="math display">\begin{bmatrix}
+ 1 &amp; x_0 &amp; x_0^2 &amp; x_0^3 \\
+ 1 &amp; x_2 &amp; x_2^2 &amp; x_2^3 \\
+ 0 &amp; 1 &amp; 2x_1 &amp; 3x_1^2 \\
+ 0 &amp; 0 &amp; 2 &amp; 6x_1 \\
+ \end{bmatrix}</span></li>
+<li>For 1b, set rows to 1 and others to 0.</li>
+</ul></li>
+<li>Local Truncation Error. A2.
+<ul>
+<li>Everything on the right-hand side is exactly correct.</li>
+<li>Taylor’s and then simplify.</li>
+<li><span class="math display">\begin{aligned}
+ y_{n+1} &amp;= 4y_n - 3y_{n-1} - 2hf(t_{n-1}, y_{n-1}) \\
+ &amp;= 4y(t_n) - 3y(t_{n-1}) - 2hy^\prime(t_{n-1}) \\
+ &amp;= y(t_n) + y^\prime(t_n)h + y^{\prime\prime}(t_n)\frac{h^2}{2} - y^{\prime\prime\prime}(t_n)\frac{h^3}{2} + ...
+ \end{aligned}</span></li>
+<li>So <span class="math inline">y_{n+1} - y(t_{n+1}) = O(h^3)</span>.</li>
+<li>If the question asked for the global error of this method, do local truncation and remember global is one less. But that would be a dirty question.</li>
+</ul></li>
+</ol>
+<blockquote>
+<p>Note: Exams do not try to fool anybody.</p>
+</blockquote>
+<ol start="5" type="1">
+<li>Fair game for midterm.
+<ul>
+<li>Anything from the course notes that was taught, up to and including last friday.</li>
+</ul></li>
+<li>Page 23, Question 1a.
+<ul>
+<li><span class="math inline">F(2, 5, -1, 10)</span>.</li>
+<li>Largest number looks like <span class="math inline">0.11111 \cdot 2^{10}</span> in binary, <span class="math inline">992</span> in decimal. Brute force factorials to find <span class="math inline">6!</span> is the largest.</li>
+<li>Turns out <span class="math inline">720</span> requires 6 bits. So it is not in our floating point number system. This was an oversight, <span class="math inline">5!</span> or <span class="math inline">6!</span> would be accepted on an examination.</li>
+</ul></li>
+<li>Page 23, Question 2a.
+<ul>
+<li>Could we be asked to plot elements on the real axis in an exam.</li>
+<li>Sure. Kind of a pain.</li>
+<li>OFL, UFL are overflow, underflow.</li>
+<li>More than one formula in the notes for calculating epsilon.
+<ul>
+<li>Just remember <span class="math inline">fl(x) = x(1 + \delta)</span>, <span class="math inline">|\delta| &lt; \epsilon</span>. <span class="math inline">\beta^{1-t}</span>.</li>
+</ul></li>
+</ul></li>
+<li>Calculators?
+<ul>
+<li>Wont need them.</li>
+</ul></li>
+<li>Page 24, Question 5c.
+<ul>
+<li>Exactly the assignment question. Errors follow the same recursion.</li>
+</ul></li>
+<li>Page 23, Question 3.
+<ul>
+<li>We are adding <span class="math inline">1 + \frac{1}{2} + \frac{1}{3} + ... + \frac{1}{M}</span>.</li>
+<li>For large <span class="math inline">M</span>, when we go from back-to-front, it does not give the same value as front-to-back.</li>
+<li>Remember that <span class="math inline">(a + b) + c \neq a + (b + c)</span>.</li>
+<li>It should happen that going from back-to-front is better, since we add small to large. We can only keep a fixed number of digits. We are not losing anything.</li>
+<li><em>Follow up</em>: catastrophic cancellation? No, because <span class="math inline">n, M</span> are both integers.</li>
+</ul></li>
+<li>Page 18, Exercise.
+<ul>
+<li><span class="math inline">0.111, 0.011, 0.001</span>.</li>
+</ul></li>
+<li>From first or second lecture, doing the integral backwards was better.
+<ul>
+<li><span class="math inline">e_n = \alpha e_{n-1} = \alpha^n e_0</span>. If <span class="math inline">\alpha &gt; 1</span>, then lets do <span class="math inline">e_{n-1} = \frac{1}{\alpha}e_n</span>.</li>
+<li>Issue because we dont have <span class="math inline">I_{n}</span> in the first place.</li>
+</ul></li>
+<li>Page 40, Question 4.
+<ul>
+<li>Seems like <span class="math inline">S(0) = 0</span>, but we have to compute the spline.</li>
+</ul></li>
+<li>Not-a-knot boundary conditions.
+<ul>
+<li>Use third derivatives.</li>
+</ul></li>
+<li>Page 41, Question 9.
+<ul>
+<li>We have three cubic polynomials. Not-a-knot says that <span class="math inline">S_1(x) = S_2(x) = S_3(x)</span>. So it is just <span class="math inline">P(x) = 2x^3 + 5x - 7</span>.</li>
+</ul></li>
+<li>Matlab.
+<ul>
+<li>No Matlab questions, but pseudocode is fair.</li>
+</ul></li>
+<li>Notes.
+<ul>
+<li>Must be your own. Can have printed notes from iPad, but you must show professor before.</li>
+</ul></li>
+<li>Page 40, Question 5.
+<ul>
+<li><span class="math inline">S^\prime(x_1) = -S^{\prime\prime}(x_n)</span>, <span class="math inline">S^{\prime\prime}(x_1) = -S^{\prime}(x_n)</span>.</li>
+<li><span class="math inline">S_1(x) = a_1 + b_1(x - x_1) + c_1(x-x_1)^2 + d(x-x_1)^3</span>. Similar for <span class="math inline">S_{n-1}(x)</span>.</li>
+<li>The coefficient depend on the last two points, and the last two derivatives.
+<ol type="i">
+<li><span class="math display">S_1^\prime(x_1) = b_1 = s_1 = -S^{\prime\prime}_{n-1}(x_n) = -2c_{n-1} - 6d_{n-1}(x_n - x_{n-1})</span></li>
+<li><span class="math display">\begin{aligned}S^{\prime\prime}(x_1) &amp;= 2c_1 \\ &amp;= -S^\prime(x_n) \\ &amp;= -(b_{n-1} + 2c_{n-1}(x_n - x_{n-1}) + 3d_{n-1}(x_n - x_{n-1})^2)\end{aligned}</span></li>
+</ol></li>
+</ul></li>
+<li>Page 41, Question 7.
+<ul>
+<li>A little bit of a pain.</li>
+<li>Plug in <span class="math inline">x_i, x_{i+1}</span> in order to solve for some terms.</li>
+<li><span class="math inline">S_i(x_i) = y_i = a_i \Delta x_i</span>. <span class="math inline">S_i(x_{i+1}) = y_{i+1} = c_i \Delta x_i</span>.</li>
+<li>To get <span class="math inline">b_i</span>, we take derivatives.</li>
+</ul></li>
+</ol>
+</body>
+</html>
