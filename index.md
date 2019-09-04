@@ -15,3 +15,7 @@ Lecture Notes
 - [CS 341](cs341/cs341.html)
 - [CS 350](cs350/cs350.html)
 - [CS 370](cs370/cs370.html)
+
+## Fall 2019
+- [CO 456](co456/co456.html)
+- [CS 486](cs486/cs486.html)

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>co456</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="co-456">CO 456</h1>
+<h2 id="game-of-nim">Game of Nim</h2>
+<p>We are given a collection of piles of chips. Two players play alternately. On a player’s turn, they remove at least one chip from a pile. The first player who cannot move loses the game.</p>
+<p><strong>Example</strong>.</p>
+<blockquote>
+<p><strong>1, 1, 2</strong>. First player takes both chips from the 2-pile, forces a win.</p>
+<p><strong>6, 9</strong>. First player takes 3 from the 9-pile, mimic the moves of the second player to force a win.</p>
+</blockquote>
+<p>If there is a move which forces a win, then the game is a <strong>winning position</strong>. From a <strong>losing position</strong>, any move leads to a winning position for the other player.</p>
+<p><strong>Lemma</strong>: If we have exactly 2 piles, with <span class="math inline">n</span>, <span class="math inline">m</span> chips, then player I wins if and only if <span class="math inline">n \neq m</span>.</p>
+<h2 id="impartial-games">Impartial Games</h2>
+<h3 id="conditions">Conditions</h3>
+<ol type="1">
+<li>There are exactly 2 players (player I and II).</li>
+<li>There are several positions, with a starting position.</li>
+<li>A player performs one of a set of allowed moves, which depends on only the current position (not on the player whose turn it is). “Impartial” (not chess). Each move generates an <strong>option</strong>.</li>
+<li>The players move alternately.</li>
+<li>There is complete information.</li>
+<li>There are no chance moves.</li>
+<li>The first player with no available move loses.</li>
+<li>The rules guarantee that the games ends.</li>
+</ol>
+<p><strong>Example</strong>. <span class="math inline">G = (1, 1, 2)</span> game in Nim. Four possible moves.</p>
+<blockquote>
+<p><span class="math display">G = (1, 1, 2) \rightarrow \begin{cases}&amp;H_1 = (1, 1, 1) \\ &amp;H_2 = (1, 1, 0) \\ &amp;H_3 = (0, 1, 2) \\\ &amp;H_4 = (1, 0, 2)\end{cases}</span></p>
+<p>Impartial games can be recursively defined by its position and options.</p>
+</blockquote>
+<p><strong>Definition</strong>: A game <span class="math inline">H</span> that is reachable from <span class="math inline">G</span> by a sequence of moves is <strong>simpler</strong> than <span class="math inline">G</span>.</p>
+<p><strong>Lemma</strong>: In any game <span class="math inline">G</span>, it is a winning position for player I or player II.</p>
+<blockquote>
+<p><strong>Proof</strong>: We proceed by induction on the simplicity of <span class="math inline">G</span>. If <span class="math inline">G</span> has no allowed moves, then it is a winning position for the player not in their turn.</p>
+</blockquote>
+</body>
+</html>
