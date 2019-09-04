@@ -55,7 +55,7 @@
 <p><strong>Definition</strong>: A game <span class="math inline">H</span> that is reachable from <span class="math inline">G</span> by a sequence of moves is <strong>simpler</strong> than <span class="math inline">G</span>.</p>
 <p><strong>Lemma</strong>: In any game <span class="math inline">G</span>, it is a winning position for player I or player II.</p>
 <blockquote>
-<p><strong>Proof</strong>: We proceed by induction on the simplicity of <span class="math inline">G</span>. If <span class="math inline">G</span> has no allowed moves, then it is a winning position for the player not in their turn.</p>
+<p>We proceed by induction on the simplicity of <span class="math inline">G</span>. If <span class="math inline">G</span> has no allowed moves, then it is a winning position for the player not in their turn. Assume <span class="math inline">G</span> has allowed moves, assume claim is true for games simpler than <span class="math inline">G</span>. Assume player I is the current player. Consider all options of <span class="math inline">G</span>. If one of them is a winning position for player I, then player I moves to that option, wins that game, then also wins <span class="math inline">G</span>. Otherwise, all options are winning positions for player II. So any move player I makes will make player II win. So <span class="math inline">G</span> is a winning position for player II.</p>
 </blockquote>
 </body>
 </html>
