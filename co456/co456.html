@@ -57,5 +57,54 @@
 <blockquote>
 <p>We proceed by induction on the simplicity of <span class="math inline">G</span>. If <span class="math inline">G</span> has no allowed moves, then it is a winning position for the player not in their turn. Assume <span class="math inline">G</span> has allowed moves, assume claim is true for games simpler than <span class="math inline">G</span>. Assume player I is the current player. Consider all options of <span class="math inline">G</span>. If one of them is a winning position for player I, then player I moves to that option, wins that game, then also wins <span class="math inline">G</span>. Otherwise, all options are winning positions for player II. So any move player I makes will make player II win. So <span class="math inline">G</span> is a winning position for player II.</p>
 </blockquote>
+<h3 id="game-sums">Game Sums</h3>
+<p><strong>Definition</strong>: Let <span class="math inline">G</span>, <span class="math inline">H</span> be two games with options <span class="math inline">G_1, ..., G_m</span>, and <span class="math inline">H_1, ..., H_n</span> respectively. We define <span class="math inline">G + H</span> as the game with options <span class="math inline">G_1 + H, ..., G_m + H, G + H_1, ..., G + H_n</span>.</p>
+<p><strong>Example</strong>: We denote <span class="math inline">\star n</span> to be a game of Nim with one pile of <span class="math inline">n</span> chips. Then <span class="math inline">\star 1 + \star 1 + \star 2</span> is the game of three piles with <span class="math inline">(1, 1, 2)</span> chips.</p>
+<p>Let <span class="math inline">\bf G</span> be the set of all impartial games.</p>
+<ol type="1">
+<li><span class="math inline">G + H \in \bf G</span> for any <span class="math inline">G, H \in \bf G</span> (closure).</li>
+<li><span class="math inline">(G + H) + J = G + (H + J)</span> (associative).</li>
+<li>There exists <span class="math inline">0 \in \bf G</span> where <span class="math inline">0 + G = G + 0 = G</span> for all <span class="math inline">G \in \bf G</span>. 0 is the game with no options.</li>
+<li><span class="math inline">G + H = H + G</span> for all <span class="math inline">G, H \in \bf G</span> (symmetric).</li>
+</ol>
+<blockquote>
+<p><strong>Aside</strong>: These are properties of an abelian group except for the inverse property.</p>
+</blockquote>
+<h3 id="game-equivalences">Game Equivalences</h3>
+<p><strong>Definition</strong>: Two games <span class="math inline">G, H</span> are <strong>equivalent</strong> is if for any game <span class="math inline">J</span>, <span class="math inline">G + J</span> is a losing game if and only if <span class="math inline">H + J</span> is a losing game. Adding the same game does not alter the outcome.</p>
+<p><strong>Notation</strong>: <span class="math inline">G \equiv H</span>.</p>
+<p><strong>Example</strong>: <span class="math inline">\star 3 \equiv \star 3</span>. <span class="math inline">\star 3 \not\equiv \star 4</span> since <span class="math inline">\star 3 + \star 3</span> is a losing game and <span class="math inline">\star 4 + \star 3</span> is a winning game. So <span class="math inline">\star n \equiv \star m</span> if and only if <span class="math inline">n = m</span>.</p>
+<p><span class="math inline">\equiv</span> is an equivalence relation.</p>
+<ol type="1">
+<li>Reflexive. <span class="math inline">G \equiv G</span>.</li>
+<li>Symmetric. <span class="math inline">G \equiv H</span> if and only if <span class="math inline">H \equiv G</span>.</li>
+<li>Transitive. If <span class="math inline">G \equiv H</span> and <span class="math inline">H \equiv K</span>, then <span class="math inline">G \equiv K</span>.</li>
+</ol>
+<blockquote>
+<p>Quick exercise to verify.</p>
+</blockquote>
+<p><strong>Exercise</strong>: If <span class="math inline">G \equiv H</span> then <span class="math inline">G + J \equiv H + J</span> for any <span class="math inline">J</span>.</p>
+<p><strong>Lemma</strong>: <span class="math inline">G</span> is a losing game if and only if <span class="math inline">G \equiv \star 0</span>.</p>
+<blockquote>
+<p><strong>Note</strong>: Start of proving that every impartial game is equivalent to a some Nim game.</p>
+<p><span class="math inline">(\Leftarrow)</span> If <span class="math inline">G \equiv \star 0</span>, then <span class="math inline">G + \star 0</span> is a losing game if and only if <span class="math inline">\star 0 + \star 0</span> is a losing game. We know <span class="math inline">\star 0 + \star 0</span> is a losing game.</p>
+<p><span class="math inline">(\Rightarrow)</span> Suppose that <span class="math inline">G</span> is a losing game. We want to show <span class="math inline">G + J</span> is a losing game if and only if <span class="math inline">\star 0 + J = J</span> is a losing game.</p>
+<p><span class="math inline">(\leftarrow)</span> Suppose <span class="math inline">J</span> is a losing game. Use induction on the simplicity of <span class="math inline">G + J</span>. Base case <span class="math inline">\equiv</span> if left as an exercise. Consider <span class="math inline">G + J</span>. Player I can move in <span class="math inline">G</span> or in <span class="math inline">J</span>.</p>
+<ol type="1">
+<li>Suppose player I moves from <span class="math inline">G + J</span> to <span class="math inline">G + J^\prime</span>. Since <span class="math inline">J</span> is a losing game, <span class="math inline">J^\prime</span> is a winning game. So player II has a winning move from <span class="math inline">J^\prime</span> to <span class="math inline">J^{\prime\prime}</span> such that <span class="math inline">J^{\prime\prime}</span> is a losing game. By induction, <span class="math inline">G + J^{\prime\prime}</span> is a losing game. So player I loses.</li>
+<li>Similar if we go from <span class="math inline">G + J</span> to <span class="math inline">G^\prime + J</span>. Player II moves to <span class="math inline">G^{\prime\prime} + J</span> which is by induction a losing game. So player I loses.</li>
+</ol>
+<p>So in both cases, <span class="math inline">G + J</span> is a losing game.</p>
+<p><span class="math inline">(\rightarrow)</span> Suppose <span class="math inline">G + J</span> is a losing game. Suppose by way of contradiction <span class="math inline">J</span> is a winning game. Then PI has a winning move <span class="math inline">J \to J^\prime</span>. So <span class="math inline">J^\prime</span> is a losing game. Then by induction, <span class="math inline">G + J^\prime</span> is a losing game. Then <span class="math inline">G + J</span> is a winning game, contradiction.</p>
+</blockquote>
+<p><strong>Corollary</strong>: If <span class="math inline">G</span> is a losing game, then <span class="math inline">J</span> has the same outcome as <span class="math inline">J + G</span>.</p>
+<blockquote>
+<p>Since <span class="math inline">G</span> is a losing game, <span class="math inline">G \equiv \star 0</span>. Add <span class="math inline">J</span> to both sides. <span class="math inline">G + J \equiv \star 0 + J = J</span>.</p>
+</blockquote>
+<p><strong>Example</strong>:</p>
+<ol type="1">
+<li>Recall that <span class="math inline">\star 5 + \star 5</span> and <span class="math inline">\star 8 + \star 8</span> are both losing games. By corollary, <span class="math inline">\star 5 + \star 5 + \star 8 + \star 8</span> is still a losing game. Player I can either play in <span class="math inline">\star 5 + \star 5</span> or <span class="math inline">\star 8 + \star 8</span>. Player II will make a winning move in the same part of the game. So we still end up with a losing game.</li>
+<li><span class="math inline">(\star 1 + \star 1 + \star 2) + (\star 5 + \star 5)</span> is a winning game and a losing game. Player I makes winning move in <span class="math inline">(\star 1 + \star 1 + \star 2)</span>. Player II has two losing parts. So we still end up with a losing game.</li>
+</ol>
 </body>
 </html>
