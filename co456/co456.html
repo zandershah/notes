@@ -106,5 +106,43 @@
 <li>Recall that <span class="math inline">\star 5 + \star 5</span> and <span class="math inline">\star 8 + \star 8</span> are both losing games. By corollary, <span class="math inline">\star 5 + \star 5 + \star 8 + \star 8</span> is still a losing game. Player I can either play in <span class="math inline">\star 5 + \star 5</span> or <span class="math inline">\star 8 + \star 8</span>. Player II will make a winning move in the same part of the game. So we still end up with a losing game.</li>
 <li><span class="math inline">(\star 1 + \star 1 + \star 2) + (\star 5 + \star 5)</span> is a winning game and a losing game. Player I makes winning move in <span class="math inline">(\star 1 + \star 1 + \star 2)</span>. Player II has two losing parts. So we still end up with a losing game.</li>
 </ol>
+<p><strong>Lemma</strong> (Copycat Principle): For any game <span class="math inline">G</span>, <span class="math inline">G + G \equiv \star 0</span>.</p>
+<blockquote>
+<p>This is true when <span class="math inline">G</span> has no options. Consider <span class="math inline">G + G</span> and without loss of generality player I moves to <span class="math inline">G^\prime + G</span>. Then player II can move to <span class="math inline">G^\prime + G^\prime</span>. By induction <span class="math inline">G^\prime + G^\prime \equiv \star 0</span>, so it is a losing game for player I. So <span class="math inline">G + G</span> is a losing game, so <span class="math inline">G + G \equiv \star 0</span>.</p>
+<p><strong>Aside</strong>: If we treat our games as equivalence classes, then the inverse of a game is itself. Adding <span class="math inline">G + G</span> gives the identity <span class="math inline">\star 0</span>.</p>
+</blockquote>
+<p><strong>Lemma</strong>: <span class="math inline">G \equiv H</span> if and only if <span class="math inline">G + H \equiv \star 0</span>.</p>
+<blockquote>
+<p><span class="math inline">(\Rightarrow)</span> If <span class="math inline">G \equiv H</span> then <span class="math inline">G + G = \star 0 \equiv H + G</span>.</p>
+<p><span class="math inline">(\Leftarrow)</span> If <span class="math inline">G + H \equiv \star 0</span> then <span class="math inline">G + G + H \equiv H \equiv \star 0 + G \equiv G</span></p>
+</blockquote>
+<p><strong>Example</strong>: <span class="math inline">\star 1 + \star 2 + \star 3 \equiv \star 0</span>. By Lemma, <span class="math inline">\star 1 + \star 2 \equiv \star 3</span>.</p>
+<p><strong>Lemma</strong>: If the options of <span class="math inline">G</span> are equivalent to the options of <span class="math inline">H</span>, then <span class="math inline">G \equiv H</span>. (More precisely: there is a bijection between the options of <span class="math inline">G</span> and <span class="math inline">H</span>, where the paired options are equivalent).</p>
+<p><strong>Example</strong>: We can show <span class="math inline">\star 1 + \star 2 \equiv \star 3</span> using this lemma.</p>
+<blockquote>
+<p><span class="math display">\star 1 + \star 2 \rightarrow \begin{cases}&amp;\star 2 \\ &amp;\star 1 \\ &amp;\star 1 + \star 1 \equiv \star 0 \end{cases}</span> <span class="math display">\star 3 \rightarrow \begin{cases}&amp;\star 2 \\ &amp;\star 1 \\ &amp;\star 0  \end{cases}</span></p>
+</blockquote>
+<p>Converse is not true.</p>
+<blockquote>
+<p>It suffices to show <span class="math inline">G + H \equiv \star 0</span>, or <span class="math inline">G + H</span> is a losing game. If <span class="math inline">G, H</span> have no options, then <span class="math inline">G + H \equiv \star 0</span>. Now WLOG, suppose player I moves to <span class="math inline">G^\prime + H</span>. By assumption, <span class="math inline">G^\prime \equiv H^\prime</span> for some option <span class="math inline">H^\prime</span> of <span class="math inline">H</span>. So player II moves to <span class="math inline">G^\prime + H^\prime</span>. By Lemma, <span class="math inline">G^\prime + H^\prime \equiv \star 0</span>, so it is a losing game for player I.</p>
+</blockquote>
+<h3 id="nim-sums">Nim Sums</h3>
+<p><strong>Definition</strong>: If <span class="math inline">\star m + \star n \equiv \star k</span>, then <span class="math inline">k</span> is the Nim sum of <span class="math inline">m, n</span>.</p>
+<p><strong>Theorem</strong>: Suppose <span class="math inline">n = 2^{a_1} + 2^{a_2} + ...</span>, where <span class="math inline">a_1 &gt; a_2 &gt; ...</span>. Then <span class="math inline">\star n \equiv \star 2^{a_1} + \star 2^{a_2} + ...</span>.</p>
+<p><strong>Examples</strong>.</p>
+<ol type="1">
+<li><span class="math inline">11 = 2^3 + 2^1 + 2^0</span>. So <span class="math inline">\star 11 \equiv \star 8 + \star 2 + \star 1</span>.</li>
+<li><span class="math inline">13 = 2^3 + 2^2 + 2^0</span>. So <span class="math inline">\star 13 \equiv \star 8 + \star 4 + \star 1</span>.</li>
+<li><span class="math inline">\star 11 + \star 13 \equiv \star 8 + \star 8 + \star 4 + \star 2 + \star 1 + \star 1 \equiv \star 4 + \star 2 \equiv 6</span>.</li>
+</ol>
+<blockquote>
+<p>This is an xor operation.</p>
+</blockquote>
+<p>When is <span class="math inline">\star b_1 + \star b_2 + ... + \star b_k \equiv \star 0</span>? When each power of <span class="math inline">2^a</span> appears in even number of terms.</p>
+<p>Given <span class="math inline">\star b_1 + \star b_2 + ... + \star b_k \equiv \star c</span>, where <span class="math inline">c &gt; 0</span>, what is a winning move? We want to make a move so the resulting game is equivalent to <span class="math inline">\star 0</span>. We add <span class="math inline">\star c</span> to both sides. We only affect one stack, so we can replace a stack <span class="math inline">b_i</span> with <span class="math inline">\star b_i + \star c</span>. This is only valid if the Nim sum of <span class="math inline">b_i</span> and <span class="math inline">c</span> is strictly smaller than <span class="math inline">b_i</span>. This will happen to at least one of <span class="math inline">b_1, ..., b_k</span>.</p>
+<p><strong>Example</strong>: <span class="math inline">\star 11 + \star 13 \equiv \star 6</span>. Add <span class="math inline">\star 6</span> to <span class="math inline">\star 11</span> or <span class="math inline">\star 13</span>.</p>
+<blockquote>
+<p><span class="math inline">\star 13 + \star 6 \equiv \star 11</span>, so the winning move is removing <span class="math inline">2</span> from <span class="math inline">\star 13</span>.</p>
+</blockquote>
 </body>
 </html>
