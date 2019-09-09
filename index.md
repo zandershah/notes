@@ -19,3 +19,4 @@ Lecture Notes
 ## Fall 2019
 - [CO 456](co456/co456.html)
 - [CS 486](cs486/cs486.html)
+- [CS 488](cs488/cs488.html)

@@ -12,11 +12,124 @@
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
 <h1 id="cs-486">CS 486</h1>
+<h2 id="rational-agent-paradigm">Rational Agent Paradigm</h2>
+<blockquote>
+<p>An entity that perceives and acts.</p>
+</blockquote>
+<ul>
+<li>Function from percepts to actions.</li>
+<li>Performance measures.
+<ul>
+<li>Goal achievement, resource consumption.</li>
+</ul></li>
+<li><strong>Caveat</strong>: Computational limitations and environmental constraints means we do not have perfect rationality.</li>
+</ul>
+<h3 id="task-environments">Task Environments</h3>
+<p>To design a rational agent the task environment must be defined.</p>
+<ul>
+<li>Performance measures.</li>
+<li>Environment.</li>
+<li>Actuators.</li>
+<li>Sensors.</li>
+</ul>
+<h4 id="properties-of-task-environment">Properties of Task Environment</h4>
+<ul>
+<li><strong>Fully Observable</strong> vs. <strong>Partially Observable</strong>.</li>
+<li><strong>Deterministic</strong> vs. <strong>Stochastic</strong>.
+<ul>
+<li>Is the next state completely determined by the current state and action executed?</li>
+</ul></li>
+<li><strong>Episodic</strong> vs. <strong>Dynamic</strong>.</li>
+<li><strong>Discrete</strong> vs. <strong>Continuous</strong>.</li>
+<li><strong>Static</strong> vs. <strong>Dynamic</strong>.</li>
+<li><strong>Single Agent</strong> vs. <strong>Multiagent</strong>.</li>
+</ul>
+<h1 id="search">Search</h1>
+<blockquote>
+<p><strong>Search problem</strong> consists of a <strong>state space</strong>, a <strong>successor function</strong>, a <strong>start space</strong>, and a <strong>goal test</strong>.</p>
+</blockquote>
+<ul>
+<li><strong>Solution</strong> is a sequence of actions (plan) from the start state to some goal state.</li>
+</ul>
+<p><strong>Example</strong>: Sliding Tiles Problem.</p>
+<blockquote>
+<ul>
+<li><strong>State</strong>: Board configuration.</li>
+<li><strong>Start</strong>: Any state.</li>
+<li><strong>Actions</strong>: Slide the blank tile into an adjacent space.</li>
+<li><strong>Goal</strong>: Does it match picture?</li>
+</ul>
+</blockquote>
+<p><strong>Example</strong>: N Queens Problem.</p>
+<blockquote>
+<ul>
+<li><strong>State</strong>: <span class="math inline">0</span> to <span class="math inline">N</span> queens.</li>
+<li><strong>Start</strong>: <span class="math inline">0</span> queens.</li>
+<li><strong>Actions</strong>: Add a queen to an empty space.</li>
+<li><strong>Goal</strong>: <span class="math inline">N</span> queens none attacking.</li>
+</ul>
+</blockquote>
+<p>Alternate representation which is more complicated but has a smaller search space.</p>
+<blockquote>
+<ul>
+<li><strong>State</strong>: <span class="math inline">0</span> to <span class="math inline">N</span> queens, first <span class="math inline">n</span> columns not attacking each other.</li>
+<li><strong>Start</strong>: <span class="math inline">0</span> queens.</li>
+<li><strong>Actions</strong>: Add a queen to the first empty column none attacking.</li>
+<li><strong>Goal</strong>: <span class="math inline">N</span> queens. And babu is cutie</li>
+</ul>
+</blockquote>
+<h2 id="state-space">State Space</h2>
+<ul>
+<li>The <strong>world space</strong> includes every last detial in the environment.</li>
+<li>A <strong>search space</strong> keeps only the details needed for planning (abstraction).</li>
+</ul>
+<h2 id="representing-state">Representing State</h2>
+<ul>
+<li><strong>State space graph</strong>.
+<ul>
+<li>Vertices correspond to states with one vertex for each space.</li>
+<li>Edges correspond to successors.</li>
+<li>Goal test is a set of goal nodes.</li>
+</ul></li>
+<li>We search for a solution by building a <strong>search tree</strong> and traversing it to find a goal state.</li>
+</ul>
+<h3 id="search-tree">Search Tree</h3>
+<ul>
+<li>State state is the root of the tree.</li>
+<li>Children are the successors.</li>
+<li>Plan is a path in the tree. A solution is a path from the root to a goal node.</li>
+</ul>
+<blockquote>
+<p>For most problems we do not actually generate the entire tree.</p>
+</blockquote>
+<ul>
+<li>We expand a node by applying all legal actions on it and adding the new states to the tree.</li>
+</ul>
+<h3 id="generic-search-algorithm">Generic Search Algorithm</h3>
+<ul>
+<li>Initialize with initial state of the problem.</li>
+<li><strong>Repeat</strong>.
+<ul>
+<li>If no candidate nodes, <strong>faliure</strong>.</li>
+<li>Choose leaf node for expansion according to <strong>search strategy</strong>.</li>
+<li>If node contains goal state, return <strong>solution</strong>.</li>
+<li>Otherwise, expand the node. Add resulting nodes to the tree.</li>
+</ul></li>
+<li>Nodes can be classified as <strong>start</strong> node, <strong>explored</strong> nodes, <strong>frontier</strong>, <strong>unexplored</strong> nodes.</li>
+</ul>
 </body>
 </html>
