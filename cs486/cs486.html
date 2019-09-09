@@ -119,7 +119,7 @@
 <ul>
 <li>We expand a node by applying all legal actions on it and adding the new states to the tree.</li>
 </ul>
-<h3 id="generic-search-algorithm">Generic Search Algorithm</h3>
+<h2 id="generic-search-algorithm">Generic Search Algorithm</h2>
 <ul>
 <li>Initialize with initial state of the problem.</li>
 <li><strong>Repeat</strong>.
@@ -130,6 +130,44 @@
 <li>Otherwise, expand the node. Add resulting nodes to the tree.</li>
 </ul></li>
 <li>Nodes can be classified as <strong>start</strong> node, <strong>explored</strong> nodes, <strong>frontier</strong>, <strong>unexplored</strong> nodes.</li>
+</ul>
+<h3 id="key-properties">Key Properties</h3>
+<ul>
+<li><strong>Completeness</strong>: Is the algorithm guaranteed to find a solution if one exists?</li>
+<li><strong>Optimality</strong>: Does the algorithm find the optimal solution?</li>
+<li><strong>Time complexity</strong>.</li>
+<li><strong>Space complexity</strong>: Size of the fringe.</li>
+<li><span class="math inline">b</span>: Branching factor.</li>
+<li><span class="math inline">m</span>: Maximum depth.</li>
+<li><span class="math inline">d</span>: Depth of the nearest goal node.</li>
+</ul>
+<p><strong>Example</strong>: DFS.</p>
+<blockquote>
+<ul>
+<li><strong>Complete</strong>: No. Infinitely stuck in a loop. If <span class="math inline">m</span> is finite then it is.</li>
+<li><strong>Optimal</strong>: No. Finds the first goal, not necessarily the optimal.</li>
+<li><strong>Time complexity</strong>: Whole tree, <span class="math inline">O(b^m)</span>.</li>
+<li><strong>Space complexity</strong>: Fringe and related path information. <span class="math inline">O(m \cdot b)</span>.</li>
+</ul>
+</blockquote>
+<p><strong>Example</strong>: BFS.</p>
+<blockquote>
+<ul>
+<li><strong>Complete</strong>: Yes.</li>
+<li><strong>Optimal</strong>: Depends on whether the shallowest goal node is the one with the least cost.</li>
+<li><strong>Time complexity</strong>: Whole tree, <span class="math inline">O(b^{d + 1})</span>.</li>
+<li><strong>Space complexity</strong>: <span class="math inline">O(b^d)</span>.</li>
+</ul>
+</blockquote>
+<h3 id="iterative-deepened-search">Iterative Deepened Search</h3>
+<blockquote>
+<p>Combine search methods to take advantage of DFS space complexity and BFS completeness and shallow solution advantage?</p>
+</blockquote>
+<ul>
+<li><strong>Complete</strong>: Yes.</li>
+<li><strong>Optimal</strong>: Depends on whether the shallowest goal node is the one with the least cost.</li>
+<li><strong>Time complexity</strong>: Whole tree, <span class="math inline">O(b^d)</span>.</li>
+<li><strong>Space complexity</strong>: <span class="math inline">O(m \cdot b)</span>.</li>
 </ul>
 </body>
 </html>
