@@ -128,7 +128,10 @@
 </blockquote>
 <h3 id="nim-sums">Nim Sums</h3>
 <p><strong>Definition</strong>: If <span class="math inline">\star m + \star n \equiv \star k</span>, then <span class="math inline">k</span> is the Nim sum of <span class="math inline">m, n</span>.</p>
-<p><strong>Theorem</strong>: Suppose <span class="math inline">n = 2^{a_1} + 2^{a_2} + ...</span>, where <span class="math inline">a_1 &gt; a_2 &gt; ...</span>. Then <span class="math inline">\star n \equiv \star 2^{a_1} + \star 2^{a_2} + ...</span>.</p>
+<p><strong>Unproven Theorem</strong>: Suppose <span class="math inline">n = 2^{a_1} + 2^{a_2} + ...</span>, where <span class="math inline">a_1 &gt; a_2 &gt; ...</span>. Then <span class="math inline">\star n \equiv \star 2^{a_1} + \star 2^{a_2} + ...</span>.</p>
+<blockquote>
+<p>Proven below.</p>
+</blockquote>
 <p><strong>Examples</strong>.</p>
 <ol type="1">
 <li><span class="math inline">11 = 2^3 + 2^1 + 2^0</span>. So <span class="math inline">\star 11 \equiv \star 8 + \star 2 + \star 1</span>.</li>
@@ -147,6 +150,15 @@
 <p><strong>Lemma</strong>: If <span class="math inline">\star b_1 + ... + \star b_k \equiv \star s</span>, where <span class="math inline">s \ge 0</span>, then there exists <span class="math inline">i</span> where the Nim sum of <span class="math inline">b_i</span> and <span class="math inline">s</span> is strictly less than <span class="math inline">b_i</span>.</p>
 <blockquote>
 <p>Suppose <span class="math inline">s = 2^{a_1} + 2^{a_2} + ...</span> where <span class="math inline">a_1 &gt; a_2 &gt; ...</span>. An odd number of %b_i$’s contain <span class="math inline">2^a_i</span>, let a specific <span class="math inline">b_i</span> be one of them. Let <span class="math inline">\star t \equiv \star b_i + \star s</span>. Since <span class="math inline">2^{a_1}</span> is in both <span class="math inline">b_i</span> and <span class="math inline">t</span>, they cancel and do not appear in <span class="math inline">t</span>. At worst, <span class="math inline">2^{a_2}, 2^{a_3}, ...</span> appear in <span class="math inline">t</span>. So <span class="math inline">t \le b_i - 2^{a_i} + 2^{a_2} + 2^{a_3} + ... &lt; b_i</span>.</p>
+</blockquote>
+<p><strong>Theorem</strong>: Suppose <span class="math inline">n = 2^{a_1} + 2^{a_2} + ...</span>, where <span class="math inline">a_1 &gt; a_2 &gt; ...</span>. Then <span class="math inline">\star n \equiv \star 2^{a_1} + \star 2^{a_2} + ...</span>.</p>
+<blockquote>
+<p>This theorem uses the following lemma. <strong>Lemma</strong>: Let <span class="math inline">0 \le p, q &lt; 2^a</span>. Suppose our theorem holds for all values less than <span class="math inline">2^a</span>. Then Nim sum of <span class="math inline">p</span> and <span class="math inline">q</span> is also strictly less than <span class="math inline">2^a</span>.</p>
+<p><strong>Theorem proof illustration</strong>: We will use induction. Consider <span class="math inline">\star 7</span>. <span class="math inline">7 = 4 + 2 + 1</span>, want to prove <span class="math inline">\star 7 \equiv \star 4 + (\star 2 + \star 1)</span>. We have <span class="math inline">\star 7 \equiv \star 4 + \star 3</span> by induction, so we need to show <span class="math inline">\star 7 \equiv \star 4 + \star 3</span>. We can show that the two sides have equivalent options.</p>
+<p>By induction on <span class="math inline">n</span>. When <span class="math inline">n = 1</span>, <span class="math inline">n = 2^0</span>, and <span class="math inline">\star 1 \equiv \star 2^0</span>. Suppose <span class="math inline">n = 2^{a_1} + 2^{a_2} + ...</span>, where <span class="math inline">a_1 &gt; a_2 &gt; ...</span>. Let <span class="math inline">q = n - 2^{a_1}</span>. When <span class="math inline">q = 0</span>, <span class="math inline">\star n \equiv \star 2^{a_1}</span>. Assume <span class="math inline">q \ge 1</span>. By induction, <span class="math inline">\star q \equiv \star 2^{a_2} + \star 2^{a_3} + ...</span>. It remains to show that <span class="math inline">\star n \equiv \star 2^{a_1} + \star 2</span>. We do this by showing the options are equivalent. The options of <span class="math inline">\star n</span> are <span class="math inline">\star (n-1), ..., \star 0</span>. There are two types of options for <span class="math inline">\star 2^{a_1} + \star q</span>.</p>
+<ul>
+<li><span class="math inline">\star i + \star q</span>, <span class="math inline">0 \le i &lt; 2^{a_i}</span>. Suppose <span class="math inline">\star i + \star q \equiv \star r_i</span> for some <span class="math inline">r_i</span>. Since <span class="math inline">i &lt; 2^{a_i}</span> and <span class="math inline">q &lt; 2^{a_i}</span>, by induction and lemma, <span class="math inline">r_i &lt; 2^{a_i}</span>. If <span class="math inline">\star r_i \equiv \star r_j</span>, then <span class="math inline">\star i + \star q \equiv \star j + \star q</span>, so <span class="math inline">\star i \equiv \star j</span>, so <span class="math inline">i = j</span>. So <span class="math inline">r_0, ..., r_{a_1 - 1}</span> are all distinct and less than <span class="math inline">2^{a_1}</span>. By pigeonhole-ish, <span class="math inline">\{r_0, ..., r_{2^{a_1 - 1}}\} = \{\star 0, ..., \star 2^{a_1 - 1}\}</span>.</li>
+</ul>
 </blockquote>
 </body>
 </html>
