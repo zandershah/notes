@@ -144,5 +144,9 @@
 <blockquote>
 <p><span class="math inline">\star 13 + \star 6 \equiv \star 11</span>, so the winning move is removing <span class="math inline">2</span> from <span class="math inline">\star 13</span>.</p>
 </blockquote>
+<p><strong>Lemma</strong>: If <span class="math inline">\star b_1 + ... + \star b_k \equiv \star s</span>, where <span class="math inline">s \ge 0</span>, then there exists <span class="math inline">i</span> where the Nim sum of <span class="math inline">b_i</span> and <span class="math inline">s</span> is strictly less than <span class="math inline">b_i</span>.</p>
+<blockquote>
+<p>Suppose <span class="math inline">s = 2^{a_1} + 2^{a_2} + ...</span> where <span class="math inline">a_1 &gt; a_2 &gt; ...</span>. An odd number of %b_i$’s contain <span class="math inline">2^a_i</span>, let a specific <span class="math inline">b_i</span> be one of them. Let <span class="math inline">\star t \equiv \star b_i + \star s</span>. Since <span class="math inline">2^{a_1}</span> is in both <span class="math inline">b_i</span> and <span class="math inline">t</span>, they cancel and do not appear in <span class="math inline">t</span>. At worst, <span class="math inline">2^{a_2}, 2^{a_3}, ...</span> appear in <span class="math inline">t</span>. So <span class="math inline">t \le b_i - 2^{a_i} + 2^{a_2} + 2^{a_3} + ... &lt; b_i</span>.</p>
+</blockquote>
 </body>
 </html>
