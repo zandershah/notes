@@ -193,5 +193,75 @@
 <blockquote>
 <p><strong>Search strategy</strong>: Expand the most promising node according to the heuristic.</p>
 </blockquote>
+<h2 id="missing-lecture-friday-13">Missing Lecture (Friday 13)</h2>
+<h1 id="constraint-satisfaction">Constraint Satisfaction</h1>
+<blockquote>
+<p>Special subset of search problems.</p>
+</blockquote>
+<ul>
+<li><strong>States</strong> are defined by <strong>variables</strong> <span class="math inline">X_i</span> with values from <strong>domains</strong> <span class="math inline">D_i</span>.</li>
+<li><strong>Goal test</strong> is a <strong>set of constraints</strong> specifying allowable combinations of values for subsets of variables.</li>
+</ul>
+<h2 id="types-of-cpss">Types of CPSs</h2>
+<ul>
+<li><strong>Discrete variables</strong>.
+<ul>
+<li><strong>Finite domains</strong>. If domain has size <span class="math inline">d</span>, there are <span class="math inline">O(d^n)</span> complete assignments.</li>
+<li><strong>Infinite domains</strong>. Linear constraints are solvable but non-linear are undecidable.</li>
+</ul></li>
+<li><strong>Continuous variables</strong>. Linear programming polynomial time.</li>
+<li><strong>Unary constraints</strong>.</li>
+<li><strong>Binary constraints</strong>. Representable with a constraint graph.</li>
+<li><strong>Higher-order constraints</strong>.</li>
+<li><strong>Soft constraints</strong>. Constrained optimization problem.</li>
+</ul>
+<h2 id="commutativity">Commutativity</h2>
+<blockquote>
+<p><strong>Key insight</strong> is that CPSs are commutative.</p>
+</blockquote>
+<ul>
+<li>Order of actions do not affect outcome.</li>
+<li>Algorithm takes advantage of this.</li>
+</ul>
+<h2 id="backtracking">Backtracking</h2>
+<blockquote>
+<p>Basic search algorithm for CSPs.</p>
+</blockquote>
+<pre><code>Select unassigned variable X
+For every value {x_1, ..., x_n} in domain of X
+    If value satisfies constraints, assign X = x_i and exit loop
+If an assignment is found
+    Move to next variable
+If no assignment is found
+    Back up to preceding variable and try a different assignment</code></pre>
+<h3 id="backtracking-efficiency">Backtracking Efficiency</h3>
+<h4 id="ordering">Ordering</h4>
+<blockquote>
+<p>Which variables should be tried first? In what order should the variable’s values be tried?</p>
+</blockquote>
+<ul>
+<li><strong>Most constrained variable</strong>. Try the variable with the fewest remaining <em>legal</em> moves. Also known as <strong>minimum remaining values</strong>.</li>
+<li><strong>Most constraining variable</strong>. Try the variable with the most constraints on the remaining variables.</li>
+<li><strong>Least constraining variable</strong>. Try the variable which rules out the fewest values in the remaining variables.</li>
+</ul>
+<h4 id="filtering">Filtering</h4>
+<blockquote>
+<p>How do we detect faliure early?</p>
+</blockquote>
+<ul>
+<li><strong>Forward checking</strong>. Keep track of remaining legal values for unassigned varibles. Terminate search when any variable has no legal values.
+<ul>
+<li>Does not detect all future faliures early.</li>
+</ul></li>
+<li><strong>Arc consistency</strong>. Given domains <span class="math inline">D_1, D_2</span>, an arc is consistent if for all <span class="math inline">x \in D_1</span>, there exists <span class="math inline">y \in D_2</span> such that <span class="math inline">x, y</span> are consistent.</li>
+<li><strong>K-consistency</strong>. For all sets of <span class="math inline">K - 1</span> variables and consistent assignment of values, a consistent value is always assignable to any <span class="math inline">K</span>th variable.</li>
+</ul>
+<h4 id="structure">Structure</h4>
+<blockquote>
+<p>Is it possible to exploit the problem structure?</p>
+</blockquote>
+<ul>
+<li><strong>Idea</strong>. Break down the graph into connected components and solve each component separately.</li>
+</ul>
 </body>
 </html>
