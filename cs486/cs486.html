@@ -191,9 +191,23 @@
 </ul>
 <p><strong>Example</strong>: Best First Search.</p>
 <blockquote>
-<p><strong>Search strategy</strong>: Expand the most promising node according to the heuristic.</p>
+<p><strong>Search strategy</strong>: Expand the most promising node according to the heuristic. - Not complete (infinite expansion). Time complexity, space complexity <span class="math inline">O(b^m)</span>.</p>
 </blockquote>
-<h2 id="missing-lecture-friday-13">Missing Lecture (Friday 13)</h2>
+<ul>
+<li><strong><span class="math inline">A^\star</span> Search</strong>: Expand according to the cost of path and heuristic. <span class="math inline">f(n) = g(n) + h(n)</span>. <em>Note: Goal test must be done while expanding the node, not when it is first discovered.</em> Time complexity is <span class="math inline">O(b^{\delta d})</span>, where <span class="math inline">\delta</span> is the relative error of the heuristic. We are required to store all expanded nodes in memory.</li>
+<li><strong>Admissible Heuristic</strong>: <span class="math inline">0 \le h(n) \le h^\star(n)</span>, where <span class="math inline">h^\star(n)</span> is the true cost.</li>
+<li>Heuristic is <strong>consistent</strong> if <span class="math inline">h(a) \le cost(a, b) + h(b)</span>. Required if we have a graph (multiple paths to a goal).</li>
+</ul>
+<blockquote>
+<p>Let <span class="math inline">G</span> be the optimal goal. Let <span class="math inline">G^\prime</span> be a sub-optimal goal. So <span class="math inline">f(G) &lt; f(G^\prime)</span>. Assume by way of contradiction that <span class="math inline">G^\prime</span> is selected over some <span class="math inline">n</span>. So <span class="math inline">f(G^\prime = g(G^\prime) &gt; g(G) = cost(s, n) + cost(n, G) \ge g(n) + h(n)</span>. This is a contradiction since <span class="math inline">n</span> would have been selected first.</p>
+</blockquote>
+<ul>
+<li><strong>Dominated Heuristic</strong>: <span class="math inline">h_1(n)</span> dominates <span class="math inline">h_2(n)</span> if for all <span class="math inline">n</span>, <span class="math inline">h_1(n) \ge h_2(n)</span> and there exists one strict inequality.</li>
+<li><strong>Theorem</strong>: If <span class="math inline">h_1(n)</span> dominates <span class="math inline">h_2(n)</span>, then <span class="math inline">A^\star</span> will never expand more nodes.</li>
+</ul>
+<blockquote>
+<p>Let <span class="math inline">c^\star</span> be the cost of the optimal solution. <span class="math inline">A^\star</span> expands all nodes such that <span class="math inline">f(n) &lt; c^\star</span>, so <span class="math inline">h(n) \le c^\star - g(n)</span>. <span class="math inline">g(n)</span> is constant across all heuristics, so since <span class="math inline">h_2(n) \le h_1(n)</span>, a node expanded in <span class="math inline">h_1</span> must also have been expanded in <span class="math inline">h_2</span>.</p>
+</blockquote>
 <h1 id="constraint-satisfaction">Constraint Satisfaction</h1>
 <blockquote>
 <p>Special subset of search problems.</p>
@@ -206,14 +220,14 @@
 <ul>
 <li><strong>Discrete variables</strong>.
 <ul>
-<li><strong>Finite domains</strong>. If domain has size <span class="math inline">d</span>, there are <span class="math inline">O(d^n)</span> complete assignments.</li>
-<li><strong>Infinite domains</strong>. Linear constraints are solvable but non-linear are undecidable.</li>
+<li><strong>Finite domains</strong>: If domain has size <span class="math inline">d</span>, there are <span class="math inline">O(d^n)</span> complete assignments.</li>
+<li><strong>Infinite domains</strong>: Linear constraints are solvable but non-linear are undecidable.</li>
 </ul></li>
-<li><strong>Continuous variables</strong>. Linear programming polynomial time.</li>
+<li><strong>Continuous variables</strong>: Linear programming polynomial time.</li>
 <li><strong>Unary constraints</strong>.</li>
-<li><strong>Binary constraints</strong>. Representable with a constraint graph.</li>
+<li><strong>Binary constraints</strong>: Representable with a constraint graph.</li>
 <li><strong>Higher-order constraints</strong>.</li>
-<li><strong>Soft constraints</strong>. Constrained optimization problem.</li>
+<li><strong>Soft constraints</strong>: Constrained optimization problem.</li>
 </ul>
 <h2 id="commutativity">Commutativity</h2>
 <blockquote>
@@ -240,28 +254,253 @@ If no assignment is found
 <p>Which variables should be tried first? In what order should the variable’s values be tried?</p>
 </blockquote>
 <ul>
-<li><strong>Most constrained variable</strong>. Try the variable with the fewest remaining <em>legal</em> moves. Also known as <strong>minimum remaining values</strong>.</li>
-<li><strong>Most constraining variable</strong>. Try the variable with the most constraints on the remaining variables.</li>
-<li><strong>Least constraining variable</strong>. Try the variable which rules out the fewest values in the remaining variables.</li>
+<li><strong>Most constrained variable</strong>: Try the variable with the fewest remaining <em>legal</em> moves. Also known as <strong>minimum remaining values</strong>.</li>
+<li><strong>Most constraining variable</strong>: Try the variable with the most constraints on the remaining variables.</li>
+<li><strong>Least constraining variable</strong>: Try the variable which rules out the fewest values in the remaining variables.</li>
 </ul>
 <h4 id="filtering">Filtering</h4>
 <blockquote>
 <p>How do we detect faliure early?</p>
 </blockquote>
 <ul>
-<li><strong>Forward checking</strong>. Keep track of remaining legal values for unassigned varibles. Terminate search when any variable has no legal values.
+<li><strong>Forward checking</strong>: Keep track of remaining legal values for unassigned varibles. Terminate search when any variable has no legal values.
 <ul>
 <li>Does not detect all future faliures early.</li>
 </ul></li>
-<li><strong>Arc consistency</strong>. Given domains <span class="math inline">D_1, D_2</span>, an arc is consistent if for all <span class="math inline">x \in D_1</span>, there exists <span class="math inline">y \in D_2</span> such that <span class="math inline">x, y</span> are consistent.</li>
-<li><strong>K-consistency</strong>. For all sets of <span class="math inline">K - 1</span> variables and consistent assignment of values, a consistent value is always assignable to any <span class="math inline">K</span>th variable.</li>
+<li><strong>Arc consistency</strong>: Given domains <span class="math inline">D_1, D_2</span>, an arc is consistent if for all <span class="math inline">x \in D_1</span>, there exists <span class="math inline">y \in D_2</span> such that <span class="math inline">x, y</span> are consistent.</li>
+<li><strong>K-consistency</strong>: For all sets of <span class="math inline">K - 1</span> variables and consistent assignment of values, a consistent value is always assignable to any <span class="math inline">K</span>th variable.</li>
 </ul>
 <h4 id="structure">Structure</h4>
 <blockquote>
-<p>Is it possible to exploit the problem structure?</p>
+<p>Is it possible to exploit the problem structure? <strong>Idea</strong>: Break down the graph into connected components and solve each component separately.</p>
 </blockquote>
 <ul>
-<li><strong>Idea</strong>. Break down the graph into connected components and solve each component separately.</li>
+<li><strong>Independent Subproblems</strong>: Solve each connected component separately.</li>
+<li><strong>Tree Structures</strong>: If the graph is a DAG, topological sort and solve in <span class="math inline">O(nd^2)</span>.</li>
+<li><strong>Cutsets</strong>: For a general graph, we define a subset of variables <span class="math inline">S</span> such that the when removed the graph is a tree. Try all values of the subset <span class="math inline">O(d^{|S|})</span> and see if there is a solution in the tree <span class="math inline">O((n - |S|)d^2)</span>, total runtime is <span class="math inline">O(d^{|S| + 2}(n-|S|))</span>.</li>
+<li><strong>Tree Decomposition</strong>: Group nodes into mega-nodes forming a tree. All variables occur in at least one mega-node. Variables connected by constraints must appear together. If a variable is in multiple mega-nodes it must be in the entire path. If <span class="math inline">w</span> is the width of the tree (1 less than the size of the largest sub-problem), the runtime is <span class="math inline">O(nd^{w + 1}</span>. Finding min-width decomposition is NP-hard, but we can use heuristics.</li>
+</ul>
+<h1 id="constraints-and-local-search">Constraints and Local Search</h1>
+<blockquote>
+<p>For many problems, the path is unimportant.</p>
+</blockquote>
+<h2 id="iterative-improvement-methods">Iterative Improvement Methods</h2>
+<ul>
+<li>Start at some potential solution. Generate all possible points to move to. If stuck then reset, otherwise move to one of the points.</li>
+</ul>
+<h2 id="hill-climbing-gradient-descent">Hill Climbing (Gradient Descent):</h2>
+<ul>
+<li>Take a step in the direction which improves the current solution value the most.</li>
+<li>Not necessarily complete (flat optima), not optimal, gets stuck at local optima and plateaus. Random restarts fixes local optima issue.</li>
+</ul>
+<h2 id="simulated-annealing">Simulated Annealing</h2>
+<blockquote>
+<p>Escape local optima by allowing “downhill” movements.</p>
+</blockquote>
+<ul>
+<li>Take selected move if it improves the solution, otherwise take it with probability <span class="math inline">p</span>.</li>
+</ul>
+<h3 id="boltzman-distribution">Boltzman Distribution</h3>
+<ul>
+<li><span class="math inline">e^{\frac{\Delta V}{T}}</span>, <span class="math inline">T &gt; 0</span> is the temperature parameter.</li>
+<li>When <span class="math inline">T</span> is high, bad moves have a chance, <strong>exploration phase</strong>.</li>
+<li>When <span class="math inline">T</span> is low, bad moves have low probability of being selected, <strong>exploitation phase</strong>.</li>
+<li>If <span class="math inline">T</span> decreases slowly enough, then we are <em>theoretically</em> guaranteeed to reach optimum.</li>
+</ul>
+<h2 id="genetic-algorithms">Genetic Algorithms</h2>
+<ul>
+<li>Encoded candidate solution is an <strong>individual</strong>.</li>
+<li>Individuals have <strong>fitness</strong> which corresponds to the quality of the solution.</li>
+<li>Populations change over generations by applying operators.</li>
+</ul>
+<ol type="1">
+<li><strong>Selection</strong>: Fitness proportional selection could lead to overcrowding. Ranking by percentile of fitness gets around this. Softmax (Boltzman) selection similar to simulated annealing works.</li>
+<li><strong>Crossover</strong>: Select random crossover point. Implemented with bitmasks.</li>
+<li><strong>Mutate</strong>: With small probability, modify a feature.</li>
+</ol>
+<ul>
+<li>In a new generation, for every child, select parents, crossover, then mutate with low probability.</li>
+</ul>
+<h1 id="adversarial-search">Adversarial Search</h1>
+<ul>
+<li>Focused on zero-sum games.</li>
+<li><strong>MAX</strong> player maximizes utility, <strong>MIN</strong> player minimizes utility.</li>
+<li><strong>Optimal stategy</strong> leads to outcomes at least as good as any other strategy, given that MIN is playing optimally.</li>
+<li><strong>Nash Equilibrium</strong>: <span class="math inline">s^\star \in S</span> is a Nash Equilibrium if for all <span class="math inline">i</span>, <span class="math inline">u_i(s^\star) \ge u_i(s_i, s_{-i}^\star)</span>, for all <span class="math inline">s_i \in S_i</span>.</li>
+<li><strong>Theorem</strong> (Kuhn): Every finite extensive form game has a subgame perfect equilibria.</li>
+</ul>
+<h2 id="minimax">Minimax</h2>
+<p><span class="math inline">M(n) = \begin{cases}u(n),\ &amp;\text{$n$ is terminal} \\ \max_{c \in succ(n)} M(c),\ &amp;\text{$n$ is MAX node} \\ \min_{c \in succ(n)} M(c),\ &amp;\text{$n$ is MIN node} \end{cases}</span>.</p>
+<ul>
+<li>Complete for fintite games, time complexity is <span class="math inline">O(b^m)</span>, space complexity $O(bm), where <span class="math inline">m</span> is the number of moves in the game. Optimal.</li>
+</ul>
+<h3 id="alpha-beta-pruning">Alpha-Beta Pruning</h3>
+<blockquote>
+<p>Compute minimax without searching the entire tree.</p>
+</blockquote>
+<ul>
+<li><strong>Alpha</strong>: Value of the best choice so far on path for MAX.</li>
+<li><strong>Beta</strong>: Value of the best (lowest) choice so far on path for MIN.</li>
+<li>We update <strong>alpha</strong> and <strong>beta</strong> as we compute <span class="math inline">M</span>. Prune as soon as the current node is known to be worse than our current best result.</li>
+<li>Results in the same outcome as full minimax. In the worst-case it offers no improvement.</li>
+</ul>
+<h2 id="optimizations">Optimizations</h2>
+<blockquote>
+<p>We might not have enough resources to compute full results.</p>
+</blockquote>
+<ul>
+<li><strong>Evaluation Functions</strong>: Returns on estimate of the expected utility. Needs to be fast to compute. Often is a weighted function of the state features.</li>
+<li><strong>Cutting Off Search</strong>: Instead of searching to terminal states, we search <em>low</em>, and then use evaluation functions.
+<ul>
+<li>Typically, we search deeper when the node is clearly good. Avoids <strong>horizon effect</strong>, where we are surprised by a bad node in the future.</li>
+</ul></li>
+</ul>
+<h3 id="monte-carlo-tree-search-mcts">Monte-Carlo Tree Search (MCTS)</h3>
+<ul>
+<li>Build a search tree according to outcomes of simulated plays.</li>
+</ul>
+<ol type="1">
+<li><strong>Selection</strong>: Traverse the tree following a policy using Upper Confidence Bounds until you run out of information required to progress.
+<ul>
+<li><span class="math inline">v_i + c\sqrt{\frac{\ln N}{n_i}}</span>, where <span class="math inline">n_i</span> is the number of times we have visited the node, <span class="math inline">N</span> is the total number of runs, and <span class="math inline">v_i</span> is the expected value of the node given the information we have.</li>
+</ul></li>
+<li><strong>Expansion</strong>: Eventually we run out of information to progress, so expand a random child.</li>
+<li><strong>Simulate</strong>: Quickly simulate a game from the node.</li>
+<li><strong>Back-propogation</strong>: Based on simulations, update expected values.</li>
+</ol>
+<h2 id="stochastic-games">Stochastic Games</h2>
+<blockquote>
+<p>Element of randomness.</p>
+</blockquote>
+<ul>
+<li>Modelled by adding <strong>chance</strong> nodes between MIN and MAX layers, with weights equal to the probability of every option.</li>
+<li>Compute <strong>expected values</strong> for minimax.</li>
+</ul>
+<h1 id="machine-learning">Machine Learning</h1>
+<ul>
+<li><strong>Learning</strong>: Improving behaviour based on experience. Range of behaviour, accuracy on tasks, or speed of execution are considered improvements.</li>
+<li><strong>Supervised Classification</strong>: Given a set of pre-classified, classify on a new instance.
+<ul>
+<li><strong>Feedback</strong>: Supervices learning is explicitly given what must be learned by each example.</li>
+</ul></li>
+<li><strong>Unsupervised Learning</strong>: Find natural classes for examples.
+<ul>
+<li><strong>Feedback</strong>: No feedback is given, learner has to find patterns themselves.</li>
+</ul></li>
+<li><strong>Reinforcement Learning</strong>: Determine what to do based on rewards and punishments.
+<ul>
+<li><strong>Feedback</strong>: Feedback is only given after a sequence of actions.</li>
+</ul></li>
+<li><strong>Transfer Learning</strong>: Learning from an expert.</li>
+<li><strong>Active Learning</strong>: Actively seeking to learn.</li>
+<li><strong>Representation</strong>: Richer representations are more useful for subsequent problem solving but are harder to learn.</li>
+<li>Measured against how well the agent performs with <strong>new examples</strong>.</li>
+<li>Tendency to prefer one hypothesis over another is a <strong>bias</strong>.</li>
+</ul>
+<p>Given representations, data, and bias, we have a <strong>search problem</strong>. We search through the space of possible representations to best fit the data. The search space is typically too large for systematic search, so we use iterative improvement. So a <strong>learning problem</strong> is made up of a search space, an evaluation function, and a search method.</p>
+<h2 id="supervised-learning">Supervised Learning</h2>
+<blockquote>
+<p>Given a set of input features <span class="math inline">X_1, ..., X_n</span>, a set of target features <span class="math inline">f(x)</span>, and a set of training examples, predict the target features for a set of test examples. This is done by returning a function that approximates <span class="math inline">f</span>.</p>
+</blockquote>
+<ul>
+<li><strong>Classification</strong>: <span class="math inline">f</span> is discrete.</li>
+<li><strong>Regression</strong>: <span class="math inline">f</span> is continuous.</li>
+<li><strong>Inductive Learning Hypothesis</strong>: We hope that the approximation of <span class="math inline">f</span> which performs well over a sufficiently large set of training examples will also perform well over any unobserved examples.</li>
+<li><strong>Evaluating Performance</strong>: Suppose <span class="math inline">y</span> is a feature and <span class="math inline">e</span> is an example. <span class="math inline">y(e)</span> is the true value of <span class="math inline">y</span> for <span class="math inline">e</span>. <span class="math inline">y^\star(e)</span> is the predicted value. The <strong>error</strong> is a measure of how close <span class="math inline">y^\star(e)</span> is to <span class="math inline">y(e)</span>.
+<ul>
+<li><strong>Receiver Operator Curve</strong>: <span class="math inline">Recall = Sensitivity = \frac{TP}{TP + FN}</span>. <span class="math inline">Specificity = \frac{TN}{TN + FP}</span>. <span class="math inline">Precision = \frac{TP}{TP + FP}</span>. <span class="math inline">F\text{-}measure = \frac{2 \cdot Precision \cdot Recall}{Precision + Recall}</span>.</li>
+</ul></li>
+</ul>
+<h3 id="decision-trees">Decision Trees</h3>
+<blockquote>
+<p>Classify instructions by storting them down the tree from root to leaf.</p>
+</blockquote>
+<ul>
+<li>Leaves are the classifications.</li>
+<li>Any boolean function is representable using decision trees.</li>
+<li>Data needs to be discrete.</li>
+</ul>
+<h4 id="inducing-decision-tree"><strong>Inducing Decision Tree</strong></h4>
+<blockquote>
+<p>Recursively choose the <em>most significant</em> attribute as the root of the subtree.</p>
+</blockquote>
+<ul>
+<li><strong>Entropy</strong>: Measure of unpredictability, uncertainty of random variables.</li>
+<li><span class="math inline">I(P(v_1), ..., P(v_n)) = \sum_{i=1}^n -P(v_i) \log_2(P(v_i))</span> from Information Theory. Assume <span class="math inline">0\log(0) = 0</span>.</li>
+<li>High entropy inplies that we gain information by observing that value.</li>
+<li><strong>Information Gain</strong>: Gain on attribute <span class="math inline">A</span> is the expected reduce in entropy. Given that attribute <span class="math inline">A</span> divides the training set <span class="math inline">E</span> into subsets <span class="math inline">E_1, ..., E_v</span>, <span class="math inline">remainder(A)</span> is the weighted sum of their information. <span class="math inline">remainder(A) = \sum_{i=1}^v \frac{p_i + n_i}{p + n} I(\frac{p_i}{p_i + n_i}, \frac{n_i}{p_i + n_i})</span>.
+<ul>
+<li>So <span class="math inline">IG(A) = I(\frac{p}{p + n}, \frac{n}{p + n}) - remainder(A)</span>. We choose the attribute <span class="math inline">A</span> which maximizes the information given, so the minimum remainder.</li>
+</ul></li>
+</ul>
+<h2 id="assessing-performance">Assessing Performance</h2>
+<ul>
+<li>Divide large set of examples into disjoint sets. Apply learning algorithm to training set an dmeasure performance against test set.</li>
+<li><strong>Overfitting</strong>: Hypothesis <span class="math inline">h \in H</span> overfits training data if there exists <span class="math inline">h^\prime</span>, <span class="math inline">h \neq h^\prime</span> such that <span class="math inline">h</span> has a smaller error on the training examples but <span class="math inline">h^\prime</span> has a smaller error on the entire distribution of instances.
+<ul>
+<li>Reduces performance of decision trees by 10%-25%.</li>
+<li>Errors causes by bias, variance in data, noise in data.</li>
+</ul></li>
+<li><strong>Bias-Variance Trade-off</strong>: Complicated models will not have enough data (low bias, high variance). Simple models with will have lots of data (high bias, low variance).</li>
+</ul>
+<h3 id="avoiding-overfitting">Avoiding Overfitting</h3>
+<ol type="1">
+<li><strong>Regularization</strong>: Prefer small decision trees over large ones. Add complexity penalty to stopping criteria.</li>
+<li><strong>Pseudocounts</strong>: Add data based on previous knowledge.</li>
+<li><strong>Cross Validation</strong>: Split training set into training an validation. Use validation as pretend test set. Optimize hypothesis to perform well against validation set.
+<ul>
+<li><strong>K-fold Validation</strong>: Divide training set into <span class="math inline">K</span> subsets, pull one out as validation and train on the rest.</li>
+</ul></li>
+</ol>
+<h2 id="linear-classifiers">Linear Classifiers</h2>
+<blockquote>
+<p>Data is of the form <span class="math inline">(x, f(x))</span>, <span class="math inline">x \in \mathbb{R}^n</span>, <span class="math inline">f(x) \in \{0, 1\}</span>.</p>
+</blockquote>
+<ul>
+<li>Want <span class="math inline">w</span> with <span class="math inline">h_w(x) = \begin{cases}1,\ &amp;w \cdot x \ge 0\\0,\ &amp;w \cdot x &lt; 0\end{cases}</span>. Find <span class="math inline">w</span> which minimizes the loss function <span class="math inline">L(h_w) = \sum_{i=1} (y_i - h_w(x_i))^2</span>.</li>
+<li><strong>Gradient Descent</strong>: <span class="math inline">\frac{\partial}{\partial w_i} L(h_w) = 2(y-h_w(x))(-x_i)</span>. Iteratively until convergence, we update <span class="math inline">w_i = w_i - \alpha \frac{\partial}{\partial w_i} L(h_w)</span>, where <span class="math inline">\alpha</span> is the step size or learning rate.</li>
+</ul>
+<h2 id="ensembles">Ensembles</h2>
+<blockquote>
+<p>Use many hypothesis and combine their predictions.</p>
+</blockquote>
+<h3 id="bagging">Bagging</h3>
+<blockquote>
+<p>Majority vote.</p>
+</blockquote>
+<ul>
+<li>Assume each hypothesis makes error with probability <span class="math inline">p</span>.</li>
+<li>Probability that the majority is wrong is <span class="math inline">\sum_{k = \lceil \frac{n}{2} \rceil}^n {n \choose k}p^k (1-p)^{n-k}</span>.</li>
+<li>Example: Random Forests.</li>
+</ul>
+<blockquote>
+<p>Randomly sample subsets of training data and features, learn decision trees off the subsets. Classify using majority vote of the forest.</p>
+</blockquote>
+<h3 id="boosting">Boosting</h3>
+<ul>
+<li>In reality, hypothesis are not equally correct and independent.</li>
+<li>Want to increase the weight of good hypothesis and decrease the weight of bad hypothesis, then use a weighted majority.</li>
+<li>Similarily, we want to increase the weight of misclassified examples.</li>
+<li>Example: AdaBoost.</li>
+</ul>
+<blockquote>
+<p>Compute accuracy <span class="math inline">p</span> for every hypothesis. Update weights of correct predictions by <span class="math inline">\frac{p}{1 - p}</span>. Update weight of hypothesis by <span class="math inline">\log(\frac{1-p}{p})</span>.</p>
+</blockquote>
+<h1 id="neural-networks">Neural Networks</h1>
+<blockquote>
+<p>Relationships between input and output may be complicated.</p>
+</blockquote>
+<ul>
+<li>Want methods for learning arbitrary relationships.</li>
+<li><strong>Neurons</strong>: Dendrites are inputs, soma is activity, axon is output, synapse is links. Learning changes how efficiently signals transfer.</li>
+<li><strong>Artificial Neuron</strong>: <span class="math inline">in(i) = \sum_{j}w_{i, j}a(j)</span>, <span class="math inline">a(i) = g(in(i))</span>. Activation functions should be non-linear and mimic real neurons, so output close to 0 or 1.</li>
+<li><strong>Common Activation Functions</strong>.
+<ul>
+<li><strong>Rectified Linear Unit</strong>: <span class="math inline">g(x) = \max\{0, x\}</span>.</li>
+<li><strong>Sigmoid Function</strong>: <span class="math inline">g(x) = \frac{1}{1 + e^x}</span>.</li>
+<li><strong>Hyperbolid Tangent</strong>: <span class="math inline">g(x) = \tanh(x) = \frac{e^{2x} - 1}{e^{2x} + 1}</span>.</li>
+<li><strong>Threshold</strong>: <span class="math inline">g(x) = \begin{cases}1,\ &amp;x \ge b\\0,\ &amp;x &lt; b\end{cases}</span>. <strong>Network Structure</strong>:</li>
+</ul></li>
 </ul>
 </body>
 </html>
