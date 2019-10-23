@@ -499,8 +499,24 @@ If no assignment is found
 <li><strong>Rectified Linear Unit</strong>: <span class="math inline">g(x) = \max\{0, x\}</span>.</li>
 <li><strong>Sigmoid Function</strong>: <span class="math inline">g(x) = \frac{1}{1 + e^x}</span>.</li>
 <li><strong>Hyperbolid Tangent</strong>: <span class="math inline">g(x) = \tanh(x) = \frac{e^{2x} - 1}{e^{2x} + 1}</span>.</li>
-<li><strong>Threshold</strong>: <span class="math inline">g(x) = \begin{cases}1,\ &amp;x \ge b\\0,\ &amp;x &lt; b\end{cases}</span>. <strong>Network Structure</strong>:</li>
+<li><strong>Threshold</strong>: <span class="math inline">g(x) = \begin{cases}1,\ &amp;x \ge b\\0,\ &amp;x &lt; b\end{cases}</span>.</li>
 </ul></li>
+</ul>
+<h2 id="network-structure">Network Structure</h2>
+<ul>
+<li><strong>Feed-forward ANN</strong>: DAG, no internal state, maps input to outputs.</li>
+<li><strong>Recurrent ANN</strong>: Directed cyclic graph, dynamic system with internal state.</li>
+<li><strong>Perceptrons</strong>: Single layered feed-forward network. Can only learn linear separators. Learning means adjusting the weights.
+<ul>
+<li><span class="math inline">E = \sum_{k} \frac{1}{2}(y_k - (h_w(x))_k)^2</span>. Gradient descent.</li>
+</ul></li>
+<li><strong>Stochastic Gradient Descent</strong>: Shuffle data at random.</li>
+<li><strong>Multilayer Networks</strong>: Any continuous function is learnable with just one hidden layer.
+<ul>
+<li>Last level we can train with gradient descent. For other layers, we do not <span class="math inline">y</span>, so how do we compute <span class="math inline">E</span>?</li>
+<li><strong>Back Propogation</strong>: Hidden layer nodes contributed to some error at output. Amount of error is proportional to the weight. Chain rule.</li>
+</ul></li>
+<li><strong>Deep Learning</strong>: Neural networks with more than one hidden layer.</li>
 </ul>
 </body>
 </html>
