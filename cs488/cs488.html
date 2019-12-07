@@ -110,7 +110,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Backface Culling, Painter’s Algorithm, Warnock, Z-Buffer.</li>
 </ul></li>
-<li><a href="#heirarchical-models-transformations"><strong>Heirarchical Models &amp; Transformations</strong></a>.</li>
+<li><a href="#hierarchical-models-transformations"><strong>Hierarchical Models &amp; Transformations</strong></a>.</li>
 <li><a href="#rotations-about-arbitrary-axis"><strong>Rotations About Arbitrary Axis</strong></a>.
 <ul>
 <li>Focused on Euler vs. Trackball.</li>
@@ -119,7 +119,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#colour"><strong>Colour</strong> (Minor things)</a>.</li>
 <li><a href="#lighting"><strong>Lighting</strong></a>.
 <ul>
-<li>Diffuse, specular.</li>
+<li>Diffuse, Specular.</li>
 </ul></li>
 <li><a href="#shading"><strong>Shading</strong></a>.
 <ul>
@@ -407,15 +407,236 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Doubles memory requirements (memory is cheap).</li>
 <li>Scale / device dependent.</li>
 </ul>
-<h2 id="heirarchical-models-transformations">Heirarchical Models &amp; Transformations</h2>
+<h2 id="hierarchical-models-transformations">Hierarchical Models &amp; Transformations</h2>
 <blockquote>
 <p>How do we model complex objects and scenes?</p>
 </blockquote>
+<ul>
+<li>Define basic 3D primitives in some nice way in their own space.</li>
+<li>Use transformations to put primitives together.</li>
+<li>Use hierarchy of spaces to build complex models (DAG).
+<ul>
+<li>DFS of the DAG, using a <strong>matrix stack</strong>.</li>
+<li>Primitives occur at leaf nodes, transformations occur at internal nodes.</li>
+</ul></li>
+</ul>
 <h2 id="rotations-about-arbitrary-axis">Rotations About Arbitrary Axis</h2>
+<blockquote>
+<p>Rotation given by <span class="math inline">a = (x, y, z)</span> and <span class="math inline">\theta</span>. Map <span class="math inline">a</span> onto one of the canonical axes, rotate by <span class="math inline">\theta</span>, then map back.</p>
+</blockquote>
+<ol type="1">
+<li>Pick closest axis to <span class="math inline">a</span>. Assume we chose the <span class="math inline">x</span>-axis.</li>
+<li>Project <span class="math inline">a</span> onto <span class="math inline">b</span> in the <span class="math inline">xz</span> plane.</li>
+<li>Compute <span class="math inline">\cos(\phi) = \frac{x}{\sqrt{x^2 + z^2}}</span>, <span class="math inline">\sin(\phi) = \frac{z}{\sqrt{x^2+z^2}}</span>.</li>
+<li>Create <span class="math inline">R(-\phi)</span>.</li>
+<li>Rotate <span class="math inline">a</span> onto the <span class="math inline">xy</span> plane using <span class="math inline">R(-\phi)</span>. <span class="math inline">c = R_y(-\theta)a</span>.</li>
+<li>Compute <span class="math inline">\cos(\gamma)</span>, <span class="math inline">\sin(\gamma)</span>, where <span class="math inline">\gamma</span> is the angle of <span class="math inline">c</span> with the <span class="math inline">x</span> axis.</li>
+<li>Use <span class="math inline">\cos(\gamma)</span> and <span class="math inline">\sin(\gamma)</span> to create <span class="math inline">R_z(-\gamma)</span>.</li>
+<li>Rotate <span class="math inline">c</span> onto the <span class="math inline">x</span>-axis using <span class="math inline">R_z(-\gamma)</span>.</li>
+<li>Rotate around the <span class="math inline">x</span>-axis by <span class="math inline">\theta</span>, <span class="math inline">R_x(\theta)</span>.</li>
+<li>Reverse <span class="math inline">z</span>-axis rotation.</li>
+<li>Reverse <span class="math inline">y</span>-axis rotation.</li>
+</ol>
+<p>So the overall transformation is <span class="math inline">R(\theta, a) = R_y(\phi)R_z(\gamma)R_x(\theta)R_z(-\gamma)R_y(-\phi)</span>.</p>
+<h3 id="d-rotation-user-interfaces">3D Rotation User Interfaces</h3>
+<ul>
+<li><strong>Virtual Sphere</strong>: Given two sequential samples of mouse position <span class="math inline">S, T</span>, map <span class="math inline">S</span> to point on sphere, map <span class="math inline">ST</span> to tangential velocity. Use to rotate. When <span class="math inline">S</span> is outside of the sphere we do <span class="math inline">z</span>-axis rotation.</li>
+<li><strong>Arcball</strong>: Rather than using <span class="math inline">T</span> as tangent, map <span class="math inline">T</span> to point on the sphere as well and rotate the ball so that <span class="math inline">S</span> moves to <span class="math inline">T</span>.</li>
+</ul>
 <h2 id="colour">Colour</h2>
+<ul>
+<li>Light sources emit intensity <span class="math inline">I(\lambda)</span>, assigns intensity to each wavelength of light.</li>
+<li>Humans perceive <span class="math inline">I(\lambda)</span> as colour. Normal human retina has three types of colour receptors which respond most strongly to short, medium, or long wavelengths.</li>
+</ul>
+<h3 id="tri-stimulus-colour-theory">Tri-Stimulus Colour Theory</h3>
+<ul>
+<li>Model visual system as linear map, from wavelength to three dimensional vector space.</li>
+</ul>
+<h3 id="colour-systems">Colour Systems</h3>
+<ul>
+<li>RGB (Red, Green, Blue) Additive.</li>
+<li>CMY (Cyan, Magenta, Yellow) Subtractive. Complement of RGB.</li>
+<li>HSV (Hue, Saturation, Value). Cone shaped colour space.</li>
+<li>CIE XYZ. More complete colour space.</li>
+<li>YIQ. Backwards compatible with black-and-white TV.</li>
+</ul>
 <h2 id="lighting">Lighting</h2>
+<blockquote>
+<p>Given a point on the surface visible through a pixel, what colour should we assign it?</p>
+</blockquote>
+<ul>
+<li>Want to smoothly shade objects in the scene.</li>
+<li>Shading done quickly (interactive speeds).</li>
+</ul>
+<p><strong>Initial Assumptions</strong></p>
+<ul>
+<li>Linearity of reflection.</li>
+<li>Energy conservation.</li>
+<li>Full spectrum of light is representable by three floats (RGB).</li>
+</ul>
+<h3 id="lambertian-reflection">Lambertian Reflection</h3>
+<blockquote>
+<p>Assume that incoming light is partially absorbed, then the remainder of energy is propogated equally in all directions.</p>
+</blockquote>
+<ul>
+<li>Approximates matte materials.</li>
+<li><span class="math inline">L_{out}(v) = \rho(v, l)E_{in}(l)</span>. We assumed that outgoing radiance is equal in all directions so <span class="math inline">\rho</span> is a constant.</li>
+<li><span class="math inline">L_{out}(v) = k_d E_{in}(l) = k_d L_{in}(l) l \cdot n</span>. For the complete environment we take the integral over all possible directions. Taken as the sum over all light sources in practice.</li>
+</ul>
+<h3 id="attenuation">Attenuation</h3>
+<ul>
+<li>No attenuation for directional lights, because the energy goes not spread out.</li>
+<li>For point light sources, <span class="math inline">L_{in}(l) \propto \frac{1}{r^2}</span>, where <span class="math inline">r</span> is the distance from light to <span class="math inline">P</span>.
+<ul>
+<li>Too harsh in practice because real lighting is from area sources, multiply reflections in environment.</li>
+<li>We use <span class="math inline">L_{in}(l) = \frac{I}{c_1 + c_2r + c_3r^2}</span>. We do not attenuate light from <span class="math inline">P</span> to the screen.</li>
+</ul></li>
+</ul>
+<h3 id="ambient-light">Ambient Light</h3>
+<ul>
+<li>Lambertian only models direct illumination.</li>
+<li>Ambient illumination is a simple approximation to global illumination.</li>
+<li>Assume everything gets uniform illumination in addition to direct illumination. <span class="math inline">L_{out}(v) = k_a I_a + \sum_i \rho(v, l_i) I_i \frac{l_i \cdot n}{c_1 + c_2 r_i + c_3 r_i^2}</span>.</li>
+</ul>
+<h3 id="specular-reflection">Specular Reflection</h3>
+<ul>
+<li>Lambertian models matte but not shiny.</li>
+<li>Shiny surfaces have highlights.</li>
+<li>Phong Bui-Tuong developed empirical model. <span class="math inline">L_{out}(v) = k_a I_a + k_d (l \cdot n) I_d + k_s (r \cdot v)^p I_s</span>. Classic <strong>Phong lighting model</strong>.
+<ul>
+<li>Vector <span class="math inline">r</span> is <span class="math inline">l</span> reflected by the surface. <span class="math inline">r = -l + 2(l \cdot n)n</span>.</li>
+<li>Exponent <span class="math inline">p</span> controls sharpness of highlight. Small <span class="math inline">p</span> gives wide highlight, large <span class="math inline">p</span> gives narrow highlight.</li>
+</ul></li>
+<li>Blinn introduced variation, <strong>Blinn-Phong lighting model</strong>. <span class="math inline">L_{out} k_a I_a + k_d(l \cdot n) I_d + k_s (h \cdot n)^p I_s</span>, with <span class="math inline">h = \frac{v + l}{|v + l|}</span> measuring deviation from the ideal mirror configuration.</li>
+</ul>
 <h2 id="shading">Shading</h2>
+<ul>
+<li>We have lighting calculation for a point, so we need surface normals at every point.</li>
+<li>Surface is often polygonal.</li>
+</ul>
+<h3 id="flat-shading">Flat Shading</h3>
+<ul>
+<li>Shade entire polygon one colour.</li>
+<li>Surface will look faceted. This is acceptable if it really is a polygonal model, not good if it is an approximation of a curved surface.</li>
+</ul>
+<h3 id="gouraud-shading">Gouraud Shading</h3>
+<ul>
+<li>Interpolate colours across a polygon from the vertices.</li>
+<li>Lighting calculation only performed at vertices.</li>
+<li>Well-defined for triangles. Extends to convex polygons but better to just convert to triangles.
+<ul>
+<li>We could slice convex polygon horizontally then interpolate colours along each scanline. This will not produce consistent shading after rotations.</li>
+<li>Triangluation is expensive and it will be visible to the viewer.</li>
+</ul></li>
+</ul>
+<h3 id="phong-shading">Phong Shading</h3>
+<ul>
+<li>Interpolate lighting model parameters instead of colours.</li>
+<li><strong>Normal</strong> is specified at every vertex of a polygon, interpolated using the Gouraud technique.</li>
+<li>Simulated with programmable vertex and fragment shaders on modern graphics hardware.</li>
+</ul>
 <h2 id="ray-tracing">Ray Tracing</h2>
+<ul>
+<li>Want more realistic images with shadows and reflections.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="cf">for</span> pixel <span class="kw">in</span> pixels:</a>
+<a class="sourceLine" id="cb2-2" title="2">    ray <span class="op">=</span> (eye, pixel <span class="op">-</span> eye)</a>
+<a class="sourceLine" id="cb2-3" title="3">    Intersect(Scene, ray)</a></code></pre></div>
+<ul>
+<li><strong>Setting</strong>: eyepoint, virtual screen (array of virtual pixels).</li>
+<li><strong>Ray</strong>: Half-line determined by eyepoint and a point associated with a chosen pixel.</li>
+<li><strong>Interpretations</strong>: Ray is a path of photons that reach the eye.</li>
+</ul>
+<h3 id="intersection-computations">Intersection Computations</h3>
+<ul>
+<li>Express ray in parametric form <span class="math inline">E + t(P - E)</span>, <span class="math inline">t &gt; 0</span>.</li>
+<li><strong>Direct Implicit Form</strong>: Express object as <span class="math inline">f(Q) = 0</span> when <span class="math inline">Q</span> is a surface point, intersection equation is solving for <span class="math inline">t</span> such that <span class="math inline">f(E + t(P - E)) = 0</span>.</li>
+<li><strong>Procedural Implicit Form</strong>: <span class="math inline">f</span> is defined procedurally.</li>
+</ul>
+<h4 id="quadratic-surfaces.">Quadratic Surfaces.</h4>
+<ul>
+<li><strong>Ellipsoid</strong>: <span class="math inline">\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1</span>.</li>
+<li><strong>Elliptic Paraboloid</strong>: <span class="math inline">\frac{x^2}{p^2} + \frac{y^2}{q^2} = 1</span>.</li>
+<li><strong>Hyperboloid of One Sheet</strong>: <span class="math inline">\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1</span>.</li>
+<li><strong>Elliptic Cone</strong>: <span class="math inline">\frac{x^2}{p^2} + \frac{y^2}{q^2} - \frac{z^2}{r^2} = 0</span>.</li>
+<li><strong>Elliptic Cylinder</strong>: <span class="math inline">\frac{x^2}{p^2} + \frac{y^2}{q^2} = 1</span>.</li>
+<li>Instead of solving generally, we can solve for simpler versions then just scale results (intersections in model space).</li>
+</ul>
+<h3 id="shading-1">Shading</h3>
+<ul>
+<li>At closest intersection point, perform Phong shading.</li>
+<li>Before adding contribution from a light, cast a ray to the light. If the ray hits an object before the light, then don’t shade. This gives <strong>shadows</strong>.</li>
+</ul>
+<h3 id="reflections">Reflections</h3>
+<ul>
+<li>Cast ray in the mirror direction.</li>
+<li>Add colour coming from this ray to the shade of the initial ray.</li>
+</ul>
+<h3 id="recursive-ray-tracing">Recursive Ray Tracing</h3>
+<ul>
+<li>Eye-screen ray is the <em>primary</em> ray.</li>
+<li>Generate secondary rays for light sources, reflections, refractions, and recurse.</li>
+<li>Accumulate averaged information for primary ray.</li>
+</ul>
+<h3 id="ray-casting">Ray Casting</h3>
+<ul>
+<li>Stop before generating secondary rays.</li>
+</ul>
+<h3 id="surface-normals">Surface Normals</h3>
+<ul>
+<li>Illumination models require surface normal vectors at intersection points.</li>
+<li>Normals to polygons are provided by planar normal or cross product of adjacent edges.</li>
+<li>Normals to any implicit surface use calculus.</li>
+</ul>
+<h4 id="normal-transformations">Normal Transformations</h4>
+<blockquote>
+<p>How do affine transformations affect surface normals?</p>
+</blockquote>
+<ul>
+<li>Recall from <a href="#affine-geometries-transformations">Affine Geometrics &amp; Transformations</a> that normals are transformed by the inverse transpose of the upper 3 x 3 portion of the transformation matrix.</li>
+</ul>
+<h3 id="modeling-and-csg">Modeling and CSG</h3>
+<ul>
+<li>Hierarchical modeling works for ray tracer too.</li>
+<li>In <em>Constructive Solid Geometry</em> all primitives are solids.</li>
+<li>New type of internal node in DAG, boolean operations (Intersection, Union, Difference).
+<ul>
+<li>Complete ray intersect object with every primitive, then perform boolean operations on the set of resulting line segments.</li>
+<li>Segments must be transformed on the way back up the DAG similar to how the ray is transformed.</li>
+</ul></li>
+</ul>
+<h3 id="texture-mapping">Texture Mapping</h3>
+<blockquote>
+<p>Adding detail by increasing model complexity is costly. When the detail is surface detail, we can use texture mapping.</p>
+</blockquote>
+<ul>
+<li>Scan a photo of the detail and paste it onto objects.</li>
+<li>Associate texture with polygon.</li>
+<li>Map pixel onto polygon then into texture map.</li>
+<li>Use weighted average of covered texture to compute colour.</li>
+</ul>
+<h3 id="bump-mapping">Bump Mapping</h3>
+<ul>
+<li>Textures will still appear smooth (no shadows).</li>
+<li>We perturb the normal, use for lighting calculation.</li>
+</ul>
+<h3 id="solid-textures">Solid Textures</h3>
+<ul>
+<li>Hard to texture map onto curved surfaces.</li>
+<li>Use a 3D texture instead. Usually procedural.</li>
+</ul>
+<h3 id="bounding-boxes-spatial-subdivision">Bounding Boxes, Spatial Subdivision</h3>
+<ul>
+<li>Ray tracing is slow, often because of ray intersect object.</li>
+<li>Improvements come in two forms; reduce the cost of ray intersect object or intersect the ray with fewer objects.</li>
+<li><strong>Bounding Boxes</strong>: Place bounding box around complicated geometry. Only compute ray intersect object if the ray intersects the bounding box. Cheap to compute if the box is axis-aligned.</li>
+</ul>
+<h3 id="spatial-subdivision">Spatial Subdivision</h3>
+<ul>
+<li>Divide space into subregions.</li>
+<li>When tracing ray, only interesect with objects in sub-regions the ray passes through.</li>
+<li>Useful when there are a lot of small objects in the scene.</li>
+</ul>
 <h2 id="aliasing">Aliasing</h2>
 <h2 id="bidirectional-ray-tracing">Bidirectional Ray Tracing</h2>
 <h2 id="radiosity">Radiosity</h2>
