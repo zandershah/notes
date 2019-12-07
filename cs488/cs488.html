@@ -11,6 +11,69 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
   <link rel="stylesheet" href="../pandoc.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -149,12 +212,205 @@
 </ul>
 <h2 id="affine-geometries-transformations">Affine Geometries &amp; Transformations</h2>
 <h3 id="linear-combinations">Linear Combinations</h3>
+<ul>
+<li>Vector-Vector addition.</li>
+<li><span class="math inline">T(u + v) = T(u) + T(v)</span>. T(u) = T(u).</li>
+<li>Point-Vector addition.</li>
+</ul>
+<h3 id="affine-combinations">Affine Combinations</h3>
+<ul>
+<li><strong>Point Subtraction</strong>: <span class="math inline">Q - P = v \in V</span> such that <span class="math inline">Q = P + v</span>, for <span class="math inline">P, Q \in P</span>. So <span class="math inline">\sum a_i P_i</span> is a vector if and only if <span class="math inline">\sum a_i = 0</span>.</li>
+<li><strong>Point Blending</strong>: <span class="math inline">Q = (1 - \alpha)Q_1 + \alpha Q_2</span> such that <span class="math inline">Q = Q_1 + \alpha(Q_2 - Q_1) \in P</span>. So <span class="math inline">\sum a_i P_i</span> is a point if and only if <span class="math inline">\sum a_i = 1</span>.
+<ul>
+<li><span class="math inline">\frac{|Q - Q_1|}{|Q - Q_2|} = \frac{1 - \alpha}{\alpha}</span>.</li>
+</ul></li>
+<li>So when combining points, the result is a point if the coefficients sum to <span class="math inline">1</span>, and the result is a vector if the coefficients sum to <span class="math inline">0</span>.</li>
+</ul>
+<h3 id="affine-transformations">Affine Transformations</h3>
+<p>Let <span class="math inline">T: A_1 \to A_2</span>, where <span class="math inline">A_1, A_2</span> are affine spaces.</p>
+<ul>
+<li><span class="math inline">T</span> maps vectors to vectors and points to points.</li>
+<li><span class="math inline">T</span> is a linear trasformation on the vectors.</li>
+<li><span class="math inline">T(P + u) = T(P) + T(u)</span>, where <span class="math inline">P \in P</span>, <span class="math inline">v \in V</span>.</li>
+</ul>
+<p>Then <span class="math inline">T</span> is an affine transformation. Preserves affine combinations on the points.</p>
+<p>Suppose <span class="math inline">T</span> is only defined on <span class="math inline">P</span>. Then <span class="math inline">T(v) = T(Q) - T(R)</span>, where <span class="math inline">v = Q - R</span>.</p>
+<h3 id="mapping-through-an-affine-transformation">Mapping Through an Affine Transformation</h3>
+<p>Let <span class="math inline">A, B</span> be affine spaces, with <span class="math inline">T: A \to B</span> be an affine transformation. Let <span class="math inline">F_A = (v_1, v_2, O_v)</span> be a frame for <span class="math inline">A</span>, let <span class="math inline">F_B = (w_1, w_2, O_w)</span> be a frame for <span class="math inline">B</span>. Let<span class="math inline">P</span> be a point in <span class="math inline">A</span> whose <em>coordinates</em> relative to <span class="math inline">F_A = (p_1, p_2, 1)</span>. What are the coordinates <span class="math inline">(p_1^\prime, p_2^\prime, 1)</span> of <span class="math inline">T(P)</span> relative to frame <span class="math inline">F_B</span>?</p>
+<p><span class="math inline">\begin{aligned} T(P) &amp;= T(p_1 v_1 + p_2 v_2 + O_v) \\ &amp;= p_1T(v_1) + p_2 T(v_2) + T(O_v) \\ \end{aligned}</span></p>
+<h3 id="geometric-transformations">Geometric Transformations</h3>
+<ul>
+<li><strong>Rotation</strong>: <span class="math inline">\begin{bmatrix}\cos(\theta) &amp; -\sin(\theta) &amp; 0 \\ \sin(\theta) &amp; \cos(\theta) &amp; 0\\ 0 &amp; 0 &amp; 1\end{bmatrix}</span>.</li>
+<li><strong>Shear</strong>: <span class="math inline">\begin{bmatrix}1 &amp; \beta &amp; 0 \\ \alpha &amp; 1 &amp; 0\\ 0 &amp; 0 &amp; 1\end{bmatrix}</span>.</li>
+<li>Translation is a shear in the next dimension.</li>
+</ul>
+<h3 id="change-of-basis">Change of Basis</h3>
+<p>Suppose we want to change coordinates relative to <span class="math inline">F_1</span> to coordinates relative to <span class="math inline">F_2</span>. We know that <span class="math inline">P = [x, y, 1]^T</span> relative to <span class="math inline">F_1 = (w_1, w_2, O_w)</span>. Solve <span class="math inline">F_1 = F_2 M_{1, 2}</span>.</p>
+<ul>
+<li>When <span class="math inline">F_2</span> is orthonormal, <span class="math inline">f_{i,j} = w_j \cdot v_i</span>, <span class="math inline">f_{i,3} = (O_w - O_v) \cdot v_i</span>.</li>
+<li>Points “mapped” by a change of basis do not change, they are just represented in a different frame.</li>
+<li>To fully specify a transformation, we need a matrix, a domain space, a range space, and a coordinate frame in each space.</li>
+</ul>
+<h3 id="world-and-viewing-frames">World and Viewing Frames</h3>
+<ul>
+<li>Standard frame is the <strong>world frame</strong>.</li>
+<li>Viewer may be anywhere and looking anywhere. Specified as <span class="math inline">z, y</span> with <span class="math inline">z</span> as the <strong>view direction</strong> and <span class="math inline">z</span> is the <strong>up vector</strong>.</li>
+<li>We change basis from the world frame to the viewers frame.</li>
+</ul>
+<p>After we are in viewing coordinates, we place a clipping box around the scene relative to the viewing frame.</p>
+<ul>
+<li>The screen is 2D, so an <strong>orthographic projection</strong> is made by removing the z-coordinate.</li>
+</ul>
+<h3 id="transforming-normals">Transforming Normals</h3>
+<ul>
+<li>Consider a non-uniform scale of a circle and the effect on the normal vector. The normal vector will be scaled as well which is incorrect.</li>
+<li>This is because normal vectors are <strong>not</strong> the difference in points.
+<ul>
+<li>But tangent vectors <strong>are</strong>, and normals are vectors perpendicular to all tangents at a point.</li>
+<li>We can prove we should transform normals by the inverse transpose of the linear part of the transformation (upper 3 x 3 submatrix).</li>
+<li>This is only an issue if there is a non-uniform scale or a shear transformation.</li>
+</ul></li>
+</ul>
 <h2 id="windows-viewports-ndc">Windows, Viewports, NDC</h2>
+<ul>
+<li><strong>Window</strong>: Rectangular area of interest in the scene.</li>
+<li><strong>Viewport</strong>: Rectangular region on device.</li>
+</ul>
+<p>Window to Viewport mapping is simple a scale based on the ratios and an offset based on their positions.</p>
+<ul>
+<li>When the ratios between the heights and lengths of the two regions are not the same, the image will be distorted.</li>
+</ul>
+<h3 id="normalized-device-coordinates">Normalized Device Coordinates</h3>
+<p>We want to specify the viewport in a generalized way so that it works on all plaforms / devices. So we use <strong>Normalized Device Coordinates</strong> as an intermediate coordinate system.</p>
 <h2 id="line-clipping">Line Clipping</h2>
+<p><strong>Clipping</strong> is removing points outside a region of interest.</p>
+<ul>
+<li><strong>Point clipping</strong>: Points are either entirely inside the region or not.</li>
+<li><strong>Line clipping</strong>: Halfspaces can be combined to bound a convex region.
+<ul>
+<li>Liang-Barsky algorithm efficiently clips line segments to a halfspace.</li>
+<li>When a line segment is parially inside and partially outside a halfspace, we generate a new line to represent the part inside.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">for</span> P, n <span class="kw">in</span> edges: <span class="co"># Halfspaces</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    wecA <span class="op">=</span> dot(A <span class="op">-</span> P, n)</a>
+<a class="sourceLine" id="cb1-3" title="3">    wecB <span class="op">=</span> dot(B <span class="op">-</span> P, n)</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">if</span> wecA <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">and</span> wecB <span class="op">&lt;</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb1-6" title="6">        reject <span class="co"># Outside</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="cf">if</span> wecA <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> wecB <span class="op">&gt;=</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb1-8" title="8">        <span class="bu">next</span> <span class="co"># Inside</span></a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10">    t <span class="op">=</span> wecA <span class="op">/</span> (wecA <span class="op">-</span> wecB)</a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="cf">if</span> wecA <span class="op">&lt;</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb1-13" title="13">        A <span class="op">=</span> A <span class="op">+</span> t <span class="op">*</span> (B <span class="op">-</span> A)</a>
+<a class="sourceLine" id="cb1-14" title="14">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb1-15" title="15">        B <span class="op">=</span> A <span class="op">+</span> t <span class="op">*</span> (B <span class="op">-</span> A)</a></code></pre></div>
 <h2 id="projections">Projections</h2>
+<h3 id="perspective-projection">Perspective Projection</h3>
+<ul>
+<li>Identify all points with a line through the eyepoint.</li>
+<li>Take intersection with viewing plane as projection.</li>
+<li>This is <strong>not</strong> an affine transformation, but a perspective projection.</li>
+<li>Angles and distances are not preserved, but they are not preserved under affine transformations.</li>
+<li>Ratios of distances are not preserved, affine combinations are not preserved.</li>
+<li>Straight lines are mapped to straight lines.</li>
+<li><em>Cross</em> ratios are preserved. <span class="math inline">\frac{|AC| / |CD}{|AB| / |BC|}</span>.</li>
+<li>Compared to affine transformations, they require 1 extra point or vector <span class="math inline">(n + 2)</span> to define a projection map in <span class="math inline">n</span> dimensional space.</li>
+</ul>
+<h3 id="perspective-map">Perspective Map</h3>
+<blockquote>
+<p>For projection plane <span class="math inline">z = d</span>.</p>
+</blockquote>
+<ul>
+<li>By similar triangles, <span class="math inline">P = \left(\frac{xd}{z}, \frac{yd}{z}, d\right)</span></li>
+<li>We need to know what is in front, which is impossible because the map loses <span class="math inline">z</span> information.</li>
+<li><span class="math inline">\begin{bmatrix}1 &amp; 0 &amp; 0 &amp; 0 \\0 &amp; 1 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{bmatrix}\begin{bmatrix}x \\y\\z\\1\end{bmatrix} = \begin{bmatrix}x\\y\\z+1\\z\end{bmatrix}</span> maps <span class="math inline">x, y</span> to <span class="math inline">\frac{x}{z}, \frac{y}{z}</span>, and maps <span class="math inline">z</span> to <span class="math inline">1 + \frac{1}{z}</span>. So we retain depth information.</li>
+<li><span class="math inline">\begin{bmatrix}1 &amp; 0 &amp; 0 &amp; 0 \\0 &amp; 1 &amp; 0 &amp; 0\\0 &amp; 0 &amp; \frac{f+n}{f-n} &amp; \frac{-2fn}{f-n} \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{bmatrix}\begin{bmatrix}x \\y\\z\\1\end{bmatrix} = \begin{bmatrix}x\\y\\\frac{z(f + n) - 2fn}{f - n}\\z\end{bmatrix}</span> is used for mapping the near and far clipping planes to <span class="math inline">[-1, 1]</span>.</li>
+<li>When fov-y is given, we need to include this in the matrix as <span class="math inline">\cot(\theta / 2)</span>.</li>
+</ul>
+<h3 id="d-clipping">3D Clipping</h3>
+<ul>
+<li>We should clip the near plane <strong>before</strong> projection to avoid divide by 0.</li>
+<li>Clipping to other planes <em>could</em> be done before projection but it is easier to clip after projection because we will have a cube instead of the truncated viewing pyramid.</li>
+</ul>
 <h2 id="polygons">Polygons</h2>
+<blockquote>
+<p>Area primitive.</p>
+</blockquote>
+<ul>
+<li>Simple polygon is planar set of ordered points, no holes, no crossing.</li>
+<li>Convention is to have points ordered in counter-clockwise order, so we have a defined interior and exterior.</li>
+<li>Affine transformations may introduce degeneracies. Orthographic projection may project entire polygon to a line segment.</li>
+</ul>
+<h3 id="polygon-clipping">Polygon Clipping</h3>
+<ul>
+<li>Window must be a convex polygon. Polygon to be clipped does not need to be convex.</li>
+<li>Given a polygon represented as <span class="math inline">v_1,..., v_n</span>, we process all polygon edges in succession against a window edge, <span class="math inline">w_1, ..., w_n</span>. Repeat for every window edge.</li>
+</ul>
+<p><strong>Algorithm</strong>: Four cases to consider.</p>
+<ol type="1">
+<li>Polygon edge is entirely inside the window edge.</li>
+<li>Polygon edge crosses window edge going out.
+<ul>
+<li>Intersection point <span class="math inline">i</span> is the next vertex of the resulting polygon.</li>
+</ul></li>
+<li>Polygon edge is entirely outside the window edge.
+<ul>
+<li>No output.</li>
+</ul></li>
+<li>Polygon edge crosses window going in.
+<ul>
+<li>Intersection point <span class="math inline">i</span> and <span class="math inline">p</span> are the next two vertices of the resulting polygon.</li>
+</ul></li>
+</ol>
+<h3 id="polygon-scan-conversion">Polygon Scan Conversion</h3>
+<ul>
+<li>Complicated in general, we look at scan conversion of triangle.</li>
+<li>Split triangle with horizonal line at middle <span class="math inline">y</span> value, so we have an axis-aligned edge.</li>
+<li>Scan convert the triangle by calculating slopes and iterating over every horizontal line (floating point algorithm).</li>
+</ul>
 <h2 id="hidden-surface-removal">Hidden Surface Removal</h2>
+<blockquote>
+<p>When we have a lot of polygons, we want to draw only those visible to the viewer.</p>
+</blockquote>
+<h3 id="backface-culling">Backface Culling</h3>
+<ul>
+<li>Remove all <em>backfacing</em> polygons. Polygons are backfacing if their normal is facing away from the viewer. So cull the polygon if <span class="math inline">N \cdot V &gt; 0</span>.</li>
+<li>Not a complete solution (used in conjuction with more complete algorithm), but easy to integrate into hardware and usually improves performance by a factor of 2.</li>
+</ul>
+<h3 id="painters-algorithm">Painter’s Algorithm</h3>
+<ul>
+<li>Sort polygons on farthest <span class="math inline">z</span>.</li>
+<li>Resolve ambiguities where <span class="math inline">z</span>’s overlap.</li>
+<li>Scan convert from largest <span class="math inline">z</span> to smallest <span class="math inline">z</span>.</li>
+<li>Some cases are simple but others are not. <span class="math inline">\Omega(n^2)</span> algorithm.</li>
+</ul>
+<h3 id="warnocks-algorithm">Warnock’s Algorithm</h3>
+<blockquote>
+<p>Divide and conquer algorithm.</p>
+</blockquote>
+<ul>
+<li>Draw the polygon-list if it is simple in the viewport, otherwise split the viewport vertically and horizontally then recursively draw.</li>
+<li>Simple means there is no more than one polygon in the viewport, or that the viewport is only 1 pixel in size (shade pixel based on closest polygon).</li>
+<li><span class="math inline">O(pn)</span>, where <span class="math inline">p, n</span> are the number of pixels and polygons.</li>
+</ul>
+<h3 id="z-buffer-algorithm">Z-Buffer Algorithm</h3>
+<ul>
+<li>Perspective transformatoin maps polygons to polygons.</li>
+<li>Scan convert while also stepping in <span class="math inline">z</span>.</li>
+<li>In addition to framebuffer, have a depth buffer (<span class="math inline">z</span> buffer) to write <span class="math inline">z</span> values.</li>
+<li>Update colour in framebuffer if the <span class="math inline">z</span> value is less than current.</li>
+<li><span class="math inline">O(p_c + n)</span>, where <span class="math inline">p_c, n</span> are the number of scan converted pixels and polygons.</li>
+<li>Easy to implement (hardware too), online algorithm.</li>
+<li>Doubles memory requirements (memory is cheap).</li>
+<li>Scale / device dependent.</li>
+</ul>
 <h2 id="heirarchical-models-transformations">Heirarchical Models &amp; Transformations</h2>
+<blockquote>
+<p>How do we model complex objects and scenes?</p>
+</blockquote>
 <h2 id="rotations-about-arbitrary-axis">Rotations About Arbitrary Axis</h2>
 <h2 id="colour">Colour</h2>
 <h2 id="lighting">Lighting</h2>
