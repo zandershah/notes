@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Shadows, CSG, Texture / Bump Mapping.</li>
 </ul></li>
 <li><a href="#aliasing"><strong>Aliasing</strong></a>.</li>
-<li><a href="#bidirectional-ray-tracing"><strong>Bidirectional Ray Tracing</strong> (Not tested in depth)</a>.</li>
+<li><a href="#bidirectional-ray-tracing"><strong>Bidirectional Tracing</strong> (Not tested in depth)</a>.</li>
 <li><a href="#radiosity"><strong>Radiosity</strong> (Not tested in depth)</a>.</li>
 <li><a href="#photon-mapping"><strong>Photon Mapping</strong> (Not tested in depth)</a>.</li>
 <li><a href="#25"><strong>Shadows, Projective, Shadow Maps, Volumes</strong> (Not tested in depth)</a>.</li>
@@ -638,8 +638,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Useful when there are a lot of small objects in the scene.</li>
 </ul>
 <h2 id="aliasing">Aliasing</h2>
-<h2 id="bidirectional-ray-tracing">Bidirectional Ray Tracing</h2>
-<h2 id="radiosity">Radiosity</h2>
+<ul>
+<li>Images sample a continuous function. When the samples are spaced too far apart, don’t get a true representation of the scene.
+<ul>
+<li>Stairsteps.</li>
+<li>Moire Patterns.</li>
+<li>Loss of small objects.</li>
+</ul></li>
+</ul>
+<h3 id="nyquist-limit">Nyquist Limit</h3>
+<ul>
+<li>Sampling rate which is twice the highest frequency.</li>
+<li>Avoids aliasing.</li>
+<li>Doesn’t work for man made objects because they have distinct edges with infinite frequency.</li>
+</ul>
+<h3 id="area-sampling">Area Sampling</h3>
+<ul>
+<li>Instead of sampling, we could integrate.</li>
+</ul>
+<h3 id="weighted-sampling">Weighted Sampling</h3>
+<ul>
+<li>Unweighted is just <span class="math inline">I = \int_{x \in Box} I_x dI</span>.</li>
+<li>Weighted gives different weights depending on position in the pixel. For example, positions closer to the center of the pixel may be weighted higher than positions near the edge.</li>
+</ul>
+<h3 id="anti-aliasing-in-ray-tracing">Anti-aliasing in Ray Tracing</h3>
+<ul>
+<li>Integration not possible, instead we point sample the image.</li>
+<li><strong>Super Sampling</strong>: Take more samples and weight with filter. Sampling pattern should not be regular or we will still get aliasing.</li>
+<li><strong>Stochastic Sampling</strong>: Jitter samples.</li>
+</ul>
+<h2 id="bidirectional-tracing">Bidirectional Tracing</h2>
+<blockquote>
+<p>Some effects such as caustics require tracing lights from light back to eye.</p>
+</blockquote>
+<h3 id="radiosity">Radiosity</h3>
+<ul>
+<li>Model diffuse interaction of light only in steady state.</li>
+<li>Discretize scene into polygons and assume polygons emit constant light over surface.</li>
+<li>Determine interaction between pairs of polygons.</li>
+<li>Solve a large linear system which is expensive but the result is reusable.</li>
+</ul>
+<h3 id="distribution-ray-tracing">Distribution Ray Tracing</h3>
+<ul>
+<li>Ray trace, but at every reflection cast multiple rays based on a distribution function that represents reflection properties.</li>
+<li>Distribution over reflected direction gives soft reflections, over light area gives soft shadows, over aperature gives depth of field, over time gives motion blur.</li>
+<li>Can handle caustics in theory but needs a lot of rays.</li>
+</ul>
+<h3 id="bidirectional-path-tracing">Bidirectional Path Tracing</h3>
+<blockquote>
+<p>Trace paths from eye and from light and connect them. Trace paths (single reflected ray).</p>
+</blockquote>
+<ul>
+<li>Reflect with distribution function.</li>
+<li>Lots of rays, low error, high noise.</li>
+<li>Less expensive than distribution ray tracing.</li>
+</ul>
+<h3 id="photon-maps">Photon Maps</h3>
+<ul>
+<li>Cast rays from lights, create a <em>photon map</em> wherever light hits.</li>
+<li>Use standard ray casting to determine lighting.
+<ul>
+<li>Density estimation to convert photon map to intensity.</li>
+</ul></li>
+<li>Fast, easy to program, high noise.</li>
+</ul>
+<h3 id="metropolis-algorithm">Metropolis Algorithm</h3>
+<ul>
+<li>Take one path from light to eye, perturb the <em>path</em> and see if it still reaches the eye.</li>
+</ul>
+<h2 id="radiosity-1">Radiosity</h2>
 <h2 id="photon-mapping">Photon Mapping</h2>
 <h2 id="shadows-projective-shadow-maps-volumes">Shadows, Projective, Shadow Maps, Volumes</h2>
 <h2 id="modelling-stuff">Modelling Stuff</h2>
