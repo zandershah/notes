@@ -1117,5 +1117,116 @@ P_{i,3} &amp;= P_{i+1}
 <li>Parameterizing spline directly with time objects will move at a non-uniform speed.</li>
 </ul>
 <h4 id="arc-length-parameterization">Arc Length Parameterization</h4>
+<ol type="1">
+<li>Given spline path <span class="math inline">P(u) = [x(u), y(u), z(u)]</span>, compute arclength of spline as a function of <span class="math inline">u</span>, <span class="math inline">s = A(u)</span>.</li>
+<li>Find inverse of <span class="math inline">A(u)</span>.</li>
+<li>Substitute <span class="math inline">u = A^{-1}(s)</span> into <span class="math inline">P(u)</span> to find motion path parameterized by arclength.</li>
+</ol>
+<ul>
+<li>Let <span class="math inline">s = f(t)</span> specify distance along the spline as a function of time <span class="math inline">t</span>.</li>
+<li>Motion path is given by <span class="math inline">P(A^{-1}(f(t)))</span>.</li>
+</ul>
+<blockquote>
+<p>There is no analytic solution if the motion path is a cubic spline. So exact arc-length parameterization is not reasible.</p>
+</blockquote>
+<h4 id="approximate-arc-length-parameterization">Approximate Arc Length Parameterization</h4>
+<ul>
+<li>Compute points on spline at equally-spaced parameteric values, use linear interpolation.</li>
+<li>Linear interpolation should consider distance between samples.</li>
+</ul>
+<h3 id="orientation-and-interpolation">Orientation and Interpolation</h3>
+<ul>
+<li>Interpolate angles rather than transformation matrix.</li>
+<li><strong>Euler Angles</strong>: Three angles, <span class="math inline">x</span>-roll, <span class="math inline">y</span>-roll, <span class="math inline">z</span>-roll.
+<ul>
+<li>Hard to find the angles given the desired orientation. But widely used in practice and easy to implement.</li>
+<li>Order of axes and orientation of coordiante axes are important.</li>
+</ul></li>
+<li><strong>Quaternions</strong>: Four-dimensional analogy of complex numbers.
+<ul>
+<li>Inverse problem is easy to solve and the UI tends to be simpler, but it is harder mathematically and computationally.</li>
+</ul></li>
+</ul>
+<h3 id="quaternions">Quaternions</h3>
+<blockquote>
+<p>Four-dimensional analogs of complex numbers. Used to represent orientation. Recall that multiplication of complex numbers represents orientation and rotation in the plane (<span class="math inline">e^{i\theta})</span>.</p>
+</blockquote>
+<ul>
+<li><span class="math inline">q = a + bi + cj + dk</span>.</li>
+</ul>
+<p><span class="math display">\begin{aligned}i^2 = j^2 = k^2 &amp;= -1\\ ij = -ji &amp;= k\\ jk = -kj &amp;= i\\ ki = -ik &amp;= j\end{aligned}</span></p>
+<blockquote>
+<p>Multiplication does not commpute.</p>
+</blockquote>
+<ul>
+<li>Broken down into scalar and vector part, <span class="math inline">q = (s, v) = s + v_1 i + v_2 j + v_3 k</span>.</li>
+<li>Product of two quaternions is <span class="math inline">q_1q_2 = (s_1s_2 - v_1 \cdot v_2, s_1 v_2 + s_2 v_1 + v_1 \times v_2)</span>.</li>
+<li><strong>Conjugate</strong>: <span class="math inline">\overline{q} = (s, -v)</span>.</li>
+<li><span class="math inline">|(s, v)| = \sqrt{s^2 + |v|^2}</span>.</li>
+</ul>
+<h4 id="unit-quaternions">Unit Quaternions</h4>
+<ul>
+<li>Unit normals, isomorphic to orientations.</li>
+<li><span class="math inline">q_r = (\cos(\theta), \sin(\theta)v)</span>, equiavlent to rotation by an angle of <span class="math inline">2\theta</span> around unit <span class="math inline">v</span>.</li>
+</ul>
+<h4 id="rotations">Rotations</h4>
+<ul>
+<li>Points in space represented by quaternions with zero scalar part.</li>
+<li><span class="math inline">q_p = (0, P)</span>.</li>
+<li>Rotation of point <span class="math inline">P</span> by <span class="math inline">q_r</span> is <span class="math inline">q_{P^\prime} = q_r q_P q_r^{-1}</span>, where inverse is equal to conjugate for unit quaternions.</li>
+<li>Allows for independent definition of axis of rotate and angle.</li>
+<li>Spherical interpolation of quaternions gives better results than interpolation of Euler angles.</li>
+</ul>
+<h4 id="interpolating-unit-quaternions">Interpolating Unit Quaternions</h4>
+<ul>
+<li>Spherical linear interpolation.
+<ul>
+<li>Want the angle between quaternions, <span class="math inline">\omega = \cos^{-1}(q_1 \cdot q_2)</span>.</li>
+<li><span class="math inline">q(u) = \frac{1}{\sin(\omega)}\left(q_1 \sin((1 - u)\omega) + q_2 \sin(u \omega)\right)</span>, for <span class="math inline">u \in [0, 1]</span>.</li>
+</ul></li>
+</ul>
+<h3 id="tools-for-shape-animation">Tools for Shape Animation</h3>
+<ul>
+<li><strong>Skeleton</strong>: Group vertices and manipulate as unit.</li>
+<li><strong>Free-Form Deformations</strong>: Changes the <em>space</em> around an object with nonlinear transformation.</li>
+</ul>
+<h3 id="kinematics-and-inverse-kinematics">Kinematics and Inverse Kinematics</h3>
+<blockquote>
+<p><strong>Kinematics</strong>: Study of motion independent of the forces that cause the motion.</p>
+</blockquote>
+<ul>
+<li><strong>Forward kinematics</strong>: Positions, velocities, accelerations.</li>
+<li><strong>Inverse kinematics</strong>: Derivation of motion of intermediate links in an articulated body given the motion of some key links.</li>
+</ul>
+<h3 id="physically-based-animation">Physically-Based Animation</h3>
+<ul>
+<li>Simulate laws of Newtonian physics in contrast to kinematics.</li>
+<li>Control objects by manipulating forces and torque.</li>
+<li>Inverse dynamics is difficult. How do we find forces to move a physical object along a desired path?</li>
+<li>Useful for secondary effects in keyframe animation.</li>
+</ul>
+<h4 id="spring-mass-models">Spring-Mass Models</h4>
+<ul>
+<li>Compose of mesh of point masses connected with springs.</li>
+<li>Compute motion according to differential equations.</li>
+</ul>
+<h3 id="morphing">Morphing</h3>
+<ul>
+<li>Linear interpolation between images.</li>
+<li>Nice effects at low cost.</li>
+<li>Hardest part is partitioning images into pieces that correspond.</li>
+</ul>
+<h3 id="motion-capture">Motion Capture</h3>
+<ul>
+<li>Keyframing complex actions is hard, instead capture motion from real objects.</li>
+</ul>
+<h3 id="flocking">Flocking</h3>
+<ul>
+<li>Animate a group of animals.</li>
+<li>Motion of individuals is semi-independent.</li>
+<li><strong>Collision Avoidance</strong>: Avoid hitting objects and one another.</li>
+<li><strong>Flock Centering</strong>: Member trying to remain a member of flock. Control flock member with local behaviour rules.</li>
+<li><strong>Perception</strong>: Objects aware of itself and a few neighbours. Doesn’t follow a designated leader.</li>
+</ul>
 </body>
 </html>
