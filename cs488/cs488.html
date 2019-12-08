@@ -707,8 +707,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Take one path from light to eye, perturb the <em>path</em> and see if it still reaches the eye.</li>
 </ul>
 <h2 id="radiosity-1">Radiosity</h2>
+<ul>
+<li>Ambient term approximates diffuse interaction of light, want to find a better model.</li>
+<li>Discretize environment and find interactions between pairs of pieces.</li>
+<li>After lighting interactions computed once, multiple views can be rendered easily.
+<ul>
+<li>No mirror or specular reflectoins.</li>
+</ul></li>
+</ul>
+<p><strong>TODO: Finish.</strong></p>
 <h2 id="photon-mapping">Photon Mapping</h2>
+<ul>
+<li>Trace rays from lights, bounce off shiny surfaces.</li>
+<li>Store lights hitting diffuse surfaces, use stored light to achieve global illumination effects.</li>
+</ul>
+<ol type="1">
+<li>Emit photons.</li>
+<li>Trace photons, store in data structure.</li>
+<li>Estimate irradiance with <span class="math inline">k</span> nearest neighbour search.</li>
+<li>Ray trace, using estimated irradiance.</li>
+</ol>
 <h2 id="shadows-projective-shadow-maps-volumes">Shadows, Projective, Shadow Maps, Volumes</h2>
+<ul>
+<li>Shadows are important to help viewer locate objects.</li>
+</ul>
+<h3 id="projective-shadows">Projective Shadows</h3>
+<blockquote>
+<p>For drawing shadows on a plane.</p>
+</blockquote>
+<ul>
+<li>After drawing scene, draw ray from light through corners of polygon and intersect with plane.</li>
+<li>Draw projected polygon as a dark colour with alpha blending.</li>
+<li>Fast and simple but only works for shadows on a plane.</li>
+</ul>
+<h3 id="shadow-maps">Shadow Maps</h3>
+<ul>
+<li>Render scene from <strong>light</strong>’s view and store the <span class="math inline">z</span>-map.</li>
+<li>Render from eye’s viewpoint. For a point <span class="math inline">P</span> that the eye sees, convert to light’s frame and look up distance to light using shadow map. When distance is equal, the object is <em>unblocked</em>, so do lighting calculation. When distance is not equal, it is in shadow.</li>
+<li>No need to rerender shadow maps every frame if light and objects are not moving.</li>
+<li>Works best with directional and spot lights.</li>
+</ul>
+<h3 id="shadow-volumes">Shadow Volumes</h3>
+<ul>
+<li>Use stencil buffer to determine where shadows are. Stencil buffer stores per pixel data.</li>
+<li>For every point <span class="math inline">P</span> on surface, consider shadow planes cast by silhouette edges. Count front facing shadow planes as <span class="math inline">+1</span>, rear facing plane as <span class="math inline">-1</span>. Take the sum of shadow planes, if it is positive then the object is in shadow.</li>
+</ul>
 <h2 id="modelling-stuff">Modelling Stuff</h2>
 <h2 id="splines-de-casteljaus-algorithm">Splines, De Casteljau’s Algorithm</h2>
 <h2 id="non-photorealistic-rendering">Non-Photorealistic Rendering</h2>
