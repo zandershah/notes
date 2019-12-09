@@ -6,7 +6,6 @@ parser = argparse.ArgumentParser(description='Study Vocabulary')
 parser.add_argument('-c', '--character', action='store_true')
 parser.add_argument('-p', '--pinyin', action='store_true')
 args = parser.parse_args()
-
 BATCH_SIZE = 10
 
 vocab = []
@@ -34,6 +33,8 @@ while v < len(vocab):
         character, pinyin = vocab[i]
         print(character, pinyin)
 
+    v += BATCH_SIZE
+    print(f'\n{v}/{len(vocab)}')
+
     _ = input()
 
-    v += BATCH_SIZE
