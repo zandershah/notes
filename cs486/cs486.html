@@ -892,6 +892,358 @@ h_{i+1} &amp;= arg max_h \sum_Z P(Z | h_i, e) \log P(e, Z | h_i) \\
 <li>Function class <span class="math inline">E \to \{1, ... k\}</span> which classifies examples.</li>
 <li>Function <span class="math inline">pval</span>, where <span class="math inline">pval(i, X_j)</span> is the predicted value of feature <span class="math inline">X_j</span> for every example in class <span class="math inline">i</span>.</li>
 </ul></li>
+<li>Use sum-of-squares error for class <span class="math inline">i</span> and pval.</li>
 </ul>
+<p><span class="math display">\sum_{e \in E} \sum_{j=1}^n (pval(class(e), X_j) - val(e, X_j))^2</span></p>
+<ul>
+<li>Given class, the pval that minimizes the error is the mean value for that class. Prove by taking derivative.</li>
+<li>Given pval, every example assigned to the class that minimizes the error for that example.</li>
+</ul>
+<ol type="1">
+<li>Randomly assign examples to classes.</li>
+<li>Repeat following EM steps until assignment does not change.
+<ul>
+<li><strong>M</strong>: For every class <span class="math inline">i</span> and feature <span class="math inline">X_j</span>, <span class="math inline">pval(i, X_j) = \dfrac{\sum_{e: class(e) = i} val(e, X_j)}{|\{e: class(e) = i\}|}</span></li>
+<li><strong>E</strong>: For every example <span class="math inline">e</span>, assign <span class="math inline">e</span> to class that minimizes <span class="math inline">\sum_{j=1}^n (pval(class(e), X_j) - val(e, X_j))^2</span>.</li>
+</ul></li>
+</ol>
+<ul>
+<li>Will eventually converge to a stable local minimum.</li>
+<li>Increasing <span class="math inline">k</span> can alwasy decrease error but is not always meaningful.</li>
+</ul>
+<h1 id="markov-decision-processes">Markov Decision Processes</h1>
+<h1 id="markov-chains">Markov Chains</h1>
+<ul>
+<li>Agent in a state <span class="math inline">s \in S</span>.</li>
+<li>Initial state <span class="math inline">s_0 = 0</span>.</li>
+<li>State that agent transitions to from <span class="math inline">s_t</span> and time <span class="math inline">t</span> is only determined by probability distribution of current state.</li>
+<li>Represent transition as probability matrix <span class="math inline">P</span>.</li>
+</ul>
+<h2 id="discounted-rewards">Discounted Rewards</h2>
+<ul>
+<li>Reward in future is not worth as much as reward now.</li>
+<li><strong>Discounted sum of future awards</strong>: Using discount factor <span class="math inline">\gamma</span>, <span class="math inline">\sum_{i \ge 0} \gamma^i R_i</span>, where <span class="math inline">R_i</span> is the reward after <span class="math inline">i</span> time steps.</li>
+</ul>
+<h2 id="solving-a-markov-process">Solving a Markov Process</h2>
+<ul>
+<li><strong>Input</strong>.
+<ul>
+<li>Set of states <span class="math inline">S = \{s_1, ..., s_n\}</span> with corresponding rewards <span class="math inline">\{r_1, ..., r_n\}</span>.</li>
+<li>Discount factor <span class="math inline">\gamma</span>.</li>
+<li>Transition probability matrix <span class="math inline">P</span>.</li>
+</ul></li>
+<li>Let <span class="math inline">U^*(s_i)</span> be the expected discount sum of future rewards starting at state <span class="math inline">s_i</span>.</li>
+<li><span class="math inline">U^*(s_i) = r_i + \gamma \sum_{j=1}^n P_{ij} U*(s_j)</span>.</li>
+<li>Closed form solution <span class="math inline">U = (I - \gamma P)^{-1} R</span>.</li>
+</ul>
+<h3 id="value-iteration">Value Iteration</h3>
+<p>Manually solve <span class="math inline">U^k(s_i)</span>, the expected discounted sum of rewards over the next <span class="math inline">k</span> time steps.</p>
+<p><span class="math display">\begin{aligned}
+U^1(s_i) &amp;= r_i \\
+U^k(s_i) &amp;= r_i + \gamma \sum_{j=1}^n P_{ij} U^{k-1}(s_j)
+\end{aligned}</span></p>
+<ul>
+<li>Repeat until convergence to desired <span class="math inline">\epsilon</span>.</li>
+</ul>
+<h2 id="policies">Policies</h2>
+<ul>
+<li>Mapping from states to actions.</li>
+<li>For every MDP there exists an optimal policy. For every possible start state, there is no better option than to follow the policy.</li>
+<li>Run through every possible policy and select the best.</li>
+</ul>
+<p>Let <span class="math inline">P^k</span> represent the transition matrix for policy <span class="math inline">k</span>.</p>
+<p><strong>Bellman’s Equation</strong>: <span class="math inline">V^{t+1}(s_i) = \max_k\left[r_i + \gamma \sum_{j=1}^n P^k_{ij}V^t(s_j)\right]</span></p>
+<ul>
+<li>Find optimal policy by taking another step and seeing which policy gives the best result.</li>
+</ul>
+<h3 id="policy-iteration">Policy Iteration</h3>
+<ul>
+<li><strong>Policy evaluation</strong>: Given <span class="math inline">\pi</span>, compute <span class="math inline">V_i = V^\pi</span>.</li>
+<li><strong>Policy improvement</strong>: Calcualte new <span class="math inline">\pi_{i+1}</span> using 1-step lookahead.</li>
+</ul>
+<h2 id="partially-observable-mdps-pomdps">Partially Observable MDPs (POMDPs)</h2>
+<ul>
+<li>Agent maintains belief state <span class="math inline">b</span>, probability distribution over all states.</li>
+<li>Optimal action depends only on agent’s current belief state.</li>
+<li>Representably as a MDP by summing over possible states <span class="math inline">s^\prime</span> that an agent might reach.
+<ul>
+<li>Given current <span class="math inline">b</span>, execute action <span class="math inline">a = \pi^*(b)</span>.</li>
+<li>Receive observation <span class="math inline">o</span>.</li>
+</ul></li>
+</ul>
+<p><span class="math display">P(b^\prime | a, b) = \sum_o P(b^\prime, o, a, b) \sum_{s^\prime} O(o | s^\prime) \sum_s P(s^\prime | a, s) b(s)</span></p>
+<h1 id="reinforcement-learning">Reinforcement Learning</h1>
+<ul>
+<li>Learning what to do to maximize a numerical reward signal.</li>
+<li>Not told what actions to take.</li>
+<li>Discover value of actions by trying them out and seeing what reward is.</li>
+</ul>
+<p><strong>Characteristics</strong>.</p>
+<ul>
+<li>Set of states <span class="math inline">S</span>.</li>
+<li>Set of actions <span class="math inline">A</span>.</li>
+<li>Set of reinforcement signals (rewards). Delayed reward possible, credit assignment problem.</li>
+<li>Exploration and exploitation.</li>
+<li>States may be partially observable only.</li>
+<li>Continuous learning.</li>
+</ul>
+<h2 id="multi-armed-bandit">Multi-Armed Bandit</h2>
+<blockquote>
+<p>Simplest reinforcement learning problem.</p>
+</blockquote>
+<p>At every time step <span class="math inline">t</span>, choose action <span class="math inline">A_t</span> from <span class="math inline">k</span> possible actions, receive reward <span class="math inline">R_t</span>.</p>
+<ul>
+<li>Reward only depends on action taking.</li>
+<li>True values are unknown, distribution is unknown.</li>
+<li><strong>Goal</strong>: Maximize total reward.</li>
+</ul>
+<h2 id="exploration-vs.exploitation">Exploration vs. Exploitation</h2>
+<ul>
+<li>Assume estimates are <span class="math inline">Q_t(a) \approx q_*(a)</span>.</li>
+<li>Greedy action is <span class="math inline">A^*_t = arg \max_a Q_t(a)</span>.
+<ul>
+<li>When <span class="math inline">A_t = A_t^*</span>, then <strong>exploiting</strong>.</li>
+<li>When <span class="math inline">A_t \neq A_t^*</span>, then <strong>exploring</strong>.</li>
+</ul></li>
+</ul>
+<h2 id="action-value-methods">Action-Value Methods</h2>
+<ul>
+<li>Estimate action values as sample averages.</li>
+</ul>
+<p><span class="math display">Q_t(a) \approx \frac{\sum_{i=1}^{t-1} R_i \cdot 1_{A_i = a}}{\sum_{i=1}^{t-1} 1_{A_i = a}}</span></p>
+<h2 id="epsilon-greedy-action-selection"><span class="math inline">\epsilon</span>-Greedy Action Selection</h2>
+<ul>
+<li>Greedy action selection you always exploit.</li>
+<li><span class="math inline">\epsilon</span>-greedy, usually greedy but with probability <span class="math inline">\epsilon</span> pick an action at random.</li>
+<li>Simple way to balance exploration and exploitation.</li>
+</ul>
+<h2 id="averaging-and-learning-rules">Averaging and Learning Rules</h2>
+<ul>
+<li>We have <span class="math inline">Q_n</span> as the average <span class="math inline">\frac{\sum_{i=1}^{n-1}R_i}{n-1}</span>, want to avoid incrementally storing all rewards.</li>
+<li><span class="math inline">Q_{n+1} = Q_n + \frac{1}{n}[R_n - Q_n]</span>.</li>
+<li>When the problem is non-stationary, sample average is not appropriate. Use exponential weighted average <span class="math inline">Q_{n+1} = Q_n + \alpha[R_n - Q_n]</span>.</li>
+<li>To ensure convergence, we need <span class="math inline">\sum_{n=1}^\infty a_n(a) = \infty</span> and <span class="math inline">\sum_{n=1}^\infty a^2_n(a) &lt; \infty</span>.</li>
+</ul>
+<h2 id="optimism">Optimism</h2>
+<ul>
+<li>Initialize actions values to some <span class="math inline">Q_1(a) \neq 0</span>.</li>
+</ul>
+<h2 id="upper-confidence-bounds">Upper Confidence Bounds</h2>
+<ul>
+<li>Reduce exploration over time using optimism.</li>
+<li>Estimate an upper bound on the true action values, select action with largest estimated upper bound.</li>
+</ul>
+<p><span class="math display">A_t \approx arg \max_a \left[Q_t(a) + c\sqrt{\frac{\log t}{N_t(a)}}\right]</span></p>
+<ul>
+<li>Want to estimate an upper confidence <span class="math inline">U_t(a)</span> for every action such that <span class="math inline">q^*(a) \le Q_t(a) + U_t(a)</span>.</li>
+<li>Depends on number of times we have sampled <span class="math inline">a</span>.</li>
+</ul>
+<h3 id="determining-bound">Determining Bound</h3>
+<ul>
+<li><strong>Hoeffding’s Inequality</strong>: Let <span class="math inline">X_1, ... X_t</span> be iid random variables in <span class="math inline">[0, 1]</span>, <span class="math inline">\overline{X}_t = \frac{1}{T} \sum_i X_i</span> be the sample mean. Then <span class="math inline">P[E[X] &gt; \overline{X}_t + u] \le e^{-2tu^2}</span>.</li>
+<li>Apply bound to bandit awards, <span class="math inline">P[q^*(a) &gt; Q_t(a) + U_t(a)] \le e^{2N_t(a) U_t(a)^2}</span>.</li>
+<li>Assume we have some probability <span class="math inline">p</span>,</li>
+</ul>
+<p><span class="math display">\begin{aligned}
+e^{2N_t(a)U_t(a)^2} &amp;= p \\
+U_t(a) &amp;= \sqrt{\frac{-\log p}{2N_t(a)}}
+\end{aligned}</span></p>
+<ul>
+<li>Reduce <span class="math inline">p</span> as we observe more rewards, for example <span class="math inline">p = t^{-4}</span>.</li>
+</ul>
+<h2 id="mdps-and-rl">MDPs and RL</h2>
+<ul>
+<li>Given the MDP, we could compute the optimal policy.</li>
+<li><strong>Prediction problem</strong>: Learn <span class="math inline">V^*</span> or <span class="math inline">V^\pi</span>.</li>
+<li><strong>Control problem</strong>: Learn <span class="math inline">\pi^*</span>.</li>
+</ul>
+<h3 id="all-rl-methods-driven-by-values">All RL Methods Driven By Values</h3>
+<ul>
+<li><span class="math inline">G_t = \sum_{i /ge 0} \gamma^i R_{t + 1 + i}</span>.</li>
+<li>Value of a state given policy <span class="math inline">\pi</span> is <span class="math inline">V^\pi(s) = E\{G_t | S_t = s, A_{t:\infty} \sim \pi\}</span>.</li>
+<li>Value of a state-action pair, given policy <span class="math inline">\pi</span> is <span class="math inline">Q^\pi(s, a) = E\{G_t | S_t = s, A_t = a, A_{t+1:\infty} \sim \pi\}</span>.</li>
+<li>Optimal value of state is <span class="math inline">V^*(s) = \max_\pi V^\pi(s)</span>.</li>
+<li>Optimal value of state-action pair is <span class="math inline">Q^*(s, a) = \max_\pi Q^\pi (s, a)</span>.</li>
+<li>Optimal policy <span class="math inline">\pi^*(s, a) &gt; 0</span> only where <span class="math inline">Q^*(s, a) = \max_b Q^*(s, b)</span>, for all <span class="math inline">s \in S</span>.</li>
+</ul>
+<h3 id="bellman-optimality-equations">Bellman Optimality Equations</h3>
+<p><span class="math display">\begin{aligned}
+V^*(s) &amp;= \max_a Q^{\pi^*}(s, a) \\
+&amp;= \max_a E\left[R_{t+1} + \gamma V^*(s_{t+1} | S_t = s, A_t = a\right] \\
+&amp;= \max_a \sum_{s^\prime, r^\prime} p(s^\prime, r | s, a)\left[r + \gamma V^*(s^\prime)\right]
+\end{aligned}</span></p>
+<p><span class="math display">\begin{aligned}
+Q^*(s, a) &amp;= E[R_{t+1} + \gamma \max_{a^\prime} Q^*(S_{t+1}, a^\prime) [S_t = s, A_t = a] \\
+&amp;= \sum_{s^\prime, r} p(s^\prime, r | s, a)[r + \gamma \max_{a^\prime} Q^*(s^\prime, a^\prime)]
+\end{aligned}</span></p>
+<ul>
+<li><strong>Model-Based</strong>: Learn model of the environment.</li>
+<li><strong>Model-Free</strong>: Never explicity learn the model.</li>
+</ul>
+<h2 id="prediction">Prediction</h2>
+<ul>
+<li><strong>Temporal Difference</strong>: Bootstrapping and sampling method.
+<ul>
+<li><strong>Bootstrapping</strong>: Update estimation of value function.</li>
+<li><strong>Sampling</strong>: Update does not involve an expected value.</li>
+</ul></li>
+<li>Simplest temporal-difference method <span class="math inline">TD(0)</span>.</li>
+</ul>
+<p><span class="math display">V(S_t)^\prime = V(S_t) + \alpha[R_{t+1} + \gamma V(S_{t+1}) - V(S_t)]</span></p>
+<blockquote>
+<p><span class="math inline">R_{t+1} + \gamma V(S_{t+1})</span> is an estimate of the return.</p>
+</blockquote>
+<ol type="1">
+<li>Initialize <span class="math inline">V(s)</span> arbitrarily.</li>
+<li>Repeat for every episode.
+<ul>
+<li>Initialize <span class="math inline">S</span>.</li>
+<li>Repeat for every episode.
+<ul>
+<li><span class="math inline">A</span> is action given by <span class="math inline">\pi</span> for <span class="math inline">S</span>.</li>
+<li>Take action <span class="math inline">A</span>, observe <span class="math inline">R, S^\prime</span>.</li>
+<li><span class="math inline">V(S) \gets V(S) + \alpha[R + \gamma V(S^\prime) - V(S)]</span>.</li>
+<li><span class="math inline">S \gets S^\prime</span>.</li>
+</ul></li>
+<li>While <span class="math inline">S</span> is not terminal.</li>
+</ul></li>
+</ol>
+<ul>
+<li><span class="math inline">TD(\lambda)</span>, update whole training sequence not just a single transition.</li>
+</ul>
+<h2 id="from-learning-action-values-to-control">From Learning Action-Values to Control</h2>
+<ul>
+<li>Take action-value prediction problem and change to control problem by updating the policy to be greedy with respect to the current estimates.</li>
+</ul>
+<ol type="1">
+<li><strong>Behavioural Policy</strong>: Generate actions and gather data.</li>
+<li><strong>Learning Policy</strong>: Target policy to learn.</li>
+</ol>
+<ul>
+<li><strong>On-Policy Learning</strong>: Behaviour <span class="math inline">=</span> Learning.</li>
+<li><strong>Off-Policy Learning</strong>: Behaviour <span class="math inline">\neq</span> Learning.</li>
+</ul>
+<h3 id="sarsa-on-policy-td-control">Sarsa (On-Policy TD Control)</h3>
+<p>Repeat for every episode.</p>
+<ol type="1">
+<li>Initialize <span class="math inline">S</span>.</li>
+<li>Choose <span class="math inline">A</span> from <span class="math inline">S</span> using policy derived from <span class="math inline">Q</span> such as <span class="math inline">\epsilon</span>-greedy.</li>
+<li>Repeat for every episode.
+<ul>
+<li>Take action <span class="math inline">A</span>, observe <span class="math inline">R, S^\prime</span>.</li>
+<li>Choose <span class="math inline">A^\prime</span> from <span class="math inline">S^\prime</span> using policy derived from <span class="math inline">Q</span>.</li>
+<li><span class="math inline">Q(S, A) \gets Q(S, A) + \alpha[R + \gamma Q(S^\prime, A^\prime) - Q(S, A)]</span>.</li>
+<li><span class="math inline">S \gets S^\prime</span>, <span class="math inline">A \gets A^\prime</span>.</li>
+</ul></li>
+<li>While <span class="math inline">S</span> is not terminal.</li>
+</ol>
+<h3 id="q-learning-off-policy-td-control">Q-Learning (Off-Policy TD Control)</h3>
+<p>Repeat for every episode.</p>
+<ol type="1">
+<li>Initialize <span class="math inline">S</span>.</li>
+<li>Repeat for every episode.
+<ul>
+<li>Choose <span class="math inline">A</span> from <span class="math inline">S</span> using policy derived from <span class="math inline">Q</span>.</li>
+<li>Take action <span class="math inline">A</span>, observe <span class="math inline">R, S^\prime</span>.</li>
+<li><span class="math inline">Q(S, A) \gets Q(S, A) + \alpha[R + \gamma \max_a Q(S^\prime, a) - Q(S, A)]</span>.</li>
+<li><span class="math inline">S \gets S^\prime</span>.</li>
+</ul></li>
+</ol>
+<h1 id="game-theory">Game Theory</h1>
+<blockquote>
+<p>Multiagent Decision Making.</p>
+</blockquote>
+<ul>
+<li>Focus on self-interested multi-agent systems.
+<ul>
+<li>Agents have their own description of the states of the world and take actions based on these descriptions.</li>
+</ul></li>
+<li><p><strong>Game Theory</strong>: Formal way to analyze interactions among a group of rational agents that behave strategically.</p></li>
+<li><strong>Best response</strong>: <span class="math inline">a_i = arg \max \sum_{a_{-i}} u_i(a_i, a_{-i})p_i(a_{-i})</span>.</li>
+<li><span class="math inline">a_i^\prime</span> <strong>strictly dominates</strong> <span class="math inline">a_i</span> if <span class="math inline">u_i(a^\prime_i, a_{-i}) &gt; u_i(a_i, a_{-i})</span> for all <span class="math inline">a_{-i}</span>.</li>
+<li><p><strong>Nash Equilibrium</strong>: <span class="math inline">a*</span> is NE if <span class="math inline">u_i(a^*) \ge u_i(a_i, a^*_{-i})</span> for all <span class="math inline">a_i</span> for all players <span class="math inline">i</span>.</p></li>
+</ul>
+<h2 id="mixed-nash-equilibria">Mixed Nash Equilibria</h2>
+<ul>
+<li><strong>Mixed Strategy</strong>: Probability distribution over <span class="math inline">A</span>.</li>
+<li>Expected utility.</li>
+</ul>
+<h2 id="repeated-games">Repeated Games</h2>
+<ul>
+<li>Strategy space is significantly larger.</li>
+<li><span class="math inline">S: H \to A</span> where <span class="math inline">H</span> is the <strong>history</strong> of play so far.</li>
+<li>Reward and punish past behaviour, worry about reputation, trust.</li>
+</ul>
+<p>Example: Prisoner’s Dilemma</p>
+<ul>
+<li><strong>Grim Strategy</strong>: Cooperate first, defect forever if the opponent defects.</li>
+<li><strong>Tit-for-Tat</strong>: Cooperate first, copy whatever opponent did in previous stage.</li>
+</ul>
+<h1 id="mechanism-design">Mechanism Design</h1>
+<ul>
+<li>Given rational agents, what sort of games should we design?</li>
+<li>Guarantee that agents will reach an outcome with properties that we want.</li>
+<li>Set of possible outcomes <span class="math inline">O</span>.</li>
+<li>Set of agents <span class="math inline">N</span>.
+<ul>
+<li>Every agent has <span class="math inline">\theta_i \in \Theta_i</span>, captures all private information relevant to agent’s decision making.</li>
+</ul></li>
+<li>Utility functions <span class="math inline">u_i(o, \theta_i)</span>.</li>
+<li><p><strong>Social choice</strong> function <span class="math inline">f: \Theta_1 \times ... \times \Theta_n \to O</span>.</p></li>
+<li><strong>Mechanism</strong>: <span class="math inline">M = (S_1, ..., S_n, g(\cdot))</span>.
+<ul>
+<li><span class="math inline">S_i</span> is stategy space of agent <span class="math inline">i</span>.</li>
+<li><span class="math inline">g: S_1 \times ... \times S_n \to O</span> is the <strong>outcome</strong> function.</li>
+</ul></li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>Mechanism <span class="math inline">M</span> <strong>implements</strong> social choice function <span class="math inline">f(\theta)</span> if there is an equilibrium <span class="math inline">s^*</span>, such that <span class="math inline">s^* = (s^*_1(\theta_1),...,s^*_n(\theta_n))</span> for all <span class="math inline">g(s^*_1(\theta_1),...,s^*_n(\theta_n)) = f(\theta_1, ...,\theta_n)</span>.</p>
+<ul>
+<li><strong>Direct</strong> mechanism is a mechanism where <span class="math inline">S_i = \Theta_i</span> for all <span class="math inline">i</span>, and <span class="math inline">g(\theta) = f(\theta)</span> for all <span class="math inline">\theta \in \Theta_1 \times ... \times \Theta_n</span>.</li>
+<li>Direct mechnaism is <strong>incentive compatible</strong> if it has equilibrium <span class="math inline">s^*</span> where <span class="math inline">s_i^*(\theta_i) = \theta_i</span> for all <span class="math inline">\theta_i \in \Theta_i</span> for all <span class="math inline">i</span>.</li>
+<li><strong>Strategy proof</strong> if the equilibrium above is a dominant strategy equlibrium.</li>
+</ul>
+<h2 id="relevation-principle">Relevation Principle</h2>
+<ul>
+<li><strong>Theorem</strong>: Suppose there exists a mechanism <span class="math inline">M</span> that implements social choise function <span class="math inline">f</span> in dominant strategies. Then there is a <strong>direct strategy-proof mechanism</strong> <span class="math inline">M^\prime</span> which also implements <span class="math inline">f</span>.</li>
+</ul>
+<h2 id="gibbard-satterthwaite-theorem">Gibbard-Satterthwaite Theorem</h2>
+<ul>
+<li>Assume that <span class="math inline">O</span> is finite and <span class="math inline">|O| &gt; 2</span>, every <span class="math inline">o \in O</span> can be achieved by SCF <span class="math inline">f</span> for some <span class="math inline">\theta</span>.</li>
+<li><span class="math inline">\Theta</span> includes all possible strict orderings over <span class="math inline">O</span>.</li>
+<li>Then <span class="math inline">f</span> is implementable in dominant strategies if and only if <span class="math inline">f</span> is <strong>dictatorial</strong>.</li>
+</ul>
+<p>So we must use a <strong>weaker</strong> equilibrium concept. Designing mechanisms where computing <strong>manipulation</strong> is computationally hard. Restrict the structure of agents’ <strong>preferences</strong>.</p>
+<h3 id="single-peaked-preferences">Single-Peaked Preferences</h3>
+<ul>
+<li><strong>Median-Voter rule</strong> is strategy proof for single-peaked preferences.</li>
+</ul>
+<h3 id="quasilinear-preferences">Quasilinear Preferences</h3>
+<ul>
+<li><strong>Outcome</strong> <span class="math inline">o = (x, t_1, ..., t_n)</span>. Where <span class="math inline">x</span> is a project choice, <span class="math inline">t_i</span> are transfers (money).</li>
+<li><strong>Utility</strong> functions <span class="math inline">u_i(o, \theta_i) = v_i(x, \theta_i) - t_i</span>.</li>
+<li>Quasilinear mechanism <span class="math inline">M = (S_1, ..., S_n, g(\cdot))</span>, where <span class="math inline">g(\cdot) = (x(\cdot), t_1, ..., t_n)</span>.</li>
+</ul>
+<h4 id="groves-mechanisms">Groves Mechanisms</h4>
+<ul>
+<li>Choice rule <span class="math inline">x^*(\theta) = arg \max_x \sum_i v_i(x, \theta_i)</span>.</li>
+<li>Transfer rules <span class="math inline">t_i(\theta) = h_i(\theta_{-i}) - \sum_{j \neq i} v_j(x^*(\theta), \theta_j)</span>.</li>
+<li><strong>Theorem</strong>: Groves mechanisms are strategy-proof and efficient, unique.</li>
+</ul>
+<h4 id="vickrey-clarke-grokves-mechanism-vcg">Vickrey-Clarke-Grokves Mechanism (VCG)</h4>
+<ul>
+<li>Outcome <span class="math inline">x^* = arg \max_x \sum_i v_i(x, \theta_i)</span>.</li>
+<li>Transfers <span class="math inline">t_i(\theta) = \sum_{j \neq i} v_j(x^{-i}, \theta_j) - \sum_{j \neq i} v_j(x^*(\theta), \theta_j)</span>.
+<ul>
+<li>Equilibrium utility is <strong>marginal contribution</strong> to welfare of the system.</li>
+</ul></li>
+</ul>
+<p>Example: Allocation.</p>
+<blockquote>
+<ul>
+<li>Social choise function is to maximize social welfare, give item to the agent who values it the most.</li>
+<li>Utility function <span class="math inline">u_i = v_i(o) - t_i</span>. Mechanism (Vickrey Auction), outcome function <span class="math inline">g</span> is second-price auction.</li>
+</ul>
+</blockquote>
 </body>
 </html>
