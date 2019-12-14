@@ -518,5 +518,380 @@ If no assignment is found
 </ul></li>
 <li><strong>Deep Learning</strong>: Neural networks with more than one hidden layer.</li>
 </ul>
+<h1 id="bayesian-networks">Bayesian Networks</h1>
+<ul>
+<li><span class="math inline">P(A, B) = \sum_i P(A | B_i) P(B_i)</span>.</li>
+<li><span class="math inline">P(A | B) P(B) = P(B | A) P(A)</span>.</li>
+<li><strong>Probabilistic Inferefence</strong>: Query to get probability.
+<ul>
+<li>Representing a full joint distribution over a set of random variables <span class="math inline">X_1, ..., X_n</span> is very expensive.</li>
+<li>Answering queries is very slow.</li>
+</ul></li>
+</ul>
+<h2 id="variable-independence">Variable Independence</h2>
+<p>Two <strong>variables</strong> <span class="math inline">X, Y</span> are conditionally independent given variable <span class="math inline">Z</span> if given that you know the value of <span class="math inline">Z</span>, nothing you learn about <span class="math inline">Y</span> will influence your beliefs about <span class="math inline">X</span>.</p>
+<ul>
+<li><span class="math inline">P(x | y, z) = P(x | z)</span>, for all <span class="math inline">x \in X, y \in Y, z \in Z</span>.</li>
+<li>Represent link using directed acyclic graph. Calculate values with marginalization.</li>
+<li><strong>Bayesian Network</strong>: Graphical representation of direct dependencies over a set of variables and a set of <strong>conditional probability tables</strong> <span class="math inline">P(X | Parents(X))</span> quantifying the strength of influences.
+<ul>
+<li>So every variable is conditionally independent of all non-descendants given its parents.</li>
+<li>Assume every random variable is directly influenced by at most <span class="math inline">k</span> others, so every table is of size at most <span class="math inline">O(2^k)</span>, so the entire network is specified in <span class="math inline">O(n2^k)</span>.</li>
+</ul></li>
+</ul>
+<h2 id="testing-independence-d-separation">Testing Independence (D-Separation)</h2>
+<ul>
+<li><strong>D-Separation</strong>: Set of variables <span class="math inline">E</span> (evidence) separates <span class="math inline">X, Y</span> if it blocks every undirected path between <span class="math inline">X</span> and <span class="math inline">Y</span>. So <span class="math inline">X, Y</span> are conditionally independent given <span class="math inline">E</span>.</li>
+</ul>
+<p>Let <span class="math inline">P</span> be an undirected path between <span class="math inline">X, Y</span>. <span class="math inline">E</span> blocks path <span class="math inline">P</span> if there exists a node <span class="math inline">Z \in P</span> such that.</p>
+<ol type="1">
+<li>An arc on <span class="math inline">P</span> goes into <span class="math inline">Z</span> and an arc leaves <span class="math inline">Z</span>, and <span class="math inline">Z \in E</span>.
+<ul>
+<li><span class="math inline">X ... \to Z \to ... Y</span>.</li>
+</ul></li>
+<li>Both arcs on <span class="math inline">P</span> leave <span class="math inline">Z</span> and <span class="math inline">Z \in E</span>.
+<ul>
+<li><span class="math inline">X ... \gets Z \to ... Y</span>.</li>
+</ul></li>
+<li>Both arcs on <span class="math inline">P</span> enter <span class="math inline">Z</span> and neither <span class="math inline">Z</span>, nor any descentents, are in <span class="math inline">E</span>.
+<ul>
+<li><span class="math inline">X ... \to Z \cup Descentents(Z) \gets ... Y</span>.</li>
+</ul></li>
+</ol>
+<ul>
+<li><strong>Markov Blanket</strong>: Given parents and children, a node is conditionally independent of all other nodes in the network.</li>
+</ul>
+<p>Example:</p>
+<blockquote>
+<p><span class="math inline">\begin{aligned} P(J) &amp;= \sum P(J, TS, Fl, Fv, Th, M, ET) \\ &amp;= \sum_{M} P(J, M) \\ &amp;= \sum_{M} P(J \mid M) P(M) \\ &amp;= \sum_{M} P(J \mid M) \sum_{ET} P(M, ET) \\ &amp;= \sum_{M} P(J \mid M) \sum_{ET} P(M \mid ET) P(ET) \end{aligned}</span></p>
+</blockquote>
+<p>Example:</p>
+<blockquote>
+<p><span class="math inline">\begin{aligned} P(J \mid ET) &amp;= \frac{P(J, ET)}{P(ET)} \\ &amp;= \frac{1}{P(ET)} \sum_{M} P(J, M, ET) \\ &amp;= \frac{1}{P(ET)} \sum_{M} P(J | M, ET) P(M, ET) \\ &amp;= \frac{1}{P(ET)} \sum_{M} P(J | M, ET) P(M \mid ET) P(ET) \\ &amp;= \frac{1}{P(ET)} \sum_{M} P(J | M) P(M \mid ET) P(ET) \\ \end{aligned}</span></p>
+</blockquote>
+<p>Example: Backwards Inference.</p>
+<blockquote>
+<p><span class="math inline">\begin{aligned} P(ET \mid J) &amp;= \frac{P(J \mid ET)P(ET)}{P(J)} \\ &amp;= \frac{1}{P(J)} P(J, ET) \\ \end{aligned}</span></p>
+</blockquote>
+<h2 id="algorithm">Algorithm</h2>
+<p>Given query variable <span class="math inline">Q</span>, evidence set <span class="math inline">E</span>, remaining variables <span class="math inline">Z</span>, set of factors <span class="math inline">F</span> corresponding to <span class="math inline">\{Q\} \cup Z</span>.</p>
+<ol type="1">
+<li>Replace factors <span class="math inline">f \in F</span> that mention a variable in <span class="math inline">E</span> with <span class="math inline">f_{E = e}</span>.</li>
+<li>Choose elimination ordering of <span class="math inline">Z</span>.</li>
+<li>For <span class="math inline">Z_j \in Z</span>, eliminate as follows.
+<ul>
+<li>Compute factor <span class="math inline">g_j = \sum_{Z_j} f_1 \times ... \times f_k</span>, where <span class="math inline">f_i</span> are factors that include <span class="math inline">Z_j</span>.</li>
+<li>Remove the factors <span class="math inline">f_i</span> from <span class="math inline">F</span> and add new factor <span class="math inline">g_j</span> to <span class="math inline">F</span>.</li>
+</ul></li>
+<li>Remaining factors refer to <span class="math inline">Q</span> only. Take their product and normalize for <span class="math inline">P(Q)</span>.</li>
+</ol>
+<h1 id="reasoning-under-uncertainty">Reasoning Under Uncertainty</h1>
+<h2 id="dynamic-inference">Dynamic Inference</h2>
+<ul>
+<li>Allow the world to evolve.</li>
+<li>Set of states representing all possible worlds.</li>
+<li>Time-splices representing snapshots of the world.</li>
+<li>Different probability distributions over states at different time-slices.</li>
+<li>Dynamic encoding of how distributions change over time.</li>
+</ul>
+<h2 id="stochastic-process">Stochastic Process</h2>
+<ul>
+<li>Set of states <span class="math inline">S</span>, <span class="math inline">P(s_t | s_{t-1}, ..., s_0)</span>.</li>
+<li>Bayes Net with ony random variable per time slice.</li>
+<li>Problem since there are infinitely many variables with infinity large CPTs.
+<ul>
+<li><strong>Stationary Process</strong>: Dynamics do not change over time.</li>
+<li><strong>Markov Assumption</strong>: Current state depends on a finite history of past states.</li>
+</ul></li>
+</ul>
+<h3 id="k-order-markov-process">k-Order Markov Process</h3>
+<ul>
+<li>Assume the last <span class="math inline">k</span> states are sufficient.</li>
+<li>Problem is that uncertainty increases over time.</li>
+</ul>
+<h1 id="hidden-markov-model">Hidden Markov Model</h1>
+<blockquote>
+<p>First Order Hidden Markov Model</p>
+</blockquote>
+<ul>
+<li>Set of states <span class="math inline">S</span>, set of observations <span class="math inline">O</span>, transition model <span class="math inline">P(s_t | s_{t-1})</span>, observation model <span class="math inline">P(o_t | s_t)</span>.</li>
+</ul>
+<ol type="1">
+<li><strong>Monitoring</strong>: <span class="math inline">P(s_t | o_t, ..., o_1)</span>.</li>
+<li><strong>Prediction</strong>: <span class="math inline">P(s_{t+k} | o_t, ..., o_1)</span>.</li>
+<li><strong>Hindsight</strong>: <span class="math inline">P(s_k | o_t, ..., o_1)</span>.</li>
+<li><strong>Most Likely Explanation</strong>: <span class="math inline">argmax_{s_t, ..., s_1} P(s_t, ..., s_1 | o_t, ..., o_1)</span>.
+<ul>
+<li><strong>Verterbi</strong> algorithm is a DP algorithm to compute the most likely sequence of states.</li>
+</ul></li>
+</ol>
+<h1 id="dynamic-bayes-net">Dynamic Bayes Net</h1>
+<blockquote>
+<p>What if the number of states or observations are exponential?</p>
+</blockquote>
+<ul>
+<li>Encode states and observations with several random variables.</li>
+<li>Exploit conditional independence to save time and space.</li>
+</ul>
+<blockquote>
+<p>HMMs are DBN with one state variable and one observation variable.</p>
+</blockquote>
+<ul>
+<li>Set of states <span class="math inline">S</span>, with observations for every state.</li>
+<li><strong>Non-Stationary Processes</strong>: When process is not stationary, we must add new state components until dynamics are stationary.</li>
+<li><strong>Non-Markovian Processes</strong>: Add new state components until dynamics are Markovian.</li>
+</ul>
+<h1 id="statistical-learning">Statistical Learning</h1>
+<blockquote>
+<p>Where do the probabilities for Bayes Nets come from?</p>
+</blockquote>
+<ul>
+<li>Experts are scarce and expensive. Data is cheap and plentiful.</li>
+<li>Build models of the world directly from data.</li>
+</ul>
+<p>Example: Candy is sold in two flavours, lime and cherry, with the same wrapper for both flavours. Bags have different ratios, (e.g. 100% cherry, 50% cherry 50% line, 100% lime). After eating <span class="math inline">k</span> candies, what is the flavour ratio of the bag?</p>
+<ul>
+<li>Hypothesis <span class="math inline">H</span> is a probabilistic theory about the world.</li>
+<li>Data <span class="math inline">D</span> is evidence.</li>
+</ul>
+<p><span class="math display">\begin{aligned}P(x | d) &amp;= \sum_i P(x | d, h_i) P(h_i | d) \\ &amp;= \sum_i P(x | h_i) P(h_i | d) \end{aligned}</span></p>
+<blockquote>
+<p>Predictions are weighted averages of the predictions of individual hypothesis.</p>
+</blockquote>
+<ul>
+<li><strong>Optimal</strong>: Given prior, no other prediction is correct more often than Bayesian one.</li>
+<li><strong>No Overfitting</strong>: Use prior to penalize complex hypothesis.</li>
+<li><strong>Intractable</strong>: When hypothesis space is large.</li>
+<li><strong>Approximations</strong>: Maximum a posteriori (MAP).</li>
+</ul>
+<h2 id="maximum-a-posteriori-map">Maximum a Posteriori (MAP)</h2>
+<ul>
+<li>Make prediction on the most probably hypothesis <span class="math inline">h_{MAP}</span>.</li>
+<li><span class="math inline">h_{MAP} = argmax_{h_i} P(h_i | d)</span>, <span class="math inline">P(x | d) = P(x | h_{MAP})</span>.</li>
+<li>Less accurate than Bayesian prediction since it only relies on one hypothesis, but converges as data increases.</li>
+</ul>
+<p><span class="math display">\begin{aligned}h_{MAP} &amp;= arg max_h P(h | d) \\
+&amp;= arg max_h P(h) P(d | h) \\
+&amp;= arg max_h P(h) \Pi_i P(d_i | h)\end{aligned}</span></p>
+<ul>
+<li>This is nonlinear optimization, take the log to linearize. Will not change optimal hypothesis.</li>
+</ul>
+<p><span class="math display"> h_{MAP} = arg max_h \left[\log P(h) + \sum_i \log P(d_i | h)\right]</span></p>
+<h2 id="maximum-likelihood-ml">Maximum Likelihood (ML)</h2>
+<ul>
+<li>Simplify MAP by assuming uniform prior, <span class="math inline">P(h_i) = P(h_j)</span>.</li>
+</ul>
+<p><span class="math display">\begin{aligned}h_{MAP} &amp;= arg max_h P(h) P(d | h) \\
+h_{ML} &amp;= arg max_h P(d | h)
+\end{aligned}</span></p>
+<ul>
+<li>Less accurate than Bayesian and MAP, still converges as data increases.</li>
+<li>No prior, so subject to overfitting.</li>
+</ul>
+<p>Example:</p>
+<blockquote>
+<p>Hypothesis <span class="math inline">h_\theta</span>, <span class="math inline">P(cherry) = \theta</span>, <span class="math inline">P(lime) = 1 - \theta</span>. - Data <span class="math inline">d</span>, <span class="math inline">N</span> candies with <span class="math inline">c</span> cherry and <span class="math inline">N - c</span> lime.</p>
+</blockquote>
+<p><span class="math display">\begin{aligned}P(d | h_\theta) &amp;= \theta^c (1 - \theta)^{N - c} \\
+L(d | h_\theta) &amp;= \log P(d | h_\theta) \\
+&amp;= c \log \theta + (N - c) \log(1 - \theta)
+\end{aligned}</span></p>
+<p>Find the <span class="math inline">\theta</span> that maximizes log likelihood.</p>
+<p><span class="math display">\begin{aligned}
+\frac{\partial L(d | h_\theta)}{\partial \theta} &amp;= \frac{c}{\theta} - \frac{N - c}{1 - \theta} = 0 \\
+\theta &amp;= \frac{c}{N}
+\end{aligned}</span></p>
+<ul>
+<li>With multiple hypothesis, take partial derivatives.</li>
+<li>Approach is extendable to any Bayes networ with complete data.</li>
+</ul>
+<h2 id="laplace-smoothing">Laplace Smoothing</h2>
+<ul>
+<li>What happens if we have not observed any cherry candies?</li>
+<li><span class="math inline">\theta = 0</span> is not a good prediction.</li>
+</ul>
+<p>Given observations <span class="math inline">x = (x_1, ..., x_d)</span> from <span class="math inline">N</span> trials, we use estimate parameters <span class="math inline">\theta</span>.</p>
+<p><span class="math display">\begin{aligned}\theta &amp;= (\theta_1, ..., \theta_d) \\
+\theta_i &amp;= \frac{x_i + \alpha}{N + \alpha d},\ \alpha &gt; 0\end{aligned}</span></p>
+<h1 id="naive-bayes">Naive Bayes</h1>
+<ul>
+<li>Want to predict a class <span class="math inline">C</span> based on attributes <span class="math inline">A_i</span>.</li>
+<li>Parameters.
+<ul>
+<li><span class="math inline">\theta = P(C = True)</span>.</li>
+<li><span class="math inline">\theta_{j, 1} = P(A_j = True | C = True)</span>.</li>
+<li>…</li>
+</ul></li>
+<li>Assumption is that <span class="math inline">A_i</span> are independent given <span class="math inline">C</span>.</li>
+</ul>
+<p>With observed attribute values <span class="math inline">x_1, ..., x_n</span>.</p>
+<p><span class="math display">P(C | x_1, ..., x_n) = \alpha P(C) \Pi_i P(x_i | C)</span></p>
+<p>From ML we know that the parameters are just observed frequencies with possible Laplace smoothing, we just need to choose the most likely class <span class="math inline">C</span>.</p>
+<h2 id="text-classifiation">Text Classifiation</h2>
+<blockquote>
+<p>Example application of Naive Bayes.</p>
+</blockquote>
+<ul>
+<li><strong>Given</strong>: Collection of documents, classified as <em>interesting</em> or <em>not interesting</em>.</li>
+<li><strong>Goal</strong>: Learn a classifier to look at a text of new documents and provide a label.</li>
+</ul>
+<h3 id="data-representation">Data Representation</h3>
+<ul>
+<li>Consider possible significant words that can occur in documents.</li>
+<li>Stem words, map words to their root.</li>
+<li>For every root, introduce common binary feature for whether the word is present in the document.</li>
+<li>Naive Bayes assumption that words are independent of each other, so <span class="math inline">P(y | document) \propto \Pi_{i=1}^{|Vocab|} P(w_i | y)</span>.
+<ul>
+<li>Use ML parameter estimation <span class="math inline">P(w_i | y)</span> as the percentage of documents of class <span class="math inline">y</span> which contain word <span class="math inline">w_i</span>.</li>
+</ul></li>
+<li>When <span class="math inline">\theta</span> cannot be found analytically, gradient serach to find a good value of <span class="math inline">\theta</span>. <span class="math inline">\theta \gets \theta + \alpha \frac{\partial L(\theta | d)}{\partial \theta}</span>.</li>
+</ul>
+<h1 id="expectation-maximization-em">Expectation Maximization (EM)</h1>
+<p>Previous problems always have values of all attributes known and learning is relatively easy. Many real world problems have hidden variables with incomplete data and missing attribute values.</p>
+<h2 id="maximum-likelihood-learning">Maximum Likelihood Learning</h2>
+<ul>
+<li><span class="math inline">\theta_{V = True, Parent(V) = x}</span> is the proportion of instances of <span class="math inline">V = x</span> with <span class="math inline">V = True</span>.</li>
+<li>What is some values are missing?</li>
+<li><strong>Naive Solutions</strong>.
+<ul>
+<li>Ignore examples with missing attribute values. What is all examples have missing attribute values?</li>
+<li>Ignore hidden variables, model might become more complex.</li>
+</ul></li>
+</ul>
+<h2 id="direct-ml"><em>Direct</em> ML</h2>
+<p>Maximize likelihood directly where <span class="math inline">E</span> are the evidence variables and <span class="math inline">Z</span> are the hidden variables.</p>
+<p><span class="math display">\begin{aligned}
+h_{ML} &amp;= arg max_h P(E | h) \\
+&amp;= arg max_h \sum_Z P(E, Z | h) \\
+&amp;= arg max_h \sum_Z \Pi_i CPT(V_i) \\
+&amp;= \arg max_h \log \sum_z \Pi_i CPT(V_i)
+\end{aligned}</span></p>
+<h2 id="expectation-maximization-em-1">Expectation-Maximization (EM)</h2>
+<ul>
+<li>If we knew the missing values then we can compute <span class="math inline">h_{ML}</span>.</li>
+</ul>
+<ol type="1">
+<li>Guess <span class="math inline">h_{ML}</span>.</li>
+<li>Iterate.
+<ul>
+<li><strong>Expectation</strong>: Based on <span class="math inline">h_{ML}</span> compute expectation of (missing) values.</li>
+<li><strong>Maximization</strong>: Based on expected (missing) values, compute new <span class="math inline">h_{ML}</span>.</li>
+</ul></li>
+</ol>
+<p><span class="math display">\begin{aligned}
+h_{i+1} &amp;= arg max_h \sum_Z P(Z | h_i, e) \log P(e, Z | h_i) \\
+&amp;= arg max_h \sum_Z P(Z | h, e) \log \Pi_h CPT_j \\
+&amp;= arg max_h \sum_Z P(Z | h, e) \sum_j \log CPT_j
+\end{aligned}</span></p>
+<p>Monotonic improvement of likelihood, <span class="math inline">P(e | h_{i+1}) \ge P(e | h_i)</span>.</p>
+<p>Example: Two coins <span class="math inline">A, B</span>. Probability of heads with <span class="math inline">A</span> is <span class="math inline">\theta_A</span>, probability of heads with <span class="math inline">B</span> is <span class="math inline">\theta_B</span>. Want to find <span class="math inline">\theta_A, \theta_B</span> by performing a number of trials.</p>
+<ul>
+<li>Set of trials where we know which coin was used gives us <span class="math inline">\theta_A = 0.8</span>, <span class="math inline">\theta_B = 0.45</span>.</li>
+<li>Now, given a set of trials where we do not know which coin was used (hidden variable).</li>
+</ul>
+<ol type="1">
+<li>HTTTHHTHTH</li>
+<li>HHHHTHHHHH</li>
+<li>HTHHHHHTHH</li>
+<li>HTHTTTHHTT</li>
+<li>THHHTHHHTH</li>
+</ol>
+<p><strong>Initialization</strong>: Let’s say <span class="math inline">\theta_A^0 = 0.6</span>, <span class="math inline">\theta_B^0 = 0.5</span>. Assume that the probability of <span class="math inline">A, B</span> being used is the same, so <span class="math inline">P(A) = P(B) = 0.5</span>.</p>
+<ul>
+<li><strong>Expectation</strong>: Compute expected counts of heads and tails. <span class="math inline">P(A | T_i) = \frac{P(T_i | A) P(A)}{\sum_{j \in \{A, B\}} P(T_i | j) P(j)}</span>.</li>
+</ul>
+<ol type="1">
+<li><span class="math inline">P(T_1 | A) = {10 \choose 5} 0.6^5 0.4^5 \approx 0.2</span>. <span class="math inline">P(T_1 | B) = {10 \choose 5} 0.5^{10} \approx 0.246</span>. So <span class="math inline">P(A | T_1) = \frac{0.2}{0.2 + 0.246} \approx 0.45</span>, <span class="math inline">P(B | T_1) = 1 - P(A | T_1) \approx 0.55</span>. Give both coins a proportional number of heads and tails,</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Coin A</th>
+<th>Coin B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2.2, 2.2</td>
+<td>2.8, 2.8</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><span class="math inline">P(T_2 | A) = {10 \choose 9} 0.6^9 0.4^1 \approx 0.0403</span>. <span class="math inline">P(T_2 | B) = {10 \choose 9} 0.5^10 \approx 0.01</span>. So <span class="math inline">P(A | T_2) \approx 0.8</span>, <span class="math inline">P(B | T_2 \approx 0.2</span>.</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Coin A</th>
+<th>Coin B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2.2, 2.2</td>
+<td>2.8, 2.8</td>
+</tr>
+<tr class="even">
+<td>7.2, 0.8</td>
+<td>1.8, 0.2</td>
+</tr>
+</tbody>
+</table>
+<p>…</p>
+<table>
+<thead>
+<tr class="header">
+<th>Coin A</th>
+<th>Coin B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2.2, 2.2</td>
+<td>2.8, 2.8</td>
+</tr>
+<tr class="even">
+<td>7.2, 0.8</td>
+<td>1.8, 0.2</td>
+</tr>
+<tr class="odd">
+<td>5.9, 1.5</td>
+<td>2.1, 0.5</td>
+</tr>
+<tr class="even">
+<td>1.4, 2.1</td>
+<td>2.6, 3.9</td>
+</tr>
+<tr class="odd">
+<td>4.5, 1.9</td>
+<td>2.5, 1.1</td>
+</tr>
+<tr class="even">
+<td><strong>23.1, 8.6</strong></td>
+<td><strong>11.7, 8.4</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Maximization</strong>: Compute parameters based on expected counts and repeat. <span class="math inline">\theta^1_A = \frac{21.3}{21.3 + 8.6} = 0.71</span>, <span class="math inline">\theta^1_B = \frac{11.7}{11.7 + 8.4}</span>.</li>
+</ul>
+<p>…</p>
+<p>Eventually we will see similar probabilities to <span class="math inline">0.8, 0.45</span>.</p>
+<h2 id="k-means-algorithm">K-Means Algorithm</h2>
+<ul>
+<li><strong>Input</strong>.
+<ul>
+<li>Set of examples <span class="math inline">E</span>.</li>
+<li>Input features <span class="math inline">X_1, ..., X_n</span>.</li>
+<li><span class="math inline">val(e, X)</span>, value of feature <span class="math inline">j</span> for example <span class="math inline">e</span>.</li>
+<li><span class="math inline">k</span> classes.</li>
+</ul></li>
+<li><strong>Output</strong>.
+<ul>
+<li>Function class <span class="math inline">E \to \{1, ... k\}</span> which classifies examples.</li>
+<li>Function <span class="math inline">pval</span>, where <span class="math inline">pval(i, X_j)</span> is the predicted value of feature <span class="math inline">X_j</span> for every example in class <span class="math inline">i</span>.</li>
+</ul></li>
+</ul>
 </body>
 </html>

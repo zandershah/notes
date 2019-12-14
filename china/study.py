@@ -5,6 +5,7 @@ import random
 parser = argparse.ArgumentParser(description='Study Vocabulary')
 parser.add_argument('-c', '--character', action='store_true')
 parser.add_argument('-p', '--pinyin', action='store_true')
+parser.add_argument('-a', '--all', action='store_true')
 args = parser.parse_args()
 BATCH_SIZE = 10
 
@@ -17,24 +18,28 @@ for lesson in filter(lambda f: f.endswith('.txt'), os.listdir()):
 
 random.shuffle(vocab)
 
-v = 0
-while v < len(vocab):
-    for i in range(v, v + BATCH_SIZE):
-        character, pinyin = vocab[i]
-
-        if args.character:
-            print(character)
-        if args.pinyin:
-            print(pinyin)
-
-    _ = input()
-
-    for i in range(v, v + BATCH_SIZE):
-        character, pinyin = vocab[i]
+if args.all:
+    for character, pinyin in vocab:
         print(character, pinyin)
+else:
+    v = 0
+    while v < len(vocab):
+        for i in range(v, min(v + BATCH_SIZE, len(vocab))):
+            character, pinyin = vocab[i]
 
-    v += BATCH_SIZE
-    print(f'\n{v}/{len(vocab)}')
+            if args.character:
+                print(character)
+            if args.pinyin:
+                print(pinyin)
 
-    _ = input()
+        _ = input()
+
+        for i in range(v, min(v + BATCH_SIZE, len(vocab))):
+            character, pinyin = vocab[i]
+            print(character, pinyin)
+
+        v += BATCH_SIZE
+        print(f'\n{v}/{len(vocab)}')
+
+        _ = input()
 
