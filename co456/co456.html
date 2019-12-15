@@ -443,5 +443,59 @@
 </blockquote>
 <p>We define <span class="math inline">f(x) = \overline{x}</span> where <span class="math inline">\overline{x} = \frac{x^i_{s_i} + \Phi^i_{s_i}(x)}{\sum_{s_i \in S_i}(x^i_{s_i} + \Phi^i_{s_i}(x))} = \frac{x^i_{s_i} + \Phi^i_{s_i}(x)}{1 + \sum_{s_i \in S_i} \Phi^i_{s_i}(x)}</span>.</p>
 <p>Note that <span class="math inline">f</span> is continuous since <span class="math inline">\Phi^i_{s_i}</span> are continuous. So <span class="math inline">f</span> has a fixed point <span class="math inline">\hat{x}</span>. Consider a player <span class="math inline">i \in N</span> and let <span class="math inline">s_i \in S_i</span> be a pure strategy such that <span class="math inline">\hat{x}^i_{s_i} &gt; 0</span> and <span class="math inline">u_i(s_i, \hat{x}^{-i}) \le u_i(\hat{x})</span>. It follows that <span class="math inline">\Phi^i_{s_i}(x) = 0</span>, so it must be the case that <span class="math inline">\Phi^i_{s^\prime_i} = 0</span> for all <span class="math inline">i, s^\prime_i</span>. So <span class="math inline">\hat{x}^i</span> is a best response to <span class="math inline">\hat{x}^{-i}</span> for all <span class="math inline">i \in N</span>, so it is a mixed Nash equilibrium.</p>
+<h1 id="mechanism-design">Mechanism Design</h1>
+<blockquote>
+<p>We want to design rules for games for rational players so that system-wide optimal goal is achieved</p>
+</blockquote>
+<h2 id="ideal-auctions">Ideal Auctions</h2>
+<ul>
+<li>Auctineed needs to decide who wins what item and who pays what amount.</li>
+</ul>
+<p><strong>Definition</strong>: An auction is <strong>dominant-strategy incentive compatible</strong> (DSIC) if truthful bidding is a dominant strategy, and yields non-negative utility for all players.</p>
+<p><strong>Definition</strong>: <strong>Social welfare</strong> of a single item is <span class="math inline">\sum_{i \in N} v_i x_i</span>, <span class="math inline">x \in \{0, 1\}^N</span>, <span class="math inline">\sum_{i \in N}x_i = 1</span>. Auction is <strong>welfare-maximizing</strong> if truthful bidding maximizes social welfare.</p>
+<p><strong>Definition</strong>: Auction is <strong>ideal</strong> if.</p>
+<ol type="1">
+<li>DSIC.</li>
+<li>Welfare-maximizing.</li>
+<li>Implemented efficiently.</li>
+</ol>
+<h2 id="sponsored-search-auctions">Sponsored Search Auctions</h2>
+<p><span class="math inline">k \ge 1</span> slots for sponsored links. For every slot <span class="math inline">j</span>, <span class="math inline">a_j \in [0, 1]</span> is probability user clicks on ad. Assume <span class="math inline">a_1 \ge a_2 \ge ... \ge a_k</span>.</p>
+<ol type="1">
+<li>Assuming truthful bidding, how can we assign items that is welfare-maximizing and efficient?</li>
+<li>Given the assignment, how do we set prices to obtain DSIC?</li>
+</ol>
+<p>Social welfare is <span class="math inline">\sum_{i \in N} v_i x_i</span>, where <span class="math inline">x_i = a_j</span> if slot <span class="math inline">j</span> assigned to player <span class="math inline">i</span>. Welfare-maximizing allocation is to assign slot <span class="math inline">j</span> to the <span class="math inline">j</span>-th highet valuation.</p>
+<p>To get DSIC pricing, use Myerson’s Lemma.</p>
+<blockquote>
+<p><em>Aside</em>: Payment as the <span class="math inline">j+1</span>th highest bid is not DSIC. Player’s could switch to a lower slot with higher utility.</p>
+</blockquote>
+<h1 id="myersons-lemma">Myerson’s Lemma</h1>
+<p><strong>Definition</strong>: Given a single parameter environment, <strong>direct revelation mechanism</strong>.</p>
+<ol type="1">
+<li>Collects bids <span class="math inline">b \in B \subseteq \mathbb{R}_+^N</span> from the bidders.</li>
+<li>Chooses feasible allocation <span class="math inline">x(b) \in X</span> based on the bids.</li>
+<li>Chooses payment <span class="math inline">p(b) \in \mathbb{R}_+^N</span> where bidder <span class="math inline">i</span> pays <span class="math inline">p_i(b)</span>.</li>
+</ol>
+<p><span class="math inline">x: B \to X</span> is an <strong>allocation rule</strong>, <span class="math inline">p: B \to \mathbb{R}_+^N</span> is a <strong>payment rule</strong>.</p>
+<ul>
+<li>Assume <span class="math inline">0 \le p_i(b) \le b_i x_i(b)</span> as part of condition to DSIC.</li>
+</ul>
+<h2 id="allocation-rules">Allocation Rules</h2>
+<ol type="1">
+<li><span class="math inline">x: B \to X</span> is <strong>implementable</strong> if there exists a payment rule <span class="math inline">p: B \to \mathbb{R}_+^N</span> such that <span class="math inline">(x, p)</span> is DSIC.</li>
+<li>Allocation rule is <strong>monotone</strong> if for all <span class="math inline">i \in N</span> and <span class="math inline">b_{-i} \in B_{-i}</span>, <span class="math inline">x_i(z, b_{-i}) \ge x_i(y, b_{-i})</span> whenever <span class="math inline">z \ge y</span>.</li>
+</ol>
+<p><strong>Myerson’s Lemma</strong>: Fix a single parameter environment.</p>
+<ul>
+<li>Allocator rule is implementable if and only if it is monotone.</li>
+<li>Given a monotone allocation, there exists unique payment rule <span class="math inline">p: B \to \mathbb{R}_+^N</span> such that <span class="math inline">(x, p)</span> is DSIC and <span class="math inline">p_i(b) = 0</span> if <span class="math inline">b_i = 0</span>.</li>
+</ul>
+<blockquote>
+<p><span class="math inline">(\Rightarrow)</span> Assume <span class="math inline">x</span> is implementable. So there is payment rule <span class="math inline">p</span> such that <span class="math inline">(x, p)</span> is DISC. Fix player <span class="math inline">i</span>, <span class="math inline">b_{-i} \in B_{-i}</span>. Required to prove that <span class="math inline">z \ge y</span> implies <span class="math inline">x_i(z, b_{-i}) \ge x_i(y, b_{-i})</span>. Use <span class="math inline">x(y), p(y)</span> to represent <span class="math inline">x_i(y, b_{-i})</span> and <span class="math inline">p_i(y, b_{-i})</span>.</p>
+<p><span class="math inline">(x, p)</span> is independent of player valuations, so DSIC for any possible valuation. So DSIC when player <span class="math inline">i</span>’s valuation is <span class="math inline">z</span>. So <span class="math inline">u(z) \ge u(z)</span>, <span class="math inline">z x(z) - p(z) \ge z z(y) - p(z)</span>. This also holds when player <span class="math inline">i</span>’s valuation is <span class="math inline">y</span>. So <span class="math inline">y x(y) - p(y) \ge y x(z) - p(z)</span>.</p>
+<p>Combining inequalities we have <span class="math inline">y(x(z) - x(y)) \le p(z) - p(y) \le z(x(z) - x(y))</span>. Since <span class="math inline">y \le z</span>, <span class="math inline">z, y \ge 0</span>, we know <span class="math inline">x(z) - x(y) \ge 0</span>, so <span class="math inline">x(z) \ge x(y)</span>. So <span class="math inline">x</span> is monotone.</p>
+<p><span class="math inline">(\Leftarrow)</span>.</p>
+</blockquote>
 </body>
 </html>
