@@ -484,7 +484,7 @@
 <h2 id="allocation-rules">Allocation Rules</h2>
 <ol type="1">
 <li><span class="math inline">x: B \to X</span> is <strong>implementable</strong> if there exists a payment rule <span class="math inline">p: B \to \mathbb{R}_+^N</span> such that <span class="math inline">(x, p)</span> is DSIC.</li>
-<li>Allocation rule is <strong>monotone</strong> if for all <span class="math inline">i \in N</span> and <span class="math inline">b_{-i} \in B_{-i}</span>, <span class="math inline">x_i(z, b_{-i}) \ge x_i(y, b_{-i})</span> whenever <span class="math inline">z \ge y</span>.</li>
+<li>Allocation rule is <strong>monotone</strong> if for all <span class="math inline">i \in N</span> and <span class="math inline">b_{-i} \in B_{-i}</span>, <span class="math inline">x_i(y, b_{-i}) \ge x_i(z, b_{-i})</span> whenever <span class="math inline">y \ge z</span>.</li>
 </ol>
 <p><strong>Myerson’s Lemma</strong>: Fix a single parameter environment.</p>
 <ul>
@@ -492,10 +492,66 @@
 <li>Given a monotone allocation, there exists unique payment rule <span class="math inline">p: B \to \mathbb{R}_+^N</span> such that <span class="math inline">(x, p)</span> is DSIC and <span class="math inline">p_i(b) = 0</span> if <span class="math inline">b_i = 0</span>.</li>
 </ul>
 <blockquote>
-<p><span class="math inline">(\Rightarrow)</span> Assume <span class="math inline">x</span> is implementable. So there is payment rule <span class="math inline">p</span> such that <span class="math inline">(x, p)</span> is DISC. Fix player <span class="math inline">i</span>, <span class="math inline">b_{-i} \in B_{-i}</span>. Required to prove that <span class="math inline">z \ge y</span> implies <span class="math inline">x_i(z, b_{-i}) \ge x_i(y, b_{-i})</span>. Use <span class="math inline">x(y), p(y)</span> to represent <span class="math inline">x_i(y, b_{-i})</span> and <span class="math inline">p_i(y, b_{-i})</span>.</p>
-<p><span class="math inline">(x, p)</span> is independent of player valuations, so DSIC for any possible valuation. So DSIC when player <span class="math inline">i</span>’s valuation is <span class="math inline">z</span>. So <span class="math inline">u(z) \ge u(z)</span>, <span class="math inline">z x(z) - p(z) \ge z z(y) - p(z)</span>. This also holds when player <span class="math inline">i</span>’s valuation is <span class="math inline">y</span>. So <span class="math inline">y x(y) - p(y) \ge y x(z) - p(z)</span>.</p>
-<p>Combining inequalities we have <span class="math inline">y(x(z) - x(y)) \le p(z) - p(y) \le z(x(z) - x(y))</span>. Since <span class="math inline">y \le z</span>, <span class="math inline">z, y \ge 0</span>, we know <span class="math inline">x(z) - x(y) \ge 0</span>, so <span class="math inline">x(z) \ge x(y)</span>. So <span class="math inline">x</span> is monotone.</p>
-<p><span class="math inline">(\Leftarrow)</span>.</p>
+<p><span class="math inline">(\Rightarrow)</span> Assume <span class="math inline">x</span> is implementable. So there is payment rule <span class="math inline">p</span> such that <span class="math inline">(x, p)</span> is DISC. Fix player <span class="math inline">i</span>, <span class="math inline">b_{-i} \in B_{-i}</span>. Required to prove that <span class="math inline">y \ge z</span> implies <span class="math inline">x_i(y, b_{-i}) \ge x_i(z, b_{-i})</span>. Use <span class="math inline">x(y), p(y)</span> to represent <span class="math inline">x_i(y, b_{-i})</span> and <span class="math inline">p_i(y, b_{-i})</span>.</p>
+<p><span class="math inline">(x, p)</span> is independent of player valuations, so DSIC for any possible valuation. So DSIC when player <span class="math inline">i</span>’s valuation is <span class="math inline">y</span>. So <span class="math inline">u(y) \ge u(z)</span>, <span class="math inline">y x(y) - p(y) \ge y x(z) - p(z)</span>. This also holds when player <span class="math inline">i</span>’s valuation is <span class="math inline">z</span>. So <span class="math inline">z x(z) - p(z) \ge z x(y) - p(y)</span>.</p>
+<p>Combining inequalities we have <span class="math inline">z(x(y) - x(z)) \le p(y) - p(z) \le y(x(y) - x(z))</span>. Since <span class="math inline">z \le y</span>, <span class="math inline">z, y \ge 0</span>, we know <span class="math inline">x(y) - x(z) \ge 0</span>, so <span class="math inline">x(y) \ge x(z)</span>. So <span class="math inline">x</span> is monotone.</p>
+<p><span class="math inline">(\Leftarrow)</span>. Assume <span class="math inline">x</span> is monotone. First show that there is only one possible payment rule under monotone and DSIC. Then show the payment rule is DSIC. Consider <span class="math inline">x</span> that is either piecewise constant, or differentiable.</p>
+<p>Assume <span class="math inline">y &gt; x</span>. Suppose <span class="math inline">x</span> is piecewise constant with intervals <span class="math inline">[0, \overline{z}_1], (\overline{z}_1, \overline{z}_2], ..., (\overline{z_q}, \infty)</span>. Define <span class="math inline">h_j</span> to be the jump at <span class="math inline">\overline{z_j}</span>, <span class="math inline">h_j = \lim_{w \to \overline{z}_j^+} x(w) - x(\overline{z}_j)</span>. Fix <span class="math inline">z \in (\overline{z}_j, \overline{z}_{j+1})</span> for some <span class="math inline">j</span>. From payment sandwich, divide by <span class="math inline">y - z</span>.</p>
+<p><span class="math display">z \frac{x(y) - x(z)}{y - z} \le \frac{p(y) - p(z)}{y - z} \le y \frac{x(y) - x(z)}{y - z}</span></p>
+<p><span class="math inline">\lim_{y \to z^+} \frac{x(y) - x(z)}{y - z} = x^\prime(z) = 0</span> since <span class="math inline">x</span> is constant at <span class="math inline">z</span>. So both of the ends of the inequality approach <span class="math inline">0</span>, so <span class="math inline">\lim_{y\to z^+}\frac{p(y) - p(z)}{y - z} = p^\prime(z) = 0</span>. So <span class="math inline">p</span> is constant within every piece of <span class="math inline">x</span>.</p>
+<p>Consider <span class="math inline">z = \overline{z}_j</span> for some <span class="math inline">j</span>. <span class="math inline">\lim_{y \to z^+} y(x(y) - x(z)) = z \cdot h_j</span>. Also, <span class="math inline">\lim_{y \to z^+}z(x(y) - x(z)) = z \cdot h_j</span>. So the payment jumps by <span class="math inline">\overline{z}_j h_j</span> and <span class="math inline">\overline{z}_j</span>. We assumed <span class="math inline">p(0) = 0</span>, so this is unique, <span class="math inline">p(z) = p_i(z, b_{-i}) = \sum_{k=1}^j \overline{z}_k h_k</span>.</p>
+<p>Consider the case where <span class="math inline">x</span> is differentiable. <span class="math inline">p(z) = p(z) - p(0) = \int_{0}^z p^\prime(t) dt = \int_0^z t x^\prime(t) dt</span>.</p>
 </blockquote>
+<h2 id="applying-myersons-lemma">Applying Myerson’s Lemma</h2>
+<ol type="1">
+<li>Single-item Auction. Let <span class="math inline">x</span> be allocation where highest bidder gets the item. Monotone. Consider <span class="math inline">i</span>, fix <span class="math inline">b_{-i} \in B_{-i}</span> of all other bids. Let <span class="math inline">B = \max_{j \neq i} b_j</span>. Using Myerson’s Lemma, <span class="math inline">p_i(b_i, b_{-i}) = \begin{cases}0,\ &amp;b_i \le B \\ B,\ &amp;b_i &gt; B\end{cases}</span>. This is the second-price rule.</li>
+<li>Sponsored search auction. <span class="math inline">k</span> slots with click-through rates <span class="math inline">\alpha_1 \ge \alpha_2 \ge ... \ge \alpha_k</span>. Allocation function assigns <span class="math inline">\alpha_i</span> to the bidder with the <span class="math inline">i</span>th highest bid. Welfare-maximing. Arrange the other bids by <span class="math inline">b_1 \ge b_2 \ge ... \ge b_k</span>. <span class="math inline">p(z) = \sum_{j: b_j &lt; z} b_j(\alpha_j - \alpha_{j+1})</span>.</li>
+</ol>
+<h2 id="hard-instances-of-welfare-maximization">Hard Instances of Welfare Maximization</h2>
+<p>Example: Managing advertising slots, <span class="math inline">T</span> seconds to fill. <span class="math inline">N</span> potential advertisers where advertiser <span class="math inline">i</span> has ad of length <span class="math inline">t_i</span>, derives value <span class="math inline">v_i</span>. Run an auction to determine which players get their ads aired. The set of feasible allocations is <span class="math inline">X = \{x \in \{0, 1\}^N: \sum_{i \in N} t_i x_i \le T\}</span>. Social welfare is <span class="math inline">\sum_{i \in N} v_i x_i</span>. This is equivalent to binary knapsack problem, NP-hard. So requirements 2, 3 of ideal auction cannot simulatneously hold unless <span class="math inline">P = NP</span>.</p>
+<blockquote>
+<p>We relax condition 2 so that we have approximate welfare maximization while keeping efficiency.</p>
+</blockquote>
+<h2 id="monotone-approximation-for-knapsack">Monotone Approximation for Knapsack</h2>
+<p>An approximation is to look for an items <em>value density</em>, which is the value divided by space or time. Sort items so that <span class="math inline">\frac{v_1}{t_1} \ge ... \ge \frac{v_n}{t_n}</span>.</p>
+<p>One possible algorithm is to fill with the largest index until the bag is full. This does not work well in general. Consider <span class="math inline">v_1 = t_1 = 1</span>, <span class="math inline">v_2 = T - 1</span>, <span class="math inline">t_2 = T</span>. Algorithm returns <span class="math inline">\{1\}</span> with value <span class="math inline">1</span> but a better solution is <span class="math inline">\{2\}</span> with value <span class="math inline">T-1</span>.</p>
+<p><strong>Refinement</strong>: Still pick <span class="math inline">i</span>, but if <span class="math inline">V_{i+1} &gt; v_1 + ... + v_i</span>&lt; then return <span class="math inline">\{i+1\}</span> instead of <span class="math inline">S</span>.</p>
+<ol type="1">
+<li><span class="math inline">N = \{1, ..., n\}</span>, <span class="math inline">\frac{v_i}{t_i} \ge \frac{v_j}{t_j}</span> whenever <span class="math inline">i &lt; j</span>. Let <span class="math inline">i</span> be largest index where <span class="math inline">t_1 + ... + t_i \le T</span>. <span class="math inline">S = \{1, ..., i\}</span>.</li>
+<li>If <span class="math inline">\sum_{j=1}^i v_j \ge v_{i+1}</span>, return <span class="math inline">S</span>. Otherwise, return <span class="math inline">\{i+1\}</span>.</li>
+</ol>
+<p>Suppose <span class="math inline">OPT</span> is optimal value of knapsack problem, <span class="math inline">APX</span> is approximate.</p>
+<p><strong>Theorem</strong>: <span class="math inline">APX \ge \frac{1}{2}OPT</span>.</p>
+<blockquote>
+<p>Consider LP relaxation, <span class="math inline">\max\{v_1x_1 + ... + v_n x_n: t_1x_1 + ... + t_n x_n \le T, 0 \le x \le 1\}</span>. Then solution <span class="math inline">x_1, ..., x_i = 1</span>, <span class="math inline">x_{i+1} = \frac{T - t_1 - ... - t_i}{t_{i+1}}</span>, <span class="math inline">x_{i+2} = ... = x_n = 0</span> is optimal. Let <span class="math inline">v*</span> be the optimal value. Then <span class="math inline">OPT \le v^*</span>. We will show <span class="math inline">APX \ge \frac{1}{2} v^*</span>.</p>
+<ol type="1">
+<li>If <span class="math inline">v(S) \ge v_{i+1}</span>, then <span class="math inline">APX = v(S)</span>. Then <span class="math inline">v^* \le v(S) + v_{i+1} \le 2 V(S) = 2 APX</span>.</li>
+<li>If <span class="math inline">v(S) &lt; v_{i+1}</span>, then <span class="math inline">APX = v_{i+1}</span>. Then <span class="math inline">v^* \le v(S) + v_{i+1} \le 2 v_{i+1} = 2APX</span>.</li>
+</ol>
+</blockquote>
+<p>The allocation is monotone so there is payment rule that is DSIC. Allocation has one jump from <span class="math inline">0</span> to <span class="math inline">1</span> at soem point, say <span class="math inline">\overline{b}_j</span>. Payment for winning is <span class="math inline">\overline{b}_j</span>. To find <span class="math inline">\overline{b}_j</span>, brute force test out different values.</p>
+<h1 id="vgc-mechanism">VGC Mechanism</h1>
+<blockquote>
+<p>Look at payment rules from a different angle.</p>
+</blockquote>
+<ol type="1">
+<li>Single-item Auction. For a player <span class="math inline">i</span>, we look at the total value received by other players when <span class="math inline">i</span> isin the auction and when <span class="math inline">i</span> is not in the auction. If player <span class="math inline">i</span>’s bid does not win, total value received by other players is the same. If player <span class="math inline">i</span>s bid wins, sum of value <span class="math inline">0</span> for others. But if player <span class="math inline">i</span> is not in ht eauction, player with the 2nd highest bid wins. Total loss of value is the 2nd highest bid. This is equal to our payment rule.</li>
+</ol>
+<h2 id="general-mechanism-design-elements">General Mechanism Design Elements</h2>
+<ul>
+<li><span class="math inline">n</span> players.</li>
+<li>Finite set of outcomes <span class="math inline">\Omega</span>.</li>
+<li>Player <span class="math inline">i</span> has private valuations <span class="math inline">v_i(\omega)</span> for every outcome <span class="math inline">w \in \Omega</span>.</li>
+</ul>
+<p><strong>Theorem</strong>: In every general mechanism design environment, there is a DSIC welfare-maximizing mechanism.</p>
+<blockquote>
+<p>Suppose we are given bids <span class="math inline">b_1, ..., b_n</span>, every bid indexed by <span class="math inline">\omega</span>. Allocation that is welfare-maximizing is <span class="math inline">x(b) = arg \max_{\omega \in \Omega} \sum_{i=1}^n b_i(w)</span>, the outcome <span class="math inline">\omega \in Omega</span> that gives the highest sum of values. Payment rule is <span class="math inline">p_i(b) = \max_{\omega \in \Omega} \sum_{j \neq i} b_j(w) - \sum_{j \neq i} b_j(\omega^*)</span>, where <span class="math inline">\omega^* = x(b)</span>.</p>
+<p>We claim that <span class="math inline">(x, p)</span> is DSIC. Prove that bidding truthfully is a dominant strategy. For <span class="math inline">i, b_{-i}</span>. When we pick an outcome <span class="math inline">x(b) = \omega^*</span>, the utility for player <span class="math inline">i</span> is <span class="math inline">v_i(\omega^*) - p_i(b) = \left[v_i(\omega^*) + \sum_{j \neq i}b_j(\omega^*)\right] - \left[\max_{\omega \in \Omega} \sum_{j \neq i} b_j(\omega)\right]</span>. The first term is the thing we maximize, the second is a constant value since <span class="math inline">i</span> is not in the auction.</p>
+<p>Consider arbitrary <span class="math inline">\omega^*</span> chosen as the allocation. The allocation <span class="math inline">x(b)</span> maximizes <span class="math inline">\sum_{i=1}^n b_j(\omega^*) = b_i(\omega^*) + \sum_{j \neq i} b_j(\omega^*)</span>. So the first term is maximized when <span class="math inline">b_i(\omega^*) = v_i(\omega^*)</span>. So we get maximum utility by bidding truthfully.</p>
+</blockquote>
+<h1 id="cooperative-games">Cooperative Games</h1>
+<p><strong>Definition</strong>: <strong>Cooperative game</strong> is given by a set of <span class="math inline">N</span> players, and characteristic function <span class="math inline">v: 2^N \to \mathbb{R}</span> that assigns a value <span class="math inline">v(S)</span> for every <strong>coalition</strong> <span class="math inline">S \subseteq N</span>. The set <span class="math inline">N</span> is called the <strong>grand coalition</strong>.</p>
+<p>Assume that <span class="math inline">v(\emptyset) = 0</span>, and <span class="math inline">v(S) \ge 0</span>.</p>
+<p>The definition does not tell us how value is distributed within a group. How do we distribute the value to achieve certain goals?</p>
 </body>
 </html>
