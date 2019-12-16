@@ -553,5 +553,113 @@
 <p><strong>Definition</strong>: <strong>Cooperative game</strong> is given by a set of <span class="math inline">N</span> players, and characteristic function <span class="math inline">v: 2^N \to \mathbb{R}</span> that assigns a value <span class="math inline">v(S)</span> for every <strong>coalition</strong> <span class="math inline">S \subseteq N</span>. The set <span class="math inline">N</span> is called the <strong>grand coalition</strong>.</p>
 <p>Assume that <span class="math inline">v(\emptyset) = 0</span>, and <span class="math inline">v(S) \ge 0</span>.</p>
 <p>The definition does not tell us how value is distributed within a group. How do we distribute the value to achieve certain goals?</p>
+<p>Example: Ice cream. <span class="math inline">P, S, G</span> want to buy ice cream. 3 sizes of ice cream, <span class="math inline">1, 1.5, 2</span> which sosts <span class="math inline">7, 9, 11</span> respectively. <span class="math inline">P</span> has <span class="math inline">3</span>, <span class="math inline">S</span> has <span class="math inline">4</span>, <span class="math inline">G</span> has <span class="math inline">5</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>S</th>
+<th><span class="math inline">\emptyset, \{P\}, \{S\}, \{G\}</span></th>
+<th><span class="math inline">\{P, S\}</span></th>
+<th><span class="math inline">\{P, G\}</span></th>
+<th><span class="math inline">\{S, G\}</span></th>
+<th><span class="math inline">\{P, S, G\}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">v(S)</span></td>
+<td><span class="math inline">0</span></td>
+<td><span class="math inline">1</span></td>
+<td><span class="math inline">1</span></td>
+<td><span class="math inline">1.5</span></td>
+<td><span class="math inline">2</span></td>
+</tr>
+</tbody>
+</table>
+<p>Example: In a matching game, we have a graph <span class="math inline">G = (V, E)</span> and weights <span class="math inline">w: E \to \mathbb{R}_+</span>. Players are the vertices, for any subset <span class="math inline">S \subseteq N</span>, the value is the maximum weight of any matching inside <span class="math inline">S</span>.</p>
+<h2 id="outcomes-of-coop-games">Outcomes of Coop Games</h2>
+<ul>
+<li><strong>Strategic games</strong>: strategy profiles (pure or mixed).</li>
+<li><strong>Cooperative games</strong>.
+<ul>
+<li>Partition the players into coalitions (<em>coalition structure</em>).</li>
+<li>Distribute the value of a group fo its members (<em>payoff vector</em>).</li>
+</ul></li>
+</ul>
+<p><strong>Definition</strong>: Given a coop game <span class="math inline">(N, v)</span>, a <strong>coalition structure</strong> is a partition <span class="math inline">\pi</span> of <span class="math inline">N</span>, <span class="math inline">\pi = (c_1, ..., c^k)</span>, <span class="math inline">c_i \subseteq N</span>, <span class="math inline">c^i \cap c^j = \emptyset</span> when <span class="math inline">i \neq j</span>, and <span class="math inline">c^1 \cup ... \cup c^k = N</span>. A <strong>payoff vector</strong> <span class="math inline">x \in \mathbb{R}_+^N</span> such that <span class="math inline">\sum_{i \in c^j} x_i = x(c^j) \le v(c^j)</span> for every <span class="math inline">j \in \{1, ..., k\}</span>. An outcome consists of <span class="math inline">(\pi, x)</span>. It is <strong>efficient</strong> if <span class="math inline">x(c^j) = v(c^j)</span> for every <span class="math inline">j \in \{1, ..., k\}</span>.</p>
+<p>Example: An outcome for the ice cream game is <span class="math inline">\pi = (\{P\}, \{S, G\})</span>, <span class="math inline">X(P) = 0</span>, <span class="math inline">X(S) = 0.7</span>, <span class="math inline">X(G) = 0.8</span>. This is efficient.</p>
+<h2 id="classes-of-coop-games">Classes of Coop Games</h2>
+<ol type="1">
+<li><strong>Monotone Games</strong>: <span class="math inline">S \subseteq T \Rightarrow v(S) \le v(T)</span>. More people produce more value.</li>
+<li><strong>Superadditive Games</strong>: For disjoint <span class="math inline">S, T</span>, <span class="math inline">v(S) + v(T) \le v(S \cup T)</span>. Superadditive implies monoticity.</li>
+<li><strong>Convex Games</strong>: For <span class="math inline">S, T \subseteq N</span>, <span class="math inline">v(S) + v(T) \le v(S \cup T) + v(S \cap T)</span>, <strong>supermodularity</strong>. Convexity implies superadditivity.</li>
+</ol>
+<p><strong>Proposition</strong>: A game <span class="math inline">(N, v)</span> is convex if and only if for every <span class="math inline">S, T</span> where <span class="math inline">S \subseteq T \subseteq N</span> and every player <span class="math inline">i \in N</span>, <span class="math inline">v(T \cup \{i\}) - v(t) \ge v(S \cup \{i\}) - v(S)</span>.</p>
+<h2 id="solution-concepts">Solution Concepts</h2>
+<blockquote>
+<p>What do we want as an outcome in a cooperative game?</p>
+</blockquote>
+<ol type="1">
+<li>Fairness. Payoff vector should reflect contribution of the players to the overall value.</li>
+<li>Stability. Incentivize players to remain in their assigned coalitions in the coalition structure.</li>
+</ol>
+<h2 id="shapley-values">Shapley Values</h2>
+<p>Shapley values deal with the fairness of payoff vectors. Assume the players form the grand coalition. How do we quantify contributions? Compare the value of the coalition before and after a player joins it.</p>
+<p>Example: Contribution of <span class="math inline">G</span> is the difference between <span class="math inline">v(\{P, S\})</span> and <span class="math inline">v(\{P, S, G\})</span>.</p>
+<p>The total contribution may exceed total value. Look at all possible ordering, average the contribution.</p>
+<p><strong>Notation</strong>: Permutation <span class="math inline">\sigma</span> of <span class="math inline">N</span> has the form <span class="math inline">(\sigma_1, ..., \sigma_n)</span> where every <span class="math inline">\sigma_i</span> is a distinct member of <span class="math inline">N</span> (or a bijection between <span class="math inline">N</span> and <span class="math inline">N</span>). The set of all permutations of <span class="math inline">N</span> is <span class="math inline">S_N</span>. Given <span class="math inline">\sigma \in S_N</span>, <strong>marginal contribution</strong> of player <span class="math inline">\sigma_i</span>.</p>
+<p>$<span class="math inline">\Delta_\sigma (\sigma_i) = v(\{\sigma_1, ..., \sigma_i\}) - v(\{\sigma_1, ..., \sigma_{i-1})</span>.</p>
+<p><strong>Definition</strong>: The <strong>Shapley value</strong> of player <span class="math inline">i</span> is <span class="math inline">\phi_i = \frac{1}{n!}\sum_{\sigma \in S_N}\Delta_\sigma(i)</span>.</p>
+<p>Example: Calculate <span class="math inline">\phi_P</span> in the ice cream game.</p>
+<blockquote>
+<p><span class="math inline">S_n = \{\sigma_1 = (P, S, G), \sigma_2 = (P, G, S), \sigma_3 = (S, P, G), \sigma_4 = (S, G, P), \sigma_5 = (G, P, S), \sigma_6 = (G, S, P)\}</span>.</p>
+<p><span class="math inline">\begin{aligned} \Delta_{\sigma_1}(P) &amp;= v(\{P\}) - v(\emptyset) = 0 \\ \Delta_{\sigma_2}(P) &amp;= v(\{P\}) - v(\emptyset) = 0 \\ \Delta_{\sigma_3}(P) &amp;= v(\{S, P\}) - v(\{S\}) = 1 \\ \Delta_{\sigma_4}(P) &amp;= v(\{S, G, P\}) - v(\{S, G\}) = 0.5 \\ \Delta_{\sigma_5}(P) &amp;= v(\{G, P\}) - v(\{G\}) = 1 \\ \Delta_{\sigma_6}(P) &amp;= v(\{G, S, P\}) - v(\{G, S\}) = 0.5 \\ \end{aligned}</span></p>
+<p>So <span class="math inline">\phi_P = \frac{1}{2}</span>.</p>
+</blockquote>
+<h3 id="properties-of-shapley-values">Properties of Shapley Values</h3>
+<ol type="1">
+<li>Efficiency: Sum of player payoffs is equal to toal value.</li>
+</ol>
+<blockquote>
+<p>For any <span class="math inline">\sigma \in S_N</span>, sum of all marginal contributions of all players is <span class="math inline">v(N)</span>.</p>
+<p><span class="math display">\begin{aligned}
+\sum_{i=1}^n \Delta_{\sigma}(i) &amp;= \sum_{i=1}^n \Delta_{\sigma} (\sigma_i) \\ 
+&amp;= [v(\{\sigma_1\}) - v(\emptyset)] + [v(\{\sigma_1, \sigma_2\}) - v(\{\sigma_1\})] + ... \\
+&amp;= v(\{\sigma_1, ..., \sigma_n\}) - v(\emptyset) \\
+&amp;= v(N)
+\end{aligned}</span></p>
+<p>So the sum of all players’ maginal contributions over all permutations is <span class="math inline">n! v(N)</span>. So Shapley value is <span class="math inline">v(N)</span>.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>Dummy player. Player <span class="math inline">i</span> is a dummy player if <span class="math inline">v(s \cup \{i\}) = v(s)</span> for all <span class="math inline">S \subseteq N</span>. If <span class="math inline">i</span> is a dummy player, then <span class="math inline">\phi_i = 0</span>.</li>
+</ol>
+<blockquote>
+<p>For any permutation <span class="math inline">\sigma \in S_N</span>, say <span class="math inline">i</span>, then <span class="math inline">\Delta_\sigma(i) = v(\{\sigma_1, ..., \sigma_{j-1}, i\}) - v(\{\sigma_1, ..., \sigma_{j-1}) = 0</span>. So <span class="math inline">\phi_i = 0</span>.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>Symmetric. Two players <span class="math inline">i, j</span> are <strong>symmetric</strong> if <span class="math inline">v(c \cup \{i\}) = v(c \cup \{j\})</span>, for all <span class="math inline">C \subseteq N \setminus \{i, j\}</span>. If <span class="math inline">i, j</span> are symmetric players, then <span class="math inline">\phi_i = \phi_j</span>.</li>
+</ol>
+<blockquote>
+<p>Define <span class="math inline">f: S_N \to S_N</span> where <span class="math inline">f(\sigma)</span> swaps the positions of <span class="math inline">i, j</span>. This is a bijection. We claim that <span class="math inline">\Delta_\sigma(i) = \Delta_{f(\sigma)}(j)</span>.</p>
+<p>Suppose <span class="math inline">i</span> precedes <span class="math inline">j</span> in <span class="math inline">\sigma</span>. Let <span class="math inline">c</span> be all elements preceding <span class="math inline">i</span>. Then $_(i) = v(c {i}) - v(c). <span class="math inline">\Delta_{f(\sigma)}(j) = v(c \cup \{j\}) - v(c)</span>. <span class="math inline">c</span> does not contain <span class="math inline">i, j</span>. By symmetry, <span class="math inline">v(c \cup \{i\}) = v(c \cup \{j\})</span>. So <span class="math inline">\Delta_\sigma(i) = \Delta_{f(\sigma)}(j)</span>.</p>
+<p>Suppose <span class="math inline">j</span> precedes <span class="math inline">i</span> in <span class="math inline">\sigma</span>. Let <span class="math inline">c</span> be all elements preceding <span class="math inline">i</span> in <span class="math inline">\sigma</span> except for <span class="math inline">j</span>. Then <span class="math inline">\Delta_\sigma(i) = v(c \cup \{i, j\}) - v(c \cup \{i\})</span>. <span class="math inline">\Delta_{f(\sigma)}(i) = v(c \cup \{i, j\}) - v(c \cup \{i\})</span>. So <span class="math inline">\Delta_\sigma(i) = \Delta_{f(\sigma)}(j)</span> by symmetry.</p>
+<p><span class="math display">\begin{aligned}
+\phi_i &amp;= \frac{1}{n!}\sum_{\sigma \in S_n} \Delta_\sigma(i) \\
+&amp;= \frac{1}{n!} \sum_{\sigma \in S_n} \Delta_{f(\sigma)}(j) \\
+&amp;= \frac{1}{n!} \sum_{\sigma \in S_n} \Delta_\sigma(j) \\
+&amp;= \phi_j
+\end{aligned}</span></p>
+</blockquote>
+<ol start="4" type="1">
+<li>Additivity. Let <span class="math inline">(N, v^1)</span>, <span class="math inline">(N, v^2)</span> be two cooperative games with the same player set <span class="math inline">N</span>. Define <span class="math inline">(N, v^3)</span> by <span class="math inline">v^3(c) = v^1(c) + v^2(c)</span> for all <span class="math inline">c \subseteq N</span>. Let <span class="math inline">\phi_i^3</span> be the shapley value for player <span class="math inline">i</span> in <span class="math inline">(N, v^3)</span>. Then <span class="math inline">\phi_i^3 = \phi_i^1 + \phi_i^2</span> for all <span class="math inline">i \in N</span>.</li>
+</ol>
+<blockquote>
+<p>TODO: Exercise.</p>
+</blockquote>
+<p>Example: Unanimity game. <span class="math inline">|N| = n</span>, <span class="math inline">v(N) = 1</span>, <span class="math inline">v(c) = 0</span> for all <span class="math inline">c \subsetneq N</span>. Any pair of players is symemtric. Since it is efficient, the sum of shapley values is <span class="math inline">1</span>. So <span class="math inline">\phi_i = \frac{1}{n}</span> for all <span class="math inline">i \in N</span>.</p>
+<h1 id="core">Core</h1>
+<p>We want an outcome <span class="math inline">(\pi, x)</span> that is stable, no group is incentivized to deviate from their assigned coalition. Given <span class="math inline">(\pi, x)</span> a coalition <span class="math inline">c</span> not in <span class="math inline">\pi</span> is more likely to break away if <span class="math inline">x(c) &lt; v(c)</span>.</p>
+<p><strong>Definition</strong>: <strong>Core</strong> consists of all outcomes <span class="math inline">(\pi, x)</span> such that <span class="math inline">x(c) \ge v(c)</span> for any <span class="math inline">c \subseteq N</span>.</p>
+<p>Example: Ice cream game.</p>
 </body>
 </html>
