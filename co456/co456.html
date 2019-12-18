@@ -553,6 +553,7 @@
 <p><strong>Definition</strong>: <strong>Cooperative game</strong> is given by a set of <span class="math inline">N</span> players, and characteristic function <span class="math inline">v: 2^N \to \mathbb{R}</span> that assigns a value <span class="math inline">v(S)</span> for every <strong>coalition</strong> <span class="math inline">S \subseteq N</span>. The set <span class="math inline">N</span> is called the <strong>grand coalition</strong>.</p>
 <p>Assume that <span class="math inline">v(\emptyset) = 0</span>, and <span class="math inline">v(S) \ge 0</span>.</p>
 <p>The definition does not tell us how value is distributed within a group. How do we distribute the value to achieve certain goals?</p>
+<h4 id="ice-cream">Ice Cream</h4>
 <p>Example: Ice cream. <span class="math inline">P, S, G</span> want to buy ice cream. 3 sizes of ice cream, <span class="math inline">1, 1.5, 2</span> which sosts <span class="math inline">7, 9, 11</span> respectively. <span class="math inline">P</span> has <span class="math inline">3</span>, <span class="math inline">S</span> has <span class="math inline">4</span>, <span class="math inline">G</span> has <span class="math inline">5</span>.</p>
 <table>
 <thead>
@@ -587,7 +588,7 @@
 </ul></li>
 </ul>
 <p><strong>Definition</strong>: Given a coop game <span class="math inline">(N, v)</span>, a <strong>coalition structure</strong> is a partition <span class="math inline">\pi</span> of <span class="math inline">N</span>, <span class="math inline">\pi = (c_1, ..., c^k)</span>, <span class="math inline">c_i \subseteq N</span>, <span class="math inline">c^i \cap c^j = \emptyset</span> when <span class="math inline">i \neq j</span>, and <span class="math inline">c^1 \cup ... \cup c^k = N</span>. A <strong>payoff vector</strong> <span class="math inline">x \in \mathbb{R}_+^N</span> such that <span class="math inline">\sum_{i \in c^j} x_i = x(c^j) \le v(c^j)</span> for every <span class="math inline">j \in \{1, ..., k\}</span>. An outcome consists of <span class="math inline">(\pi, x)</span>. It is <strong>efficient</strong> if <span class="math inline">x(c^j) = v(c^j)</span> for every <span class="math inline">j \in \{1, ..., k\}</span>.</p>
-<p>Example: An outcome for the ice cream game is <span class="math inline">\pi = (\{P\}, \{S, G\})</span>, <span class="math inline">X(P) = 0</span>, <span class="math inline">X(S) = 0.7</span>, <span class="math inline">X(G) = 0.8</span>. This is efficient.</p>
+<p>Example: An outcome for the <a href="#ice-cream">ice cream game</a> is <span class="math inline">\pi = (\{P\}, \{S, G\})</span>, <span class="math inline">X(P) = 0</span>, <span class="math inline">X(S) = 0.7</span>, <span class="math inline">X(G) = 0.8</span>. This is efficient.</p>
 <h2 id="classes-of-coop-games">Classes of Coop Games</h2>
 <ol type="1">
 <li><strong>Monotone Games</strong>: <span class="math inline">S \subseteq T \Rightarrow v(S) \le v(T)</span>. More people produce more value.</li>
@@ -608,9 +609,9 @@
 <p>Example: Contribution of <span class="math inline">G</span> is the difference between <span class="math inline">v(\{P, S\})</span> and <span class="math inline">v(\{P, S, G\})</span>.</p>
 <p>The total contribution may exceed total value. Look at all possible ordering, average the contribution.</p>
 <p><strong>Notation</strong>: Permutation <span class="math inline">\sigma</span> of <span class="math inline">N</span> has the form <span class="math inline">(\sigma_1, ..., \sigma_n)</span> where every <span class="math inline">\sigma_i</span> is a distinct member of <span class="math inline">N</span> (or a bijection between <span class="math inline">N</span> and <span class="math inline">N</span>). The set of all permutations of <span class="math inline">N</span> is <span class="math inline">S_N</span>. Given <span class="math inline">\sigma \in S_N</span>, <strong>marginal contribution</strong> of player <span class="math inline">\sigma_i</span>.</p>
-<p>$<span class="math inline">\Delta_\sigma (\sigma_i) = v(\{\sigma_1, ..., \sigma_i\}) - v(\{\sigma_1, ..., \sigma_{i-1})</span>.</p>
+<p><span class="math display">\Delta_\sigma (\sigma_i) = v(\{\sigma_1, ..., \sigma_i\}) - v(\{\sigma_1, ..., \sigma_{i-1})</span></p>
 <p><strong>Definition</strong>: The <strong>Shapley value</strong> of player <span class="math inline">i</span> is <span class="math inline">\phi_i = \frac{1}{n!}\sum_{\sigma \in S_N}\Delta_\sigma(i)</span>.</p>
-<p>Example: Calculate <span class="math inline">\phi_P</span> in the ice cream game.</p>
+<p>Example: Calculate <span class="math inline">\phi_P</span> in the <a href="#ice-cream">ice cream game</a>.</p>
 <blockquote>
 <p><span class="math inline">S_n = \{\sigma_1 = (P, S, G), \sigma_2 = (P, G, S), \sigma_3 = (S, P, G), \sigma_4 = (S, G, P), \sigma_5 = (G, P, S), \sigma_6 = (G, S, P)\}</span>.</p>
 <p><span class="math inline">\begin{aligned} \Delta_{\sigma_1}(P) &amp;= v(\{P\}) - v(\emptyset) = 0 \\ \Delta_{\sigma_2}(P) &amp;= v(\{P\}) - v(\emptyset) = 0 \\ \Delta_{\sigma_3}(P) &amp;= v(\{S, P\}) - v(\{S\}) = 1 \\ \Delta_{\sigma_4}(P) &amp;= v(\{S, G, P\}) - v(\{S, G\}) = 0.5 \\ \Delta_{\sigma_5}(P) &amp;= v(\{G, P\}) - v(\{G\}) = 1 \\ \Delta_{\sigma_6}(P) &amp;= v(\{G, S, P\}) - v(\{G, S\}) = 0.5 \\ \end{aligned}</span></p>
@@ -641,7 +642,7 @@
 </ol>
 <blockquote>
 <p>Define <span class="math inline">f: S_N \to S_N</span> where <span class="math inline">f(\sigma)</span> swaps the positions of <span class="math inline">i, j</span>. This is a bijection. We claim that <span class="math inline">\Delta_\sigma(i) = \Delta_{f(\sigma)}(j)</span>.</p>
-<p>Suppose <span class="math inline">i</span> precedes <span class="math inline">j</span> in <span class="math inline">\sigma</span>. Let <span class="math inline">c</span> be all elements preceding <span class="math inline">i</span>. Then $_(i) = v(c {i}) - v(c). <span class="math inline">\Delta_{f(\sigma)}(j) = v(c \cup \{j\}) - v(c)</span>. <span class="math inline">c</span> does not contain <span class="math inline">i, j</span>. By symmetry, <span class="math inline">v(c \cup \{i\}) = v(c \cup \{j\})</span>. So <span class="math inline">\Delta_\sigma(i) = \Delta_{f(\sigma)}(j)</span>.</p>
+<p>Suppose <span class="math inline">i</span> precedes <span class="math inline">j</span> in <span class="math inline">\sigma</span>. Let <span class="math inline">c</span> be all elements preceding <span class="math inline">i</span>. Then <span class="math inline">\Delta_\sigma(i) = v(c \cup \{i\}) - v(c)</span>. <span class="math inline">\Delta_{f(\sigma)}(j) = v(c \cup \{j\}) - v(c)</span>. <span class="math inline">c</span> does not contain <span class="math inline">i, j</span>. By symmetry, <span class="math inline">v(c \cup \{i\}) = v(c \cup \{j\})</span>. So <span class="math inline">\Delta_\sigma(i) = \Delta_{f(\sigma)}(j)</span>.</p>
 <p>Suppose <span class="math inline">j</span> precedes <span class="math inline">i</span> in <span class="math inline">\sigma</span>. Let <span class="math inline">c</span> be all elements preceding <span class="math inline">i</span> in <span class="math inline">\sigma</span> except for <span class="math inline">j</span>. Then <span class="math inline">\Delta_\sigma(i) = v(c \cup \{i, j\}) - v(c \cup \{i\})</span>. <span class="math inline">\Delta_{f(\sigma)}(i) = v(c \cup \{i, j\}) - v(c \cup \{i\})</span>. So <span class="math inline">\Delta_\sigma(i) = \Delta_{f(\sigma)}(j)</span> by symmetry.</p>
 <p><span class="math display">\begin{aligned}
 \phi_i &amp;= \frac{1}{n!}\sum_{\sigma \in S_n} \Delta_\sigma(i) \\
@@ -654,12 +655,132 @@
 <li>Additivity. Let <span class="math inline">(N, v^1)</span>, <span class="math inline">(N, v^2)</span> be two cooperative games with the same player set <span class="math inline">N</span>. Define <span class="math inline">(N, v^3)</span> by <span class="math inline">v^3(c) = v^1(c) + v^2(c)</span> for all <span class="math inline">c \subseteq N</span>. Let <span class="math inline">\phi_i^3</span> be the shapley value for player <span class="math inline">i</span> in <span class="math inline">(N, v^3)</span>. Then <span class="math inline">\phi_i^3 = \phi_i^1 + \phi_i^2</span> for all <span class="math inline">i \in N</span>.</li>
 </ol>
 <blockquote>
-<p>TODO: Exercise.</p>
+<p><span class="math display">\begin{aligned}
+\Delta_\sigma^3(i) &amp;= v^3(\{\sigma_1, ..., \sigma_{i - 1}, \sigma_i\}) - v^3(\{\sigma_1, ..., \sigma_{i-1}\}) \\
+&amp;= v^1(\{\sigma_1, ..., \sigma_{i - 1}, \sigma_i\}) - v^1(\{\sigma_1, ..., \sigma_{i-1}\}) + v^2(\{\sigma_1, ..., \sigma_{i - 1}, \sigma_i\}) - v^2(\{\sigma_1, ..., \sigma_{i-1}\})\\
+&amp;= \Delta_\sigma^1(i) + \Delta_\sigma^2(i) \\
+\ \\
+\phi^3_i &amp;= \frac{1}{n!} \sum_{\sigma \in S_n} \Delta^3_\sigma(i) \\
+&amp;= \frac{1}{n!} \sum_{\sigma \in S_n} \left[\Delta^1_\sigma(i) + \Delta^2_\sigma(i)\right] \\
+&amp;= \frac{1}{n!} \sum_{\sigma \in S_n} \Delta^1_\sigma(i) + \frac{1}{n!} \sum_{\sigma \in S_n} \Delta^2_\sigma(i) \\
+&amp;= \phi^1_i + \phi^2_i
+\end{aligned}</span></p>
 </blockquote>
 <p>Example: Unanimity game. <span class="math inline">|N| = n</span>, <span class="math inline">v(N) = 1</span>, <span class="math inline">v(c) = 0</span> for all <span class="math inline">c \subsetneq N</span>. Any pair of players is symemtric. Since it is efficient, the sum of shapley values is <span class="math inline">1</span>. So <span class="math inline">\phi_i = \frac{1}{n}</span> for all <span class="math inline">i \in N</span>.</p>
 <h1 id="core">Core</h1>
 <p>We want an outcome <span class="math inline">(\pi, x)</span> that is stable, no group is incentivized to deviate from their assigned coalition. Given <span class="math inline">(\pi, x)</span> a coalition <span class="math inline">c</span> not in <span class="math inline">\pi</span> is more likely to break away if <span class="math inline">x(c) &lt; v(c)</span>.</p>
 <p><strong>Definition</strong>: <strong>Core</strong> consists of all outcomes <span class="math inline">(\pi, x)</span> such that <span class="math inline">x(c) \ge v(c)</span> for any <span class="math inline">c \subseteq N</span>.</p>
-<p>Example: Ice cream game.</p>
+<p>Example: <a href="#ice-cream">Ice cream game</a>. Assume <span class="math inline">(\pi, x)</span> is in the core. Assume that <span class="math inline">\pi</span> has at least 2 parts. Then at least one part is a single player with value of <span class="math inline">0</span>. The player has <span class="math inline">x</span> value 0, so <span class="math inline">x(N) \le 1.5</span>, but <span class="math inline">v(N) = 2</span>, so <span class="math inline">\pi</span> cannot have more than 1 part. So <span class="math inline">\pi = (N)</span>. The payoff <span class="math inline">x</span> must satisfy <span class="math inline">x(c) \ge v(c)</span> for all <span class="math inline">c \subseteq N</span> and <span class="math inline">x(N) = v(N)</span>. If <span class="math inline">x = (x_P, x_S, x_G)</span>, then <span class="math inline">x_P + x_S + x_G = 2</span>, <span class="math inline">x_P, x_S, x_G \ge 0</span>, <span class="math inline">x_P + x_S \ge 1</span>, <span class="math inline">x_P + x_G \ge 1</span>, <span class="math inline">x_S + x_G \ge 1.5</span>.</p>
+<h2 id="core-properties">Core Properties</h2>
+<ol type="1">
+<li>Efficient within its coalitions. If <span class="math inline">(\pi, x)</span> is in the core of <span class="math inline">(N, v)</span>, then <span class="math inline">v(c) = x(c)</span> for all <span class="math inline">c \in \pi</span>.</li>
+</ol>
+<blockquote>
+<p>By definition of a core, <span class="math inline">x(c) \ge v(c)</span>. Since <span class="math inline">(\pi, x)</span> is valid, <span class="math inline">x(c) \le v(c)</span>. So <span class="math inline">x(c) = v(g)</span>.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>The core is welfare-maximizing, the sum of coalition values is maximum. If <span class="math inline">(\pi, x)</span> is in the core of <span class="math inline">(N, v)</span>, then <span class="math inline">v(\pi) \ge v(\pi^\prime)</span> for any partition <span class="math inline">\pi^\prime</span> of <span class="math inline">N</span>.</li>
+</ol>
+<blockquote>
+<p>Since <span class="math inline">(\pi, x)</span> is in the core, <span class="math inline">x(c^\prime) \ge v(c^\prime)</span> for any <span class="math inline">c^\prime \in \pi^\prime</span> (<span class="math inline">x(c) \ge v(c)</span> for any <span class="math inline">c \subseteq N</span>). So <span class="math inline">\sum_{c^\prime \in \pi^\prime} x(c^\prime) \ge \sum_{c^\prime \in \pi^\prime} v(c^\prime) = v(\pi^\prime)</span>. We also know that the sum over all <span class="math inline">x(c^\prime)</span> is the same regardless of the partition, so <span class="math inline">\sum_{c^\prime \in \pi^\prime} x(c^\prime) = \sum_{c \in \pi} x(c) = \sum_{c \in \pi} v(c) = v(\pi)</span>. So <span class="math inline">v(\pi) \ge v(\pi^\prime)</span>.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>There are games with empty cores.</li>
+</ol>
+<blockquote>
+<p>3-player majority game. <span class="math inline">N = \{1, 2, 3\}</span>. <span class="math inline">v(S) = \begin{cases}1,\ &amp;|S| \ge 2 \\0,\ &amp;|S| \ge 1\end{cases}</span>. Suppose <span class="math inline">(\pi, x)</span> is a core. Since <span class="math inline">v(N) = 1</span>, <span class="math inline">x_1 + x_2 + x_3 \ge 1</span>, <span class="math inline">x_1, x_2, x_3 \ge 0</span>. So at least one <span class="math inline">x_i \ge \frac{1}{3}</span>. The total value of any coalition structure is at most <span class="math inline">1</span>, so <span class="math inline">x_1 + x_2 + x_3 \le 1</span>. <span class="math inline">x(N \setminus \{i\}) \le \frac{2}{3}</span>. <span class="math inline">v(N \setminus \{i\}) = 1</span>. Contradiction.</p>
+</blockquote>
+<h2 id="cores-of-superadditive-games">Cores of Superadditive Games</h2>
+<blockquote>
+<p><span class="math inline">V(S \cup T) \ge V(S) + V(T)</span>, for disjoint <span class="math inline">S, T \subseteq N</span>.</p>
+</blockquote>
+<p>Players want to form the grand coalition, but not all cores consist of only the frand coalition. We claim that the question of existence of cores can be answered by looking at the grand coalition.</p>
+<p><strong>Strict superadditive case</strong>: <span class="math inline">v(S \cup T) &gt; v(S) + v(T)</span> for disjoint, non-empty <span class="math inline">S, T \subseteq N</span>.</p>
+<blockquote>
+<p>Suppose <span class="math inline">(\pi, x)</span> is a core where <span class="math inline">\pi</span> is not the grand coalition. Say <span class="math inline">c^1, c^2 \in \pi</span>. Then <span class="math inline">x(c^1) + x(c^2) = x(c^1 \cup c^2) \ge v(c^1 \cup c^2) &gt; v(c^1) + v(c^2)</span>. This is a contradiction because <span class="math inline">x(c^i) = v(c^i)</span>. So for strict superadditive game if a core exists, it has the form <span class="math inline">((N), x)</span>.</p>
+</blockquote>
+<p><strong>Superadditive case</strong>. If <span class="math inline">(\pi, x)</span> is in the core, then <span class="math inline">((N), x)</span> is also in the core.</p>
+<blockquote>
+<p>Since <span class="math inline">(\pi, x)</span> is in the core, <span class="math inline">x(c) \ge v(c0</span> for all <span class="math inline">c \subseteq N</span>. We need to verify that <span class="math inline">((N), x)</span> is a vlaid outcome, so <span class="math inline">x(N) \le v(N)</span>. <span class="math inline">x(N) = \sum_{c \in \pi}x(c) = \sum_{c \in \pi} v(c) \le v(N)</span>.</p>
+</blockquote>
+<p>We only need to look at the payoff vector in the core. This is the polyhedron <span class="math inline">C = \{x \in \mathbb{R}_+^N: x(N) = v(N), x(c) \ge v(c) \forall c \subseteq N\}</span>.</p>
+<ul>
+<li>Non-superadditive games may not have <span class="math inline">(N)</span> in the core.</li>
+</ul>
+<p>Example: <span class="math inline">N = \{1, 2, 3, 4\}</span>. <span class="math inline">v(S) = 1</span> if <span class="math inline">|S| \ge 2</span>, <span class="math inline">0</span> otherwise. <span class="math inline">v(N) = 1</span> is not max value, since <span class="math inline">\pi = (\{1, 2\}, \{3, 4\})</span>, <span class="math inline">v(\pi) = 2</span>. So <span class="math inline">(N)</span> is not in the core.</p>
+<p><strong>Definition</strong>: For any <span class="math inline">(N, v)</span>, its <strong>superadditive cover</strong> is <span class="math inline">(N, v^*)</span>, where for every <span class="math inline">S \subseteq N</span>, <span class="math inline">v^*(S) = \max \{v(\pi): \pi \text{ is a partition of } S\}</span>.</p>
+<p>Example: <span class="math inline">v^*(N) = 2</span>.</p>
+<p><strong>Proposition</strong>: Game <span class="math inline">(N, v)</span> has a non-empty core if and only if its superadditive cover <span class="math inline">(N, v^*)</span> has a non-empty core.</p>
+<blockquote>
+<p><span class="math inline">(\Rightarrow)</span> Suppose <span class="math inline">(\pi, x)</span> is in the core of <span class="math inline">(N, v)</span>. We claim that it is in the core of <span class="math inline">(N, v^*)</span>. Required to show that <span class="math inline">x(c) \ge v^*(c)</span> for all <span class="math inline">c \subseteq N</span>.</p>
+<p>Let <span class="math inline">\pi^\prime = argmax \{v(\pi^\prime): \pi^\prime \text{ is a partition of } c\}</span>. <span class="math inline">v^*(c) = v(\pi^\prime) = \sum_{c^\prime \in \pi^\prime} v(c^\prime) \le \sum_{c^\prime \in \pi^\prime} x(c^\prime) = x(c)</span>. So <span class="math inline">(\pi, x)</span> is in the core of <span class="math inline">(N, v^*)</span>.</p>
+<p><span class="math inline">(\Leftarrow)</span>: Suppose <span class="math inline">(N, v^*)</span> has a non-empty core. Superadditive game, so <span class="math inline">((N), x)</span> is in the core. So <span class="math inline">x(N) \le v^*(N)</span>, let <span class="math inline">\pi</span> represent the partition such that <span class="math inline">v^*(N) = v(\pi)</span>. We claim that <span class="math inline">(\pi, x)</span> is in the core of <span class="math inline">(N, v)</span>. <span class="math inline">\sum_{c \in \pi} x(c) = x(N) \le v^*(N) = v(\pi)</span>, so it is a feasible allocation. Consider <span class="math inline">c \subseteq N</span>. <span class="math inline">x(c) \ge v^*(c) \ge v(c)</span>, so <span class="math inline">(\pi, x)</span> is in the core of <span class="math inline">(N, v)</span>.</p>
+</blockquote>
+<h2 id="cores-of-convex-games">Cores of Convex Games</h2>
+<blockquote>
+<p><span class="math inline">V(S \cup T) + v(S \cap T) \ge v(S) + v(T)</span>, for any <span class="math inline">S, T \subseteq N</span>.</p>
+</blockquote>
+<p><strong>Proposition</strong>: Convex games have a non-empty core.</p>
+<blockquote>
+<p>Convex games are supperadditive, so it suffices to find <span class="math inline">x</span> such that <span class="math inline">x(N) = v(N)</span>, <span class="math inline">x(c) \ge v(c)</span> for all <span class="math inline">c \subseteq N</span>. Let <span class="math inline">\sigma \in S_N</span>. Without loss of generality, assume <span class="math inline">\sigma = (1, 2, ..., n)</span>. Define <span class="math inline">x_i = \Delta_\sigma(i)</span>. We proved <span class="math inline">x(N) = v(N)</span> in a Shapley value proof. Let <span class="math inline">c \subseteq N</span>, say <span class="math inline">C = \{i_1,..., i_k\}</span>. Without loss of generality assume <span class="math inline">i_1 &lt; ... &lt; i_k</span>. <span class="math inline">v(c) = [v(\{i_1\}) - v(\emptyset)] + v(\{i_1, i_2\}) - v(\{i_1\})] + ...</span>.</p>
+<p>We want to show that the <span class="math inline">j</span>th term is at most <span class="math inline">\Delta_\sigma(i_j) = v(\{1, ..., i_j\}) - v(\{1, ..., i_{j} - 1\})</span>. Using supermodularity, <span class="math inline">v(\{i_1, ..., i_j\}) + v(\{1, ..., i_j - 1\}) \le v(\{1, ..., i_j\}) + v(\{1, ..., i_{j-1}\})</span>. So <span class="math inline">x_{i_j} = v(\{1, ..., i_j\}) - v(\{1, ..., i_j - 1\}) \ge v(\{i_1, ..., i_j\}) - v(\{i_i, ..., i_{j-1}\})</span>, So <span class="math inline">v(c) \le x_{i_1} + ... + x_{i_k} = x(c)</span>.</p>
+</blockquote>
+<h1 id="matching-games">Matching Games</h1>
+<p><span class="math inline">N</span> players, played on a graph <span class="math inline">G = (N, E)</span>. Let <span class="math inline">w_e \ge 0</span> be a weight for every edge in <span class="math inline">E</span>. The value <span class="math inline">v(S)</span> of <span class="math inline">S \subseteq N</span> is the maximum weight of a matching using vertices in <span class="math inline">S</span>. This is superadditive, so we only need to look at the grand coalition. <span class="math inline">((N), x)</span> is in the core if and only if <span class="math inline">x \in C</span>, <span class="math inline">C = \{x \in \mathbb{R}_+^N: x(N) = v(N), x(c) \ge v(c) \forall c \subseteq N\}</span>. There are exponentially many constraints, so we simplify as <span class="math inline">C^\prime = \{x \in \mathbb{R}_+^N: x(N) = v(N), x_u + x_v \ge w_{uv} \forall uv \in E\}</span>.</p>
+<p><strong>Proposition</strong>: <span class="math inline">C = C^\prime</span>.</p>
+<blockquote>
+<p>Every constraint <span class="math inline">C</span> is also in <span class="math inline">C^\prime</span>, so <span class="math inline">C \subseteq C^\prime</span>. Let <span class="math inline">x \in C^\prime</span>. <span class="math inline">x(N) = v(N)</span>. Let <span class="math inline">c \subseteq N</span>. Let <span class="math inline">M</span> be a maximum weight matching in <span class="math inline">c</span>. Then <span class="math inline">v(c) = w(M)</span>. We want to show that <span class="math inline">x(c) \ge v(c) = w(M)</span>.</p>
+<p><span class="math display">\begin{aligned}
+x(c) &amp;\ge \sum_{uv \in M} (x_u + x_v) \text{ (since $M$ is a matching)} \\
+&amp;\ge \sum_{uv \in M} w_{uv} \text{ (since $x \in C^\prime$)}\\
+&amp;= w(M)
+\end{aligned}</span></p>
+</blockquote>
+<p><strong>LP Formulation</strong>: We solve feasibility problem of <span class="math inline">C^\prime</span> using the following LP.</p>
+<p><span class="math display">\begin{aligned}
+\min\ &amp;x(N) \\
+\text{s.t. } &amp;x_u + x_v \ge w_{uv},\ \forall uv \in E \\
+&amp;x \ge 0
+\end{aligned}</span> This is feasible with large <span class="math inline">x</span>. As <span class="math inline">C = C^\prime</span>, <span class="math inline">x(N) \ge v(N)</span>. So the solution is bounded by <span class="math inline">v(N)</span>. So there is an optimal solution. The dual is given by the followinig LP.</p>
+<p><span class="math display">\begin{aligned}
+\max\ &amp;\sum_{e \in E} w_e y_e \\
+\text{s.t. } &amp;\sum_{e \in \delta(v)} y_e \le 1,\ \forall v \in N \\
+&amp;y \ge 0
+\end{aligned}</span></p>
+<p>When <span class="math inline">y</span> is integral, this is the maximum weight matching problem. This is the LP relaxation. (D) could have fractional optimal solution, for example a triangle with all edge weights being <span class="math inline">3</span> would have a maximum matching of <span class="math inline">3</span> but the LP relaxation optimal would be <span class="math inline">y = \left(\frac{1}{2}, \frac{1}{2}, \frac{1}{2}\right)</span>, <span class="math inline">4.5</span>.</p>
+<p><strong>Proposition</strong>: The core of the matching game is non-empty if and only if <span class="math inline">(D)</span> has an integral optimal solution.</p>
+<blockquote>
+<p>It suffices to show that <span class="math inline">(P)</span> has an optimal value <span class="math inline">v(N)</span> if and only if <span class="math inline">(D)</span> has an integer optimal solution.</p>
+<p><span class="math inline">(\Rightarrow)</span> Suppose <span class="math inline">(P)</span> has optimal value <span class="math inline">v(N)</span>, so <span class="math inline">x(N) = v(N)</span>. Let <span class="math inline">M</span> be a matching of value <span class="math inline">v(N)</span>, <span class="math inline">w(M) = v(N)</span>. Let <span class="math inline">y</span> be the vector where <span class="math inline">y_e = \begin{cases} 1\ &amp;e \in M\\0,\ &amp;e \not\in M\end{cases}</span>. So <span class="math inline">y</span> is feasible for <span class="math inline">(D)</span>, with objective value <span class="math inline">w(M)</span>. By weak duality, <span class="math inline">y</span> is optimal for <span class="math inline">(D)</span>, <span class="math inline">y</span> is integral.</p>
+<p><span class="math inline">(\Leftarrow)</span> Suppose <span class="math inline">y</span> is optimal integral solution for <span class="math inline">(D)</span>. Let <span class="math inline">M^\prime = \{e \in E: y_e = 1\}</span>. Then <span class="math inline">M^\prime</span> is a matching with optimal value <span class="math inline">w(M^\prime)</span>, and <span class="math inline">M^\prime</span> is a maximum weight matching. Then <span class="math inline">w(M^\prime) = v(N)</span>. By strong duality, <span class="math inline">(P)</span> has optimal value <span class="math inline">v(N)</span>.</p>
+</blockquote>
+<p><em>Note</em>: When <span class="math inline">G</span> is bipartite, <span class="math inline">(D)</span> has integral optimal solution, so the core is non-empty. Determining the integrality of <span class="math inline">(D)</span> is polytime.</p>
+<h2 id="network-bargaining-games">Network Bargaining Games</h2>
+<p>Network bargaining game is a game played on a graph <span class="math inline">G = (N, E)</span>. Every edge <span class="math inline">uv</span> represents a potential partnership between <span class="math inline">u,v</span> which generates value <span class="math inline">w_{uv}</span>. How are pairs formed? How should the value be split?</p>
+<p>An outcome consists of a matching <span class="math inline">M</span> and a payoff vector <span class="math inline">x \in \mathbb{R}_+^N</span> such that <span class="math inline">x_u + x_v = w_{uv}</span> for all <span class="math inline">uv \in M</span>, <span class="math inline">x_v = 0</span> if <span class="math inline">v</span> is not matched in <span class="math inline">M</span>.</p>
+<h3 id="stable-outcomes">Stable Outcomes</h3>
+<p><strong>Definition</strong>: For an outcome <span class="math inline">(M, x)</span> and player <span class="math inline">u</span>, the <strong>outside option</strong> of player <span class="math inline">u</span> is <span class="math inline">\alpha_u = \max\{w_{uv} - x_v: uv \in \delta(u) \setminus M\}</span>. If <span class="math inline">\delta(u) \setminus M = \emptyset</span>, then <span class="math inline">\alpha_u = 0</span>. This is the maximum value that <span class="math inline">u</span> receives by defecting from their current partner in <span class="math inline">M</span>. It is stable if there is no incentive to switch.</p>
+<p><strong>Definition</strong>: An outcome <span class="math inline">(M, v)</span> is <strong>stable</strong> if <span class="math inline">x_u \ge \alpha_u</span> for all <span class="math inline">u \in N</span>.</p>
+<p>In a stable outcome, for any edge <span class="math inline">uv</span>, <span class="math inline">x_u + x_v \ge w_{uv}</span> (<span class="math inline">x_u \ge \alpha_u \ge w_{uv} - x_v</span>).</p>
+<p><strong>Proposition</strong>: A stable outcome exists in a network bargaining game if and only if the correpsonding matching game has a non-empty core.</p>
+<h3 id="balanced-outcomes">Balanced Outcomes</h3>
+<p><strong>Definition</strong>: Outcome <span class="math inline">(M, v)</span> is <strong>balanced</strong> if for all <span class="math inline">uv \in M</span>, <span class="math inline">x_u - \alpha_u = x_v - \alpha_v</span>. Alternatively, <span class="math inline">x_u = \alpha_u + \frac{w_{uv} - \alpha_u - \alpha_v}{2}</span>.</p>
+<p><strong>Definition</strong>: For any cooperative game <span class="math inline">(N, v)</span> and a payoff vector <span class="math inline">x \in \mathbb{R}_+^N</span>, the <strong>surplus</strong> of <span class="math inline">i</span> over <span class="math inline">j</span> is <span class="math inline">S_{ij} = \max\{v(c) - x(c): c \subseteq N, i \in c, j \not\in C\}</span>.</p>
+<p><span class="math inline">v(c) - x(c)</span> is the excess value not distributed. The max represents what player <span class="math inline">i</span> could potentially get without working with <span class="math inline">j</span>. If <span class="math inline">S_{ij}(x) &gt; S_{ji}(x)</span>, then player <span class="math inline">i</span> could demand more from <span class="math inline">j</span> if they work together.</p>
+<p><strong>Definition</strong>: The <strong>prekernel</strong> is <span class="math inline">P = \{x \in \mathbb{R}_+^N: S_{ij}(x) = S_{ji}(x)\ \forall i, j \in N\}</span>.</p>
+<p>Application to network bargaining.</p>
+<p><strong>Proposition</strong>: If <span class="math inline">x</span> is in the intersection of the core and the prekernel of the matching game corresponding to the network bargaining game, then <span class="math inline">x</span> is a balanced outcome in the network bargaining game.</p>
+<blockquote>
+<p>Let <span class="math inline">ij</span> be an edge. We first prove that the surplus of <span class="math inline">i</span> over <span class="math inline">j</span> is <span class="math inline">S_{ij} = \begin{cases} \max \{w_{ik} - x_i - x_k: ik \in \delta(i) \setminus \{ij\}\},\ &amp;\delta(i) \setminus \{ij\} \neq \emptyset \\ -x_i\ &amp;\delta(i) \setminus \{ij\} = \emptyset\end{cases} = \alpha_i - x_i</span>.</p>
+<p>Let <span class="math inline">c \subseteq N</span>, <span class="math inline">i \in c, j \not\in c</span> be a minimal set where <span class="math inline">S_{ij}(x) = v(c) - x(c)</span>. Let <span class="math inline">M</span> be a matching in <span class="math inline">c</span> where <span class="math inline">v(c) = w(M)</span>. Suppose there exists <span class="math inline">uv \in M</span> that is not incident with <span class="math inline">i</span>. Since <span class="math inline">x</span> is in the core, <span class="math inline">x_u + x_v \ge w_{uv}</span>.</p>
+<p><span class="math display">\begin{aligned}
+v(c \setminus \{u, v\}) - x(c \setminus \{u, v\}) &amp;= v(c) - w_{uv} - (x(c) - x_u - x_v) \\
+&amp;= v(c) - x(c) + x_u + x_v - w_{uv} \\
+&amp;\ge v(c) - x(c)
+\end{aligned}</span></p>
+<p>This implies <span class="math inline">v(c \setminus \{u, v\}) - x(c \setminus \{u, v\}) = v(c) - x(c)</span>, contradicting the minimality of <span class="math inline">c</span>. Similarly, <span class="math inline">c</span> cannot include and vertex other that <span class="math inline">i</span> that is not matched in <span class="math inline">M</span> (eitehr it would increase <span class="math inline">S_{ij}</span>, or make a smaller <span class="math inline">c</span>). So <span class="math inline">c</span> is either <span class="math inline">\{i\}</span> or <span class="math inline">\{i, k\}</span> where <span class="math inline">ik \in \delta(i) \setminus \{ij\}</span>. This givs our formula for <span class="math inline">S_{ij}(x)</span>. Finally, since <span class="math inline">x</span> is in the prekernel, <span class="math inline">S_{ij}(x) = S_{ji}(x)</span>. So <span class="math inline">\alpha_i - x_i = \alpha_j - x_j</span>, so <span class="math inline">x</span> is balanced.</p>
+</blockquote>
+<p>Schmeidler showed that in general, if the core is non-empty, then the intersection of hte core and the prekernel is non-empty.</p>
+<p><strong>Theorem</strong>: A network bargaining game is a balanced outcome if and only if it has a stable outcome.</p>
 </body>
 </html>
