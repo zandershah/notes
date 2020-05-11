@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>co351</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="co351">CO351</h1>
+<h1 id="introduction">Introduction</h1>
+<p><strong>Network Flow Theory</strong>: Class of optimization problems on graphs (directed graphs), usually involving the movement of stuff.</p>
+<p>Example: Transshipment problem.</p>
+<blockquote>
+<p>Directed graph. Nodes weights are the supply or demand, arc weights are the cost to move one good across the arc. We want to move all goods from supply to demand while minimizing total cost.</p>
+<p>Solutions are representing using another digraph with arcs representing the amount of goods transfered between nodes.</p>
+</blockquote>
+<h1 id="graphs">Graphs</h1>
+<h2 id="definitions">Definitions</h2>
+<ul>
+<li><span class="math inline">G = (V, E)</span> consists of a set of <strong>vertices</strong> <span class="math inline">V</span> and unordered pairs of vertices <span class="math inline">E</span>.</li>
+<li><strong>Degree</strong> of a vertex <span class="math inline">v</span> is the number of edges incident to <span class="math inline">v</span>, <span class="math inline">d_G(v)</span> or <span class="math inline">d(v)</span>.</li>
+<li><strong>Walk</strong> is sequence of vertices <span class="math inline">v_1, ..., v_k</span> where <span class="math inline">v_i v_{i+1}</span> are edges.</li>
+<li><strong>Path</strong> is a walk with distinct vertices.</li>
+<li><strong>Cycle</strong> is a walk <span class="math inline">v_1, ..., v_k, v_1</span>, where <span class="math inline">v_1, ..., v_k</span> are distinct and <span class="math inline">k \ge 3</span>.</li>
+</ul>
+<h2 id="connectivity-and-cuts">Connectivity and cuts</h2>
+<ul>
+<li><span class="math inline">G</span> is <strong>connected</strong> if there is a path between every pair of vertices, <strong>disconnected</strong> otherwise.</li>
+<li>For <span class="math inline">S \subseteq V</span>, the <strong>cut</strong> induced by <span class="math inline">S</span> is the set of all edges with exactly one edge in <span class="math inline">S</span>.</li>
+<li>If <span class="math inline">s, t \in V</span>, <span class="math inline">s \in S</span>, <span class="math inline">v \not\in S</span>, then <span class="math inline">\delta(S)</span> is an <strong>s,t-cut</strong>.</li>
+<li>There exists an s,t-path if and only if every s,t-cut is non-empty.</li>
+</ul>
+<p><strong>Trees</strong>.</p>
+<ul>
+<li>Connected graph with no cycles. <span class="math inline">n</span> vertices with <span class="math inline">n - 1</span> edges.</li>
+<li><strong>Spanning tree</strong> of <span class="math inline">G</span> is a subgraph that is a tree which uses all vertices of <span class="math inline">G</span>.</li>
+<li><span class="math inline">G</span> has a spanning tree if and only if <span class="math inline">G</span> is connected.</li>
+<li>If <span class="math inline">T</span> is a tree and <span class="math inline">u, v</span> are not adjacent, <span class="math inline">T + uv</span> contains exactly only cycle <span class="math inline">C</span>. If <span class="math inline">xy</span> is an edge of <span class="math inline">C</span> then <span class="math inline">T + uv - xy</span> is another tree.</li>
+</ul>
+<h1 id="directed-graphs">Directed Graphs</h1>
+<h2 id="definitions-1">Definitions</h2>
+<ul>
+<li><strong>Directed graphs</strong> (digraph) <span class="math inline">D = (N, A)</span> is a set of nodes <span class="math inline">N</span> and a set of arcs <span class="math inline">A</span> that are <strong>ordered</strong> pairs of nods.</li>
+<li>For an arc <span class="math inline">uv</span>, <span class="math inline">u</span> is the tail, <span class="math inline">v</span> is the head.</li>
+<li><strong>Out-degree</strong> of <span class="math inline">v</span> is the number of arcs whose tail is <span class="math inline">v</span>, <span class="math inline">d(v)</span>.</li>
+<li><strong>In-degree</strong> of <span class="math inline">v</span> is the number of arcs whose head is <span class="math inline">v</span>, <span class="math inline">d(\overline{v})</span>.</li>
+<li><strong>Directed walk</strong> (diwalk) is a sequence of nodes <span class="math inline">v_1, ..., v_k</span> such that <span class="math inline">v_i v_{i+1}</span> arr arcs.</li>
+<li><strong>Directed path</strong> (dipath) is a diwalk where all nodes are distinct.</li>
+<li><strong>Directed cycle</strong> (dicycle) is a diwalk <span class="math inline">v_1, ..., v_k, v_1</span> where <span class="math inline">v_1, ..., v_k</span> are distinct and <span class="math inline">k \ge 3</span>.</li>
+</ul>
+<h2 id="cuts">Cuts</h2>
+<blockquote>
+<p>For <span class="math inline">S \subseteq N</span>, the <strong>cut</strong> induced by <span class="math inline">S</span> is the set of all arcs whose tails are in <span class="math inline">S</span> and heads are not in <span class="math inline">S</span>. <span class="math inline">\delta(S) = \{uv \in A: u \in S, v \not\in S\}</span>. <span class="math inline">\delta(\overline{S}) = \{uv \in A, u \not\in S, v \in S\}</span>.</p>
+</blockquote>
+<ul>
+<li>If <span class="math inline">s, t \in N</span>, where <span class="math inline">s \in S</span> and <span class="math inline">t \not\in S</span>, then <span class="math inline">\delta(S)</span> is an <strong>s,t-cut</strong>.</li>
+</ul>
+<p><strong>Proposition</strong>: There exists an s,t-dipath if and only if every s,t-cut is non-empty.</p>
+<blockquote>
+<p><span class="math inline">(\Rightarrow)</span> Let <span class="math inline">s = v_1,v_2,...,v_k=t</span> be a s,t-dipath. Let <span class="math inline">\delta(S)</span> be an s,t-cut. Since <span class="math inline">v_1 \in S, v_k \not\in S</span>, there exists a largest index <span class="math inline">i &lt; k</span> such that <span class="math inline">v_i \in S</span>, <span class="math inline">v_{i+1} \not\in S</span>. So <span class="math inline">v_i v_{i+1} \in \delta(S)</span>, so <span class="math inline">\delta(S)</span> is non-empty.</p>
+<p><span class="math inline">(\Leftarrow)</span> Assume every s,t-cut is non-empty. Let <span class="math inline">S</span> be the set of all nodes <span class="math inline">v</span> such that an s,v-dipath exists. If <span class="math inline">t \in S</span>, then an s,t-dipath exists, and we are done. If <span class="math inline">t \not\in S</span>, then <span class="math inline">\delta(S) \neq \emptyset</span>, so there must exist some arc <span class="math inline">uv \in \delta(S)</span>. Since <span class="math inline">u \in S</span>, there exists a u,v-dipath <span class="math inline">P</span>. Then <span class="math inline">P + uv</span> is an s,v-dipath so <span class="math inline">v \in S</span>, contradiction.</p>
+</blockquote>
+<h2 id="underlying-graph">Underlying Graph</h2>
+<blockquote>
+<p>Remove the directions on the arcs to get edges.</p>
+</blockquote>
+<ul>
+<li>Digraph is <strong>connected</strong> if its underlying graph is connected. <em>Note: Might not have a dipath between certain ordered pairs of nodes</em>.</li>
+<li><strong>Spanning tree</strong> is a spanning tree of the underlying graph.</li>
+<li><strong>Cycle</strong> is a cycle in the underlying graph. <em>Note: Not necessarily a directed cycle</em>.
+<ul>
+<li>When considering the direction of a cycle in the underlying graph, arcs that go along the direction are <strong>forward arcs</strong>, arcs ones that go against are <strong>backward arcs</strong>.</li>
+</ul></li>
+</ul>
+<h1 id="transshipment-problem-tp">Transshipment Problem (TP)</h1>
+<ol type="1">
+<li>Digraph <span class="math inline">D = (N, A)</span>.</li>
+<li>Node demands <span class="math inline">b_v</span> for each <span class="math inline">v \in N</span>. Negative demand corresponds to supply.</li>
+<li>Arc costs <span class="math inline">w_e</span> for each <span class="math inline">e \in A</span>.</li>
+</ol>
+<blockquote>
+<p>A solution is called a <strong>flow</strong>. The goal is to minimize the total cost of the flow.</p>
+</blockquote>
+<h2 id="lp-formulation">LP Formulation</h2>
+<blockquote>
+<p><em>Notation</em>: If <span class="math inline">x \in \mathbb{R}^T</span> and <span class="math inline">S \subseteq T</span>, then <span class="math inline">x(S) = \sum_{i \in S}x_i</span>.</p>
+</blockquote>
+<ol type="1">
+<li><strong>Variables</strong>. For each arc <span class="math inline">e \in A</span>, define <span class="math inline">x_e \in \mathbb{R}</span>.</li>
+<li><strong>Objective function</strong>. Cost of transporting <span class="math inline">x_e</span> on arc <span class="math inline">e</span> is <span class="math inline">w_e x_e</span>. Want to minimize total costs. <span class="math inline">\min w^T x</span>.</li>
+<li><strong>Constraint</strong>. Inflow minus outgoing flow equals the demand. <span class="math inline">\delta(u) - \delta(\overline{u}) = b_u</span>. All variables are non-negative, <span class="math inline">x_e \ge 0</span>.</li>
+</ol>
+<p><span class="math display">\begin{aligned}
+\min\ &amp;w^Tx \\
+\text{s.t } &amp;x(\delta(\overline{v})) - x(\delta(v)) = b_v,\ \forall v \in N \\
+&amp;x \ge 0
+\end{aligned}</span></p>
+<p>Matrix form is called an <strong>incidence matrix</strong> where the rows represent nodes and the columns represent arcs.</p>
+</body>
+</html>
