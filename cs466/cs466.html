@@ -14,11 +14,41 @@
     ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="../pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
 <h1 id="cs466">CS466</h1>
+<h1 id="minimum-cut">Minimum Cut</h1>
+<blockquote>
+<p>Find a minimum cardinality subset of edges to disconnect a graph.</p>
+</blockquote>
+<h2 id="kargers-algorithm">Karger’s Algorithm</h2>
+<blockquote>
+<p>Contract a random edge.</p>
+</blockquote>
+<p>While there are more than two vertices in the graph, choose a uniformly random edge <span class="math inline">uv</span> and contract the two endpoints. Output the edges between the remaining two vertices.</p>
+<p><strong>Theorem</strong>: Success probability of returning a min-cut is at least <span class="math inline">\frac{2}{n(n-1)}</span>.</p>
+<blockquote>
+<p>Let <span class="math inline">F \le E</span> be a minimum cut, say <span class="math inline">|F| = k</span>. The probability that we don’t choose an edge in <span class="math inline">F</span> in the <span class="math inline">i</span>-th iteration is <span class="math inline">\frac{|F|}{|E|}</span>. In the <span class="math inline">i</span>-th iteration, we have <span class="math inline">(n - i + 1)</span> vertices. The minimum cut is assumed to be at least <span class="math inline">k</span>, so the minimum degree is also at least <span class="math inline">k</span>, so the number of edges is at least <span class="math inline">\frac{(n - i + 1) k}{2}</span>. So probability for the <span class="math inline">i</span>-th iteration is upper-bounded by <span class="math inline">\frac{2}{n - i + 1}</span></p>
+<p>Probability of success in all iteration.</p>
+<p><span class="math display">\Pi_{i=0}^{n-3}\left(1 - \frac{2}{n-i}\right) = \frac{n-2}{n} \cdot \frac{n-3}{n-1} \cdot \frac{n-4}{n-2} ... = \frac{2}{n(n-1)}</span></p>
+</blockquote>
+<p>Let us repeat <span class="math inline">T</span> many times, taking the best result. The failure probability is now <span class="math inline">\left(1 - \frac{2}{n(n-1)}\right)^T \le e^{\frac{-2T}{n(n-1)}}</span>.</p>
 </body>
 </html>
