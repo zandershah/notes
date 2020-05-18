@@ -123,5 +123,88 @@
 &amp;x \ge 0
 \end{aligned}</span></p>
 <p>Matrix form is called an <strong>incidence matrix</strong> where the rows represent nodes and the columns represent arcs.</p>
+<h1 id="dual-lp-for-tp">Dual LP for TP</h1>
+<p><span class="math display">\begin{aligned}
+\min\ &amp;w^T x \\
+\text{s.t. } &amp;x(\delta(\overline{v})) - x(\delta(v)) = b_v,\ &amp;\forall v \in N \\
+x \ge \mathbf{0}
+\end{aligned}</span></p>
+<ul>
+<li>When we take the dual there will be a variable for every node, and a constraint for every arc in the original digraph.</li>
+</ul>
+<p><span class="math display">\begin{aligned}
+\max\ &amp;b^T y \\
+\text{s.t. } &amp;y_v - y_u \le w_{uv}\ \forall uv \in A
+\end{aligned}</span></p>
+<h2 id="cs-conditions">CS Conditions</h2>
+<blockquote>
+<p>Recall: Variable is zero or the corresponding constraint is tight.</p>
+</blockquote>
+<ul>
+<li>The primal constraints are always tight.</li>
+</ul>
+<p><span class="math inline">x_{uv} = 0</span> or <span class="math inline">y_v - y_u = w_{uv}</span>, <span class="math inline">\forall uv \in A</span>. So <span class="math inline">x_{uv} &gt; 0</span> implies <span class="math inline">y_v - y_u = w_{uv}</span>.</p>
+<blockquote>
+<p>Recall: Let <span class="math inline">(P), (D)</span> be a primal-dual pair. Then <span class="math inline">x, y</span> are optimal solutions to <span class="math inline">(P), (D)</span> if and only if they are feasible and satisfy CS conditions.</p>
+</blockquote>
+<p>Given a feasible solution to <span class="math inline">(P)</span>, how do we generate a feasible solution to <span class="math inline">(D)</span>?</p>
+<blockquote>
+<p>Arbitrarily assign the value of a node to be <span class="math inline">0</span>, then use the arc constraints to fill in the other nodes. So we have a feasible <span class="math inline">x</span> and <span class="math inline">x,y</span> satisfy CS conditions. It remains to show that <span class="math inline">y</span> is feasible.</p>
+<p>We need to check arc conditions not included in the solution.</p>
+</blockquote>
+<p>Alternatively, given that <span class="math inline">x, y</span> are feasible, use strong duality.</p>
+<h1 id="basic-feasible-solution-for-tp">Basic Feasible Solution for TP</h1>
+<blockquote>
+<p>Recall: Basis is a set of linearly independent column that form a square invertible matrix. Every basis corresponds to a <strong>unique</strong> basic solution.</p>
+</blockquote>
+<p>Consider the incidence matrix of a digraph. The rows are linearly independent, because every column will sum to zero. So the rank of the matrix is at most <span class="math inline">|N|-1</span>.</p>
+<p>We assume that the coefficient matrix has full row rank in simplex. So we row reduce to get an equivalent system with full row rank.</p>
+<p>What is the rank of the incidence matrix of a digraph <span class="math inline">D(N, A)</span>?</p>
+<blockquote>
+<p>There are <span class="math inline">|N|</span> rows, rows are dependent, so the rank is at most <span class="math inline">|N| - 1</span>. Every column represents an arc, so we can ask which arcs can we pick so the corresponding columns form a basis.</p>
+<p>Consider any undirected cycle in the digraph. This corresponds to a square matrix with dependent columns.</p>
+</blockquote>
+<p><strong>Proposition</strong>: If a set of arcs does not contain a cycle, then the columns of the incidence matrix corresponding to the arcs are linearly independent.</p>
+<blockquote>
+<p>Suppose these columns are not independent. Let us consider the set of columns with non-zero coefficients. So for any row, we have either all entries zero or at least two non-zero. Let us collect all these arcs and the nodes with at least <span class="math inline">2</span> non-zero entries. We have a digraph where every node is incident with at least <span class="math inline">2</span> arcs. So this digraph must have a cycle.</p>
+</blockquote>
+<p>So to find independent columns, we find arcs that don’t have cycles. To find a basis, we need as many arcs as possible. For any connected digraph, a spanning tree exists with <span class="math inline">|N| - 1</span> arcs, corresponding to <span class="math inline">|N| - 1</span> independent columns. So the rank is at least <span class="math inline">|N| - 1</span>, but the rank is at most <span class="math inline">|N| - 1</span>. So the rank is equal to <span class="math inline">|N| - 1</span> and we have a basis.</p>
+<p><strong>Theorem</strong>: Let <span class="math inline">M</span> be the incidence matrix of a connected digraph <span class="math inline">D = (N, A)</span>. Then the rank of <span class="math inline">M</span> is <span class="math inline">|N| - 1</span>. Moreover, a set of <span class="math inline">|N| - 1</span> columns of <span class="math inline">M</span> is a basis if and only if the <span class="math inline">|N| - 1</span> arcs corresponding to these columns is a spanning tree of <span class="math inline">D</span>.</p>
+<p><strong>Exercise</strong>: Determine the rank for a disconnected digraph.</p>
+<h2 id="basic-solution">Basic Solution</h2>
+<ul>
+<li>Start with our spanning tree as the basis.</li>
+<li>Arcs not in the spanning tree will be zero because they are non-basic variables.</li>
+<li>Starting at a leaf, we iteratively solve for <span class="math inline">x</span> using the flow constraints.</li>
+<li>If the end result is a feasible flow, then it is a <strong>basic feasible solution</strong> (BFS).</li>
+</ul>
+<h1 id="primal-dual-relations-in-simplex">Primal-Dual Relations in Simplex</h1>
+<p>Consider a state of the simplex algorithm.</p>
+<ol type="1">
+<li><p>Suppose we have some coefficients in the objective vector equal to zero (canonical form). What does this mean for the corresponding dual?</p>
+<blockquote>
+<p>The dual constraint is tight for the basic variables. Non-basic variables have value <span class="math inline">0</span>.</p>
+</blockquote>
+<p>So the CS conditions are satisfied.</p></li>
+<li><p>Suppose a coefficient is positive, what does this mean for the corresponding dual?</p>
+<blockquote>
+<p>The dual constraint is not satisfied. We are “trying to fix” that constraint in the step of the simplex algorithm.</p>
+</blockquote></li>
+<li><p>We stop when all constriants are non-positive, what does this mean for the corresponding dual?</p>
+<blockquote>
+<p>All dual constraints are satisfied, <span class="math inline">y</span> is feasible.</p>
+</blockquote></li>
+</ol>
+<p>So we see that the simplex keeps <span class="math inline">x</span> feasible, with CS conditions satisfied, and works towards the feasibility of <span class="math inline">y</span>. When <span class="math inline">y</span> becomes feasible, we have optimal solutions.</p>
+<h2 id="application-to-tp">Application to TP</h2>
+<ul>
+<li><p>For the dual, we add a slack variable so that it is an equality constraint. <span class="math inline">-y_u + y_v + \overline{w_{uv}} = w_{uv}</span>, <span class="math inline">\forall uv \in A</span>, <span class="math inline">\overline{w} \ge \mathbf{0}</span>.</p>
+<ul>
+<li><span class="math inline">\overline{w_{uv}}</span> for arcs in the tree are zero since they are the tight constriants.</li>
+<li>Negative values imply that the dual constraints are not satisfied, so they are the entering variable.</li>
+</ul></li>
+</ul>
+<p><strong>Definition</strong>: A vector <span class="math inline">y \in \mathbb{R}^N</span> is called a <strong>node potential</strong>. Given <span class="math inline">y</span>, the <strong>reduced cost</strong> of arc <span class="math inline">uv</span> is <span class="math inline">\overline{w_{uv}} = y_u + w_{uv} - y_v</span>. A node potential is <strong>feasible</strong> if <span class="math inline">\overline{w_{uv}} \ge 0</span>, <span class="math inline">\forall uv \in A</span>.</p>
+<p><strong>Exercise</strong>: How do we find a “leaving arc”? Add flow to the entering arc, adjust flow on basic arcs while maintaining feasibility.</p>
 </body>
 </html>
